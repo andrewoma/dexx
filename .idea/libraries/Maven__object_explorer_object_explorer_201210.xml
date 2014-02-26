@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: object-explorer:object-explorer:201210">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/object-explorer/object-explorer/201210/object-explorer-201210.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/object-explorer/object-explorer/201210/object-explorer-201210-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/object-explorer/object-explorer/201210/object-explorer-201210-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

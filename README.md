@@ -24,7 +24,7 @@ Secondly, a pure Java implementation of functional persistent collections is usa
 
 #### Overview
 
-The diagram below shows dexx's class hierarchy (interfaces are in blue and concrete implementations are in blue).
+The diagram below shows dexx's class hierarchy (interfaces are in blue and concrete implementations are in green).
 
 ![dexx collections overview](/docs/dexxcollections.png "dexx collections overview")
 

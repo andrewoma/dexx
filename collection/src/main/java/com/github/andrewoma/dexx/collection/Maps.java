@@ -117,7 +117,7 @@ public class Maps {
     @NotNull
     @SuppressWarnings("unchecked")
     public static <K, V> BuilderFactory<Pair<K, V>, Map<K, V>> factory() {
-        return (BuilderFactory) HashSet.<Pair<K, V>>factory();
+        return (BuilderFactory) HashMap.<K, V>factory();
     }
 
     @NotNull

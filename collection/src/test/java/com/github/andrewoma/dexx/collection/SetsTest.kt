@@ -62,6 +62,9 @@ class SetsTest {
 
     test fun factory() {
         assertEquals(build(1, 2, 3), Sets.factory<Int>().newBuilder().addAll(1, 2, 3).result())
+    }
 
+    test fun builder() {
+        assertEquals(build(1, 2, 3), Sets.builder<Int>().addAll(1, 2, 3).result())
     }
 }

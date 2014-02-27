@@ -24,7 +24,7 @@ Secondly, a pure Java implementation of functional persistent collections is usa
 
 #### Overview
 
-The diagram below shows the dexx's class hierarchy (interfaces are in blue and concrete implementations are in blue).
+The diagram below shows dexx's class hierarchy (interfaces are in blue and concrete implementations are in blue).
 
 ![dexx collections overview](/docs/dexxcollections.png "dexx collections overview")
 
@@ -32,7 +32,7 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 
 #### Status
 * Scala's HashSet, TreeSet, HashMap, TreeMap & Vector have been ported
-* Helper classes for construction and adapters to java.util equivalents is largely complete
+* Helper classes for construction and adapters to java.util equivalents are largely complete
 
 #### Roadmap
 * Complete helper classes and adapters for existing implementations

@@ -23,16 +23,16 @@
 package com.github.andrewoma.dexx.collection.performance
 
 import com.github.andrewoma.dexx.collection.HashMap
-import objectexplorer.MemoryMeasurer
-import objectexplorer.ObjectGraphMeasurer
+//import objectexplorer.MemoryMeasurer
+//import objectexplorer.ObjectGraphMeasurer
 import org.junit.Test as test
 
 class TraversableSizeTest() {
     test fun mapSizes() {
-        val footprint = ObjectGraphMeasurer.measure(HashMap.empty<Int, Int>())!!
-        println(footprint)
-
-        val memory = MemoryMeasurer.measureBytes(HashMap.empty<Int, Int>())
-        println(memory)
+//        val footprint = ObjectGraphMeasurer.measure(HashMap.empty<Int, Int>())!!
+//        println(footprint)
+//
+//        val memory = MemoryMeasurer.measureBytes(HashMap.empty<Int, Int>())
+//        println(memory)
     }
 }

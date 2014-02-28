@@ -44,3 +44,4 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 * Benchmark existing implementations
 * Port Scala's ArrayList as an alternative IndexedList implementation
 * Port Scala's List/ListBuffer as a LinkedList/Builder implementation
+* Publish to Maven Central via Sonatype

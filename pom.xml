@@ -9,24 +9,6 @@
 
     <name>dexx-parent</name>
 
-    <repositories>
-        <repository>
-            <id>repo</id>
-            <url>file://${project.basedir}/../lib</url>
-        </repository>
-        <repository>
-            <id>jetbrains-all</id>
-            <url>http://repository.jetbrains.com/all</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>jetbrains-all</id>
-            <url>http://repository.jetbrains.com/all</url>
-        </pluginRepository>
-    </pluginRepositories>
-
     <properties>
         <kotlin.version>0.6.1910</kotlin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,15 +21,6 @@
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <configuration>
-                        <argLine>
-                            -javaagent:${project.basedir}/../lib/object-explorer/object-explorer/201210/object-explorer-201210.jar
-                        </argLine>
-                    </configuration>
-                </plugin>
                 <plugin>
                     <artifactId>kotlin-maven-plugin</artifactId>
                     <groupId>org.jetbrains.kotlin</groupId>
@@ -103,12 +76,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.jetbrains.annotations</groupId>
-                <artifactId>annotations</artifactId>
-                <version>132.197</version>
-                <scope>provided</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

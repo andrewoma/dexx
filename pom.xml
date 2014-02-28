@@ -7,7 +7,33 @@
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>dexx-parent</name>
+    <name>Dexx parent</name>
+
+    <licenses>
+        <license>
+            <name>The MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <description>Parent for the dexx project</description>
+    <url>https://github.com/andrewoma/dexx</url>
+
+    <scm>
+        <url>https://github.com/andrewoma/dexx</url>
+        <connection>scm:git:git://github.com/andrewoma/dexx.git</connection>
+        <developerConnection>scm:git:git@github.com:andrewoma/dexx.git</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <email>andrewoma@gmail.com</email>
+            <name>Andrew O'Malley</name>
+            <url>https://github.com/andrewoma</url>
+            <id>andrewoma</id>
+        </developer>
+    </developers>
 
     <properties>
         <kotlin.version>0.6.1910</kotlin.version>
@@ -59,6 +85,52 @@
                             <systemPath>${tools-jar}</systemPath>
                         </dependency>
                     </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.2.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.9.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.4.1</version>
+                    <configuration>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <mavenExecutorId>forked-path</mavenExecutorId>
+                        <tagNameFormat>v@{project.version}</tagNameFormat>
+                        <preparationGoals>clean test</preparationGoals>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -120,5 +192,4 @@
             </dependencies>
         </profile>
     </profiles>
-
 </project>

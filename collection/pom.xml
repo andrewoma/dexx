@@ -10,9 +10,11 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <name>dexx-collections</name>
+    <name>Dexx collections</name>
     <artifactId>dexx-collections</artifactId>
     <packaging>jar</packaging>
+
+    <description>Persistent (immutable) collection library for Java</description>
 
     <build>
         <plugins>

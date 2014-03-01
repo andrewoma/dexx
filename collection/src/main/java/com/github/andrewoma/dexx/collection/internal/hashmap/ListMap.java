@@ -121,7 +121,7 @@ public class ListMap<K, V> extends AbstractMap<K, V> {
     }
 
     public boolean containsKey(@NotNull K key) {
-        return get(key) != null;
+        return false;
     }
 
     // Note: this is an inner class that builds a list by using the pointer to the outer class
@@ -151,11 +151,12 @@ public class ListMap<K, V> extends AbstractMap<K, V> {
 
         @Override
         public V get(@NotNull K key) {
-            return apply0(this, key);
+            ListMap<K, V> pairs = apply0(this, key);
+            return pairs == null ? null : pairs.getValue();
         }
 
-        private V apply0(ListMap<K, V> cur, K key) {
-            return cur.isEmpty() ? null : (key.equals(cur.getKey()) ? cur.getValue() : apply0(cur.tail(), key));
+        private ListMap<K, V> apply0(ListMap<K, V> cur, K key) {
+            return cur.isEmpty() ? null : (key.equals(cur.getKey()) ? cur : apply0(cur.tail(), key));
         }
 
         @Override
@@ -191,6 +192,11 @@ public class ListMap<K, V> extends AbstractMap<K, V> {
         @Override
         protected V getValue() {
             return value;
+        }
+
+        @Override
+        public boolean containsKey(@NotNull K key) {
+            return apply0(this, key) != null;
         }
     }
 }

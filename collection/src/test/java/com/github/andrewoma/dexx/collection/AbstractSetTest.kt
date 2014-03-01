@@ -146,4 +146,14 @@ abstract class AbstractSetTest() : AbstractIterableTest() {
     test fun asSet() {
         assertEquals(setOf(1, 2, 3), build(1, 2, 3).asSet())
     }
+
+    // TODO ... can/should Sets support containing nulls
+//    test fun hashCodesWithNullValues() {
+//        assertEquals(build(1, 2, null).hashCode(), build(1, 2, null).hashCode())
+//    }
+//
+//    test fun equalsWithNullValues() {
+//        assertEquals(build(1, 2, null), build(1, 2, null))
+//        assertFalse(build(null).equals(build("1", "2", "3")))
+//    }
 }

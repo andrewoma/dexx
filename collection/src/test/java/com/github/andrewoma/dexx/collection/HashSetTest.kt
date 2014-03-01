@@ -22,9 +22,18 @@
 
 package com.github.andrewoma.dexx.collection
 
+import kotlin.test.assertEquals
+
 class HashSetTest() : AbstractSetTest() {
+
+    private fun build<T>(vararg ts: T) = build_(*ts) as Set<T>
 
     override fun <T> factory(): BuilderFactory<T, out Iterable<T>> {
         return HashSet.factory<T>()
+    }
+
+    test fun setOfSets() {
+        val sets = build(build(1, 2, 3), build(1, 2, 3), build(2, 3), build(4, 5, 6))
+        assertEquals(3, sets.size())
     }
 }

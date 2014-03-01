@@ -132,4 +132,17 @@ abstract class AbstractTraversableTest() {
     test fun clearBuilder() {
         assertEquals(build(3, 4, 5), factory<Int>().newBuilder().addAll(1, 2, 3).clear().addAll(3, 4, 5).result())
     }
+
+    test fun hashCodes() {
+        assertEquals(build(1, 2, 3).hashCode(), build(1, 2, 3).hashCode())
+        assertFalse(build(1, 2, 3).hashCode() == build(2, 3, 4).hashCode())
+    }
+
+    test fun equals() {
+        assertEquals(build(1, 2, 3), build(1, 2, 3))
+        assertFalse(build(1, 2, 3).equals(build(2, 3, 4)))
+        assertFalse(build(1, 2, 3).equals(build(1, 2)))
+        assertFalse(build(1, 2, 3).equals(""))
+        assertFalse(build(1, 2, 3).equals(build("1", "2", "3")))
+    }
 }

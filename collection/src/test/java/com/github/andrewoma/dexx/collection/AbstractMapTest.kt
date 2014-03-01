@@ -248,4 +248,24 @@ abstract class AbstractMapTest() : AbstractIterableTest() {
         assertFalse(map.containsKey(2))
         assertFalse(map.containsKey(4))
     }
+
+    test fun emptyGet() {
+        val map = buildMap<Int, Int>()
+        assertNull(map.get(1))
+    }
+
+    test fun emptyRemove() {
+        val map = buildMap<Int, Int>()
+        assertTrue(map.remove(1).isEmpty())
+    }
+
+    test fun nullValue() {
+        val map = buildMap<Int?, Int?>()
+        assertNull(map.put(1, null).get(1))
+    }
+
+    test fun containsKeyNullValue() {
+        val map = buildMap<Int?, Int?>()
+        assertTrue(map.put(1, null).containsKey(1))
+    }
 }

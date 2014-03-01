@@ -75,7 +75,6 @@ public class HashMap<K, V> extends AbstractMap<K, V> {
 
     @Override
     public boolean containsKey(@NotNull K key) {
-        // TODO ... probably not correct if allowing null values
         return compactHashMap.get(key, keyFunction()) != null;
     }
 

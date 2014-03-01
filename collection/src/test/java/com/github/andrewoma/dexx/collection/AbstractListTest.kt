@@ -59,4 +59,8 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         assertEquals(2, list.lastIndexOf(2))
         assertEquals(-1, list.lastIndexOf(3))
     }
+
+    test fun usingNulls() {
+        assertEquals(listOf(1, null, 2, null), build(1, null, 2, null).klist())
+    }
 }

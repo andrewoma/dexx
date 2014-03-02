@@ -28,6 +28,7 @@ import com.github.andrewoma.dexx.*
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.test.assertFalse
+import kotlin.test.assertNull
 
 class VectorTest() : AbstractListTest() {
 
@@ -62,18 +63,32 @@ class VectorTest() : AbstractListTest() {
         assertSequence(sequence(10).take(100), 0, 10)
     }
 
-    test fun takeRight() {
-        assertSequence(sequence(10).takeRight(5), 5, 5)
+    test fun drop() {
+        assertSequence(sequence(10).drop(5), 5, 5)
     }
 
-    test fun takeRightNone() {
+    test fun dropNone() {
         val vector = sequence(10)
-        assertSequence(vector.takeRight(0), 0, 0)
-        assertSequence(vector.takeRight(-1), 0, 0)
+        assertSequence(vector.drop(0), 0, 10)
+        assertSequence(vector.drop(-1), 0, 10)
     }
 
-    test fun takeRightAll() {
-        assertSequence(sequence(10).takeRight(100), 0, 10)
+    test fun dropAll() {
+        assertSequence(sequence(10).drop(100), 0, 0)
+    }
+
+    test fun first() {
+        assertEquals(0, sequence(10).first())
+        assertNull(sequence(0).first())
+    }
+
+    test fun last() {
+        assertEquals(9, sequence(10).last())
+        assertNull(sequence(0).last())
+    }
+
+    test fun range() {
+        // TODO
     }
 
     fun assertSequence(vector: Vector<Int>, from: Int, length: Int) {
@@ -170,7 +185,7 @@ class VectorTest() : AbstractListTest() {
         }
     }
 
-    fun buildIterate() {
+    test fun buildIterate() {
         for (size in sizes()) {
             var vector = sequence(size)
             var i: Int = 0
@@ -181,7 +196,7 @@ class VectorTest() : AbstractListTest() {
         }
     }
 
-    fun update() {
+    test fun update() {
         for (size in sizes()) {
             var vector = sequence(size)
             for (i in 0..size - 1) {

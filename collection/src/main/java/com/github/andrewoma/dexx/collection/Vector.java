@@ -33,6 +33,7 @@ package com.github.andrewoma.dexx.collection;
 import com.github.andrewoma.dexx.collection.internal.base.AbstractIndexedList;
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -137,59 +138,41 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
             return Vector.empty();
     }
 
-    @NotNull
-    public Vector<E> takeRight(int n) {
-        if (n <= 0)
-            return Vector.empty();
-        else if (endIndex - n > startIndex)
-            return dropFront0(endIndex - n);
-        else
-            return this;
-    }
-
-    @NotNull
-    public Vector<E> dropRight(int n) {
-        if (n <= 0)
-            return this;
-        else if (endIndex - n > startIndex)
-            return dropBack0(endIndex - n);
-        else
-            return Vector.empty();
-    }
-
     public boolean isEmpty() {
         return size() == 0;
     }
 
-    public E head() {
-        if (isEmpty()) throw new UnsupportedOperationException("empty.head");
+    @Nullable
+    public E first() {
+        if (isEmpty()) return null;
         return get(0);
     }
 
     @NotNull
     public Vector<E> tail() {
-        if (isEmpty()) throw new UnsupportedOperationException("empty.tail");
+        if (isEmpty()) return this;
         return drop(1);
     }
 
+    @Nullable
     public E last() {
-        if (isEmpty()) throw new UnsupportedOperationException("empty.last");
+        if (isEmpty()) return null;
         return get(size() - 1);
     }
 
     @NotNull
-    public Vector<E> init() {
-        if (isEmpty()) throw new UnsupportedOperationException("empty.init");
-        return dropRight(1);
+    @Override
+    public Vector<E> range(int from, boolean fromInclusive, int to, boolean toInclusive) {
+        return slice(from + (fromInclusive ? 0 : 1), to + (toInclusive ? 1 : 0));
     }
 
     @NotNull
-    public Vector<E> slice(int from, int until) {
+    private Vector<E> slice(int from, int until) {
         return take(until).drop(from);
     }
 
     @NotNull
-    public Pair<Vector<E>, Vector<E>> splitAt(int n) {
+    protected Pair<Vector<E>, Vector<E>> splitAt(int n) {
         return new Pair<Vector<E>, Vector<E>>(take(n), drop(n));
     }
 
@@ -1155,4 +1138,3 @@ class VectorBuilder<E> extends AbstractBuilder<E, Vector<E>> {
         return this;
     }
 }
-

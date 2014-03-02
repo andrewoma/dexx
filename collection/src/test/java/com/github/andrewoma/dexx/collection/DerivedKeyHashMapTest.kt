@@ -81,6 +81,22 @@ class DerivedKeyHashMapTest : AbstractMapTest() {
         }
     }
 
+    test fun explicitForEach() {
+        var map = DerivedKeyHashMap(keyFunction)
+        map = map.put("1", ClassWithKey("1", "A"))
+        map = map.put("2", ClassWithKey("2", "B"))
+
+        val actual = java.util.HashSet<String>()
+        val f = object: Function<Pair<String, DerivedKeyHashMapTest.ClassWithKey>, Unit> {
+            [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+            override fun invoke(parameter: Pair<String, DerivedKeyHashMapTest.ClassWithKey>?) {
+                actual.add(parameter!!.component1()!!)
+            }
+        }
+        map.forEach(f)
+        assertEquals(setOf("1", "2"), actual)
+    }
+
     test fun directBuilding() {
         val builder = DerivedKeyHashMap.factory(keyFunction).newBuilder()
         val map = builder.add(Pair("1", ClassWithKey("1", "A"))).result()

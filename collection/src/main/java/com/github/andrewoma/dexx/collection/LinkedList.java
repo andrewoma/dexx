@@ -22,10 +22,24 @@
 
 package com.github.andrewoma.dexx.collection;
 
+import org.jetbrains.annotations.NotNull;
+
 public interface LinkedList<E> extends List<E> {
+    @NotNull
     LinkedList<E> set(int i, E elem);
 
+    @NotNull
     LinkedList<E> append(E elem);
 
+    @NotNull
     LinkedList<E> prepend(E elem);
+
+    @NotNull
+    LinkedList<E> drop(int number);
+
+    @NotNull
+    LinkedList<E> take(int number);
+
+    @NotNull
+    LinkedList<E> range(int from, boolean fromInclusive, int to, boolean toInclusive);
 }

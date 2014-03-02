@@ -55,5 +55,11 @@ public interface SortedMap<K, V> extends Map<K, V> {
     Pair<K, V> last();
 
     @NotNull
+    SortedMap<K, V> drop(int number);
+
+    @NotNull
+    SortedMap<K, V> take(int number);
+
+    @NotNull
     java.util.SortedMap<K, V> asSortedMap();
 }

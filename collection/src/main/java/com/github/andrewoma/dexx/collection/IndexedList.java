@@ -33,4 +33,13 @@ public interface IndexedList<E> extends List<E> {
 
     @NotNull
     IndexedList<E> prepend(E elem);
+
+    @NotNull
+    IndexedList<E> drop(int number);
+
+    @NotNull
+    IndexedList<E> take(int number);
+
+    @NotNull
+    IndexedList<E> range(int from, boolean fromInclusive, int to, boolean toInclusive);
 }

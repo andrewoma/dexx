@@ -22,16 +22,37 @@
 
 package com.github.andrewoma.dexx.collection;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public interface List<E> extends Iterable<E> {
     E get(int i);
 
+    @NotNull
     List<E> set(int i, E elem);
 
+    @NotNull
     List<E> append(E elem);
 
+    @NotNull
     List<E> prepend(E elem);
 
     int indexOf(E elem);
 
     int lastIndexOf(E elem);
+
+    @Nullable
+    E first();
+
+    @Nullable
+    E last();
+
+    @NotNull
+    List<E> drop(int number);
+
+    @NotNull
+    List<E> take(int number);
+
+    @NotNull
+    List<E> range(int from, boolean fromInclusive, int to, boolean toInclusive);
 }

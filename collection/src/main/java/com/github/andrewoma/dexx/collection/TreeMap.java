@@ -134,6 +134,18 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
 
     @NotNull
     @Override
+    public SortedMap<K, V> drop(int number) {
+        return new TreeMap<K, V>(redBlackTree.drop(tree, number), redBlackTree);
+    }
+
+    @NotNull
+    @Override
+    public SortedMap<K, V> take(int number) {
+        return new TreeMap<K, V>(redBlackTree.take(tree, number), redBlackTree);
+    }
+
+    @NotNull
+    @Override
     public SortedMap<K, V> from(@NotNull K key, boolean inclusive) {
         return new TreeMap<K, V>(redBlackTree.from(tree, key, inclusive), redBlackTree);
     }

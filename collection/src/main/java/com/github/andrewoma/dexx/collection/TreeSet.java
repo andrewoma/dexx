@@ -121,6 +121,18 @@ public class TreeSet<E> extends AbstractSortedSet<E> {
 
     @NotNull
     @Override
+    public SortedSet<E> drop(int number) {
+        return new TreeSet<E>(redBlackTree.drop(tree, number), redBlackTree);
+    }
+
+    @NotNull
+    @Override
+    public SortedSet<E> take(int number) {
+        return new TreeSet<E>(redBlackTree.take(tree, number), redBlackTree);
+    }
+
+    @NotNull
+    @Override
     public SortedSet<E> from(@NotNull E value, boolean inclusive) {
         return new TreeSet<E>(redBlackTree.from(tree, value, inclusive), redBlackTree);
     }

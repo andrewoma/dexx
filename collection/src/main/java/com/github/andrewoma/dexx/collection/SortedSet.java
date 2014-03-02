@@ -38,6 +38,12 @@ public interface SortedSet<E> extends Set<E> {
     E last();
 
     @NotNull
+    SortedSet<E> drop(int number);
+
+    @NotNull
+    SortedSet<E> take(int number);
+
+    @NotNull
     SortedSet<E> add(E value);
 
     @NotNull

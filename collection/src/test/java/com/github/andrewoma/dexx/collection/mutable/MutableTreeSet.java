@@ -107,6 +107,18 @@ public class MutableTreeSet<A> extends AbstractSortedSet<A> {
         return underlying.iterator();
     }
 
+    @NotNull
+    @Override
+    public SortedSet<A> drop(int number) {
+        throw new UnsupportedOperationException();
+    }
+
+    @NotNull
+    @Override
+    public SortedSet<A> take(int number) {
+        throw new UnsupportedOperationException();
+    }
+
     static class MutableTreeSetBuilder<A> extends AbstractBuilder<A, SortedSet<A>> implements Builder<A, SortedSet<A>> {
         private java.util.SortedSet<A> result;
 

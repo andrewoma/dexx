@@ -34,10 +34,20 @@ class PairTest {
         assertEquals(Pair("1", "A"), Pair("1", "A"))
         assertFalse(Pair("1", "A").equals(Pair("1", "B")))
         assertFalse(Pair("1", "A").equals(Pair("2", "A")))
+        val pair = Pair("1", "A")
+        assertEquals(pair, pair)
+        assertFalse(pair.equals(""))
+        assertEquals(Pair(null, null), Pair(null, null))
+        assertEquals(Pair(1, null), Pair(1, null))
+        assertEquals(Pair(null, 1), Pair(null, 1))
+        assertFalse(Pair(null, 1).equals(null))
     }
 
     test fun hashCode() {
         assertEquals(Pair("1", "A").hashCode(), Pair("1", "A").hashCode())
+        assertEquals(Pair(null, null).hashCode(), Pair(null, null).hashCode())
+        assertEquals(Pair(1, null).hashCode(), Pair(1, null).hashCode())
+        assertEquals(Pair(null, 1).hashCode(), Pair(null, 1).hashCode())
         assertFalse(Pair("1", "A").hashCode().equals(Pair("1", "B").hashCode()))
         assertFalse(Pair("1", "A").hashCode().equals(Pair("2", "A").hashCode()))
     }

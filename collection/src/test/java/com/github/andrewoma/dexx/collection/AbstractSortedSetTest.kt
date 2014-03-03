@@ -84,9 +84,25 @@ abstract class AbstractSortedSetTest() : AbstractSetTest() {
     }
 
     test fun takeNone() {
-        val vector = sequence(10)
-        assertSequence(vector.take(0), 0, 0)
-        assertSequence(vector.take(-1), 0, 0)
+        val set = sequence(10)
+        assertSequence(set.take(0), 0, 0)
+        assertSequence(set.take(-1), 0, 0)
+    }
+
+    test fun takeLoop() {
+        val max = 100
+        val set = sequence(max)
+        for (i in 1 .. max) {
+            assertSequence(set.take(i), 0, i)
+        }
+    }
+
+    test fun dropLoop() {
+        val max = 100
+        val set = sequence(max)
+        for (i in 1 .. max) {
+            assertSequence(set.drop(i), i, max - i)
+        }
     }
 
     test fun takeAll() {
@@ -98,9 +114,9 @@ abstract class AbstractSortedSetTest() : AbstractSetTest() {
     }
 
     test fun dropNone() {
-        val vector = sequence(10)
-        assertSequence(vector.drop(0), 0, 10)
-        assertSequence(vector.drop(-1), 0, 10)
+        val set = sequence(10)
+        assertSequence(set.drop(0), 0, 10)
+        assertSequence(set.drop(-1), 0, 10)
     }
 
     test fun dropAll() {

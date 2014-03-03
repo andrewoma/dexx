@@ -78,4 +78,50 @@ abstract class AbstractSortedSetTest() : AbstractSetTest() {
     test fun asSortedSet() {
         assertEquals(setOf(1, 2, 3), build(1, 2, 3).asSortedSet())
     }
+
+    // TODO ... TreeSet.take is broken
+//    test fun take() {
+//        assertSequence(sequence(10).take(5), 0, 5)
+//    }
+
+    test fun takeNone() {
+        val vector = sequence(10)
+        assertSequence(vector.take(0), 0, 0)
+        assertSequence(vector.take(-1), 0, 0)
+    }
+
+    test fun takeAll() {
+        assertSequence(sequence(10).take(100), 0, 10)
+    }
+
+    test fun drop() {
+        assertSequence(sequence(10).drop(5), 5, 5)
+    }
+
+    test fun dropNone() {
+        val vector = sequence(10)
+        assertSequence(vector.drop(0), 0, 10)
+        assertSequence(vector.drop(-1), 0, 10)
+    }
+
+    test fun dropAll() {
+        assertSequence(sequence(10).drop(100), 0, 0)
+    }
+
+    fun sequence(size: Int): SortedSet<Int> {
+        var set = TreeSet.empty<Int>()
+        for (i in 0..size - 1) {
+            set = set.add(i)
+        }
+        return set
+    }
+
+    fun assertSequence(set: SortedSet<Int>, from: Int, length: Int) {
+        var from_ = from
+        assertEquals(length, set.size())
+        for (integer in set)
+        {
+            assertEquals(from_++, integer)
+        }
+    }
 }

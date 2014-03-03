@@ -79,10 +79,9 @@ abstract class AbstractSortedSetTest() : AbstractSetTest() {
         assertEquals(setOf(1, 2, 3), build(1, 2, 3).asSortedSet())
     }
 
-    // TODO ... TreeSet.take is broken
-//    test fun take() {
-//        assertSequence(sequence(10).take(5), 0, 5)
-//    }
+    test fun take() {
+        assertSequence(sequence(10).take(5), 0, 5)
+    }
 
     test fun takeNone() {
         val vector = sequence(10)

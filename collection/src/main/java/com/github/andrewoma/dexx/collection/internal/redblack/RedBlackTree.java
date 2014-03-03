@@ -240,6 +240,24 @@ public class RedBlackTree<K, V> {
         return tree;
     }
 
+    private Tree<K, V> updNth(Tree<K, V> tree, int idx, K k, V v, boolean overwrite) {
+        if (tree == null) {
+            return mkTree(false, k, v, null, null);
+        } else {
+            int rank = count(tree.getLeft()) + 1;
+            if (idx < rank) {
+                return balanceLeft(isBlackTree(tree), tree.getKey(kf), tree.getValue(), updNth(tree.getLeft(), idx, k, v, overwrite), tree.getRight());
+            }
+            else if (idx > rank) {
+                return balanceRight(isBlackTree(tree), tree.getKey(kf), tree.getValue(), tree.getLeft(), updNth(tree.getRight(), idx - rank, k, v, overwrite));
+            }
+            else if (overwrite) {
+                return mkTree(isBlackTree(tree), k, v, tree.getLeft(), tree.getRight());
+            }
+            return tree;
+        }
+    }
+
     /* Based on Stefan Kahrs' Haskell version of Okasaki's Red&Black Trees
     * http://www.cse.unsw.edu.au/~dons/data/RedBlackTree.html */
     private Tree<K, V> del(Tree<K, V> tree, K k) {
@@ -405,7 +423,7 @@ public class RedBlackTree<K, V> {
         if (n > count) return doDrop(tree.getRight(), n - count - 1);
         Tree<K, V> newLeft = doDrop(tree.getLeft(), n);
         if (newLeft == tree.getLeft()) return tree;
-        else if (newLeft == null) return upd(tree.getRight(), tree.getKey(kf), tree.getValue(), false);
+        else if (newLeft == null) return updNth(tree.getRight(), n - count - 1, tree.getKey(kf), tree.getValue(), false);
         else return rebalance(tree, newLeft, tree.getRight());
     }
 
@@ -416,7 +434,7 @@ public class RedBlackTree<K, V> {
         if (n <= count) return doTake(tree.getLeft(), n);
         Tree<K, V> newRight = doTake(tree.getRight(), n - count - 1);
         if (newRight == tree.getRight()) return tree;
-        else if (newRight == null) return upd(tree.getLeft(), tree.getKey(kf), tree.getValue(), false);
+        else if (newRight == null) return updNth(tree.getLeft(), n, tree.getKey(kf), tree.getValue(), false);
         else return rebalance(tree, tree.getLeft(), newRight);
     }
 
@@ -428,8 +446,8 @@ public class RedBlackTree<K, V> {
         Tree<K, V> newLeft = doDrop(tree.getLeft(), from);
         Tree<K, V> newRight = doTake(tree.getRight(), until - count - 1);
         if ((newLeft == tree.getLeft()) && (newRight == tree.getRight())) return tree;
-        else if (newLeft == null) return upd(newRight, tree.getKey(kf), tree.getValue(), false);
-        else if (newRight == null) return upd(newLeft, tree.getKey(kf), tree.getValue(), false);
+        else if (newLeft == null) return updNth(newRight, from - count - 1, tree.getKey(kf), tree.getValue(), false);
+        else if (newRight == null) return updNth(newLeft, until, tree.getKey(kf), tree.getValue(), false);
         else return rebalance(tree, newLeft, newRight);
     }
 
@@ -511,19 +529,20 @@ public class RedBlackTree<K, V> {
             return factory.black(tree.getKey(kf), tree.getValue(), blkNewLeft, blkNewRight);
         } else {
             List<Tree<K, V>> zipFrom = findDepth(zipper.zipper, zipper.smallerDepth);
-            Tree<K, V> zippedTree = zipper.leftMost ?
+
+            Tree<K, V> result = zipper.leftMost ?
                     factory.red(tree.getKey(kf), tree.getValue(), blkNewLeft, zipFrom.get(0)) :
                     factory.red(tree.getKey(kf), tree.getValue(), zipFrom.get(0), blkNewRight);
 
             for (Tree<K, V> node : zipFrom.subList(1, zipFrom.size())) {
                 if (zipper.leftMost) {
-                    zippedTree = balanceLeft(isBlackTree(node), node.getKey(kf), node.getValue(), tree, node.getRight());
+                    result = balanceLeft(isBlackTree(node), node.getKey(kf), node.getValue(), result, node.getRight());
                 } else {
-                    zippedTree = balanceRight(isBlackTree(node), node.getKey(kf), node.getValue(), node.getLeft(), tree);
+                    result = balanceRight(isBlackTree(node), node.getKey(kf), node.getValue(), node.getLeft(), result);
                 }
             }
 
-            return zippedTree;
+            return result;
         }
     }
 }

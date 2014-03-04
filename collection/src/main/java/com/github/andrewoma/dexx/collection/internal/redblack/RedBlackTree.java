@@ -48,21 +48,24 @@ public class RedBlackTree<K, V> {
     private final Comparator<? super K> ordering;
     private final KeyFunction<K, V> kf;
 
+    @SuppressWarnings("unchecked")
+    private static final Comparator DEFAULT_COMPARATOR = new Comparator() {
+        public int compare(@NotNull Object o1, @NotNull Object o2) {
+            return ((Comparable) o1).compareTo(o2);
+        }
+    };
+
     public RedBlackTree() {
         this(new DefaultTreeFactory(), null, null);
     }
 
+    @SuppressWarnings("unchecked")
     public RedBlackTree(TreeFactory factory, Comparator<? super K> ordering, KeyFunction<K, V> keyFunction) {
         this.factory = factory;
         this.kf = keyFunction;
 
         if (ordering == null) {
-            ordering = new Comparator<K>() {
-                @SuppressWarnings("unchecked")
-                public int compare(@NotNull K o1, @NotNull K o2) {
-                    return ((Comparable<K>) o1).compareTo(o2);
-                }
-            };
+            ordering = DEFAULT_COMPARATOR;
         }
 
         this.ordering = ordering;
@@ -73,7 +76,7 @@ public class RedBlackTree<K, V> {
     }
 
     public Comparator<? super K> getOrdering() {
-        return ordering;
+        return ordering == DEFAULT_COMPARATOR ? null : ordering;
     }
 
     public boolean isEmpty(Tree<K, V> tree) {

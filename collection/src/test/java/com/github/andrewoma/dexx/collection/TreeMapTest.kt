@@ -24,14 +24,15 @@ package com.github.andrewoma.dexx.collection
 
 import kotlin.test.assertEquals
 import org.junit.Test as test
+import java.util.Comparator
 
 /**
  *
  */
 class TreeMapTest : AbstractSortedMapTest() {
 
-    override fun <K, V> mapFactory(): BuilderFactory<Pair<K, V>, out SortedMap<K, V>> {
-        return TreeMap.factory<K, V>(null, null)
+    override fun <K, V> mapFactory(comparator: Comparator<in K>?): BuilderFactory<Pair<K, V>, out SortedMap<K, V>> {
+        return TreeMap.factory<K, V>(comparator, null)
     }
 
     test fun construct() {

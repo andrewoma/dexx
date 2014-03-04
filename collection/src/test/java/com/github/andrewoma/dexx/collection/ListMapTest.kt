@@ -27,13 +27,14 @@ import com.github.andrewoma.dexx.collection.internal.base.AbstractIterable
 import org.junit.Test
 import kotlin.test.assertEquals
 import com.github.andrewoma.dexx.collection.internal.hashmap.ListMap
+import java.util.Comparator
 
 /**
  *
  */
 class ListMapTest : AbstractMapTest() {
 
-    override fun <K, V> mapFactory(): BuilderFactory<Pair<K, V>, out Map<K, V>> {
+    override fun <K, V> mapFactory(comparator: Comparator<in K>?): BuilderFactory<Pair<K, V>, out Map<K, V>> {
         return ListMap.factory()
     }
 }

@@ -29,9 +29,10 @@ import com.github.andrewoma.dexx.collection.AbstractMapTest.WrappedBuilderFactor
 import org.junit.Test as test
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractBuilder
 import kotlin.test.assertFalse
+import java.util.Comparator
 
 abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : AbstractIterableTest() {
-    abstract fun <K, V> mapFactory(): BuilderFactory<Pair<K, V>, out Map<K, V>>
+    abstract fun <K, V> mapFactory(comparator: Comparator<in K>? = null): BuilderFactory<Pair<K, V>, out Map<K, V>>
 
     protected fun <K, V> buildMap_(vararg entries: kotlin.Pair<K, V>): Map<K, V> {
         val builder = mapFactory<K, V>().newBuilder()

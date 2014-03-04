@@ -30,9 +30,10 @@ import kotlin.test.assertNull
 import com.github.andrewoma.dexx.collection.internal.base.AbstractIterable
 import com.github.andrewoma.dexx.collection.AbstractMapTest.WrappedBuilderFactory
 import org.junit.Test as test
+import java.util.Comparator
 
 abstract class AbstractSortedMapTest() : AbstractMapTest() {
-    override abstract fun <K, V> mapFactory(): BuilderFactory<Pair<K,V>, out SortedMap<K,V>>
+    override abstract fun <K, V> mapFactory(comparator: Comparator<in K>?): BuilderFactory<Pair<K,V>, out SortedMap<K,V>>
 
     private fun <K, V> buildMap(vararg entries : kotlin.Pair<K, V>) = buildMap_(*entries) as SortedMap<K, V>
 
@@ -86,12 +87,94 @@ abstract class AbstractSortedMapTest() : AbstractMapTest() {
         assertEquals(Pair(5, "E"), map.last())
     }
 
-    test fun remainsSorted() {
-//        arrayListOf("").filter {  }
+    test fun <K,V>  sortedWithCustomComparator() {
+        val c = object: Comparator<Int> {
+            [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+            override fun compare(o1: Int, o2: Int): Int {
+                return o1.compareTo(o2)  * -1
+            }
+        }
+        val builder = mapFactory<Int, Int>(c).newBuilder()
+        builder.add(Pair(2, 20))
+        builder.add(Pair(1, 10))
+        builder.add(Pair(3, 30))
+        builder.add(Pair(7, 70))
+        builder.add(Pair(4, 40))
+
+        val map = builder.result()
+        val actual = arrayListOf<Int>()
+
+        for (pair in map) {
+            actual.add(pair.component1()!!)
+        }
+
+        assertEquals(listOf(7, 4, 3, 2, 1), actual)
+        assertEquals(c, map.comparator())
     }
 
-    test fun sortedWithCustomComparator() {
-
+    test fun compartorIsNullWhenNotSupplied() {
+        val map = buildMap<Int, Int>()
+        assertNull(map.comparator())
     }
 
+    test fun take() {
+        assertSequence(sequence(10).take(5), 0, 5)
+    }
+
+    test fun takeNone() {
+        val map = sequence(10)
+        assertSequence(map.take(0), 0, 0)
+        assertSequence(map.take(-1), 0, 0)
+    }
+
+    test fun takeLoop() {
+        val max = 100
+        val map = sequence(max)
+        for (i in 1 .. max) {
+            assertSequence(map.take(i), 0, i)
+        }
+    }
+
+    test fun dropLoop() {
+        val max = 100
+        val map = sequence(max)
+        for (i in 1 .. max) {
+            assertSequence(map.drop(i), i, max - i)
+        }
+    }
+
+    test fun takeAll() {
+        assertSequence(sequence(10).take(100), 0, 10)
+    }
+
+    test fun drop() {
+        assertSequence(sequence(10).drop(5), 5, 5)
+    }
+
+    test fun dropNone() {
+        val map = sequence(10)
+        assertSequence(map.drop(0), 0, 10)
+        assertSequence(map.drop(-1), 0, 10)
+    }
+
+    test fun dropAll() {
+        assertSequence(sequence(10).drop(100), 0, 0)
+    }
+
+    fun sequence(size: Int): SortedMap<Int, Int> {
+        val builder = mapFactory<Int, Int>().newBuilder()
+        for (i in 0..size - 1) {
+            builder.add(Pair(i, i))
+        }
+        return builder.result()
+    }
+
+    fun assertSequence(map: SortedMap<Int, Int>, from: Int, length: Int) {
+        var from_ = from
+        assertEquals(length, map.size())
+        for (pair in map)
+        {
+            assertEquals(from_++, pair.component1())
+        }
+    }
 }

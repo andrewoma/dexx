@@ -28,6 +28,7 @@ import com.github.andrewoma.dexx.collection.internal.builder.AbstractSelfBuilder
 import kotlin.test.assertEquals
 import org.junit.Test as test
 import com.github.andrewoma.dexx.collection.DerivedKeyHashMapTest.ClassWithKey
+import java.util.Comparator
 
 /**
  *
@@ -67,7 +68,7 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
         }
     }
 
-    override fun <K, V> mapFactory(): BuilderFactory<Pair<K, V>, out Map<K, V>> {
+    override fun <K, V> mapFactory(comparator: Comparator<in K>?): BuilderFactory<Pair<K, V>, out Map<K, V>> {
         return object : BuilderFactory<Pair<K, V>, Map<K, V>> {
             override fun newBuilder(): Builder<Pair<K, V>, Map<K, V>> {
                 return object : AbstractSelfBuilder<Pair<K, V>, Map<K, V>>(WrappedDerivedKeyHashMap<K, V>(empty())) {

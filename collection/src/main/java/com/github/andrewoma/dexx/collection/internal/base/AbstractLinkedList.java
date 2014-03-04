@@ -27,5 +27,5 @@ import com.github.andrewoma.dexx.collection.LinkedList;
 /**
  *
  */
-public abstract class AbstractLinked<E> extends AbstractList<E> implements LinkedList<E> {
+public abstract class AbstractLinkedList<E> extends AbstractList<E> implements LinkedList<E> {
 }

@@ -32,7 +32,7 @@ import com.github.andrewoma.dexx.collection.DerivedKeyHashMapTest.ClassWithKey
 /**
  *
  */
-class DerivedKeyHashMapTest : AbstractMapTest() {
+class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
     fun <K, V> empty() = DerivedKeyHashMap.factory<K, Pair<K, V>> { it.component1()!! }.newBuilder().result()
 
     inner class WrappedDerivedKeyHashMap<K : Any, V : Any>(val underlying: DerivedKeyHashMap<K, Pair<K, V>> = empty()) : AbstractMap<K, V>() {

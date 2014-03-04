@@ -30,7 +30,7 @@ import org.junit.Test as test
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractBuilder
 import kotlin.test.assertFalse
 
-abstract class AbstractMapTest() : AbstractIterableTest() {
+abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : AbstractIterableTest() {
     abstract fun <K, V> mapFactory(): BuilderFactory<Pair<K, V>, out Map<K, V>>
 
     protected fun <K, V> buildMap_(vararg entries: kotlin.Pair<K, V>): Map<K, V> {
@@ -267,5 +267,14 @@ abstract class AbstractMapTest() : AbstractIterableTest() {
     test fun containsKeyNullValue() {
         val map = buildMap<Int?, Int?>()
         assertTrue(map.put(1, null).containsKey(1))
+    }
+
+    test fun equalsNonMap() {
+        assertFalse(buildMap(1 to 2).equals(""))
+    }
+
+    test fun equalsWithNullValues() {
+        if (!supportsNullValues) return
+        assertEquals(buildMap(1 to null), buildMap(1 to null))
     }
 }

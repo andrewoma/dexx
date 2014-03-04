@@ -60,7 +60,34 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         assertEquals(-1, list.lastIndexOf(3))
     }
 
-    test fun usingNulls() {
-        assertEquals(listOf(1, null, 2, null), build(1, null, 2, null).klist())
+    test fun indexOfWithNulls() {
+        val list = build(1, null, null, 1)
+        assertEquals(1, list.indexOf(null))
+        assertEquals(-1, list.indexOf(3))
+    }
+
+    test fun lastIndexOfWithNulls() {
+        val list = build(1, null, null, 1)
+        assertEquals(2, list.lastIndexOf(null))
+        assertEquals(-1, list.lastIndexOf(3))
+    }
+
+    test fun equalsUsingNulls() {
+        assertEquals(build(1, null, 2, null), build(1, null, 2, null))
+        assertEquals(build(1, 2), build(1, 2))
+        assertEquals(build(null, 2), build(null, 2))
+        assertEquals(build(1, null), build(1, null))
+        assertFalse(build(1).equals(build(null)))
+        assertFalse(build(null).equals(build(1)))
+        assertFalse(build(1, 2, 3).equals(build(null, null, null)))
+    }
+
+    test fun hashCodeUsingNulls() {
+        assertEquals(build(1, null, 2, null).hashCode(), build(1, null, 2, null).hashCode())
+    }
+
+    test fun notEqualsWithDifferentLengths() {
+        assertFalse(build(1, 1, 1).equals(build(1, 1)))
+        assertFalse(build(1, 1).equals(build(1, 1, 1)))
     }
 }

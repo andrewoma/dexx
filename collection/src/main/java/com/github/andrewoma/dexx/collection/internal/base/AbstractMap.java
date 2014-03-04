@@ -70,7 +70,7 @@ public abstract class AbstractMap<K, V> extends AbstractIterable<Pair<K, V>> imp
                 K key = pair.component1();
                 V value = pair.component2();
                 if (value == null) {
-                    if (!(m.get(key) == null && m.get(key) != null))
+                    if (m.get(key) != null || !m.containsKey(key))
                         return false;
                 } else {
                     if (!value.equals(m.get(key)))

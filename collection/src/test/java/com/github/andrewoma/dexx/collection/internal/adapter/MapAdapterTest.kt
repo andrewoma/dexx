@@ -46,7 +46,7 @@ public open class MapAdapterTest {
         assertEquals(map(1 to 1, 2 to 2), mapOf(1 to 1, 2 to 2))
     }
 
-    test fun hashCode() {
+    test fun testHashCode() {
         assertEquals(map(1 to 1, 2 to 2).hashCode(), map(1 to 1, 2 to 2).hashCode())
         assertEquals(map(1 to 1, 2 to 2).hashCode(), mapOf(1 to 1, 2 to 2).hashCode()) // Same hashCode algorithm as java.util
     }

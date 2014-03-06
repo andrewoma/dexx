@@ -38,7 +38,7 @@ public open class SetAdapterTest {
         assertEquals(setOf(1, 2, 3), set(1, 2, 3))
     }
 
-    test fun hashCode() {
+    test fun testHashCode() {
         assertEquals(set(1, 2, 3), set(1, 2, 3))
     }
 

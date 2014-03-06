@@ -238,7 +238,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         assertEquals(buildMap(1 to 2, 3 to 4), buildMap(1 to 2, 3 to 4))
     }
 
-    test fun hashCode() {
+    test fun testHashCode() {
         assertEquals(buildMap(1 to 2, 3 to 4).hashCode(), buildMap(1 to 2, 3 to 4).hashCode())
     }
 

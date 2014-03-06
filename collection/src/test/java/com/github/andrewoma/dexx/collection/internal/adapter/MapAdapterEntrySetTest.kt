@@ -48,7 +48,7 @@ public open class MapAdapterEntrySetTest {
         assertEquals(mapOf(1 to 1, 2 to 2).entrySet(), map(1 to 1, 2 to 2))
     }
 
-    test fun hashCode() {
+    test fun testHashCode() {
         assertEquals(map(1 to 1, 2 to 2), map(1 to 1, 2 to 2))
     }
 

@@ -41,5 +41,9 @@ public interface LinkedList<E> extends List<E> {
     LinkedList<E> take(int number);
 
     @NotNull
+    @Override
+    LinkedList<E> tail();
+
+    @NotNull
     LinkedList<E> range(int from, boolean fromInclusive, int to, boolean toInclusive);
 }

@@ -43,7 +43,7 @@ class PairTest {
         assertFalse(Pair(null, 1).equals(null))
     }
 
-    test fun hashCode() {
+    test fun testHashCode() {
         assertEquals(Pair("1", "A").hashCode(), Pair("1", "A").hashCode())
         assertEquals(Pair(null, null).hashCode(), Pair(null, null).hashCode())
         assertEquals(Pair(1, null).hashCode(), Pair(1, null).hashCode())
@@ -52,7 +52,7 @@ class PairTest {
         assertFalse(Pair("1", "A").hashCode().equals(Pair("2", "A").hashCode()))
     }
 
-    test fun toString() {
+    test fun testToString() {
         assertEquals("(1, A)", Pair("1", "A").toString())
     }
 }

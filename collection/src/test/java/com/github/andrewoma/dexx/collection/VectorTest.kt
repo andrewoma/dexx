@@ -38,7 +38,7 @@ class VectorTest() : AbstractListTest() {
 
     fun size(level: Int) = BigDecimal(2).pow(level * 5).intValueExact()
 
-    fun sizes(): jet.List<Int> {
+    fun sizes(): Collection<Int> {
         val max = if (TestMode.current() == TestMode.QUICK) 3 else 5
         val sizes = (1..max).mapTo(arrayListOf<Int>()) { size(it) }
         sizes.add(size(max) + 2)

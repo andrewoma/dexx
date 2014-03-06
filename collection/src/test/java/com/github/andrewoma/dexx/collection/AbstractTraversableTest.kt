@@ -82,7 +82,7 @@ abstract class AbstractTraversableTest() {
     }
 
     // Converts to a list so the order of traversal is known (may not be the order of insertion for Sets et al)
-    fun <T> toList(traversable: Traversable<T>) : jet.List<T> {
+    fun <T> toList(traversable: Traversable<T>) : Collection<T> {
         val ordered = arrayListOf<T>()
         traversable.forEach { ordered.add(it!!) }
         return ordered
@@ -100,8 +100,8 @@ abstract class AbstractTraversableTest() {
 
     test fun makeStringTruncated() {
         val traversable = build(1, 2, 3)
-        val list = toList(traversable)
-        assertEquals("prefix" + list[0] + "," + list[1] + ",...postfix", traversable.makeString(",", "prefix", "postfix", 2, "..."))
+        val list = toList(traversable).iterator()
+        assertEquals("prefix" + list.next() + "," + list.next() + ",...postfix", traversable.makeString(",", "prefix", "postfix", 2, "..."))
     }
 
     test fun toSortedSet() {
@@ -124,7 +124,7 @@ abstract class AbstractTraversableTest() {
         assertEquals(Vector.factory<Int>().newBuilder().addAll(toList(traversable)).result(), traversable.toIndexedList());
     }
 
-    test fun toString() {
+    test fun testToString() {
         val traversable = build(1, 2, 3)
         assertEquals(traversable.getClass().getSimpleName() + "(" + toList(traversable).makeString(", ") + ")", traversable.toString())
     }

@@ -48,6 +48,9 @@ public interface List<E> extends Iterable<E> {
     E last();
 
     @NotNull
+    List<E> tail();
+
+    @NotNull
     List<E> drop(int number);
 
     @NotNull

@@ -137,7 +137,7 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
     }
 
     class ClassForIdentityKey(val key: String, val value: String) {
-        fun equals(o: Any?): Boolean = o is ClassForIdentityKey && o.key == key
-        fun hashCode(): Int = key.hashCode()
+        override fun equals(other: Any?): Boolean = other is ClassForIdentityKey && other.key == key
+        override fun hashCode(): Int = key.hashCode()
     }
 }

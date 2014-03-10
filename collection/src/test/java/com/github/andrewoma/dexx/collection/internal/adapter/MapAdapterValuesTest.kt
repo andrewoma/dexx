@@ -32,87 +32,72 @@ import org.junit.Test as test
 import com.google.common.collect.ImmutableMap
 
 /**
- *
+ * TODO ... should values implement equals() and hashCode()? Java's doesn't ...
  */
 public open class MapAdapterValuesTest {
-    open fun map(vararg values: Pair<Int, Int>) : MutableCollection<Int> {
+    open fun values(vararg values: Int) : MutableCollection<Int> {
         val builder = HashMap.factory<Int, Int>().newBuilder()
-        for (pair in values) {
-            builder.add(DPair(pair.first, pair.second))
+        for (value in values) {
+            builder.add(DPair(value, value))
         }
         return builder.result().asMap().values()
     }
 
-    // TODO
-//    test fun equals() {
-//        assertEquals(map(1 to 1, 2 to 2), mapOf(1 to 1, 2 to 2).entrySet())
-//        assertEquals(mapOf(1 to 1, 2 to 2).entrySet(), map(1 to 1, 2 to 2))
-//    }
-//
-//    test fun testHashCode() {
-//        assertEquals(map(1 to 1, 2 to 2), map(1 to 1, 2 to 2))
-//    }
-//
-//    test fun size() {
-//        assertEquals(0, map().size())
-//        assertEquals(2, map(1 to 1, 2 to 2).size())
-//    }
-//
-//    test fun empty() {
-//        assertTrue(map().isEmpty())
-//        assertFalse(map(1 to 1, 2 to 2).isEmpty())
-//    }
-//
-//    test fun contains() {
-//        val set = map(1 to 1, 2 to 2, 3 to 3)
-//        assertTrue(set.contains(e(1 to 1)))
-//        assertFalse(set.contains(e(4 to 4)))
-//    }
-//
-//    test fun toArray() {
-//        val ints = map(1 to 1, 2 to 2).copyToArray()
-//        assertEquals(ints.map { it.getKey() } sortBy { it }, listOf(1, 2))
-//    }
-//
-//    test fun iterator() {
-//        val ints = mapOf(1 to 1, 2 to 2).iterator()
-//        assertEquals(ints.map { it.getKey() } sortBy { it }, listOf(1, 2))
-//    }
-//
-//    test fun containsAll() {
-//        assertTrue(map(1 to 1, 2 to 2, 3 to 3).containsAll(listOf(e(1 to 1), e(2 to 2), e(3 to 3))))
-//        assertTrue(map(1 to 1, 2 to 2, 3 to 3).containsAll(listOf(e(1 to 1), e(2 to 2))))
-//        assertTrue(map(1 to 1, 2 to 2, 3 to 3).containsAll(listOf(e(1 to 1))))
-//        assertTrue(map(1 to 1, 2 to 2, 3 to 3).containsAll(listOf()))
-//        assertFalse(map(1 to 1, 2 to 2, 3 to 3).containsAll(listOf(e(4 to 4))))
-//        assertFalse(map(1 to 1, 2 to 2, 3 to 3).containsAll(listOf(e(1 to 1), e(2 to 2), e(3 to 3), e(4 to 4))))
-//    }
-//
-//    fun e(pair: Pair<Int, Int>): MutableMap.MutableEntry<Int, Int> {
-//        return ImmutableMap.of(pair.first, pair.second)!!.entrySet().iterator().next()
-//    }
-//
-//    test(expected = javaClass<UnsupportedOperationException>()) fun add() {
-//        map().add(e(1 to 1))
-//    }
-//
-//    test(expected = javaClass<UnsupportedOperationException>()) fun remove() {
-//        map().remove(e(1 to 1))
-//    }
-//
-//    test(expected = javaClass<UnsupportedOperationException>()) fun addAll() {
-//        map().addAll(listOf(e(1 to 1)))
-//    }
-//
-//    test(expected = javaClass<UnsupportedOperationException>()) fun retainAll() {
-//        map().retainAll(listOf(e(1 to 1)))
-//    }
-//
-//    test(expected = javaClass<UnsupportedOperationException>()) fun removeAll() {
-//        map().removeAll(listOf(e(1 to 1)))
-//    }
-//
-//    test(expected = javaClass<UnsupportedOperationException>()) fun clear() {
-//        map().clear()
-//    }
+    test fun size() {
+        assertEquals(0, values().size())
+        assertEquals(2, values(1, 2).size())
+    }
+
+    test fun empty() {
+        assertTrue(values().isEmpty())
+        assertFalse(values(1, 2).isEmpty())
+    }
+
+    test fun contains() {
+        val set = values(1, 2, 3)
+        assertTrue(set.contains(1))
+        assertFalse(set.contains(4))
+    }
+
+    test fun iterator() {
+        assertEquals(values(1, 2, 3).iterator().toSet(), setOf(1, 2, 3))
+    }
+
+    test fun toArray() {
+        val ints = values(1, 2).copyToArray()
+        assertEquals(arrayListOf(*ints), listOf(1, 2))
+    }
+
+    test fun containsAll() {
+        assertTrue(values(1, 2, 3).containsAll(listOf(1, 2, 3)))
+        assertTrue(values(1, 2, 3).containsAll(listOf(1, 2)))
+        assertTrue(values(1, 2, 3).containsAll(listOf(1)))
+        assertTrue(values(1, 2, 3).containsAll(listOf()))
+        assertFalse(values(1, 2, 3).containsAll(listOf(4)))
+        assertFalse(values(1, 2, 3).containsAll(listOf(1, 2, 3, 4)))
+    }
+
+    test(expected = javaClass<UnsupportedOperationException>()) fun add() {
+        values().add(1)
+    }
+
+    test(expected = javaClass<UnsupportedOperationException>()) fun remove() {
+        values().remove(1)
+    }
+
+    test(expected = javaClass<UnsupportedOperationException>()) fun addAll() {
+        values().addAll(listOf(1))
+    }
+
+    test(expected = javaClass<UnsupportedOperationException>()) fun retainAll() {
+        values().retainAll(listOf(1))
+    }
+
+    test(expected = javaClass<UnsupportedOperationException>()) fun removeAll() {
+        values().removeAll(listOf(1))
+    }
+
+    test(expected = javaClass<UnsupportedOperationException>()) fun clear() {
+        values().clear()
+    }
 }

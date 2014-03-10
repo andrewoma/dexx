@@ -30,6 +30,7 @@ import com.github.andrewoma.dexx.collection.HashMap
 import com.github.andrewoma.dexx.collection.Pair as DPair
 import org.junit.Test as test
 import com.google.common.collect.ImmutableMap
+import com.github.andrewoma.dexx.collection.Maps
 
 /**
  *
@@ -62,10 +63,45 @@ public open class MapAdapterEntrySetTest {
         assertFalse(map(1 to 1, 2 to 2).isEmpty())
     }
 
+    test(expected = javaClass<UnsupportedOperationException>()) fun setValue() {
+        map(1 to 1).iterator().next().setValue(2)
+    }
+
+    test fun entriesEqual() {
+        val e1 = map(1 to 1)
+        val e2 = map(1 to 1)
+        val e3 = map(1 to 2)
+        assertEquals(e1.iterator().next(), e2.iterator().next())
+        assertEquals(e2.iterator().next(), e1.iterator().next())
+        assertFalse(e1.iterator().next() == e3.iterator().next())
+        assertFalse(e1.iterator().next().equals(""))
+    }
+
+    test fun entriesWithNullsEqual() {
+        val e1 = Maps.of(1, null: Int?).asMap().entrySet()
+        val e2 = Maps.of(1, null: Int?).asMap().entrySet()
+        assertEquals(e1.iterator().next(), e2.iterator().next())
+        assertEquals(e2.iterator().next(), e1.iterator().next())
+        assertFalse(e1.iterator().next().equals(""))
+    }
+
+    test fun entryToString() {
+        assertEquals("1=2", map(1 to 2).iterator().next().toString())
+    }
+
+    test fun entriesHashcodesEqual() {
+        val e1 = map(1 to 1)
+        val e2 = map(1 to 1)
+        val e3 = map(1 to 2)
+        assertEquals(e1.iterator().next().hashCode(), e2.iterator().next().hashCode())
+        assertFalse(e1.iterator().next().hashCode() == e3.iterator().next().hashCode())
+    }
+
     test fun contains() {
         val set = map(1 to 1, 2 to 2, 3 to 3)
         assertTrue(set.contains(e(1 to 1)))
-        assertFalse(set.contains(e(4 to 4)))
+        assertFalse(set.contains(e(4  to 4)))
+        assertFalse(set.contains(""))
     }
 
     test fun toArray() {

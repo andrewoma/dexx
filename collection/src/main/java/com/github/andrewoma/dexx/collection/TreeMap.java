@@ -31,9 +31,11 @@ import com.github.andrewoma.dexx.collection.internal.redblack.RedBlackTree;
 import com.github.andrewoma.dexx.collection.internal.redblack.Tree;
 import com.github.andrewoma.dexx.collection.internal.redblack.TreeFactory;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -116,20 +118,28 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         redBlackTree.forEach(tree, f);
     }
 
-    @NotNull
+    @Nullable
     @Override
     public Pair<K, V> first() {
-        return toPair(redBlackTree.smallest(tree));
+        try {
+            return toPair(redBlackTree.smallest(tree));
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
     private Pair<K, V> toPair(Tree<K, V> tree) {
         return new Pair<K, V>(tree.getKey(redBlackTree.getKeyFunction()), tree.getValue());
     }
 
-    @NotNull
+    @Nullable
     @Override
     public Pair<K, V> last() {
-        return toPair(redBlackTree.greatest(tree));
+        try {
+            return toPair(redBlackTree.greatest(tree));
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
     @NotNull

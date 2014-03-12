@@ -27,6 +27,7 @@ import com.github.andrewoma.dexx.collection.SortedMap;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -39,7 +40,6 @@ public class SortedMapAdapter<K, V> extends MapAdapter<K, V> implements java.uti
         this.map = map;
     }
 
-    @NotNull
     @Override
     public Comparator<? super K> comparator() {
         return map.comparator();
@@ -65,12 +65,14 @@ public class SortedMapAdapter<K, V> extends MapAdapter<K, V> implements java.uti
 
     @Override
     public K firstKey() {
+        if (map.isEmpty()) throw new NoSuchElementException("Empty map");
         Pair<K, V> first = map.first();
         return first == null ? null : first.component1();
     }
 
     @Override
     public K lastKey() {
+        if (map.isEmpty()) throw new NoSuchElementException("Empty map");
         Pair<K, V> last = map.last();
         return last == null ? null : last.component1();
     }

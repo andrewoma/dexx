@@ -82,9 +82,17 @@ abstract class AbstractSortedMapTest() : AbstractMapTest() {
         assertEquals(Pair(1, "A"), map.first())
     }
 
+    test fun firstSortedMapEmpty() {
+        assertNull(buildMap<Int, Int>().first())
+    }
+
     test fun lastSortedMap() {
         val map = buildMap(1 to "A", 3 to "C", 2 to "B", 5 to "E", 4 to "D")
         assertEquals(Pair(5, "E"), map.last())
+    }
+
+    test fun lastSortedMapEmpty() {
+        assertNull(buildMap<Int, Int>().last())
     }
 
     test fun <K,V>  sortedWithCustomComparator() {

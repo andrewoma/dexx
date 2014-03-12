@@ -57,7 +57,13 @@ public class MapAdapter<K, V> extends java.util.AbstractMap<K, V> implements jav
     @Override
     @SuppressWarnings("unchecked")
     public boolean containsKey(Object key) {
-        return map.containsKey((K) key);
+        try {
+            return map.containsKey((K) key);
+        } catch (ClassCastException e) {
+            return false;
+        } catch (NullPointerException e) {
+            return false;
+        }
     }
 
     @Override
@@ -69,7 +75,13 @@ public class MapAdapter<K, V> extends java.util.AbstractMap<K, V> implements jav
     @Override
     @SuppressWarnings("unchecked")
     public V get(Object key) {
-        return map.get((K) key);
+        try {
+            return map.get((K) key);
+        } catch (ClassCastException e) {
+            return null;
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 
     @Override

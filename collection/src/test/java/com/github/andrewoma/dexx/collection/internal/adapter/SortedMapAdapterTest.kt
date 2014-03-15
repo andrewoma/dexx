@@ -98,12 +98,24 @@ public open class SortedMapAdapterTest : MapAdapterTest() {
     }
 
     test fun subMap() {
-        // TODO
+        assertEquals(map(1 to 1, 2 to 2, 3 to 3), map(1 to 1, 2 to 2, 3 to 3).subMap(0, 4))
+        assertEquals(map(1 to 1, 2 to 2), map(1 to 1, 2 to 2, 3 to 3).subMap(1, 3))
+        assertEquals(map(), map(1 to 1, 2 to 2, 3 to 3).subMap(2, 2))
+        assertEquals(map(), map(1 to 1, 2 to 2, 3 to 3).subMap(2, 1))
+        assertEquals(map(), map().subMap(1, 1))
+
+        // Check the java.util behaviour is the same
+        assertEquals(map(1 to 1, 2 to 2, 3 to 3), jmap(1 to 1, 2 to 2, 3 to 3).subMap(0, 4))
+        assertEquals(map(1 to 1, 2 to 2), jmap(1 to 1, 2 to 2, 3 to 3).subMap(1, 3))
+        assertEquals(map(), jmap(1 to 1, 2 to 2, 3 to 3).subMap(2, 2))
+        // Note: j.u.TreeMap throws IllegalArgumentException with fromKey > toKey
+        //   assertEquals(map(), jmap(1 to 1, 2 to 2, 3 to 3).subMap(2, 1))
+        assertEquals(map(), jmap().subMap(1, 1))
     }
 
     test fun comparator() {
         // TODO ... Bug in JetBrains' annotations - it thinks SortedMap.comparator() can't return a null
-//        assertNull(map().comparator())
+        // assertNull(map().comparator())
     }
 
     test fun <K, V>  sortedWithCustomComparator() {

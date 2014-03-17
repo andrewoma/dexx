@@ -28,9 +28,11 @@ import com.github.andrewoma.dexx.collection.internal.redblack.DerivedKeyFactory;
 import com.github.andrewoma.dexx.collection.internal.redblack.RedBlackTree;
 import com.github.andrewoma.dexx.collection.internal.redblack.Tree;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -102,16 +104,24 @@ public class TreeSet<E> extends AbstractSortedSet<E> {
         return RedBlackTree.count(tree);
     }
 
-    @NotNull
+    @Nullable
     @Override
     public E first() {
-        return redBlackTree.smallest(tree).getValue();
+        try {
+            return redBlackTree.smallest(tree).getValue();
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
-    @NotNull
+    @Nullable
     @Override
     public E last() {
-        return redBlackTree.greatest(tree).getValue();
+        try {
+            return redBlackTree.greatest(tree).getValue();
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
     @NotNull

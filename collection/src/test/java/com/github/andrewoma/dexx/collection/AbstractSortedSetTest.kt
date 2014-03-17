@@ -27,6 +27,7 @@ import kotlin.test.assertTrue
 import kotlin.test.assertFalse
 import org.junit.Test as test
 import java.util.NoSuchElementException
+import kotlin.test.assertNull
 
 abstract class AbstractSortedSetTest() : AbstractSetTest() {
 
@@ -73,6 +74,14 @@ abstract class AbstractSortedSetTest() : AbstractSetTest() {
     test fun lastSortedSet() {
         val set = build(1, 3, 2, 5, 4)
         assertEquals(5, set.last())
+    }
+
+    test fun firstEmpty() {
+        assertNull(build<Int>().first())
+    }
+
+    test fun lastEmpty() {
+        assertNull(build<Int>().last())
     }
 
     test fun asSortedSet() {

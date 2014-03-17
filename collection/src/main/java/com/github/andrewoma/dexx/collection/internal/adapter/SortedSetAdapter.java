@@ -26,6 +26,7 @@ import com.github.andrewoma.dexx.collection.SortedSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -64,11 +65,13 @@ public class SortedSetAdapter<E> extends SetAdapater<E> implements java.util.Sor
 
     @Override
     public E first() {
+        if (set.isEmpty()) throw new NoSuchElementException("Empty set");
         return set.first();
     }
 
     @Override
     public E last() {
+        if (set.isEmpty()) throw new NoSuchElementException("Empty set");
         return set.last();
     }
 }

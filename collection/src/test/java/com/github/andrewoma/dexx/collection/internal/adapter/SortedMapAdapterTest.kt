@@ -125,8 +125,8 @@ public open class SortedMapAdapterTest : MapAdapterTest() {
                 return o1.compareTo(o2) * -1
             }
         }
-        val map = TreeMap<Int, Int>(c, null).put(2, 20).put(1, 10).put(3, 30).put(7, 70).put(4, 40)
-        val actual = map.map { it.component1()!! }
+        val map = TreeMap<Int, Int>(c, null).put(2, 20).put(1, 10).put(3, 30).put(7, 70).put(4, 40).asSortedMap()
+        val actual = map.map { it.component1() }
 
         assertEquals(listOf(7, 4, 3, 2, 1), actual)
         assertEquals(c, map.comparator())

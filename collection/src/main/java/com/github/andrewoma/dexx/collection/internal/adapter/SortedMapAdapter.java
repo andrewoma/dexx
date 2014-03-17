@@ -63,17 +63,19 @@ public class SortedMapAdapter<K, V> extends MapAdapter<K, V> implements java.uti
         return new SortedMapAdapter<K, V>(map.from(fromKey, true));
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public K firstKey() {
         if (map.isEmpty()) throw new NoSuchElementException("Empty map");
         Pair<K, V> first = map.first();
-        return first == null ? null : first.component1();
+        return first.component1();
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public K lastKey() {
         if (map.isEmpty()) throw new NoSuchElementException("Empty map");
         Pair<K, V> last = map.last();
-        return last == null ? null : last.component1();
+        return last.component1();
     }
 }

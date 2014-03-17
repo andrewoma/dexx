@@ -74,6 +74,7 @@ public open class MapAdapterTest {
         assertEquals(10, map.get(1))
         assertNull(map.get(4))
         assertNull(map.get(10))
+        assertNull(map.get("foo"))
     }
 
     test fun containsValue() {

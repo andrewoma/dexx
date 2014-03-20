@@ -32,27 +32,27 @@ import org.junit.Test as test
 import kotlin.test.assertEquals
 
 class BlogTest {
-    fun <T, R> Stream<T>.build(builder: Builder<T, R>): R {
-        this.forEach { builder.add(it) }
-        return builder.build()
-    }
-
-    fun <T> Stream<T>.toPersistentSet(): com.github.andrewoma.dexx.collection.Set<T>
-            = build(Sets.builder<T>())
-
-    fun <T> Stream<T>.toPersistentSortedSet(): SortedSet<T>
-            = build(SortedSets.builder<T>())
-
-    fun <K, V> Stream<com.github.andrewoma.dexx.collection.Pair<K, V>>.toPersistentMap(): com.github.andrewoma.dexx.collection.Map<K, V>
-            = build(Maps.builder<K, V>())
-
+//    fun <T, R> Stream<T>.build(builder: Builder<T, R>): R {
+//        this.forEach { builder.add(it) }
+//        return builder.build()
+//    }
+//
+//    fun <T> Stream<T>.toPersistentSet(): com.github.andrewoma.dexx.collection.Set<T>
+//            = build(Sets.builder<T>())
+//
+//    fun <T> Stream<T>.toPersistentSortedSet(): SortedSet<T>
+//            = build(SortedSets.builder<T>())
+//
+//    fun <K, V> Stream<com.github.andrewoma.dexx.collection.Pair<K, V>>.toPersistentMap(): com.github.andrewoma.dexx.collection.Map<K, V>
+//            = build(Maps.builder<K, V>())
+//
     test fun lazyEvaluation() {
-        val set = SortedSets.of(1, 2, 3, 4, 5, 6).stream()
-                .filter { it % 2 == 0 }
-                .map { "$it is even" }
-                .take(2)
-                .toPersistentSortedSet()
-
-        assertEquals(SortedSets.of("2 is even", "4 is even"), set)
+//        val set = SortedSets.of(1, 2, 3, 4, 5, 6).stream()
+//                .filter { it % 2 == 0 }
+//                .map { "$it is even" }
+//                .take(2)
+//                .toPersistentSortedSet()
+//
+//        assertEquals(SortedSets.of("2 is even", "4 is even"), set)
     }
 }

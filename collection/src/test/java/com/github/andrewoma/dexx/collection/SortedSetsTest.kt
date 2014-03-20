@@ -56,20 +56,6 @@ class SortedSetsTest {
         assertEquals(build(null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), SortedSets.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
     }
 
-    // TODO ... move to kotlin sample/blog class
-    fun <T, R> Iterator<T>.build(builder: Builder<T, R>): R {
-        while (this.hasNext()) builder.add(this.next())
-        return builder.build()
-    }
-
-    fun <T> Iterator<T>.toPersistentSet(): Set<T>
-            = build(Sets.builder<T>())
-    fun <T> Iterator<T>.toPersistentSortedSet(): SortedSet<T>
-            = build(SortedSets.builder<T>())
-
-    fun <K, V> Iterator<com.github.andrewoma.dexx.collection.Pair<K, V>>.toPersistentMap(): Map<K, V>
-            = build(Maps.builder<K, V>())
-
     test fun ofWithComparator() {
         assertEquals(build<Int>(c), SortedSets.of<Int>(c))
         assertEquals(build(c, 1), SortedSets.of(c, 1))
@@ -84,12 +70,6 @@ class SortedSetsTest {
         assertEquals(build(c, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), SortedSets.of(c, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
         assertEquals(build(c, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), SortedSets.of(c, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11))
         assertEquals(build(c, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), SortedSets.of(c, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
-
-        val sets = SortedSets.of(1, 2, 3, 4, 5, 6).iterator()
-                .filter { it % 2 == 0 }
-                .map { "$it is even" }
-                .take(2)
-                .toPersistentSortedSet()
     }
 
     test fun copyOfIterable() {

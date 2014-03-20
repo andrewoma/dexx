@@ -90,14 +90,7 @@ public class MutableHashSet<A> extends AbstractSet<A> {
 
         @NotNull
         @Override
-        public Builder<A, Set<A>> clear() {
-            result.clear();
-            return this;
-        }
-
-        @NotNull
-        @Override
-        public Set<A> result() {
+        public Set<A> build() {
             return new MutableHashSet<A>(result);
         }
     }

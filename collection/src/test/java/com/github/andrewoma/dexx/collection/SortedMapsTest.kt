@@ -29,7 +29,7 @@ class SortedMapsTest {
     private fun build<K, V>(vararg ts: kotlin.Pair<K, V>) : Map<K, V> {
         val builder = TreeMap.factory<K, V>(null, null).newBuilder()
         for (t in ts) { builder.add(Pair(t.first, t.second)) }
-        return builder.result()
+        return builder.build()
     }
 
     test fun of() {
@@ -54,10 +54,10 @@ class SortedMapsTest {
     }
 
     test fun factory() {
-        assertEquals(build(1 to "a", 2 to "b"), SortedMaps.factory<Int, String>().newBuilder().addAll(Pair(1, "a"), Pair(2, "b")).result())
+        assertEquals(build(1 to "a", 2 to "b"), SortedMaps.factory<Int, String>().newBuilder().addAll(Pair(1, "a"), Pair(2, "b")).build())
     }
 
     test fun builder() {
-        assertEquals(build(1 to "a", 2 to "b"), SortedMaps.builder<Int, String>().addAll(Pair(1, "a"), Pair(2, "b")).result())
+        assertEquals(build(1 to "a", 2 to "b"), SortedMaps.builder<Int, String>().addAll(Pair(1, "a"), Pair(2, "b")).build())
     }
 }

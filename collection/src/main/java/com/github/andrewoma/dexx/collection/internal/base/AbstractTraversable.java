@@ -93,7 +93,7 @@ public abstract class AbstractTraversable<E> implements Traversable<E> {
     @NotNull
     @Override
     public <R extends Traversable<E>> R to(@NotNull Builder<E, R> builder) {
-        return builder.addAll(this).result();
+        return builder.addAll(this).build();
     }
 
     @NotNull

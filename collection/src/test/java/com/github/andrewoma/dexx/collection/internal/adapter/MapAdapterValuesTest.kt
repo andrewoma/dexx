@@ -40,7 +40,7 @@ public open class MapAdapterValuesTest {
         for (value in values) {
             builder.add(DPair(value, value))
         }
-        return builder.result().asMap().values()
+        return builder.build().asMap().values()
     }
 
     test fun size() {

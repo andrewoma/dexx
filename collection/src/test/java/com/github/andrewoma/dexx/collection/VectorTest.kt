@@ -213,6 +213,6 @@ class VectorTest() : AbstractListTest() {
         for (i in 0..size - 1) {
             builder.add(i)
         }
-        return builder.result()
+        return builder.build()
     }
 }

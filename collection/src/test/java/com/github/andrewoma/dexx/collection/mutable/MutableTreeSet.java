@@ -135,14 +135,7 @@ public class MutableTreeSet<A> extends AbstractSortedSet<A> {
 
         @NotNull
         @Override
-        public Builder<A, SortedSet<A>> clear() {
-            result.clear();
-            return this;
-        }
-
-        @NotNull
-        @Override
-        public SortedSet<A> result() {
+        public SortedSet<A> build() {
             return new MutableTreeSet<A>(result);
         }
     }

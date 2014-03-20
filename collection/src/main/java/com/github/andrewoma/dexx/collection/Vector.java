@@ -1117,7 +1117,7 @@ class VectorBuilder<E> extends AbstractBuilder<E, Vector<E>> {
     }
 
     @NotNull
-    public Vector<E> result() {
+    public Vector<E> build() {
         int size = blockIndex + lo;
         if (size == 0)
             return Vector.empty();
@@ -1128,7 +1128,6 @@ class VectorBuilder<E> extends AbstractBuilder<E, Vector<E>> {
     }
 
     @NotNull
-    @Override
     public Builder<E, Vector<E>> clear() {
         pointer.display0 = new Object[32];
         pointer.depth = 1;

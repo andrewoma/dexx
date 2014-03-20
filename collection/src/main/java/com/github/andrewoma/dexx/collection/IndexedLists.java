@@ -106,7 +106,7 @@ public class IndexedLists {
             builder.add(other);
         }
 
-        return builder.result();
+        return builder.build();
     }
 
     private static <E> IndexedList<E> construct(E... es) {
@@ -114,7 +114,7 @@ public class IndexedLists {
         for (E e : es) {
             builder.add(e);
         }
-        return builder.result();
+        return builder.build();
     }
 
     @NotNull
@@ -123,7 +123,7 @@ public class IndexedLists {
         for (E e : iterable) {
             builder.add(e);
         }
-        return builder.result();
+        return builder.build();
     }
 
     @NotNull
@@ -132,7 +132,7 @@ public class IndexedLists {
         for (E e : es) {
             builder.add(e);
         }
-        return builder.result();
+        return builder.build();
     }
 
     @NotNull
@@ -147,7 +147,7 @@ public class IndexedLists {
             }
         });
 
-        return builder.result();
+        return builder.build();
     }
 
     @NotNull

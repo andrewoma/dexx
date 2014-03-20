@@ -34,7 +34,7 @@ import java.util.Comparator
  *
  */
 class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
-    fun <K, V> empty() = DerivedKeyHashMap.factory<K, Pair<K, V>> { it.component1()!! }.newBuilder().result()
+    fun <K, V> empty() = DerivedKeyHashMap.factory<K, Pair<K, V>> { it.component1()!! }.newBuilder().build()
 
     inner class WrappedDerivedKeyHashMap<K : Any, V : Any>(val underlying: DerivedKeyHashMap<K, Pair<K, V>> = empty()) : AbstractMap<K, V>() {
 
@@ -100,14 +100,14 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
 
     test fun directBuilding() {
         val builder = DerivedKeyHashMap.factory(keyFunction).newBuilder()
-        val map = builder.add(Pair("1", ClassWithKey("1", "A"))).result()
+        val map = builder.add(Pair("1", ClassWithKey("1", "A"))).build()
 
         assertEquals(1, map.size())
         assertEquals(ClassWithKey("1", "A"), map["1"])
     }
 
     test fun withCustomClass() {
-        var map = DerivedKeyHashMap.factory(keyFunction).newBuilder().result()
+        var map = DerivedKeyHashMap.factory(keyFunction).newBuilder().build()
         map = map.put("1", ClassWithKey("1", "A"))
         map = map.put("2", ClassWithKey("2", "B"))
         map = map.put("3", ClassWithKey("3", "C"))
@@ -118,7 +118,7 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
     }
 
     test fun withIdentityKeyFunction() {
-        var map = DerivedKeyHashMap.factory<ClassForIdentityKey, ClassForIdentityKey>(IdentityKeyFunction()).newBuilder().result()
+        var map = DerivedKeyHashMap.factory<ClassForIdentityKey, ClassForIdentityKey>(IdentityKeyFunction()).newBuilder().build()
         val o1 = ClassForIdentityKey("1", "2")
         map = map.put(o1, o1)
         val o2 = ClassForIdentityKey("1", "3")

@@ -91,7 +91,7 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
             expected.add(i)
         }
         val actual = hashSetOf<Int>()
-        builder.result().iterator().forEach { actual.add(it) }
+        builder.build().iterator().forEach { actual.add(it) }
         assertEquals(expected, actual)
     }
 }

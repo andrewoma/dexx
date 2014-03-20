@@ -36,6 +36,6 @@ class TreeMapTest : AbstractSortedMapTest() {
     }
 
     test fun construct() {
-        assertEquals(mapFactory<Int, Int>().newBuilder().add(Pair(1, 2)).result(), TreeMap<Int, Int>().put(1, 2))
+        assertEquals(mapFactory<Int, Int>().newBuilder().add(Pair(1, 2)).build(), TreeMap<Int, Int>().put(1, 2))
     }
 }

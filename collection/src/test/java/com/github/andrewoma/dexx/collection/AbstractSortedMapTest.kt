@@ -109,7 +109,7 @@ abstract class AbstractSortedMapTest() : AbstractMapTest() {
         builder.add(Pair(7, 70))
         builder.add(Pair(4, 40))
 
-        val map = builder.result()
+        val map = builder.build()
         val actual = arrayListOf<Int>()
 
         for (pair in map) {
@@ -174,7 +174,7 @@ abstract class AbstractSortedMapTest() : AbstractMapTest() {
         for (i in 0..size - 1) {
             builder.add(Pair(i, i))
         }
-        return builder.result()
+        return builder.build()
     }
 
     fun assertSequence(map: SortedMap<Int, Int>, from: Int, length: Int) {

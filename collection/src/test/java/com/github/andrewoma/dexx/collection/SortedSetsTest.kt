@@ -37,7 +37,7 @@ class SortedSetsTest {
     private fun build<T>(comparator: Comparator<in T>?, vararg ts: T) : SortedSet<T> {
         val builder = TreeSet.factory<T>(comparator).newBuilder()
         for (t in ts) { builder.add(t) }
-        return builder.result()
+        return builder.build()
     }
 
     test fun of() {
@@ -59,7 +59,7 @@ class SortedSetsTest {
     // TODO ... move to kotlin sample/blog class
     fun <T, R> Iterator<T>.build(builder: Builder<T, R>): R {
         while (this.hasNext()) builder.add(this.next())
-        return builder.result()
+        return builder.build()
     }
 
     fun <T> Iterator<T>.toPersistentSet(): Set<T>
@@ -105,7 +105,7 @@ class SortedSetsTest {
     }
 
     test fun factory() {
-        assertEquals(build(null, 1, 2, 3), SortedSets.factory<Int>().newBuilder().addAll(1, 2, 3).result())
+        assertEquals(build(null, 1, 2, 3), SortedSets.factory<Int>().newBuilder().addAll(1, 2, 3).build())
     }
 
     test fun copyOfIterableWithComparator() {
@@ -121,6 +121,6 @@ class SortedSetsTest {
     }
 
     test fun factoryWithComparator() {
-        assertEquals(build(c, 1, 2, 3), SortedSets.factory<Int>(c).newBuilder().addAll(1, 2, 3).result())
+        assertEquals(build(c, 1, 2, 3), SortedSets.factory<Int>(c).newBuilder().addAll(1, 2, 3).build())
     }
 }

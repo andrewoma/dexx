@@ -39,7 +39,7 @@ public open class MapAdapterTest {
         for (pair in values) {
             builder.add(DPair(pair.first, pair.second))
         }
-        return builder.result().asMap()
+        return builder.build().asMap()
     }
 
     test fun equals() {

@@ -41,7 +41,7 @@ public open class MapAdapterEntrySetTest {
         for (pair in values) {
             builder.add(DPair(pair.first, pair.second))
         }
-        return builder.result().asMap().entrySet()
+        return builder.build().asMap().entrySet()
     }
 
     test fun equals() {

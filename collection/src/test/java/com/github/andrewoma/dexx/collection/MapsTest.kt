@@ -29,7 +29,7 @@ class MapsTest {
     private fun build<K, V>(vararg ts: kotlin.Pair<K, V>) : Map<K, V> {
         val builder = HashMap.factory<K, V>().newBuilder()
         for (t in ts) { builder.add(Pair(t.first, t.second)) }
-        return builder.result()
+        return builder.build()
     }
 
     test fun of() {
@@ -54,10 +54,10 @@ class MapsTest {
     }
 
     test fun factory() {
-        assertEquals(build(1 to "a", 2 to "b"), Maps.factory<Int, String>().newBuilder().addAll(Pair(1, "a"), Pair(2, "b")).result())
+        assertEquals(build(1 to "a", 2 to "b"), Maps.factory<Int, String>().newBuilder().addAll(Pair(1, "a"), Pair(2, "b")).build())
     }
 
     test fun builder() {
-        assertEquals(build(1 to "a", 2 to "b"), Maps.builder<Int, String>().addAll(Pair(1, "a"), Pair(2, "b")).result())
+        assertEquals(build(1 to "a", 2 to "b"), Maps.builder<Int, String>().addAll(Pair(1, "a"), Pair(2, "b")).build())
     }
 }

@@ -38,7 +38,7 @@ public open class SortedMapAdapterTest : MapAdapterTest() {
         for (pair in values) {
             builder.add(DPair(pair.first, pair.second))
         }
-        return builder.result().asSortedMap()
+        return builder.build().asSortedMap()
     }
 
     fun jmap(vararg values: Pair<Int, Int>): SortedMap<Int, Int> {

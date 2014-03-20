@@ -52,10 +52,10 @@ public class SetPerformanceTest {
     private static java.util.Map<String, java.util.Map<Class, Set<Integer>>> setResults = new HashMap<String, Map<Class, Set<Integer>>>();
     private static java.util.Map<String, java.util.Map<Class, Integer>> intResults = new HashMap<String, Map<Class, Integer>>();
 
-    private static Set<Integer> dexxHashSet = HashSet.<Integer>factory().newBuilder().result();
-    private static Set<Integer> javaHashSet = MutableHashSet.<Integer>factory().newBuilder().result();
-    private static Set<Integer> dexxTreeSet = TreeSet.<Integer>factory(null).newBuilder().result();
-    private static Set<Integer> javaTreeSet = MutableTreeSet.<Integer>factory(null).newBuilder().result();
+    private static Set<Integer> dexxHashSet = HashSet.<Integer>factory().newBuilder().build();
+    private static Set<Integer> javaHashSet = MutableHashSet.<Integer>factory().newBuilder().build();
+    private static Set<Integer> dexxTreeSet = TreeSet.<Integer>factory(null).newBuilder().build();
+    private static Set<Integer> javaTreeSet = MutableTreeSet.<Integer>factory(null).newBuilder().build();
 
     private Comparator<Integer> ordering = new Comparator<Integer>() {
         @Override
@@ -146,7 +146,7 @@ public class SetPerformanceTest {
     private void addRandomThenRemove(BuilderFactory<Integer, ? extends Set<Integer>> factory) {
         if (disabled()) return;
 
-        Set<Integer> result = factory.newBuilder().result();
+        Set<Integer> result = factory.newBuilder().build();
         for (int i : rnd) {
             result = result.add(i);
         }
@@ -211,7 +211,7 @@ public class SetPerformanceTest {
     private void addRandom(BuilderFactory<Integer, ? extends Set<Integer>> factory) {
         if (disabled()) return;
 
-        Set<Integer> result = factory.newBuilder().result();
+        Set<Integer> result = factory.newBuilder().build();
         for (int i : rnd) {
             result = result.add(i);
         }

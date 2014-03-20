@@ -29,7 +29,7 @@ class SetsTest {
     private fun build<T>(vararg ts: T) : Set<T> {
         val builder = HashSet.factory<T>().newBuilder()
         for (t in ts) { builder.add(t) }
-        return builder.result()
+        return builder.build()
     }
 
     test fun of() {
@@ -61,10 +61,10 @@ class SetsTest {
     }
 
     test fun factory() {
-        assertEquals(build(1, 2, 3), Sets.factory<Int>().newBuilder().addAll(1, 2, 3).result())
+        assertEquals(build(1, 2, 3), Sets.factory<Int>().newBuilder().addAll(1, 2, 3).build())
     }
 
     test fun builder() {
-        assertEquals(build(1, 2, 3), Sets.builder<Int>().addAll(1, 2, 3).result())
+        assertEquals(build(1, 2, 3), Sets.builder<Int>().addAll(1, 2, 3).build())
     }
 }

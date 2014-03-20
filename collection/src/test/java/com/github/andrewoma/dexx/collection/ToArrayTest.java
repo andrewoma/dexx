@@ -62,7 +62,7 @@ public class ToArrayTest {
                 builder.add(new Pair<Integer, Integer>(i, i));
             }
 
-            collections.add(builder.result());
+            collections.add(builder.build());
         }
     }
 

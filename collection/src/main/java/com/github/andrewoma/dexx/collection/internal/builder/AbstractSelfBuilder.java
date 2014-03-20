@@ -22,7 +22,6 @@
 
 package com.github.andrewoma.dexx.collection.internal.builder;
 
-import com.github.andrewoma.dexx.collection.Builder;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,23 +29,14 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AbstractSelfBuilder<E, R> extends AbstractBuilder<E, R> {
     protected R result;
-    private final R empty;
 
     protected AbstractSelfBuilder(R empty) {
-        this.empty = empty;
         this.result = empty;
     }
 
     @NotNull
     @Override
-    public Builder<E, R> clear() {
-        result = empty;
-        return this;
-    }
-
-    @NotNull
-    @Override
-    public R result() {
+    public R build() {
         return result;
     }
 }

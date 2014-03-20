@@ -37,7 +37,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
     protected fun <K, V> buildMap_(vararg entries: kotlin.Pair<K, V>): Map<K, V> {
         val builder = mapFactory<K, V>().newBuilder()
         for (e in entries) builder.add(Pair(e.first, e.second))
-        return builder.result()
+        return builder.build()
     }
 
     private fun <K, V> buildMap(vararg entries: kotlin.Pair<K, V>): Map<K, V> = buildMap_(*entries)
@@ -59,13 +59,8 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
             return this
         }
 
-        override fun clear(): Builder<T, Iterable<T>> {
-            builder.clear()
-            return this
-        }
-
-        override fun result(): Iterable<T> {
-            val iterable = WrappedMapIterable(builder.result())
+        override fun build(): Iterable<T> {
+            val iterable = WrappedMapIterable(builder.build())
             return iterable
         }
     }

@@ -39,13 +39,13 @@ abstract class AbstractTraversableTest() {
     protected open fun build_<T>(vararg ts : T) : Traversable<T> {
         val builder = factory<T>().newBuilder()
         for (t : T in ts) builder.add(t)
-        return builder.result()
+        return builder.build()
     }
 
     private fun build<T>(vararg ts: T) = build_(*ts)
 
     test fun builder() {
-        val actual = factory<Int>().newBuilder().add(1).addAll(2, 3, 4).addAll(build(5, 6, 7)).result()
+        val actual = factory<Int>().newBuilder().add(1).addAll(2, 3, 4).addAll(build(5, 6, 7)).build()
         assertEquals(build(1, 2, 3, 4, 5, 6, 7), actual)
     }
 
@@ -73,12 +73,12 @@ abstract class AbstractTraversableTest() {
             expected.add(i)
         }
         val actual = hashSetOf<Int>()
-        builder.result().forEach { actual.add(it!!) }
+        builder.build().forEach { actual.add(it!!) }
         assertEquals(expected, actual)
     }
 
     test fun toSet() {
-        assertEquals(build(1, 1, 2, 2).toSet(), HashSet.factory<Int>().newBuilder().addAll(1, 2).result())
+        assertEquals(build(1, 1, 2, 2).toSet(), HashSet.factory<Int>().newBuilder().addAll(1, 2).build())
     }
 
     // Converts to a list so the order of traversal is known (may not be the order of insertion for Sets et al)
@@ -105,7 +105,7 @@ abstract class AbstractTraversableTest() {
     }
 
     test fun toSortedSet() {
-        assertEquals(TreeSet.factory<Int>(null).newBuilder().addAll(1, 2, 3).result(), build(3, 1, 2).toSortedSet(null))
+        assertEquals(TreeSet.factory<Int>(null).newBuilder().addAll(1, 2, 3).build(), build(3, 1, 2).toSortedSet(null))
     }
 
     test fun toSortedSetWithComparator() {
@@ -116,21 +116,17 @@ abstract class AbstractTraversableTest() {
             }
         }
 
-        assertEquals(TreeSet.factory<Int>(comparator).newBuilder().addAll(1, 2, 3).result(), build(3, 1, 2).toSortedSet(comparator))
+        assertEquals(TreeSet.factory<Int>(comparator).newBuilder().addAll(1, 2, 3).build(), build(3, 1, 2).toSortedSet(comparator))
     }
 
     test fun toIndexedList() {
         val traversable = build(1, 2, 3)
-        assertEquals(Vector.factory<Int>().newBuilder().addAll(toList(traversable)).result(), traversable.toIndexedList());
+        assertEquals(Vector.factory<Int>().newBuilder().addAll(toList(traversable)).build(), traversable.toIndexedList());
     }
 
     test fun testToString() {
         val traversable = build(1, 2, 3)
         assertEquals(traversable.getClass().getSimpleName() + "(" + toList(traversable).makeString(", ") + ")", traversable.toString())
-    }
-
-    test fun clearBuilder() {
-        assertEquals(build(3, 4, 5), factory<Int>().newBuilder().addAll(1, 2, 3).clear().addAll(3, 4, 5).result())
     }
 
     test fun hashCodes() {

@@ -43,8 +43,5 @@ public interface Builder<E, R> {
     Builder<E, R> addAll(E e1, E e2, E... es);
 
     @NotNull
-    Builder<E, R> clear();
-
-    @NotNull
-    R result();
+    R build();
 }

@@ -38,4 +38,34 @@ class TreeMapTest : AbstractSortedMapTest() {
     test fun construct() {
         assertEquals(mapFactory<Int, Int>().newBuilder().add(Pair(1, 2)).build(), TreeMap<Int, Int>().put(1, 2))
     }
+
+    test fun sliceFromStart() {
+        val max = 100
+        val map = sequence(max) as TreeMap
+        for (i in 0..max-1) {
+            val from = i
+            val to = map.size()
+            assertEquals(map.drop(from).take(to - from), map.slice(from, to))
+        }
+    }
+
+    test fun sliceFromEnd() {
+        val max = 100
+        val map = sequence(max) as TreeMap
+        for (i in 0..max-1) {
+            val from = 0
+            val to = map.size() - i
+            assertEquals(map.drop(from).take(to - from), map.slice(from, to))
+        }
+    }
+
+    test fun sliceFromStartAndEnd() {
+        val max = 100
+        val map = sequence(max) as TreeMap
+        for (i in 0..max/2) {
+            val from = i
+            val to = map.size() - i
+            assertEquals(map.drop(from).take(to - from), map.slice(from, to))
+        }
+    }
 }

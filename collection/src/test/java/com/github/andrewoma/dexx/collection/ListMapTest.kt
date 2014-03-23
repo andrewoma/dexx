@@ -37,4 +37,8 @@ class ListMapTest : AbstractMapTest() {
     override fun <K, V> mapFactory(comparator: Comparator<in K>?): BuilderFactory<Pair<K, V>, out Map<K, V>> {
         return ListMap.factory()
     }
+
+    override fun putGetRemoveRandom() {
+        putGetRemoveRandom(100)
+    }
 }

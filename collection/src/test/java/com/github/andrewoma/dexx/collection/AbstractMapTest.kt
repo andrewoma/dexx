@@ -30,6 +30,8 @@ import org.junit.Test as test
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractBuilder
 import kotlin.test.assertFalse
 import java.util.Comparator
+import java.util.Random
+import java.util.LinkedHashSet
 
 abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : AbstractIterableTest() {
     abstract fun <K, V> mapFactory(comparator: Comparator<in K>? = null): BuilderFactory<Pair<K, V>, out Map<K, V>>
@@ -272,5 +274,50 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
     test fun equalsWithNullValues() {
         if (!supportsNullValues) return
         assertEquals(buildMap(1 to null), buildMap(1 to null))
+    }
+
+    open test fun putGetRemoveRandom() {
+        putGetRemoveRandom(10000)
+    }
+
+    fun putGetRemoveRandom(size: Int) {
+        val numbers = randomNumbers(size)
+        var map = buildMap<Int, Int>()
+        for (i in numbers) {
+            map = map.put(i, i)
+        }
+        // Do it again
+        for (i in numbers) {
+            map = map.put(i, i)
+        }
+        // Do it again with new value
+        for (i in numbers) {
+            map = map.put(i, i + 1)
+        }
+        assertEquals(numbers.size, map.size())
+
+        for (i in numbers) {
+            assertEquals(i + 1, map.get(i))
+        }
+
+        for (i in numbers) {
+            map = map.remove(i)
+        }
+        assertTrue(map.isEmpty())
+
+        // Do it again
+        for (i in numbers) {
+            map = map.remove(i)
+        }
+        assertTrue(map.isEmpty())
+    }
+
+    fun randomNumbers(size: Int): LinkedHashSet<Int> {
+        val random = Random()
+        val generated = LinkedHashSet<Int>()
+        while (generated.size() < size) {
+            generated.add(random.nextInt())
+        }
+        return generated
     }
 }

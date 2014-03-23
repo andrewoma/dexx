@@ -195,5 +195,10 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
             }
         };
     }
+
+    @NotNull
+    protected TreeMap<K, V> slice(int from, int until) {
+        return new TreeMap<K, V>(redBlackTree.slice(tree, from, until), redBlackTree);
+    }
 }
 

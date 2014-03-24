@@ -24,6 +24,9 @@ package com.github.andrewoma.dexx.collection;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * BuilderFactory defines a factory interface for creating Builder instances.
+ */
 public interface BuilderFactory<E, R> {
     @NotNull
     Builder<E, R> newBuilder();

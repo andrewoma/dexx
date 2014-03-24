@@ -29,6 +29,39 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 
+/**
+ * <tt>DerivedKeyHashMap</tt> is a <tt>HashMap</tt> variant where the key for the <tt>Map</tt> is derived from the value stored.
+ *
+ * <p>By deriving the key it is possible to reduce the memory overhead per node in the map (assuming the key is a
+ * primitive field in the value object). e.g.
+ *
+ * <pre>{@code
+ * static class Value {
+ *     int key;
+ *     int value;
+ * }
+ *
+ * DerivedKeyHashMap<Integer, Value> map = new DerivedKeyHashMap<Integer, Value>(
+ *     new KeyFunction<Integer, Value>() {
+ *         @literal @Override public Integer key(Value value) {
+ *             return value.key;
+ *          }
+ * });
+ *
+ * Value value = new Value();
+ * value.key = 1;
+ * value.value = 100;
+ * map = map.put(value.key, value);
+ * }</pre>
+ *
+ * The underlying implementation is a port of Scala's HashMap which is an implementation of a
+ * <a href="http://en.wikipedia.org/wiki/Hash_array_mapped_trie">hash array mapped trie.</a>
+ *
+ * <p>It uses significantly less memory than the Scala implementation as the leaf nodes are the values
+ * themselves (not objects containing keys, values and hashes).
+ *
+ * <p>As the key is derived from the value, <tt>DerivedKeyHashMap</tt> does not support <tt>null</tt> values.
+ */
 public class DerivedKeyHashMap<K, V> extends AbstractMap<K, V> {
     private final KeyFunction<K, V> keyFunction;
     private CompactHashMap<K, V> compactHashMap = CompactHashMap.empty();

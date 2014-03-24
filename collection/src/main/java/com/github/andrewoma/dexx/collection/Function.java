@@ -23,7 +23,7 @@
 package com.github.andrewoma.dexx.collection;
 
 /**
- *
+ * A generic function interface that takes a single parameter
  */
 public interface Function<P, R> {
     R invoke(P parameter);

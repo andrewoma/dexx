@@ -1126,14 +1126,4 @@ class VectorBuilder<E> extends AbstractBuilder<E, Vector<E>> {
         if (pointer.depth > 1) s.pointer.gotoPos(0, size - 1); // we're currently focused to size - 1, not size!
         return s;
     }
-
-    @NotNull
-    public Builder<E, Vector<E>> clear() {
-        pointer.display0 = new Object[32];
-        pointer.depth = 1;
-        blockIndex = 0;
-        lo = 0;
-
-        return this;
-    }
 }

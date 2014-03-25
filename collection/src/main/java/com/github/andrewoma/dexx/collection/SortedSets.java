@@ -257,4 +257,9 @@ public class SortedSets {
     public static <E> Builder<E, SortedSet<E>> builder() {
         return SortedSets.<E>factory().newBuilder();
     }
+
+    @NotNull
+    public static <E> Builder<E, SortedSet<E>> builder(Comparator<? super E> comparator) {
+        return SortedSets.<E>factory(comparator).newBuilder();
+    }
 }

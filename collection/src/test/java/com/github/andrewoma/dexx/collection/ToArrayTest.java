@@ -51,7 +51,7 @@ public class ToArrayTest {
         // Build collections of each type containing 10 elements (pairs of ints)
         java.util.List<Builder<Pair<Integer, Integer>, ? extends Iterable<Pair<Integer, Integer>>>> builders = ImmutableList.of(
                 Sets.<Pair<Integer, Integer>>builder(),
-                TreeSet.<Pair<Integer, Integer>>factory(comparator).newBuilder(), // TODO ... replace with SortedSets.newBuilder(comparator)
+                SortedSets.<Pair<Integer, Integer>>builder(comparator),
                 IndexedLists.<Pair<Integer, Integer>>builder(),
                 Maps.<Integer, Integer>builder(),
                 SortedMaps.<Integer, Integer>builder()

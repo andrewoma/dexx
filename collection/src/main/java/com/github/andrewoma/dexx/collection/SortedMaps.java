@@ -24,6 +24,8 @@ package com.github.andrewoma.dexx.collection;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Comparator;
+
 /**
  *
  */
@@ -67,8 +69,52 @@ public class SortedMaps {
         return construct(p(k1, v1), p(k2, v2), p(k3, v3), p(k4, v4), p(k5, v5));
     }
 
-    private static <K extends Comparable<? super K>, V> Pair<K, V> p(K k, V v) {
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public static <K, V> SortedMap<K, V> of(Comparator<? super K> comparator) {
+        return SortedMaps.<K, V>construct(comparator);
+    }
+
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public static <K, V> SortedMap<K, V> of(Comparator<? super K> comparator, K k, V v) {
+        return construct(comparator, p(k, v));
+    }
+
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public static <K, V> SortedMap<K, V> of(Comparator<? super K> comparator, K k1, V v1, K k2, V v2) {
+        return construct(comparator, p(k1, v1), p(k2, v2));
+    }
+
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public static <K, V> SortedMap<K, V> of(Comparator<? super K> comparator, K k1, V v1, K k2, V v2, K k3, V v3) {
+        return construct(comparator, p(k1, v1), p(k2, v2), p(k3, v3));
+    }
+
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public static <K, V> SortedMap<K, V> of(Comparator<? super K> comparator, K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
+        return construct(comparator, p(k1, v1), p(k2, v2), p(k3, v3), p(k4, v4));
+    }
+
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public static <K, V> SortedMap<K, V> of(Comparator<? super K> comparator, K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
+        return construct(comparator, p(k1, v1), p(k2, v2), p(k3, v3), p(k4, v4), p(k5, v5));
+    }
+
+    private static <K, V> Pair<K, V> p(K k, V v) {
         return new Pair<K, V>(k, v);
+    }
+
+    private static <K, V> SortedMap<K, V> construct(Comparator<? super K> comparator, Pair<K, V>... pairs) {
+        SortedMap<K, V> map = new TreeMap<K, V>(comparator, null);
+        for (Pair<K, V> pair : pairs) {
+            map = map.put(pair.component1(), pair.component2());
+        }
+        return map;
     }
 
     private static <K extends Comparable<? super K>, V> SortedMap<K, V> construct(Pair<K, V>... pairs) {
@@ -120,8 +166,20 @@ public class SortedMaps {
         return (BuilderFactory) TreeMap.<K, V>factory(null, null);
     }
 
+
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public static <K, V> BuilderFactory<Pair<K, V>, SortedMap<K, V>> factory(Comparator<? super K> comparator) {
+        return (BuilderFactory) TreeMap.<K, V>factory(comparator, null);
+    }
+
     @NotNull
     public static <K extends Comparable<? super K>, V> Builder<Pair<K, V>, SortedMap<K, V>> builder() {
         return SortedMaps.<K, V>factory().newBuilder();
+    }
+
+    @NotNull
+    public static <K, V> Builder<Pair<K, V>, SortedMap<K, V>> builder(Comparator<? super K> comparator) {
+        return SortedMaps.<K, V>factory(comparator).newBuilder();
     }
 }

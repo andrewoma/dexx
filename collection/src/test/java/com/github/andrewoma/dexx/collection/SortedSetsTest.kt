@@ -103,4 +103,12 @@ class SortedSetsTest {
     test fun factoryWithComparator() {
         assertEquals(build(c, 1, 2, 3), SortedSets.factory<Int>(c).newBuilder().addAll(1, 2, 3).build())
     }
+
+    test fun builder() {
+        assertEquals(build(null, 1, 2, 3), SortedSets.builder<Int>().addAll(1, 2, 3).build())
+    }
+
+    test fun builderWithComparator() {
+        assertEquals(build(c, 1, 2, 3), SortedSets.builder(c).addAll(1, 2, 3).build())
+    }
 }

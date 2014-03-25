@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Iterator;
 
 /**
- *
+ * <tt>HashSet</tt> is an implementation of <tt>Set</tt> backed by a <tt>HashMap</tt>.
  */
 public class HashSet<E> extends AbstractSet<E> {
     protected static final HashSet EMPTY = new HashSet();

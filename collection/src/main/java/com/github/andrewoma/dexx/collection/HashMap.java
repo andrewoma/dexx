@@ -30,7 +30,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Iterator;
 
 /**
+ * <tt>HashMap</tt> is an implementation of <tt>Map</tt> based on a hash trie.
  *
+ * <p>The underlying implementation is a port of Scala's HashMap which is an implementation of a
+ * <a href="http://en.wikipedia.org/wiki/Hash_array_mapped_trie">hash array mapped trie.</a>
  */
 public class HashMap<K, V> extends AbstractMap<K, V> {
     protected static final HashMap EMPTY = new HashMap();

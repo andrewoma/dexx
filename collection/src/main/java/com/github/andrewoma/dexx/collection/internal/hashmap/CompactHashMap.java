@@ -148,7 +148,7 @@ public class CompactHashMap<K, V> {
 }
 
 class HashMap1<K, V> extends CompactHashMap<K, V> {
-    protected final K key;  // TODO ... review what to store here. No longer critical for memory usage as these are created on the fly, not stored
+    protected final K key;
     protected final int hash;
     protected final V value;
     protected Pair<K, V> kv;

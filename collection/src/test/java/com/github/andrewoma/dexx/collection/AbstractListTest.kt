@@ -54,6 +54,28 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         assertEquals(-1, list.indexOf(3))
     }
 
+    test fun tail() {
+        assertEquals(build(2, 3), build(1, 2, 3).tail());
+        assertEquals(build(2), build(1, 2).tail());
+        assertEquals(build<Int>(), build(1).tail());
+        assertEquals(build<Int>(), build<Int>().tail());
+    }
+
+    test fun prepend() {
+        assertEquals(build(1), build<Int>().prepend(1));
+        assertEquals(build(2, 1), build(1).prepend(2));
+        assertEquals(build(3, 2, 1), build(2, 1).prepend(3));
+    }
+
+    test fun range() {
+        assertEquals(build(1, 2, 3, 4), build(1, 2, 3, 4).range(0, true, 3, true));
+        assertEquals(build(2, 3), build(1, 2, 3, 4).range(0, false, 3, false));
+        assertEquals(build(2, 3), build(1, 2, 3, 4).range(1, true, 2, true ));
+        assertEquals(build(2), build(1, 2, 3, 4).range(1, true, 2, false ));
+        assertEquals(build(3), build(1, 2, 3, 4).range(1, false, 2, true));
+        assertEquals(build<Int>(), build(1, 2, 3, 4).range(1, false, 2, false));
+    }
+
     test fun lastIndexOf() {
         val list = build(1, 2, 2, 1)
         assertEquals(2, list.lastIndexOf(2))

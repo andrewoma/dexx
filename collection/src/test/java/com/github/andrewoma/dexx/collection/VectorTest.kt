@@ -87,10 +87,6 @@ class VectorTest() : AbstractListTest() {
         assertNull(sequence(0).last())
     }
 
-    test fun range() {
-        // TODO
-    }
-
     fun assertSequence(vector: Vector<Int>, from: Int, length: Int) {
         var from_ = from
         assertEquals(length, vector.size())

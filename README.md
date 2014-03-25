@@ -39,9 +39,9 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 * [JetBrain's annotations](https://www.jetbrains.com/idea/documentation/howto.html) (`@NotNull` and `@Nullable`) are used in the source to support Kotlin's nullable types, but they are [not required at runtime](http://stackoverflow.com/questions/3567413/why-doesnt-a-missing-annotation-cause-a-classnotfoundexception-at-runtime).
 
 #### Roadmap
-* Complete helper classes and adapters for existing implementations
-* Improve test coverage of existing implementations
+* Complete Javadocs
+* Update README with basic usage
 * Benchmark existing implementations
+* Publish 0.1 to Maven Central via Sonatype
 * Port Scala's ArrayList as an alternative IndexedList implementation
 * Port Scala's List/ListBuffer as a LinkedList/Builder implementation
-* Publish to Maven Central via Sonatype

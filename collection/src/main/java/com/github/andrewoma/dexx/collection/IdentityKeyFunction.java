@@ -25,10 +25,10 @@ package com.github.andrewoma.dexx.collection;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * <tt>IdentityKeyFunction</tt> is a <tt>KeyFunction</tt> where the value can be used as a key.
+ * {@code IdentityKeyFunction} is a {@code KeyFunction} where the value can be used as a key.
  *
- * <p>This is useful in <tt>DerivedKeyHashMap</tt> instances where the value defines <tt>equals()</tt>
- * and <tt>hashCode()</tt> methods that only use the key.
+ * <p>This is useful in {@code DerivedKeyHashMap} instances where the value defines {@code equals()}
+ * and {@code hashCode()} methods that only use the key.
  */
 public class IdentityKeyFunction<E> implements KeyFunction<E, E> {
     @NotNull

@@ -26,6 +26,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 
+/**
+ * {@code Iterable} defines collections that can be accessed via an {@link java.util.Iterator}.
+ */
 public interface Iterable<E> extends Traversable<E>, java.lang.Iterable<E> {
     @NotNull
     Iterator<E> iterator();

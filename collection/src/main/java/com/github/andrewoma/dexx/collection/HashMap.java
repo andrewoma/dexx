@@ -26,17 +26,18 @@ import com.github.andrewoma.dexx.collection.internal.base.AbstractMap;
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractSelfBuilder;
 import com.github.andrewoma.dexx.collection.internal.hashmap.CompactHashMap;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 
 /**
- * <tt>HashMap</tt> is an implementation of <tt>Map</tt> based on a hash trie.
+ * {@code HashMap} is an implementation of {@code Map} based on a hash trie.
  *
  * <p>The underlying implementation is a port of Scala's HashMap which is an implementation of a
  * <a href="http://en.wikipedia.org/wiki/Hash_array_mapped_trie">hash array mapped trie.</a>
  */
 public class HashMap<K, V> extends AbstractMap<K, V> {
-    protected static final HashMap EMPTY = new HashMap();
+    private static final HashMap EMPTY = new HashMap();
 
     private static final KeyFunction keyFunction = new KeyFunction<Object, Pair>() {
         @NotNull
@@ -90,24 +91,30 @@ public class HashMap<K, V> extends AbstractMap<K, V> {
     }
 
     @NotNull
+    @Override
     public HashMap<K, V> put(@NotNull K key, V value) {
         return new HashMap<K, V>(compactHashMap.put(key, new Pair<K, V>(key, value), keyFunction()));
     }
 
+    @Nullable
+    @Override
     public V get(@NotNull K key) {
         Pair<K, V> pair = compactHashMap.get(key, keyFunction());
         return pair == null ? null : pair.component2();
     }
 
     @NotNull
+    @Override
     public HashMap<K, V> remove(@NotNull K key) {
         return new HashMap<K, V>(compactHashMap.remove(key, keyFunction()));
     }
 
+    @Override
     public int size() {
         return compactHashMap.size();
     }
 
+    @Override
     public <U> void forEach(@NotNull final Function<Pair<K, V>, U> f) {
         compactHashMap.forEach(new Function<Pair<K, Pair<K, V>>, Object>() {
             @Override
@@ -119,6 +126,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> {
     }
 
     @NotNull
+    @Override
     public Iterator<Pair<K, V>> iterator() {
         return new Itr<K, V>(compactHashMap.iterator(keyFunction()));
     }

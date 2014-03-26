@@ -26,16 +26,17 @@ import com.github.andrewoma.dexx.collection.internal.base.AbstractMap;
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractSelfBuilder;
 import com.github.andrewoma.dexx.collection.internal.hashmap.CompactHashMap;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 
 /**
- * <tt>DerivedKeyHashMap</tt> is a <tt>HashMap</tt> variant where the key for the <tt>Map</tt> is derived from the value stored.
+ * {@code DerivedKeyHashMap} is a {@code HashMap} variant where the key for the {@code Map} is derived from the value stored.
  *
  * <p>By deriving the key it is possible to reduce the memory overhead per node in the map (assuming the key is a
  * primitive field in the value object). e.g.
  *
- * <pre>{@code
+ * <pre> {@code
  * static class Value {
  *     int key;
  *     int value;
@@ -43,9 +44,9 @@ import java.util.Iterator;
  *
  * DerivedKeyHashMap<Integer, Value> map = new DerivedKeyHashMap<Integer, Value>(
  *     new KeyFunction<Integer, Value>() {
- *         @literal @Override public Integer key(Value value) {
+ *         public Integer key(Value value) {
  *             return value.key;
- *          }
+ *         }
  * });
  *
  * Value value = new Value();
@@ -57,10 +58,10 @@ import java.util.Iterator;
  * The underlying implementation is a port of Scala's HashMap which is an implementation of a
  * <a href="http://en.wikipedia.org/wiki/Hash_array_mapped_trie">hash array mapped trie.</a>
  *
- * <p>It uses significantly less memory than the Scala implementation as the leaf nodes are the values
+ * <p>It uses significantly less memory than Scala's implementation as the leaf nodes are the values
  * themselves (not objects containing keys, values and hashes).
  *
- * <p>As the key is derived from the value, <tt>DerivedKeyHashMap</tt> does not support <tt>null</tt> values.
+ * <p>As the key is derived from the value, {@code DerivedKeyHashMap} does not support {@code null} values.
  */
 public class DerivedKeyHashMap<K, V> extends AbstractMap<K, V> {
     private final KeyFunction<K, V> keyFunction;
@@ -99,23 +100,29 @@ public class DerivedKeyHashMap<K, V> extends AbstractMap<K, V> {
     }
 
     @NotNull
+    @Override
     public DerivedKeyHashMap<K, V> put(@NotNull K key, V value) {
         return new DerivedKeyHashMap<K, V>(keyFunction, compactHashMap.put(key, value, keyFunction));
     }
 
+    @Nullable
+    @Override
     public V get(@NotNull K key) {
         return compactHashMap.get(key, keyFunction);
     }
 
     @NotNull
+    @Override
     public DerivedKeyHashMap<K, V> remove(@NotNull K key) {
         return new DerivedKeyHashMap<K, V>(keyFunction, compactHashMap.remove(key, keyFunction));
     }
 
+    @Override
     public int size() {
         return compactHashMap.size();
     }
 
+    @Override
     public <U> void forEach(@NotNull final Function<Pair<K, V>, U> f) {
         compactHashMap.forEach(new Function<Pair<K, V>, Object>() {
             @Override
@@ -127,6 +134,7 @@ public class DerivedKeyHashMap<K, V> extends AbstractMap<K, V> {
     }
 
     @NotNull
+    @Override
     public Iterator<Pair<K, V>> iterator() {
         return compactHashMap.iterator(keyFunction);
     }

@@ -23,17 +23,29 @@
 package com.github.andrewoma.dexx.collection;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
- *
+ * {@code Map} defines the interface for maps that associate keys with values.
  */
 @SuppressWarnings("NullableProblems")
 public interface Map<K, V> extends Iterable<Pair<K, V>> {
+    /**
+     * Returns a map with the value specified associated to the key specified.
+     * <p>If value already exists for the key, it will be replaced.
+     */
     @NotNull
     Map<K, V> put(@NotNull K key, V value);
 
+    /**
+     * Returns the value associated with the key or {@code null} if the no value exists with the key specified.
+     */
+    @Nullable
     V get(@NotNull K key);
 
+    /**
+     *
+     */
     @NotNull
     Map<K, V> remove(@NotNull K key);
 

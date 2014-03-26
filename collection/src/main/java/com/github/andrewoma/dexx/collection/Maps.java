@@ -25,7 +25,16 @@ package com.github.andrewoma.dexx.collection;
 import org.jetbrains.annotations.NotNull;
 
 /**
+ * {@code Maps} is the preferred method of constructing instances of {@code Map}.
  *
+ * <p>{@link com.github.andrewoma.dexx.collection.HashMap} is currently constructed in
+ * all cases, however this may change in the future.
+ *
+ * <p>{@code Maps} is preferred for construction as:
+ * <ul>
+ *     <li>It works better in languages that support type inference
+ *     <li>It allows future optimisations (e.g. small maps be dedicated classes which are then upgraded to {@code HashMaps})
+ * </ul>
  */
 public class Maps {
     private Maps() {

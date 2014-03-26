@@ -23,7 +23,7 @@
 package com.github.andrewoma.dexx.collection;
 
 /**
- *
+ * {@code Pair} is a generic container for two components of specified types.
  */
 public class Pair<C1, C2> {
     private final C1 component1;

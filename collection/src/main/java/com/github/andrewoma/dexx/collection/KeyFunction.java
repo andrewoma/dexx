@@ -25,7 +25,9 @@ package com.github.andrewoma.dexx.collection;
 import org.jetbrains.annotations.NotNull;
 
 /**
+ * {@code KeyFunction} defines the interface for extracting a key from a value.
  *
+ * @see com.github.andrewoma.dexx.collection.DerivedKeyHashMap
  */
 public interface KeyFunction<K, V> {
     @NotNull

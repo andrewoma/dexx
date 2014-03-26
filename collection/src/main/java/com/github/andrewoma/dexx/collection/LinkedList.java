@@ -24,20 +24,29 @@ package com.github.andrewoma.dexx.collection;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * {@code LinkedList} implementations guarantee fast access to the head via {@link #first()}
+ * and tail via {@link #tail()}.
+ */
 public interface LinkedList<E> extends List<E> {
     @NotNull
+    @Override
     LinkedList<E> set(int i, E elem);
 
     @NotNull
+    @Override
     LinkedList<E> append(E elem);
 
     @NotNull
+    @Override
     LinkedList<E> prepend(E elem);
 
     @NotNull
+    @Override
     LinkedList<E> drop(int number);
 
     @NotNull
+    @Override
     LinkedList<E> take(int number);
 
     @NotNull
@@ -45,5 +54,6 @@ public interface LinkedList<E> extends List<E> {
     LinkedList<E> tail();
 
     @NotNull
+    @Override
     LinkedList<E> range(int from, boolean fromInclusive, int to, boolean toInclusive);
 }

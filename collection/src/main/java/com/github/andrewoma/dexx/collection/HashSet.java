@@ -31,10 +31,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Iterator;
 
 /**
- * <tt>HashSet</tt> is an implementation of <tt>Set</tt> backed by a <tt>HashMap</tt>.
+ * {@code HashSet} is an implementation of {@code Set} backed by a {@code HashMap}.
  */
 public class HashSet<E> extends AbstractSet<E> {
-    protected static final HashSet EMPTY = new HashSet();
+    private static final HashSet EMPTY = new HashSet();
 
     private static final KeyFunction keyFunction = new KeyFunction<Object, Object>() {
         @NotNull
@@ -83,19 +83,23 @@ public class HashSet<E> extends AbstractSet<E> {
     }
 
     @NotNull
+    @Override
     public HashSet<E> add(E value) {
         return new HashSet<E>(compactHashMap.put(value, value, keyFunction()));
     }
 
     @NotNull
+    @Override
     public HashSet<E> remove(E value) {
         return new HashSet<E>(compactHashMap.remove(value, keyFunction()));
     }
 
+    @Override
     public boolean contains(E value) {
         return compactHashMap.get(value, keyFunction()) != null;
     }
 
+    @Override
     public int size() {
         return compactHashMap.size();
     }
@@ -106,6 +110,7 @@ public class HashSet<E> extends AbstractSet<E> {
     }
 
     @NotNull
+    @Override
     public Iterator<E> iterator() {
         final Iterator<Pair<E, E>> iterator = compactHashMap.iterator(keyFunction());
         return new Iterator<E>() {

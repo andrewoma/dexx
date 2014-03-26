@@ -25,7 +25,16 @@ package com.github.andrewoma.dexx.collection;
 import org.jetbrains.annotations.NotNull;
 
 /**
+ * {@code IndexedLists} is the preferred method of constructing instances of {@code IndexedList}.
  *
+ * <p>{@link com.github.andrewoma.dexx.collection.Vector} is currently constructed in
+ * all cases, however this may change in the future.
+ *
+ * <p>{@code IndexedLists} is preferred for construction as:
+ * <ul>
+ *     <li>It works better in languages that support type inference
+ *     <li>It allows future optimisations (e.g. small lists might start as arrays and get upgraded to {@code Vectors})
+ * </ul>
  */
 public class IndexedLists {
     private IndexedLists() {

@@ -26,11 +26,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * <tt>List</tt> defines an sequence of elements where the order is preserved.
+ * {@code List} defines an sequence of elements where the order is preserved.
  *
- * <p>There are two sub-interfaces of <tt>List</tt> that define very different performance characteristics:
+ * <p>There are two sub-interfaces of {@code List} that define very different performance characteristics:
  * <ul>
- * <li>{@link IndexedList}: Guarantees fast random access to elements in the <tt>List</tt> via indexes.
+ * <li>{@link IndexedList}: Guarantees fast random access to elements in the {@code List} via indexes.
  * <li>{@link LinkedList}: Guarantees fast {@link #prepend(Object)} and {@link #tail()} operations.
  * </ul>
  *
@@ -76,13 +76,13 @@ public interface List<E> extends Iterable<E> {
     int lastIndexOf(E elem);
 
     /**
-     * Returns first element in the list or <tt>null</tt> if the list is empty.
+     * Returns first element in the list or {@code null} if the list is empty.
      */
     @Nullable
     E first();
 
     /**
-     * Returns last element in the list or <tt>null</tt> if the list is empty.
+     * Returns last element in the list or {@code null} if the list is empty.
      */
     @Nullable
     E last();
@@ -95,23 +95,24 @@ public interface List<E> extends Iterable<E> {
     List<E> tail();
 
     /**
-     * Returns a list containing all elements in the list, excluding first <tt>number</tt> of elements.
+     * Returns a list containing all elements in the list, excluding first {@code number} of elements.
      */
     @NotNull
     List<E> drop(int number);
 
     /**
-     * Returns a list containing the first <tt>number</tt> of elements from this list.
+     * Returns a list containing the first {@code number} of elements from this list.
      */
     @NotNull
     List<E> take(int number);
 
     /**
      * Returns a list containing a contiguous range of elements from this list.
-     * @param from starting index for the range (zero-based)
-     * @param fromInclusive if true, the element at the <tt>from</tt> index will be included
-     * @param to end index for the range (zero-based)
-     * @param toInclusive if true, the element at the <tt>to</tt> index will be included
+     *
+     * @param from          starting index for the range (zero-based)
+     * @param fromInclusive if true, the element at the {@code from} index will be included
+     * @param to            end index for the range (zero-based)
+     * @param toInclusive   if true, the element at the {@code to} index will be included
      */
     @NotNull
     List<E> range(int from, boolean fromInclusive, int to, boolean toInclusive);

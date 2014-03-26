@@ -24,22 +24,31 @@ package com.github.andrewoma.dexx.collection;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * {@code IndexedList} implementations guarantee fast random access to elements via {@link #get(int)}.
+ */
 public interface IndexedList<E> extends List<E> {
+    @Override
     @NotNull
     IndexedList<E> set(int i, E elem);
 
+    @Override
     @NotNull
     IndexedList<E> append(E elem);
 
+    @Override
     @NotNull
     IndexedList<E> prepend(E elem);
 
+    @Override
     @NotNull
     IndexedList<E> drop(int number);
 
+    @Override
     @NotNull
     IndexedList<E> take(int number);
 
+    @Override
     @NotNull
     IndexedList<E> range(int from, boolean fromInclusive, int to, boolean toInclusive);
 }

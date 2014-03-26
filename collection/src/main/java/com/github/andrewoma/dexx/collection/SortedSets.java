@@ -27,7 +27,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Comparator;
 
 /**
+ * {@code SortedSets} is the preferred method of constructing instances of {@code SortedSet}.
  *
+ * <p>{@link com.github.andrewoma.dexx.collection.TreeSet} is currently constructed in
+ * all cases, however this may change in the future.
+ *
+ * <p>{@code SortedSets} is preferred for construction as:
+ * <ul>
+ *     <li>It works better in languages that support type inference
+ *     <li>It allows future optimisations (e.g. small sets may be dedicated classes which are then upgraded to {@code TreeSets})
+ * </ul>
  */
 public class SortedSets {
     private SortedSets() {

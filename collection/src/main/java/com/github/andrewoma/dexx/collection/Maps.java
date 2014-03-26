@@ -33,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
  * <p>{@code Maps} is preferred for construction as:
  * <ul>
  *     <li>It works better in languages that support type inference
- *     <li>It allows future optimisations (e.g. small maps be dedicated classes which are then upgraded to {@code HashMaps})
+ *     <li>It allows future optimisations (e.g. small maps may be dedicated classes which are then upgraded to {@code HashMaps})
  * </ul>
  */
 public class Maps {

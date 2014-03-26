@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Comparator;
 
 /**
- *
+ * SortedMap defines the interface for maps that are sorted by their key.
  */
 public interface SortedMap<K, V> extends Map<K, V> {
     @NotNull
@@ -37,29 +37,60 @@ public interface SortedMap<K, V> extends Map<K, V> {
     @NotNull
     SortedMap<K, V> remove(@NotNull K key);
 
+    /**
+     * Returns the bottom of the map starting from the key specified.
+     * @param inclusive if true, the key will be included in the result, otherwise it will be excluded
+     */
     @NotNull
     SortedMap<K, V> from(@NotNull K key, boolean inclusive);
 
+    /**
+     * Returns the top of the map up until the key specified.
+     * @param inclusive if true, the key will be included in the result, otherwise it will be excluded
+     */
     @NotNull
     SortedMap<K, V> to(@NotNull K key, boolean inclusive);
 
+    /**
+     * Returns a subset of the map between the {@code from} and {@code to} keys specified.
+     * @param fromInclusive if true, the key will be included in the result, otherwise it will be excluded
+     * @param toInclusive if true, the key will be included in the result, otherwise it will be excluded
+     */
     @NotNull
     SortedMap<K, V> range(@NotNull K from, boolean fromInclusive, @NotNull K to, boolean toInclusive);
 
+    /**
+     * Returns the comparator associated with this map, or {@code null} if the default ordering is used.
+     */
     Comparator<? super K> comparator();
 
+    /**
+     * Returns the first entry in the map or {@code null} if the map is empty.
+     */
     @Nullable
     Pair<K, V> first();
 
+    /**
+     * Returns the last entry in the map or {@code null} if the map is empty.
+     */
     @Nullable
     Pair<K, V> last();
 
+    /**
+     * Returns a map containing all elements in this map, excluding the first {@code number} of elements.
+     */
     @NotNull
     SortedMap<K, V> drop(int number);
 
+    /**
+     * Returns a list containing the first {@code number} of elements from this list.
+     */
     @NotNull
     SortedMap<K, V> take(int number);
 
+    /**
+     * Returns an immutable view of this map as an instance of {@code java.util.SortedMap}.
+     */
     @NotNull
     java.util.SortedMap<K, V> asSortedMap();
 }

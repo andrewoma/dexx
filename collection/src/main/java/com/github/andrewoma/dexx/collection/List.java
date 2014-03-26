@@ -95,7 +95,7 @@ public interface List<E> extends Iterable<E> {
     List<E> tail();
 
     /**
-     * Returns a list containing all elements in the list, excluding first {@code number} of elements.
+     * Returns a list containing all elements in this list, excluding the first {@code number} of elements.
      */
     @NotNull
     List<E> drop(int number);
@@ -116,4 +116,9 @@ public interface List<E> extends Iterable<E> {
      */
     @NotNull
     List<E> range(int from, boolean fromInclusive, int to, boolean toInclusive);
+
+    /**
+     * Returns an immutable view of this list as an instance of {@code java.util.List}.
+     */
+    java.util.List<E> asList();
 }

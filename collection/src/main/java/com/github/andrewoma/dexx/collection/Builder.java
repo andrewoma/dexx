@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 
 /**
- * Builders provide efficient implementations for incrementally building persistent collections.
+ * {@code Builders} provide efficient implementations for incrementally building persistent collections.
  */
 public interface Builder<E, R> {
     @NotNull

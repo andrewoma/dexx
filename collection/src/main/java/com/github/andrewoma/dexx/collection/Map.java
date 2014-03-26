@@ -44,19 +44,31 @@ public interface Map<K, V> extends Iterable<Pair<K, V>> {
     V get(@NotNull K key);
 
     /**
-     *
+     * Returns a map with the value associated with the key removed if it exists.
      */
     @NotNull
     Map<K, V> remove(@NotNull K key);
 
+    /**
+     * Returns the keys for this map.
+     */
     @NotNull
     Iterable<K> keys();
 
+    /**
+     * Returns the values for this map.
+     */
     @NotNull
     Iterable<V> values();
 
+    /**
+     * Returns true if this map contains the specified key.
+     */
     boolean containsKey(@NotNull K key);
 
+    /**
+     * Returns an immutable view of this map as an instance of {@link java.util.Map}.
+     */
     @NotNull
     java.util.Map<K, V> asMap();
 }

@@ -86,4 +86,9 @@ public abstract class AbstractList<E> extends AbstractIterable<E> implements Lis
 
         return hashCode;
     }
+
+    @Override
+    public java.util.List<E> asList() {
+        throw new UnsupportedOperationException(); // TODO - Add a ListAdapter
+    }
 }

@@ -25,17 +25,29 @@ package com.github.andrewoma.dexx.collection;
 import org.jetbrains.annotations.NotNull;
 
 /**
- *
+ * Set defines the interface for a unique set of values as defined by {@link java.lang.Object#equals(Object)}.
  */
 public interface Set<E> extends Iterable<E> {
+    /**
+     * Returns a set that adds the specified value if it doesn't already exist in this set.
+     */
     @NotNull
     Set<E> add(E value);
 
+    /**
+     * Removes the specified value from the set if it exists.
+     */
     @NotNull
     Set<E> remove(E value);
 
+    /**
+     * Returns true if the value exists in this set.
+     */
     boolean contains(E value);
 
+    /**
+     * Returns an immutable view of this set as an instance of {@code java.util.Set}.
+     */
     @NotNull
     java.util.Set<E> asSet();
 }

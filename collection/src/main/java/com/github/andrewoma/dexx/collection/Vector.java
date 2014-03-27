@@ -39,12 +39,15 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Vector is a general-purpose, immutable data structure.  It provides random access and updates
- * in effectively constant time, as well as very fast append and prepend.  Because vectors strike
- * a good balance between fast random selections and fast random functional updates, they are
- * currently the default implementation of immutable indexed sequences.  It is backed by a little
- * endian bit-mapped vector trie with a branching factor of 32.  Locality is very good, but not
+ * Vector is a general-purpose, immutable data structure.
+ *
+ * <p>It provides random access and updates in effectively constant time, as well as very fast append and prepend.
+ *
+ * <p>It is backed by a little endian bit-mapped vector trie with a branching factor of 32.  Locality is very good, but not
  * contiguous, which is good for very large sequences.
+ *
+ * <p>See Scala's <a href="http://www.scala-lang.org/docu/files/collections-api/collections_15.html">documentation</a>
+ * for more information on the implementation.
  */
 public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
     private static final Vector EMPTY = new Vector(0, 0, 0);
@@ -79,6 +82,7 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
 
     private boolean dirty = false;
 
+    @Override
     public int size() {
         return endIndex - startIndex;
     }
@@ -90,6 +94,7 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
     }
 
     @NotNull
+    @Override
     public Iterator<E> iterator() {
         VectorIterator<E> s = new VectorIterator<E>(startIndex, endIndex);
         initIterator(s);
@@ -103,6 +108,7 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
 
 // SeqLike api
 
+    @Override
     public E get(int index) {
         int idx = checkRangeConvert(index);
         //println("get elem: "+index + "/"+idx + "(focus:" +focus+" xor:"+(idx^focus)+" depth:"+depth+")")
@@ -119,6 +125,7 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
 
     // SeqLike api
     @NotNull
+    @Override
     public Vector<E> take(int n) {
         if (n <= 0)
             return Vector.empty();
@@ -129,6 +136,7 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
     }
 
     @NotNull
+    @Override
     public Vector<E> drop(int n) {
         if (n <= 0)
             return this;
@@ -138,23 +146,27 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
             return Vector.empty();
     }
 
+    @Override
     public boolean isEmpty() {
         return size() == 0;
     }
 
     @Nullable
+    @Override
     public E first() {
         if (isEmpty()) return null;
         return get(0);
     }
 
     @NotNull
+    @Override
     public Vector<E> tail() {
         if (isEmpty()) return this;
         return drop(1);
     }
 
     @Nullable
+    @Override
     public E last() {
         if (isEmpty()) return null;
         return get(size() - 1);
@@ -177,6 +189,7 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
     }
 
     @NotNull
+    @Override
     public Vector<E> set(int index, E elem) {
         int idx = checkRangeConvert(index);
         Vector<E> s = new Vector<E>(startIndex, endIndex, idx);
@@ -206,6 +219,7 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
     }
 
     @NotNull
+    @Override
     public Vector<E> prepend(E value) {
         if (endIndex != startIndex) {
             int blockIndex = (startIndex - 1) & ~31;
@@ -296,6 +310,7 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
     }
 
     @NotNull
+    @Override
     public Vector<E> append(E value) {
 //    //println("------- append " + value)
 //    debug()()
@@ -583,10 +598,12 @@ class VectorIterator<E> extends VectorPointer<E> implements Iterator<E> {
         _hasNext = blockIndex + lo < endIndex;
     }
 
+    @Override
     public boolean hasNext() {
         return _hasNext;
     }
 
+    @Override
     public E next() {
         if (!_hasNext) throw new NoSuchElementException("reached iterator end");
 
@@ -610,6 +627,7 @@ class VectorIterator<E> extends VectorPointer<E> implements Iterator<E> {
         return res;
     }
 
+    @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
@@ -1117,6 +1135,7 @@ class VectorBuilder<E> extends AbstractBuilder<E, Vector<E>> {
     }
 
     @NotNull
+    @Override
     public Vector<E> build() {
         int size = blockIndex + lo;
         if (size == 0)

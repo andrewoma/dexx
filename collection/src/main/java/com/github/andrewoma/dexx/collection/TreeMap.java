@@ -38,7 +38,12 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
+ * {@code TreeMap} is an implementation of {@code SortedMap} based on a
+ * <a href="http://en.wikipedia.org/wiki/Red%E2%80%93black_tree">red-black tree</a>.
  *
+ * <p>{@code TreeMaps} can be constructed with a {@link com.github.andrewoma.dexx.collection.KeyFunction}
+ * to provide modest memory saving per node. See {@link com.github.andrewoma.dexx.collection.DerivedKeyHashMap}
+ * for an example of using a key function.
  */
 public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     private Tree<K, V> tree;
@@ -87,14 +92,17 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     }
 
     @NotNull
+    @Override
     public TreeMap<K, V> put(@NotNull K key, V value) {
         return new TreeMap<K, V>(redBlackTree.update(tree, key, value, true), redBlackTree);
     }
 
+    @Override
     public V get(@NotNull K key) {
         return redBlackTree.get(tree, key);
     }
 
+    @Override
     public int size() {
         return RedBlackTree.count(tree);
     }
@@ -105,11 +113,13 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     }
 
     @NotNull
+    @Override
     public TreeMap<K, V> remove(@NotNull K key) {
         return new TreeMap<K, V>(redBlackTree.delete(tree, key), redBlackTree);
     }
 
     @NotNull
+    @Override
     public Iterator<Pair<K, V>> iterator() {
         return redBlackTree.iterator(tree);
     }

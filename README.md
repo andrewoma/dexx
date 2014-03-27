@@ -32,14 +32,14 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 
 #### Status
 * Scala's HashSet, TreeSet, HashMap, TreeMap & Vector have been ported
-* Helper classes for construction and adapters to java.util equivalents are largely complete
+* Helper classes for construction and adapters to `java.util` collections are largely complete
+* Test coverage is fairly comprehensive: 94% line and 89% branch at present
 
 #### Dependencies
 * There are no runtime dependencies
 * [JetBrain's annotations](https://www.jetbrains.com/idea/documentation/howto.html) (`@NotNull` and `@Nullable`) are used in the source to support Kotlin's nullable types, but they are [not required at runtime](http://stackoverflow.com/questions/3567413/why-doesnt-a-missing-annotation-cause-a-classnotfoundexception-at-runtime).
 
 #### Roadmap
-* Complete Javadocs
 * Update README with basic usage
 * Benchmark existing implementations
 * Publish 0.1 to Maven Central via Sonatype

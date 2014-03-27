@@ -35,7 +35,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *
+ * {@code TreeSet} is an implementation of {@code SortedSet} backed by a {@code TreeMap}.
  */
 public class TreeSet<E> extends AbstractSortedSet<E> {
     private final Tree<E, E> tree;
@@ -87,19 +87,23 @@ public class TreeSet<E> extends AbstractSortedSet<E> {
     }
 
     @NotNull
+    @Override
     public TreeSet<E> add(E value) {
         return new TreeSet<E>(redBlackTree.update(tree, value, value, true), redBlackTree);
     }
 
     @NotNull
+    @Override
     public TreeSet<E> remove(E value) {
         return new TreeSet<E>(redBlackTree.delete(tree, value), redBlackTree);
     }
 
+    @Override
     public boolean contains(E value) {
         return redBlackTree.contains(tree, value);
     }
 
+    @Override
     public int size() {
         return RedBlackTree.count(tree);
     }
@@ -125,6 +129,7 @@ public class TreeSet<E> extends AbstractSortedSet<E> {
     }
 
     @NotNull
+    @Override
     public Iterator<E> iterator() {
         return redBlackTree.keysIterator(tree);
     }

@@ -36,7 +36,7 @@
     </developers>
 
     <properties>
-        <kotlin.version>0.7.115</kotlin.version>
+        <kotlin.version>0.7.271</kotlin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

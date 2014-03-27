@@ -24,6 +24,8 @@ package com.github.andrewoma.dexx.collection.internal.base;
 
 
 import com.github.andrewoma.dexx.collection.List;
+import com.github.andrewoma.dexx.collection.internal.adapter.ListAdapater;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 
@@ -87,8 +89,9 @@ public abstract class AbstractList<E> extends AbstractIterable<E> implements Lis
         return hashCode;
     }
 
+    @NotNull
     @Override
     public java.util.List<E> asList() {
-        throw new UnsupportedOperationException(); // TODO - Add a ListAdapter
+        return new ListAdapater<E>(this);
     }
 }

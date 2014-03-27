@@ -120,5 +120,6 @@ public interface List<E> extends Iterable<E> {
     /**
      * Returns an immutable view of this list as an instance of {@code java.util.List}.
      */
+    @NotNull
     java.util.List<E> asList();
 }

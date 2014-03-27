@@ -31,8 +31,8 @@ The diagram below shows dexx's class hierarchy (interfaces are in blue and concr
 Note that the interfaces such as `Map`, `Set` and `List` are *not* related to the `java.util` equivalents as persistent collections require all modification methods such as `add` and `remove` to return a new collection instance.
 
 #### Status
-* Scala's HashSet, TreeSet, HashMap, TreeMap & Vector have been ported
-* Helper classes for construction and adapters to `java.util` collections are largely complete
+* Scala's HashSet, TreeSet, HashMap, TreeMap and Vector have been ported
+* Helper classes for construction and adapters to `java.util` collections are complete
 * Test coverage is fairly comprehensive: 94% line and 89% branch at present
 
 #### Dependencies

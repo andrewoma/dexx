@@ -80,7 +80,7 @@ val set = builder.build()
 Unfortunately, the `java.util` collection interfaces are not compatible with persistent collections as
 modifications such as `add()` must return a new collection instance, leaving the original untouched.
 
-However, all collections can viewed as an immutable form of their `java.util` equivalent by using the
+However, all collections can be viewed as an immutable form of their `java.util` equivalent by using the
 the `as...()` methods.
 ```kotlin
 val javaSet = Sets.of(1, 2, 3).asSet() // Now a java.util.Set
@@ -116,8 +116,7 @@ fun <T, R> Stream<T>.build(builder: Builder<T, R>): R {
     return builder.build()
 }
 
-fun <T> Stream<T>.toPersistentSet(): Set<T>
-        = build(Sets.builder<T>())
+fun <T> Stream<T>.toPersistentSet(): Set<T> = build(Sets.builder<T>())
 ```
 
 #### Development

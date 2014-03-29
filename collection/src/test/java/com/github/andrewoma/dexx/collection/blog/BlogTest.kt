@@ -55,4 +55,33 @@ class BlogTest {
 
         assertEquals(SortedSets.of("2 is even", "4 is even"), set)
     }
+
+    test fun setExample() {
+        val set1 = Sets.of(1, 2, 3)
+        val set2 = set1.add(4)
+        val set3 = set1.remove(1)
+        println(set1) // Prints Set(1, 2, 3)
+        println(set2) // Prints Set(1, 2, 3, 4)
+        println(set3) // Prints Set(2, 3)
+    }
+
+    test fun usageFragment1() {
+        val set = Sets.of(1, 2, 3)
+        println(set)
+    }
+
+    test fun usageFragment2() {
+        val javaSet: kotlin.Set<Int> = setOf<Int>()
+        val set = Sets.copyOf(javaSet)
+        println(set)
+    }
+
+    test fun usageFragment3() {
+        val builder = Sets.builder<Int>()
+        for (i in 1..100) {
+            builder.add(i)
+        }
+        val set = builder.build()
+        println(set)
+    }
 }

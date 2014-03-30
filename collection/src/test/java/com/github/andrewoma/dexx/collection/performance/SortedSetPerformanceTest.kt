@@ -32,7 +32,7 @@ import com.github.andrewoma.dexx.collection.TreeSet
 public class SortedSetPerformanceTest : SetPerformanceTest() {
 
     override fun compare(description: String, operations: Int, iterations: Int, f: (builder: Builder<Int, out DSet<Int>>)
-            -> com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result) {
+            -> PerformanceMeasurement.Result) {
         val java = time(iterations) { f(MutableTreeSet.factory<Int>(null).newBuilder()) }
         val dexx = time(iterations) { f(TreeSet.factory<Int>(null).newBuilder()) }
         compare("SortedSet: $description", operations, java, dexx)

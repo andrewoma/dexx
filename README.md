@@ -42,7 +42,7 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 
 #### Roadmap
 * Publishing of 0.1 to Maven Central is in progress
-* Complete basic benchmarks for existing implementations (HashSet and TreeSet are done).
+* Complete basic benchmarks for existing implementations (HashSet, TreeSet and Vector are done).
 * Port Scala's ArrayList as an alternative IndexedList implementation
 * Port Scala's List/ListBuffer as a LinkedList/Builder implementation
 
@@ -134,7 +134,7 @@ fun <T, R> Stream<T>.build(builder: Builder<T, R>): R {
     return builder.build()
 }
 
-fun <T> Stream<T>.toPersistentSet(): Set<T> = build(Sets.builder<T>())
+fun <T> Stream<T>.toPersistentSortedSet(): SortedSet<T> = build(SortedSets.builder<T>())
 ```
 
 #### Performance
@@ -143,6 +143,10 @@ Benchmarking is still a work in progress (all the warnings about JVM benchmarks 
 running on OS X 10.6.8 with JDK 1.6.0_65 are:
 * HashSet is around 3 times slower than `java.util.HashSet` for add, remove and contains.
 * TreeSet is around 3 times slower than `java.util.TreeSet` for add and remove, but on a par for contains.
+* Vector performance relative to `java.util.ArrayList`:
+  * Appending and iteration is slower for small lists, but becomes faster for larger lists
+  * Random access seems to be a constant 2x slower
+  * Prepending is a constant time operation for Vectors (fast), but is linear in ArrayLists
 
 See the section below for how to run the benchmarks for yourself. The output from my development machine
 is [here](/docs/benchmarks.txt).

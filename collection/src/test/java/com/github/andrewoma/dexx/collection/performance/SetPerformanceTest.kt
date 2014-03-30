@@ -144,7 +144,7 @@ public open class SetPerformanceTest : PerformanceMeasurement {
         return Result(duration, result)
     }
 
-    open fun compare(description: String, operations: Int, iterations: Int, f: (builder: Builder<Int, out DSet<Int>>) -> com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result) {
+    open fun compare(description: String, operations: Int, iterations: Int, f: (builder: Builder<Int, out DSet<Int>>) -> PerformanceMeasurement.Result) {
         val java = time(iterations) { f(MutableHashSet.factory<Int>().newBuilder()) }
         val dexx = time(iterations) { f(HashSet.factory<Int>().newBuilder()) }
         compare("Set: $description", operations, java, dexx)

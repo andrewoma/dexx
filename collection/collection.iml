@@ -16,7 +16,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.jetbrains.kotlin:kotlin-runtime:0.7.271" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.carrotsearch:junit-benchmarks:0.7.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.google.guava:guava:14.0.1" level="project" />
   </component>
 </module>

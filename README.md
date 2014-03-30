@@ -41,7 +41,7 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 * The tests are written in Kotlin, but again this is not a runtime dependency
 
 #### Roadmap
-* Benchmark existing implementations
+* Complete basic benchmarks for existing implementations (HashSet and TreeSet are done).
 * Publish 0.1 to Maven Central via Sonatype
 * Port Scala's ArrayList as an alternative IndexedList implementation
 * Port Scala's List/ListBuffer as a LinkedList/Builder implementation
@@ -119,7 +119,21 @@ fun <T, R> Stream<T>.build(builder: Builder<T, R>): R {
 fun <T> Stream<T>.toPersistentSet(): Set<T> = build(Sets.builder<T>())
 ```
 
+#### Performance
+
+Benchmarking is still a work in progress (all the warnings about JVM benchmarks apply). The results so far
+running on OS X 10.6.8 with JDK 1.6.0_65 are:
+* HashSet is around 3 times slower than `java.util.HashSet` for add, remove and contains.
+* TreeSet is around 3 times slower than `java.util.TreeSet` for add and remove, but on a par for contains.
+
+See the section below for how to run the benchmarks for yourself. The output from my development machine
+are [here](/docs/benchmarks.txt).
+
+My conclusions so far are that the collections perform adequately to be used as a drop-in replacement
+for the majority of use cases. While slower, _slow_ is generally referring to millions of operations per second.
+
 #### Development
 * Dexx is currently built with maven. Use `mvn install` to build and install into your local repository.
 * By default, a quick version of tests are run. Getting better test coverage of `Vectors` requires large
   collections. To run tests with complete coverage use: `mvn -Ddexx.test.mode=COMPLETE -P cobertura clean cobertura:cobertura`
+* To run the benchmarks, use `mvn -Ddexx.test.mode=BENCHMARK test` (results are lines starting with BENCHMARK).

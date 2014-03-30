@@ -22,17 +22,20 @@
 
 package com.github.andrewoma.dexx.collection.performance
 
-import com.github.andrewoma.dexx.collection.HashMap
-//import objectexplorer.MemoryMeasurer
-//import objectexplorer.ObjectGraphMeasurer
 import org.junit.Test as test
+import kotlin.Set as JSet
+import com.github.andrewoma.dexx.collection.Set as DSet
+import com.github.andrewoma.dexx.collection.Builder
+import com.github.andrewoma.dexx.collection.mutable.MutableTreeSet
+import com.github.andrewoma.dexx.collection.TreeSet
 
-class TraversableSizeTest() {
-    test fun mapSizes() {
-//        val footprint = ObjectGraphMeasurer.measure(HashMap.empty<Int, Int>())!!
-//        println(footprint)
-//
-//        val memory = MemoryMeasurer.measureBytes(HashMap.empty<Int, Int>())
-//        println(memory)
+public class SortedSetPerformanceTest : SetPerformanceTest() {
+
+    override fun compare(description: String, operations: Int, iterations: Int, f: (builder: Builder<Int, out DSet<Int>>)
+            -> com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result) {
+        val java = time(iterations) { f(MutableTreeSet.factory<Int>(null).newBuilder()) }
+        val dexx = time(iterations) { f(TreeSet.factory<Int>(null).newBuilder()) }
+        compare("SortedSet: $description", operations, java, dexx)
     }
 }
+

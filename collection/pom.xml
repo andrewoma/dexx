@@ -28,7 +28,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.10</version>
                 <configuration>
-                    <argLine>-Xmx2048m</argLine>
+                    <argLine>-server -Xmx2048m</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -61,12 +61,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.9</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.carrotsearch</groupId>
-            <artifactId>junit-benchmarks</artifactId>
-            <version>0.7.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>

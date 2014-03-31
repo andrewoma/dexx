@@ -41,7 +41,6 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 * The tests are written in Kotlin, but again this is not a runtime dependency
 
 #### Roadmap
-* Publishing of 0.1 to Maven Central is in progress
 * Port Scala's ArrayList as an alternative IndexedList implementation
 * Port Scala's List/ListBuffer as a LinkedList/Builder implementation
 
@@ -51,21 +50,13 @@ This project is licensed under a MIT license. Portions ported from Scala are Sca
 #### Usage
 
 ##### Adding to your project
-Version 0.1 has been released. You can use it via the following dependency:
+Version 0.1 has been released and is available in Maven Central. You can use it via the following dependency:
 ```xml
 <dependency>
     <groupId>com.github.andrewoma.dexx</groupId>
     <artifactId>dexx-collections</artifactId>
     <version>0.1</version>
 </dependency>
-```
-This release should be in Maven Central shortly. Until then, it is available via Sonatype's staging repository:
-```xml
-<repository>
-    <id>sonatype-staging</id>
-    <name>Sonatype Staging</name>
-    <url>https://oss.sonatype.org/content/groups/staging</url>
-</repository>
 ```
 
 ##### Constructing collections

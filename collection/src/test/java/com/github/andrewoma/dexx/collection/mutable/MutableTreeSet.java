@@ -119,6 +119,11 @@ public class MutableTreeSet<A> extends AbstractSortedSet<A> {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public int size() {
+        return underlying.size();
+    }
+
     static class MutableTreeSetBuilder<A> extends AbstractBuilder<A, SortedSet<A>> implements Builder<A, SortedSet<A>> {
         private java.util.SortedSet<A> result;
 

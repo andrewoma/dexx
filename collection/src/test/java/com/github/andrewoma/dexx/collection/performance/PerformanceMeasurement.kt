@@ -28,7 +28,6 @@ import com.github.andrewoma.dexx.collection.Set as DSet
 import kotlin.test.assertEquals
 import java.security.SecureRandom
 import java.util.LinkedHashSet
-import java.math.BigDecimal
 import com.github.andrewoma.dexx.TestMode
 
 public trait PerformanceMeasurement {
@@ -79,9 +78,9 @@ public trait PerformanceMeasurement {
 
         fun delta(java: Long, dexx: Long): String {
             return if (java > dexx) {
-                "Dexx is ${BigDecimal(java.toDouble() / dexx.toDouble()).setScale(2, BigDecimal.ROUND_HALF_UP)} times faster"
+                "Dexx is ${"%.2f".format(java.toDouble() / dexx.toDouble())} times faster"
             } else {
-                "Java is ${BigDecimal(dexx.toDouble() / java.toDouble()).setScale(2, BigDecimal.ROUND_HALF_UP)} times faster"
+                "Java is ${"%.2f".format(dexx.toDouble() / java.toDouble())} times faster"
             }
         }
 

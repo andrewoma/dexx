@@ -205,7 +205,7 @@ public open class IndexedListPerformanceTest : PerformanceMeasurement {
     open fun compare(description: String, operations: Int, iterations: Int, f: (builder: Builder<Int, out DList<Int>>) -> PerformanceMeasurement.Result) {
         val java = time(iterations) { f(MutableArrayList.factory<Int>().newBuilder()) }
         val dexx = time(iterations) { f(Vector.factory<Int>().newBuilder()) }
-        compare("Indexed List: $description", operations, java, dexx)
+        compare("IndexedList: $description", operations, java, dexx)
     }
 }
 

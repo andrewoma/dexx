@@ -24,47 +24,60 @@ package com.github.andrewoma.dexx.collection.mutable;
 
 import com.github.andrewoma.dexx.collection.Builder;
 import com.github.andrewoma.dexx.collection.BuilderFactory;
-import com.github.andrewoma.dexx.collection.Set;
-import com.github.andrewoma.dexx.collection.internal.base.AbstractSet;
+import com.github.andrewoma.dexx.collection.Map;
+import com.github.andrewoma.dexx.collection.Pair;
+import com.github.andrewoma.dexx.collection.internal.base.AbstractMap;
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Iterator;
 
 /**
  *
  */
-public class MutableHashSet<A> extends AbstractSet<A> {
-    private java.util.Set<A> underlying = new HashSet<A>();
+public class MutableHashMap<K, V> extends AbstractMap<K, V> {
+    private java.util.Map<K, V> underlying = new HashMap<K, V>();
 
     @NotNull
-    public static <A> BuilderFactory<A, Set<A>> factory() {
-        return new BuilderFactory<A, Set<A>>() {
+    public static <K, V> BuilderFactory<Pair<K, V>, Map<K, V>> factory() {
+        return new BuilderFactory<Pair<K, V>, Map<K, V>>() {
             @NotNull
             @Override
-            public Builder<A, Set<A>> newBuilder() {
-                return new MutableHashSetBuilder<A>();
+            public Builder<Pair<K, V>, Map<K, V>> newBuilder() {
+                return new MutableHashMapBuilder<K, V>();
             }
         };
     }
 
-    private MutableHashSet(java.util.Set<A> underlying) {
+    private MutableHashMap(java.util.Map<K, V> underlying) {
         this.underlying = underlying;
     }
 
     @NotNull
     @Override
-    public Set<A> add(A value) {
-        underlying.add(value);
+    public Map<K, V> put(@NotNull K key, V value) {
+        underlying.put(key, value);
         return this;
+    }
+
+    @Nullable
+    @Override
+    public V get(@NotNull K key) {
+        return underlying.get(key);
     }
 
     @NotNull
     @Override
-    public Set<A> remove(A value) {
-        underlying.remove(value);
+    public Map<K, V> remove(@NotNull K key) {
+        underlying.remove(key);
         return this;
+    }
+
+    @Override
+    public boolean containsKey(@NotNull K key) {
+        return underlying.containsKey(key);
     }
 
     @Override
@@ -72,31 +85,26 @@ public class MutableHashSet<A> extends AbstractSet<A> {
         return underlying.size();
     }
 
-    @Override
-    public boolean contains(A value) {
-        return underlying.contains(value);
-    }
-
     @NotNull
     @Override
-    public Iterator<A> iterator() {
-        return underlying.iterator();
+    public Iterator<Pair<K, V>> iterator() {
+        throw new UnsupportedOperationException();
     }
 
-    static class MutableHashSetBuilder<A> extends AbstractBuilder<A, Set<A>> implements Builder<A, Set<A>> {
-        private java.util.Set<A> result = new HashSet<A>();
+    static class MutableHashMapBuilder<K, V> extends AbstractBuilder<Pair<K, V>, Map<K, V>> {
+        private java.util.HashMap<K, V> map = new HashMap<K, V>();
 
         @NotNull
         @Override
-        public Builder<A, Set<A>> add(A element) {
-            result.add(element);
+        public Builder<Pair<K, V>, Map<K, V>> add(Pair<K, V> element) {
+            map.put(element.component1(), element.component2());
             return this;
         }
 
         @NotNull
         @Override
-        public Set<A> build() {
-            return new MutableHashSet<A>(result);
+        public Map<K, V> build() {
+            return new MutableHashMap<K, V>(map);
         }
     }
 }

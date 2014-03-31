@@ -23,19 +23,18 @@
 package com.github.andrewoma.dexx.collection.performance
 
 import org.junit.Test as test
-import kotlin.Set as JSet
-import com.github.andrewoma.dexx.collection.Set as DSet
+import com.github.andrewoma.dexx.collection.Map as DMap
 import com.github.andrewoma.dexx.collection.Builder
-import com.github.andrewoma.dexx.collection.mutable.MutableTreeSet
-import com.github.andrewoma.dexx.collection.TreeSet
+import com.github.andrewoma.dexx.collection.Pair
+import com.github.andrewoma.dexx.collection.mutable.MutableTreeMap
+import com.github.andrewoma.dexx.collection.TreeMap
 
-public class SortedSetPerformanceTest : SetPerformanceTest() {
+public open class SortedMapPerformanceTest : MapPerformanceTest() {
 
-    override fun compare(description: String, operations: Int, iterations: Int, f: (builder: Builder<Int, out DSet<Int>>)
-    -> PerformanceMeasurement.Result) {
-        val java = time(iterations) { f(MutableTreeSet.factory<Int>(null).newBuilder()) }
-        val dexx = time(iterations) { f(TreeSet.factory<Int>(null).newBuilder()) }
-        compare("SortedSet: $description", operations, java, dexx)
+    override fun compare(description: String, operations: Int, iterations: Int, f: (builder: Builder<Pair<Int, Int>, out DMap<Int, Int>>) -> PerformanceMeasurement.Result) {
+        val java = time(iterations) { f(MutableTreeMap.factory<Int, Int>().newBuilder()) }
+        val dexx = time(iterations) { f(TreeMap.factory<Int, Int>(null, null).newBuilder()) }
+        compare("SortedMap: $description", operations, java, dexx)
     }
 }
 

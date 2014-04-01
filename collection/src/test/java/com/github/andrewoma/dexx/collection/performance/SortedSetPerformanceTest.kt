@@ -28,6 +28,8 @@ import com.github.andrewoma.dexx.collection.Set as DSet
 import com.github.andrewoma.dexx.collection.Builder
 import com.github.andrewoma.dexx.collection.mutable.MutableTreeSet
 import com.github.andrewoma.dexx.collection.TreeSet
+import com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result
+import kotlin.util.measureTimeNano
 
 public class SortedSetPerformanceTest : SetPerformanceTest() {
 
@@ -36,6 +38,68 @@ public class SortedSetPerformanceTest : SetPerformanceTest() {
         val java = time(iterations) { f(MutableTreeSet.factory<Int>(null).newBuilder()) }
         val dexx = time(iterations) { f(TreeSet.factory<Int>(null).newBuilder()) }
         compare("SortedSet: $description", operations, java, dexx)
+    }
+
+    test fun addSorted() {
+        addSorted(size = 100, iterations = 1000)
+        addSorted(size = 10000, iterations = 1000)
+        addSorted(size = 100000, iterations = 100)
+        addSorted(size = 1000000, iterations = 10)
+    }
+
+    test fun addReverseSorted() {
+        addReverseSorted(size = 100, iterations = 1000)
+        addReverseSorted(size = 10000, iterations = 1000)
+        addReverseSorted(size = 100000, iterations = 100)
+        addReverseSorted(size = 1000000, iterations = 10)
+    }
+
+    fun addSorted(size: Int, iterations: Int) {
+        if (disabled()) return
+
+        compare("Add $size ints in order to empty set", operations = size, iterations = iterations) { builder ->
+            addSorted(size, builder)
+        }
+    }
+
+    fun addSorted(size: Int, builder: Builder<Int, out DSet<Int>>): Result {
+        var set = builder.build()
+
+        var result = 0L
+        val duration = measureTimeNano {
+            for (i in 1..size) {
+                set = set.add(i)
+                result += i
+            }
+        }
+
+        result += set.size()
+
+        return Result(duration, result)
+    }
+
+    fun addReverseSorted(size: Int, iterations: Int) {
+        if (disabled()) return
+
+        compare("Add $size ints in reverse order to empty set", operations = size, iterations = iterations) { builder ->
+            addReverseSorted(size, builder)
+        }
+    }
+
+    fun addReverseSorted(size: Int, builder: Builder<Int, out DSet<Int>>): Result {
+        var set = builder.build()
+
+        var result = 0L
+        val duration = measureTimeNano {
+            for (i in size.downTo(1)) {
+                set = set.add(i)
+                result += i
+            }
+        }
+
+        result += set.size()
+
+        return Result(duration, result)
     }
 }
 

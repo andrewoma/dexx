@@ -1,65 +1,73 @@
-BENCHMARK: IndexedList: Append 10000 values to indexed list of size 100: Java: 10.8ns/op Dexx: 40.0ns/op. Java is 3.70 times faster
-BENCHMARK: IndexedList: Append 10000 values to indexed list of size 10000: Java: 12.4ns/op Dexx: 40.2ns/op. Java is 3.24 times faster
-BENCHMARK: IndexedList: Append 10000 values to indexed list of size 100000: Java: 10.3ns/op Dexx: 43.2ns/op. Java is 4.19 times faster
-BENCHMARK: IndexedList: Append 10000 values to indexed list of size 1000000: Java: 240.4ns/op Dexx: 45.0ns/op. Dexx is 5.34 times faster
-BENCHMARK: IndexedList: Prepend 10000 values to indexed list of size 100: Java: 650.1ns/op Dexx: 38.4ns/op. Dexx is 16.93 times faster
-BENCHMARK: IndexedList: Prepend 10000 values to indexed list of size 10000: Java: 2411.1ns/op Dexx: 39.1ns/op. Dexx is 61.66 times faster
-BENCHMARK: IndexedList: Prepend 10000 values to indexed list of size 100000: Java: 25161.9ns/op Dexx: 44.7ns/op. Dexx is 562.91 times faster
-BENCHMARK: IndexedList: Randomly get 10000 values by index from indexed list of size 100: Java: 1.4ns/op Dexx: 11.8ns/op. Java is 8.43 times faster
-BENCHMARK: IndexedList: Randomly get 10000 values by index from indexed list of size 10000: Java: 6.6ns/op Dexx: 14.3ns/op. Java is 2.17 times faster
-BENCHMARK: IndexedList: Randomly get 10000 values by index from indexed list of size 100000: Java: 13.3ns/op Dexx: 24.5ns/op. Java is 1.84 times faster
-BENCHMARK: IndexedList: Randomly get 10000 values by index from indexed list of size 1000000: Java: 68.5ns/op Dexx: 140.7ns/op. Java is 2.05 times faster
-BENCHMARK: IndexedList: Randomly set 10000 values by index from indexed list of size 100: Java: 6.9ns/op Dexx: 61.8ns/op. Java is 8.96 times faster
-BENCHMARK: IndexedList: Randomly set 10000 values by index from indexed list of size 10000: Java: 5.8ns/op Dexx: 93.4ns/op. Java is 16.10 times faster
-BENCHMARK: IndexedList: Randomly set 10000 values by index from indexed list of size 100000: Java: 11.6ns/op Dexx: 160.4ns/op. Java is 13.83 times faster
-BENCHMARK: IndexedList: Randomly set 10000 values by index from indexed list of size 1000000: Java: 19.9ns/op Dexx: 347.2ns/op. Java is 17.45 times faster
-BENCHMARK: IndexedList: Iterate indexed list of size 100000: Java: 10.04ns/op Dexx: 4.85ns/op. Dexx is 2.07 times faster
-BENCHMARK: IndexedList: Iterate indexed list of size 1000000: Java: 11.169ns/op Dexx: 5.575ns/op. Dexx is 2.00 times faster
-BENCHMARK: Map: Put 10000 random ints to map of size 100: Java: 56.6ns/op Dexx: 189.9ns/op. Java is 3.36 times faster
-BENCHMARK: Map: Put 10000 random ints to map of size 10000: Java: 70.1ns/op Dexx: 238.2ns/op. Java is 3.40 times faster
-BENCHMARK: Map: Put 10000 random ints to map of size 100000: Java: 114.5ns/op Dexx: 402.0ns/op. Java is 3.51 times faster
-BENCHMARK: Map: Put 10000 random ints to map of size 1000000: Java: 193.1ns/op Dexx: 671.7ns/op. Java is 3.48 times faster
-BENCHMARK: Map: Remove all items randomly from a map of size 100 elements: Java: 30.0ns/op Dexx: 110.0ns/op. Java is 3.67 times faster
-BENCHMARK: Map: Remove all items randomly from a map of size 10000 elements: Java: 50.4ns/op Dexx: 214.5ns/op. Java is 4.26 times faster
-BENCHMARK: Map: Remove all items randomly from a map of size 100000 elements: Java: 161.35ns/op Dexx: 437.81ns/op. Java is 2.71 times faster
-BENCHMARK: Map: Remove all items randomly from a map of size 1000000 elements: Java: 278.383ns/op Dexx: 793.984ns/op. Java is 2.85 times faster
-BENCHMARK: Map: Check map of size 100 contains element 100 times: Java: 0.0ns/op Dexx: 60.0ns/op. Java is Infinity times faster
-BENCHMARK: Map: Check map of size 10000 contains element 10000 times: Java: 25.8ns/op Dexx: 110.2ns/op. Java is 4.27 times faster
-BENCHMARK: Map: Check map of size 100000 contains element 100000 times: Java: 103.04ns/op Dexx: 320.37ns/op. Java is 3.11 times faster
-BENCHMARK: Map: Check map of size 1000000 contains element 1000000 times: Java: 202.645ns/op Dexx: 565.982ns/op. Java is 2.79 times faster
-BENCHMARK: Set: Add 10000 random ints to set of size 100: Java: 49.1ns/op Dexx: 164.9ns/op. Java is 3.36 times faster
-BENCHMARK: Set: Add 10000 random ints to set of size 10000: Java: 56.6ns/op Dexx: 203.1ns/op. Java is 3.59 times faster
-BENCHMARK: Set: Add 10000 random ints to set of size 100000: Java: 91.5ns/op Dexx: 364.6ns/op. Java is 3.98 times faster
-BENCHMARK: Set: Add 10000 random ints to set of size 1000000: Java: 177.3ns/op Dexx: 581.8ns/op. Java is 3.28 times faster
-BENCHMARK: Set: Check set of size 100 contains element 100 times: Java: 10.0ns/op Dexx: 50.0ns/op. Java is 5.00 times faster
-BENCHMARK: Set: Check set of size 10000 contains element 10000 times: Java: 25.2ns/op Dexx: 77.0ns/op. Java is 3.06 times faster
-BENCHMARK: Set: Check set of size 100000 contains element 100000 times: Java: 92.42ns/op Dexx: 192.54ns/op. Java is 2.08 times faster
-BENCHMARK: Set: Check set of size 1000000 contains element 1000000 times: Java: 210.542ns/op Dexx: 472.389ns/op. Java is 2.24 times faster
-BENCHMARK: Set: Remove all items randomly from a set of size 100 elements: Java: 30.0ns/op Dexx: 110.0ns/op. Java is 3.67 times faster
-BENCHMARK: Set: Remove all items randomly from a set of size 10000 elements: Java: 48.9ns/op Dexx: 187.5ns/op. Java is 3.83 times faster
-BENCHMARK: Set: Remove all items randomly from a set of size 100000 elements: Java: 145.27ns/op Dexx: 384.39ns/op. Java is 2.65 times faster
-BENCHMARK: Set: Remove all items randomly from a set of size 1000000 elements: Java: 260.319ns/op Dexx: 722.788ns/op. Java is 2.78 times faster
-BENCHMARK: SortedMap: Put 10000 random ints to map of size 100: Java: 170.1ns/op Dexx: 828.9ns/op. Java is 4.87 times faster
-BENCHMARK: SortedMap: Put 10000 random ints to map of size 10000: Java: 231.0ns/op Dexx: 1087.9ns/op. Java is 4.71 times faster
-BENCHMARK: SortedMap: Put 10000 random ints to map of size 100000: Java: 537.1ns/op Dexx: 1647.7ns/op. Java is 3.07 times faster
-BENCHMARK: SortedMap: Put 10000 random ints to map of size 1000000: Java: 1244.2ns/op Dexx: 2791.7ns/op. Java is 2.24 times faster
-BENCHMARK: SortedMap: Remove all items randomly from a map of size 100 elements: Java: 50.0ns/op Dexx: 210.0ns/op. Java is 4.20 times faster
-BENCHMARK: SortedMap: Remove all items randomly from a map of size 10000 elements: Java: 154.8ns/op Dexx: 544.6ns/op. Java is 3.52 times faster
-BENCHMARK: SortedMap: Remove all items randomly from a map of size 100000 elements: Java: 428.75ns/op Dexx: 1499.08ns/op. Java is 3.50 times faster
-BENCHMARK: SortedMap: Remove all items randomly from a map of size 1000000 elements: Java: 1118.993ns/op Dexx: 2710.652ns/op. Java is 2.42 times faster
-BENCHMARK: SortedMap: Check map of size 100 contains element 100 times: Java: 40.0ns/op Dexx: 60.0ns/op. Java is 1.50 times faster
-BENCHMARK: SortedMap: Check map of size 10000 contains element 10000 times: Java: 136.1ns/op Dexx: 195.5ns/op. Java is 1.44 times faster
-BENCHMARK: SortedMap: Check map of size 100000 contains element 100000 times: Java: 368.03ns/op Dexx: 476.71ns/op. Java is 1.30 times faster
-BENCHMARK: SortedMap: Check map of size 1000000 contains element 1000000 times: Java: 1068.072ns/op Dexx: 1220.791ns/op. Java is 1.14 times faster
-BENCHMARK: SortedSet: Add 10000 random ints to set of size 100: Java: 157.9ns/op Dexx: 1313.6ns/op. Java is 8.32 times faster
-BENCHMARK: SortedSet: Add 10000 random ints to set of size 10000: Java: 215.8ns/op Dexx: 1683.3ns/op. Java is 7.80 times faster
-BENCHMARK: SortedSet: Add 10000 random ints to set of size 100000: Java: 413.7ns/op Dexx: 2367.9ns/op. Java is 5.72 times faster
-BENCHMARK: SortedSet: Add 10000 random ints to set of size 1000000: Java: 1034.4ns/op Dexx: 3626.6ns/op. Java is 3.51 times faster
-BENCHMARK: SortedSet: Check set of size 100 contains element 100 times: Java: 60.0ns/op Dexx: 150.0ns/op. Java is 2.50 times faster
-BENCHMARK: SortedSet: Check set of size 10000 contains element 10000 times: Java: 153.9ns/op Dexx: 343.2ns/op. Java is 2.23 times faster
-BENCHMARK: SortedSet: Check set of size 100000 contains element 100000 times: Java: 329.47ns/op Dexx: 529.96ns/op. Java is 1.61 times faster
-BENCHMARK: SortedSet: Check set of size 1000000 contains element 1000000 times: Java: 880.113ns/op Dexx: 1302.78ns/op. Java is 1.48 times faster
-BENCHMARK: SortedSet: Remove all items randomly from a set of size 100 elements: Java: 60.0ns/op Dexx: 1370.0ns/op. Java is 22.83 times faster
-BENCHMARK: SortedSet: Remove all items randomly from a set of size 10000 elements: Java: 164.2ns/op Dexx: 1024.4ns/op. Java is 6.24 times faster
-BENCHMARK: SortedSet: Remove all items randomly from a set of size 100000 elements: Java: 356.33ns/op Dexx: 1886.54ns/op. Java is 5.29 times faster
-BENCHMARK: SortedSet: Remove all items randomly from a set of size 1000000 elements: Java: 1148.854ns/op Dexx: 3117.615ns/op. Java is 2.71 times faster
+BENCHMARK: IndexedList: Append 10000 values to indexed list of size 100: Java: 11.2ns/op Dexx: 40.1ns/op. Java is 3.58 times faster
+BENCHMARK: IndexedList: Append 10000 values to indexed list of size 10000: Java: 11.5ns/op Dexx: 40.7ns/op. Java is 3.54 times faster
+BENCHMARK: IndexedList: Append 10000 values to indexed list of size 100000: Java: 9.4ns/op Dexx: 42.6ns/op. Java is 4.53 times faster
+BENCHMARK: IndexedList: Append 10000 values to indexed list of size 1000000: Java: 229.4ns/op Dexx: 46.3ns/op. Dexx is 4.95 times faster
+BENCHMARK: IndexedList: Prepend 10000 values to indexed list of size 100: Java: 628.9ns/op Dexx: 38.9ns/op. Dexx is 16.17 times faster
+BENCHMARK: IndexedList: Prepend 10000 values to indexed list of size 10000: Java: 2317.5ns/op Dexx: 38.2ns/op. Dexx is 60.67 times faster
+BENCHMARK: IndexedList: Prepend 10000 values to indexed list of size 100000: Java: 23441.9ns/op Dexx: 42.4ns/op. Dexx is 552.88 times faster
+BENCHMARK: IndexedList: Randomly get 10000 values by index from indexed list of size 100: Java: 1.4ns/op Dexx: 11.5ns/op. Java is 8.21 times faster
+BENCHMARK: IndexedList: Randomly get 10000 values by index from indexed list of size 10000: Java: 6.3ns/op Dexx: 13.8ns/op. Java is 2.19 times faster
+BENCHMARK: IndexedList: Randomly get 10000 values by index from indexed list of size 100000: Java: 11.8ns/op Dexx: 23.4ns/op. Java is 1.98 times faster
+BENCHMARK: IndexedList: Randomly get 10000 values by index from indexed list of size 1000000: Java: 65.9ns/op Dexx: 132.5ns/op. Java is 2.01 times faster
+BENCHMARK: IndexedList: Randomly set 10000 values by index from indexed list of size 100: Java: 5.1ns/op Dexx: 55.8ns/op. Java is 10.94 times faster
+BENCHMARK: IndexedList: Randomly set 10000 values by index from indexed list of size 10000: Java: 5.9ns/op Dexx: 89.0ns/op. Java is 15.08 times faster
+BENCHMARK: IndexedList: Randomly set 10000 values by index from indexed list of size 100000: Java: 11.3ns/op Dexx: 165.2ns/op. Java is 14.62 times faster
+BENCHMARK: IndexedList: Randomly set 10000 values by index from indexed list of size 1000000: Java: 19.7ns/op Dexx: 328.7ns/op. Java is 16.69 times faster
+BENCHMARK: IndexedList: Iterate indexed list of size 100000: Java: 9.47ns/op Dexx: 4.65ns/op. Dexx is 2.04 times faster
+BENCHMARK: IndexedList: Iterate indexed list of size 1000000: Java: 10.813ns/op Dexx: 5.38ns/op. Dexx is 2.01 times faster
+BENCHMARK: Map: Put 10000 random ints to map of size 100: Java: 53.1ns/op Dexx: 174.7ns/op. Java is 3.29 times faster
+BENCHMARK: Map: Put 10000 random ints to map of size 10000: Java: 70.8ns/op Dexx: 222.1ns/op. Java is 3.14 times faster
+BENCHMARK: Map: Put 10000 random ints to map of size 100000: Java: 114.6ns/op Dexx: 388.7ns/op. Java is 3.39 times faster
+BENCHMARK: Map: Put 10000 random ints to map of size 1000000: Java: 191.9ns/op Dexx: 642.1ns/op. Java is 3.35 times faster
+BENCHMARK: Map: Remove all items randomly from a map of size 100 elements: Java: 30.0ns/op Dexx: 100.0ns/op. Java is 3.33 times faster
+BENCHMARK: Map: Remove all items randomly from a map of size 10000 elements: Java: 50.9ns/op Dexx: 207.7ns/op. Java is 4.08 times faster
+BENCHMARK: Map: Remove all items randomly from a map of size 100000 elements: Java: 165.24ns/op Dexx: 415.29ns/op. Java is 2.51 times faster
+BENCHMARK: Map: Remove all items randomly from a map of size 1000000 elements: Java: 305.411ns/op Dexx: 745.864ns/op. Java is 2.44 times faster
+BENCHMARK: Map: Check map of size 100 contains element 100 times: Java: 0.0ns/op Dexx: 40.0ns/op. Java is Infinity times faster
+BENCHMARK: Map: Check map of size 10000 contains element 10000 times: Java: 26.5ns/op Dexx: 91.7ns/op. Java is 3.46 times faster
+BENCHMARK: Map: Check map of size 100000 contains element 100000 times: Java: 111.49ns/op Dexx: 281.96ns/op. Java is 2.53 times faster
+BENCHMARK: Map: Check map of size 1000000 contains element 1000000 times: Java: 187.373ns/op Dexx: 550.266ns/op. Java is 2.94 times faster
+BENCHMARK: Set: Add 10000 random ints to set of size 100: Java: 46.4ns/op Dexx: 164.4ns/op. Java is 3.54 times faster
+BENCHMARK: Set: Add 10000 random ints to set of size 10000: Java: 55.2ns/op Dexx: 200.7ns/op. Java is 3.64 times faster
+BENCHMARK: Set: Add 10000 random ints to set of size 100000: Java: 89.1ns/op Dexx: 364.8ns/op. Java is 4.09 times faster
+BENCHMARK: Set: Add 10000 random ints to set of size 1000000: Java: 176.0ns/op Dexx: 572.6ns/op. Java is 3.25 times faster
+BENCHMARK: Set: Check set of size 100 contains element 100 times: Java: 10.0ns/op Dexx: 40.0ns/op. Java is 4.00 times faster
+BENCHMARK: Set: Check set of size 10000 contains element 10000 times: Java: 25.3ns/op Dexx: 75.2ns/op. Java is 2.97 times faster
+BENCHMARK: Set: Check set of size 100000 contains element 100000 times: Java: 84.1ns/op Dexx: 184.81ns/op. Java is 2.20 times faster
+BENCHMARK: Set: Check set of size 1000000 contains element 1000000 times: Java: 169.308ns/op Dexx: 455.546ns/op. Java is 2.69 times faster
+BENCHMARK: Set: Remove all items randomly from a set of size 100 elements: Java: 50.0ns/op Dexx: 110.0ns/op. Java is 2.20 times faster
+BENCHMARK: Set: Remove all items randomly from a set of size 10000 elements: Java: 49.6ns/op Dexx: 177.7ns/op. Java is 3.58 times faster
+BENCHMARK: Set: Remove all items randomly from a set of size 100000 elements: Java: 132.23ns/op Dexx: 359.75ns/op. Java is 2.72 times faster
+BENCHMARK: Set: Remove all items randomly from a set of size 1000000 elements: Java: 251.576ns/op Dexx: 674.562ns/op. Java is 2.68 times faster
+BENCHMARK: SortedMap: Put 10000 random ints to map of size 100: Java: 136.1ns/op Dexx: 782.5ns/op. Java is 5.75 times faster
+BENCHMARK: SortedMap: Put 10000 random ints to map of size 10000: Java: 189.0ns/op Dexx: 1001.2ns/op. Java is 5.30 times faster
+BENCHMARK: SortedMap: Put 10000 random ints to map of size 100000: Java: 439.2ns/op Dexx: 1541.6ns/op. Java is 3.51 times faster
+BENCHMARK: SortedMap: Put 10000 random ints to map of size 1000000: Java: 1184.1ns/op Dexx: 2620.2ns/op. Java is 2.21 times faster
+BENCHMARK: SortedMap: Remove all items randomly from a map of size 100 elements: Java: 50.0ns/op Dexx: 200.0ns/op. Java is 4.00 times faster
+BENCHMARK: SortedMap: Remove all items randomly from a map of size 10000 elements: Java: 150.9ns/op Dexx: 534.9ns/op. Java is 3.54 times faster
+BENCHMARK: SortedMap: Remove all items randomly from a map of size 100000 elements: Java: 399.75ns/op Dexx: 1379.58ns/op. Java is 3.45 times faster
+BENCHMARK: SortedMap: Remove all items randomly from a map of size 1000000 elements: Java: 1085.46ns/op Dexx: 2451.846ns/op. Java is 2.26 times faster
+BENCHMARK: SortedMap: Check map of size 100 contains element 100 times: Java: 40.0ns/op Dexx: 50.0ns/op. Java is 1.25 times faster
+BENCHMARK: SortedMap: Check map of size 10000 contains element 10000 times: Java: 128.4ns/op Dexx: 164.4ns/op. Java is 1.28 times faster
+BENCHMARK: SortedMap: Check map of size 100000 contains element 100000 times: Java: 330.78ns/op Dexx: 421.08ns/op. Java is 1.27 times faster
+BENCHMARK: SortedMap: Check map of size 1000000 contains element 1000000 times: Java: 1067.257ns/op Dexx: 1167.858ns/op. Java is 1.09 times faster
+BENCHMARK: SortedSet: Add 100 ints in order to empty set: Java: 50.0ns/op Dexx: 650.0ns/op. Java is 13.00 times faster
+BENCHMARK: SortedSet: Add 10000 ints in order to empty set: Java: 79.3ns/op Dexx: 1446.3ns/op. Java is 18.24 times faster
+BENCHMARK: SortedSet: Add 100000 ints in order to empty set: Java: 120.03ns/op Dexx: 1913.03ns/op. Java is 15.94 times faster
+BENCHMARK: SortedSet: Add 1000000 ints in order to empty set: Java: 174.514ns/op Dexx: 2705.396ns/op. Java is 15.50 times faster
+BENCHMARK: SortedSet: Add 100 ints in reverse order to empty set: Java: 50.0ns/op Dexx: 1720.0ns/op. Java is 34.40 times faster
+BENCHMARK: SortedSet: Add 10000 ints in reverse order to empty set: Java: 72.2ns/op Dexx: 1452.3ns/op. Java is 20.11 times faster
+BENCHMARK: SortedSet: Add 100000 ints in reverse order to empty set: Java: 118.6ns/op Dexx: 1918.65ns/op. Java is 16.18 times faster
+BENCHMARK: SortedSet: Add 1000000 ints in reverse order to empty set: Java: 159.159ns/op Dexx: 2736.97ns/op. Java is 17.20 times faster
+BENCHMARK: SortedSet: Add 10000 random ints to set of size 100: Java: 127.4ns/op Dexx: 1259.0ns/op. Java is 9.88 times faster
+BENCHMARK: SortedSet: Add 10000 random ints to set of size 10000: Java: 175.0ns/op Dexx: 1538.7ns/op. Java is 8.79 times faster
+BENCHMARK: SortedSet: Add 10000 random ints to set of size 100000: Java: 355.3ns/op Dexx: 2239.1ns/op. Java is 6.30 times faster
+BENCHMARK: SortedSet: Add 10000 random ints to set of size 1000000: Java: 1052.4ns/op Dexx: 3588.0ns/op. Java is 3.41 times faster
+BENCHMARK: SortedSet: Check set of size 100 contains element 100 times: Java: 40.0ns/op Dexx: 120.0ns/op. Java is 3.00 times faster
+BENCHMARK: SortedSet: Check set of size 10000 contains element 10000 times: Java: 118.9ns/op Dexx: 323.2ns/op. Java is 2.72 times faster
+BENCHMARK: SortedSet: Check set of size 100000 contains element 100000 times: Java: 294.34ns/op Dexx: 514.53ns/op. Java is 1.75 times faster
+BENCHMARK: SortedSet: Check set of size 1000000 contains element 1000000 times: Java: 900.357ns/op Dexx: 1374.325ns/op. Java is 1.53 times faster
+BENCHMARK: SortedSet: Remove all items randomly from a set of size 100 elements: Java: 60.0ns/op Dexx: 1670.0ns/op. Java is 27.83 times faster
+BENCHMARK: SortedSet: Remove all items randomly from a set of size 10000 elements: Java: 151.5ns/op Dexx: 1041.3ns/op. Java is 6.87 times faster
+BENCHMARK: SortedSet: Remove all items randomly from a set of size 100000 elements: Java: 382.6ns/op Dexx: 1995.04ns/op. Java is 5.21 times faster
+BENCHMARK: SortedSet: Remove all items randomly from a set of size 1000000 elements: Java: 1115.803ns/op Dexx: 3347.155ns/op. Java is 3.00 times faster

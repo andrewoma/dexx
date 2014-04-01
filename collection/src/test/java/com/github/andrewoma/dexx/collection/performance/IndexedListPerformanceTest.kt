@@ -110,14 +110,14 @@ public open class IndexedListPerformanceTest : PerformanceMeasurement {
     }
 
     fun append(size: Int, operations: Int, builder: Builder<Int, out DList<Int>>): Result {
-        for (i in 0..size) {
+        for (i in 1..size) {
             builder.add(i)
         }
         var list = builder.build()
 
         var result = 0L
         val duration = measureTimeNano {
-            for (i in 0..operations) {
+            for (i in 1..operations) {
                 list = list.append(i)
                 result += i
             }
@@ -129,14 +129,14 @@ public open class IndexedListPerformanceTest : PerformanceMeasurement {
     }
 
     fun prepend(size: Int, operations: Int, builder: Builder<Int, out DList<Int>>): Result {
-        for (i in 0..size) {
+        for (i in 1..size) {
             builder.add(i)
         }
         var list = builder.build()
 
         var result = 0L
         val duration = measureTimeNano {
-            for (i in 0..operations) {
+            for (i in 1..operations) {
                 list = list.prepend(i)
                 result += i
             }
@@ -148,7 +148,7 @@ public open class IndexedListPerformanceTest : PerformanceMeasurement {
     }
 
     fun randomGet(size: Int, operationInts: IntArray, builder: Builder<Int, out DList<Int>>): Result {
-        for (i in 0..size) {
+        for (i in 1..size) {
             builder.add(i)
         }
         var list = builder.build()
@@ -166,7 +166,7 @@ public open class IndexedListPerformanceTest : PerformanceMeasurement {
     }
 
     fun randomSet(size: Int, operationInts: IntArray, builder: Builder<Int, out DList<Int>>): Result {
-        for (i in 0..size) {
+        for (i in 1..size) {
             builder.add(i)
         }
         var list = builder.build()
@@ -185,7 +185,7 @@ public open class IndexedListPerformanceTest : PerformanceMeasurement {
     }
 
     fun iterate(size: Int, builder: Builder<Int, out DList<Int>>): Result {
-        for (i in 0..size) {
+        for (i in 1..size) {
             builder.add(i)
         }
         var list = builder.build()

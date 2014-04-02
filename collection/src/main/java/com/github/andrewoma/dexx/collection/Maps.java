@@ -24,6 +24,8 @@ package com.github.andrewoma.dexx.collection;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Iterator;
+
 /**
  * {@code Maps} is the preferred method of constructing instances of {@code Map}.
  *
@@ -92,6 +94,17 @@ public class Maps {
     public static <K, V> Map<K, V> copyOf(java.lang.Iterable<Pair<K, V>> iterable) {
         HashMap<K, V> result = HashMap.empty();
         for (Pair<K, V> pair : iterable) {
+            result = result.put(pair.component1(), pair.component2());
+        }
+
+        return result;
+    }
+
+    @NotNull
+    public static <K, V> Map<K, V> copyOf(Iterator<Pair<K, V>> iterator) {
+        HashMap<K, V> result = HashMap.empty();
+        while (iterator.hasNext()) {
+            Pair<K, V> pair = iterator.next();
             result = result.put(pair.component1(), pair.component2());
         }
 

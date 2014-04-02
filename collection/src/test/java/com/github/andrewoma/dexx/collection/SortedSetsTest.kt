@@ -76,6 +76,10 @@ class SortedSetsTest {
         assertEquals(build(null, 1, 2, 3), SortedSets.copyOf(java.util.Arrays.asList(1, 2, 3)))
     }
 
+    test fun copyOfIterator() {
+        assertEquals(build(null, 1, 2, 3), SortedSets.copyOf(Vector.empty<Int>().append(1).append(2).append(3).iterator()))
+    }
+
     test fun copyOfArray() {
         assertEquals(build(null, 1, 2, 3), SortedSets.copyOf(java.util.Arrays.asList(1, 2, 3).copyToArray()))
     }
@@ -90,6 +94,10 @@ class SortedSetsTest {
 
     test fun copyOfIterableWithComparator() {
         assertEquals(build(c, 1, 2, 3), SortedSets.copyOf(c, java.util.Arrays.asList(1, 2, 3)))
+    }
+
+    test fun copyOfIteratorWithComparator() {
+        assertEquals(build(c, 1, 2, 3), SortedSets.copyOf(c, Vector.empty<Int>().append(1).append(2).append(3).iterator()))
     }
 
     test fun copyOfArrayWithComparator() {

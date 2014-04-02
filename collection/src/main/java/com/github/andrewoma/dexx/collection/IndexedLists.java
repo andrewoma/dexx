@@ -24,6 +24,8 @@ package com.github.andrewoma.dexx.collection;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Iterator;
+
 /**
  * {@code IndexedLists} is the preferred method of constructing instances of {@code IndexedList}.
  *
@@ -131,6 +133,15 @@ public class IndexedLists {
         Builder<E, Vector<E>> builder = Vector.<E>factory().newBuilder();
         for (E e : iterable) {
             builder.add(e);
+        }
+        return builder.build();
+    }
+
+    @NotNull
+    public static <E> IndexedList<E> copyOf(Iterator<E> iterator) {
+        Builder<E, Vector<E>> builder = Vector.<E>factory().newBuilder();
+        while (iterator.hasNext()) {
+            builder.add(iterator.next());
         }
         return builder.build();
     }

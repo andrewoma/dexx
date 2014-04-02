@@ -69,6 +69,10 @@ class SortedMapsTest {
         assertEquals(build(1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b"))))
     }
 
+    test fun copyOfIterator() {
+        assertEquals(build(1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).iterator()))
+    }
+
     test fun copyOfArray() {
         assertEquals(build(1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).copyToArray()))
     }

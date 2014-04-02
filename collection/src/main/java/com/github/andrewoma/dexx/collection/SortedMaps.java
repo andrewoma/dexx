@@ -25,6 +25,7 @@ package com.github.andrewoma.dexx.collection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
+import java.util.Iterator;
 
 /**
  * {@code SortedMaps} is the preferred method of constructing instances of {@code SortedMap}.
@@ -138,6 +139,17 @@ public class SortedMaps {
     public static <K extends Comparable<? super K>, V> SortedMap<K, V> copyOf(java.lang.Iterable<Pair<K, V>> iterable) {
         SortedMap<K, V> result = new TreeMap<K, V>();
         for (Pair<K, V> pair : iterable) {
+            result = result.put(pair.component1(), pair.component2());
+        }
+
+        return result;
+    }
+
+    @NotNull
+    public static <K extends Comparable<? super K>, V> SortedMap<K, V> copyOf(Iterator<Pair<K, V>> iterator) {
+        SortedMap<K, V> result = new TreeMap<K, V>();
+        while (iterator.hasNext()) {
+            Pair<K, V> pair = iterator.next();
             result = result.put(pair.component1(), pair.component2());
         }
 

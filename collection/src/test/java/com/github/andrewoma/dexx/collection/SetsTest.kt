@@ -60,6 +60,10 @@ class SetsTest {
         assertEquals(build(1, 2, 3), Sets.copyOfTraversable(Vector.empty<Int>().append(1).append(2).append(3)))
     }
 
+    test fun copyOfIterator() {
+        assertEquals(build(1, 2, 3), Sets.copyOf(Vector.empty<Int>().append(1).append(2).append(3).iterator()))
+    }
+
     test fun factory() {
         assertEquals(build(1, 2, 3), Sets.factory<Int>().newBuilder().addAll(1, 2, 3).build())
     }

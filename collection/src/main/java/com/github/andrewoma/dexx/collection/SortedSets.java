@@ -25,6 +25,7 @@ package com.github.andrewoma.dexx.collection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
+import java.util.Iterator;
 
 /**
  * {@code SortedSets} is the preferred method of constructing instances of {@code SortedSet}.
@@ -206,6 +207,11 @@ public class SortedSets {
     }
 
     @NotNull
+    public static <E> SortedSet<E> copyOf(Iterator<E> iterator) {
+        return copyOf(null, iterator);
+    }
+
+    @NotNull
     public static <E> SortedSet<E> copyOf(E[] es) {
         return copyOf(null, es);
     }
@@ -220,6 +226,15 @@ public class SortedSets {
         SortedSet<E> set = new TreeSet<E>(comparator);
         for (E e : iterable) {
             set = set.add(e);
+        }
+        return set;
+    }
+
+    @NotNull
+    public static <E> SortedSet<E> copyOf(Comparator<? super E> comparator, Iterator<E> iterator) {
+        SortedSet<E> set = new TreeSet<E>(comparator);
+        while (iterator.hasNext()) {
+            set = set.add(iterator.next());
         }
         return set;
     }

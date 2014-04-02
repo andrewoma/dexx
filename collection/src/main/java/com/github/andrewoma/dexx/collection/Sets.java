@@ -24,6 +24,8 @@ package com.github.andrewoma.dexx.collection;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Iterator;
+
 /**
  * {@code Sets} is the preferred method of constructing instances of {@code Set}.
  *
@@ -129,6 +131,15 @@ public class Sets {
         HashSet<E> result = HashSet.empty();
         for (E e : iterable) {
             result = result.add(e);
+        }
+        return result;
+    }
+
+    @NotNull
+    public static <E> Set<E> copyOf(Iterator<E> iterator) {
+        HashSet<E> result = HashSet.empty();
+        while (iterator.hasNext()) {
+            result = result.add(iterator.next());
         }
         return result;
     }

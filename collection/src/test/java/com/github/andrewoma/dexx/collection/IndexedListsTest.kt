@@ -52,6 +52,10 @@ class IndexedListsTest {
         assertEquals(build(1, 2, 3), IndexedLists.copyOf(java.util.Arrays.asList(1, 2, 3)))
     }
 
+    test fun copyOfIterator() {
+        assertEquals(build(1, 2, 3), IndexedLists.copyOf(Vector.empty<Int>().append(1).append(2).append(3).iterator()))
+    }
+
     test fun copyOfArray() {
         assertEquals(build(1, 2, 3), IndexedLists.copyOf(java.util.Arrays.asList(1, 2, 3).copyToArray()))
     }

@@ -67,7 +67,7 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         assertEquals(build(3, 2, 1), build(2, 1).prepend(3));
     }
 
-    test fun range() {
+    test open fun range() {
         assertEquals(build(1, 2, 3, 4), build(1, 2, 3, 4).range(0, true, 3, true));
         assertEquals(build(2, 3), build(1, 2, 3, 4).range(0, false, 3, false));
         assertEquals(build(2, 3), build(1, 2, 3, 4).range(1, true, 2, true ));

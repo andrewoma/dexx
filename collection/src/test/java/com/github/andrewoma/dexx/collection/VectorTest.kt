@@ -46,7 +46,7 @@ class VectorTest() : AbstractListTest() {
     }
 
     test(expected = javaClass<IndexOutOfBoundsException>()) fun getOutOfBounds() {
-        sequence(10).get(11)
+        sequence(10)[11]
     }
 
     test fun take() {

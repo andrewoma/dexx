@@ -76,8 +76,8 @@ public abstract class ConsList<E> extends AbstractList<E> implements LinkedList<
     }
 
     @SuppressWarnings("unchecked")
-    public static <A> ConsList<A> empty() {
-        return (ConsList<A>) EMPTY;
+    public static <E> ConsList<E> empty() {
+        return (ConsList<E>) EMPTY;
     }
 
     @NotNull

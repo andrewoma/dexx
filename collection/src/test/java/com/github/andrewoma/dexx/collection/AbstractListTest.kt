@@ -148,6 +148,13 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         }
     }
 
+    test fun setSameValueTwice() {
+        var list = build(1, 2, 3)
+        list = list.set(0, 3)
+        list = list.set(0, 3)
+        assertEquals(listOf(3, 2, 3), list.klist())
+    }
+
     test(expected = javaClass<IndexOutOfBoundsException>()) fun emptyGet() {
         build<Int>()[0]
     }

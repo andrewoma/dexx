@@ -45,57 +45,6 @@ class VectorTest() : AbstractListTest() {
         return sizes
     }
 
-    test(expected = javaClass<IndexOutOfBoundsException>()) fun getOutOfBounds() {
-        sequence(10)[11]
-    }
-
-    test fun take() {
-        assertSequence(sequence(10).take(5), 0, 5)
-    }
-
-    test fun takeNone() {
-        val vector = sequence(10)
-        assertSequence(vector.take(0), 0, 0)
-        assertSequence(vector.take(-1), 0, 0)
-    }
-
-    test fun takeAll() {
-        assertSequence(sequence(10).take(100), 0, 10)
-    }
-
-    test fun drop() {
-        assertSequence(sequence(10).drop(5), 5, 5)
-    }
-
-    test fun dropNone() {
-        val vector = sequence(10)
-        assertSequence(vector.drop(0), 0, 10)
-        assertSequence(vector.drop(-1), 0, 10)
-    }
-
-    test fun dropAll() {
-        assertSequence(sequence(10).drop(100), 0, 0)
-    }
-
-    test fun first() {
-        assertEquals(0, sequence(10).first())
-        assertNull(sequence(0).first())
-    }
-
-    test fun last() {
-        assertEquals(9, sequence(10).last())
-        assertNull(sequence(0).last())
-    }
-
-    fun assertSequence(vector: Vector<Int>, from: Int, length: Int) {
-        var from_ = from
-        assertEquals(length, vector.size())
-        for (integer in vector)
-        {
-            assertEquals(from_++, integer)
-        }
-    }
-
     test fun isEmpty() {
         val vector = Vector.empty<String>()
         assertTrue(vector.isEmpty())
@@ -142,7 +91,7 @@ class VectorTest() : AbstractListTest() {
 
     test fun split() {
         for (size in sizes()) {
-            var vector = sequence(size)
+            var vector = sequence(size) as Vector<Int>
             val half = size / 2
 
             val (top, bottom) = vector.splitAt(half)
@@ -202,13 +151,5 @@ class VectorTest() : AbstractListTest() {
                 assertEquals(i + 1, vector[i])
             }
         }
-    }
-
-    fun sequence(size: Int): Vector<Int> {
-        val builder = Vector.factory<Int>().newBuilder()
-        for (i in 0..size - 1) {
-            builder.add(i)
-        }
-        return builder.build()
     }
 }

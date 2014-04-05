@@ -35,8 +35,4 @@ class ConsListTest() : AbstractListTest() {
     override fun <T> factory(): BuilderFactory<T, out List<T>> {
         return ConsList.factory()
     }
-
-    override fun range() {
-        // TODO ...
-    }
 }

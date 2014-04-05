@@ -23,16 +23,16 @@
 package com.github.andrewoma.dexx.collection
 
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 import kotlin.test.assertFalse
 import org.junit.Test as test
-import java.util.NoSuchElementException
+import kotlin.test.assertNull
 
 abstract class AbstractListTest() : AbstractIterableTest() {
+    override abstract fun <T> factory(): BuilderFactory<T, out List<T>>
 
     private fun build<T>(vararg ts: T) = build_(*ts) as List<T>
 
-    fun <T> List<T>.klist() : java.util.ArrayList<T> {
+    fun <T> List<T>.klist(): java.util.ArrayList<T> {
         val klist = arrayListOf<T>()
         for (i in this) {
             klist.add(i)
@@ -67,11 +67,17 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         assertEquals(build(3, 2, 1), build(2, 1).prepend(3));
     }
 
+    test fun append() {
+        assertEquals(build(1), build<Int>().append(1));
+        assertEquals(build(1, 2), build(1).append(2));
+        assertEquals(build(1, 2, 3), build(1, 2).append(3));
+    }
+
     test open fun range() {
         assertEquals(build(1, 2, 3, 4), build(1, 2, 3, 4).range(0, true, 3, true));
         assertEquals(build(2, 3), build(1, 2, 3, 4).range(0, false, 3, false));
-        assertEquals(build(2, 3), build(1, 2, 3, 4).range(1, true, 2, true ));
-        assertEquals(build(2), build(1, 2, 3, 4).range(1, true, 2, false ));
+        assertEquals(build(2, 3), build(1, 2, 3, 4).range(1, true, 2, true));
+        assertEquals(build(2), build(1, 2, 3, 4).range(1, true, 2, false));
         assertEquals(build(3), build(1, 2, 3, 4).range(1, false, 2, true));
         assertEquals(build<Int>(), build(1, 2, 3, 4).range(1, false, 2, false));
     }
@@ -111,5 +117,84 @@ abstract class AbstractListTest() : AbstractIterableTest() {
     test fun notEqualsWithDifferentLengths() {
         assertFalse(build(1, 1, 1).equals(build(1, 1)))
         assertFalse(build(1, 1).equals(build(1, 1, 1)))
+    }
+
+    test(expected = javaClass<IndexOutOfBoundsException>()) fun getOutOfBounds() {
+        sequence(10)[11]
+    }
+
+    test fun get() {
+        val list = sequence(10)
+        for (i in 0..list.size() - 1) {
+            assertEquals(i, list[i])
+        }
+        for (i in (0..list.size() - 1).reversed()) {
+            assertEquals(i, list[i])
+        }
+    }
+
+    test fun set() {
+        var list = sequence(10)
+        for (i in 0..list.size() - 1) {
+            list = list.set(i, i + 10);
+        }
+
+        for (i in 0..list.size() - 1) {
+            assertEquals(i + 10, list[i])
+        }
+    }
+
+    test fun take() {
+        assertSequence(sequence(10).take(5), 0, 5)
+    }
+
+    test fun takeNone() {
+        val list = sequence(10)
+        assertSequence(list.take(0), 0, 0)
+        assertSequence(list.take(-1), 0, 0)
+    }
+
+    test fun takeAll() {
+        assertSequence(sequence(10).take(100), 0, 10)
+    }
+
+    test fun drop() {
+        assertSequence(sequence(10).drop(5), 5, 5)
+    }
+
+    test fun dropNone() {
+        val list = sequence(10)
+        assertSequence(list.drop(0), 0, 10)
+        assertSequence(list.drop(-1), 0, 10)
+    }
+
+    test fun dropAll() {
+        assertSequence(sequence(10).drop(100), 0, 0)
+    }
+
+    test fun first() {
+        assertEquals(0, sequence(10).first())
+        assertNull(sequence(0).first())
+    }
+
+    test fun last() {
+        assertEquals(9, sequence(10).last())
+        assertNull(sequence(0).last())
+    }
+
+    fun assertSequence(list: List<Int>, from: Int, length: Int) {
+        var from_ = from
+        assertEquals(length, list.size())
+        for (integer in list) {
+            assertEquals(from_++, integer)
+        }
+    }
+
+    fun sequence(size: Int): List<Int> {
+        val builder = factory<Int>().newBuilder()
+        for (i in 0..size - 1) {
+            builder.add(i)
+        }
+        return builder.build()
     }
 }

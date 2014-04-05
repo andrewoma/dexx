@@ -27,6 +27,7 @@ import com.github.andrewoma.dexx.collection.internal.builder.AbstractBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -78,30 +79,60 @@ public abstract class ConsList<E> extends AbstractList<E> implements LinkedList<
 
     @NotNull
     @Override
+    public abstract ConsList<E> append(E elem);
+
+    @NotNull
+    @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            private ConsList<E> current = ConsList.this;
+        return new ConsListIterator<E>(this);
+    }
 
-            @Override
-            public boolean hasNext() {
-                return !(current instanceof Nil);
-            }
+    @NotNull
+    @Override
+    public abstract ConsList<E> range(int from, boolean fromInclusive, int to, boolean toInclusive);
 
-            @Override
-            public E next() {
-                if (current instanceof Nil) {
-                    throw new NoSuchElementException("Empty list");
-                }
-                Cons<E> cons = (Cons<E>) current;
-                current = cons.tail();
-                return cons.first();
-            }
+    @NotNull
+    @Override
+    public abstract ConsList<E> tail();
 
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException();
-            }
-        };
+    @NotNull
+    @Override
+    public abstract ConsList<E> take(int number);
+
+    @NotNull
+    @Override
+    public abstract ConsList<E> drop(int number);
+
+    @NotNull
+    @Override
+    public abstract ConsList<E> set(int i, E elem);
+}
+
+class ConsListIterator<E> implements Iterator<E> {
+    ConsList<E> current;
+
+    ConsListIterator(ConsList<E> current) {
+        this.current = current;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return !(current instanceof Nil);
+    }
+
+    @Override
+    public E next() {
+        if (current instanceof Nil) {
+            throw new NoSuchElementException("Empty list");
+        }
+        Cons<E> cons = (Cons<E>) current;
+        current = cons.tail();
+        return cons.first();
+    }
+
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException();
     }
 }
 
@@ -141,24 +172,24 @@ class Nil<E> extends ConsList<E> {
     @NotNull
     @Override
     public ConsList<E> drop(int number) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     @NotNull
     @Override
     public ConsList<E> take(int number) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     @NotNull
     @Override
     public ConsList<E> range(int from, boolean fromInclusive, int to, boolean toInclusive) {
-        throw new UnsupportedOperationException();
+        return this;
     }
 
     @Override
     public E get(int i) {
-        throw new IndexOutOfBoundsException();
+        throw new IndexOutOfBoundsException(String.valueOf(i));
     }
 
     @Nullable
@@ -201,31 +232,83 @@ class Cons<E> extends ConsList<E> {
     @NotNull
     @Override
     public ConsList<E> set(int i, E elem) {
-        throw new UnsupportedOperationException();
+        // Copy everything up to the index we need to set
+        java.util.List<E> before = new ArrayList<E>(i);
+        ConsListIterator<E> iterator = (ConsListIterator<E>) iterator();
+        for (int count = 0; count < i && iterator.hasNext(); count++) {
+            before.add(iterator.next());
+        }
+
+        if (before.size() != i || !iterator.hasNext()) {
+            throw new IndexOutOfBoundsException(String.valueOf(i));
+        }
+
+        iterator.next(); // Discard the current value
+        ConsList<E> result = iterator.current; // Share the unmodified tail
+
+        result = result.prepend(elem); // Set the new value
+
+        // Add all the elements before the one we set back
+        for (int index = before.size() - 1; index >= 0; index--) {
+            result = result.prepend(before.get(index));
+        }
+
+        return result;
     }
 
     @NotNull
     @Override
     public ConsList<E> append(E elem) {
-        throw new UnsupportedOperationException();
+        java.util.List<E> current = new ArrayList<E>();
+        for (E e : this) {
+            current.add(e);
+        }
+
+        ConsList<E> result = empty();
+        result = result.append(elem);
+
+        for (int i = current.size() - 1; i >= 0; i--) {
+            result = result.prepend(current.get(i));
+        }
+
+        return result;
     }
 
     @NotNull
     @Override
     public ConsList<E> drop(int number) {
-        throw new UnsupportedOperationException();
+        ConsListIterator<E> iterator = (ConsListIterator<E>) iterator();
+        for (int count = 0; count < number && iterator.hasNext(); count++) {
+            iterator.next();
+        }
+
+        return iterator.current;
     }
 
     @NotNull
     @Override
     public ConsList<E> take(int number) {
-        throw new UnsupportedOperationException();
+        java.util.List<E> top = new ArrayList<E>(Math.max(0, number));
+        ConsListIterator<E> iterator = (ConsListIterator<E>) iterator();
+        for (int count = 0; count < number && iterator.hasNext(); count++) {
+            top.add(iterator.next());
+        }
+
+        ConsList<E> result = empty();
+        for (int i = top.size() - 1; i >= 0; i--) {
+            result = result.prepend(top.get(i));
+        }
+
+        return result;
     }
 
     @NotNull
     @Override
     public ConsList<E> range(int from, boolean fromInclusive, int to, boolean toInclusive) {
-        throw new UnsupportedOperationException();
+        from = fromInclusive ? from : from + 1;
+        to = toInclusive ? to + 1 : to;
+
+        return this.drop(from).take(to - from);
     }
 
     @Override

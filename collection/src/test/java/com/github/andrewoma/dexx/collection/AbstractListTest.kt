@@ -123,6 +123,10 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         sequence(10)[11]
     }
 
+    test(expected = javaClass<IndexOutOfBoundsException>()) fun setOutOfBounds() {
+        sequence(10).set(11, 100)
+    }
+
     test fun get() {
         val list = sequence(10)
         for (i in 0..list.size() - 1) {
@@ -142,6 +146,26 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         for (i in 0..list.size() - 1) {
             assertEquals(i + 10, list[i])
         }
+    }
+
+    test(expected = javaClass<IndexOutOfBoundsException>()) fun emptyGet() {
+        build<Int>()[0]
+    }
+
+    test(expected = javaClass<IndexOutOfBoundsException>()) fun emptySet() {
+        build<Int>().set(0, 100)
+    }
+
+    test fun emptyTake() {
+        assertEquals(build<Int>(), build<Int>().take(1))
+    }
+
+    test fun emptyDrop() {
+        assertEquals(build<Int>(), build<Int>().drop(1))
+    }
+
+    test fun emptyRange() {
+        assertEquals(build<Int>(), build<Int>().range(0, true, 1, true))
     }
 
     test fun take() {

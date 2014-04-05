@@ -134,6 +134,11 @@ abstract class AbstractTraversableTest() {
         assertFalse(build(1, 2, 3).hashCode() == build(2, 3, 4).hashCode())
     }
 
+    test fun emptyCollection() {
+        assertTrue(build<Int>().isEmpty())
+        assertFalse(build(1).isEmpty())
+    }
+
     test fun equals() {
         assertEquals(build(1, 2, 3), build(1, 2, 3))
         assertFalse(build(1, 2, 3).equals(build(2, 3, 4)))

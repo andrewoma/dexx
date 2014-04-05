@@ -239,7 +239,7 @@ class Cons<E> extends ConsList<E> {
             before.add(iterator.next());
         }
 
-        if (before.size() != i || !iterator.hasNext()) {
+        if (!iterator.hasNext()) {
             throw new IndexOutOfBoundsException(String.valueOf(i));
         }
 

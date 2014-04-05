@@ -51,8 +51,6 @@ public abstract class ConsList<E> extends AbstractList<E> implements LinkedList<
             @NotNull
             @Override
             public Builder<E, ConsList<E>> newBuilder() {
-                // TODO ... sort out the contract for builders.
-                // Should they be build once? Thread safe?
                 return new AbstractBuilder<E, ConsList<E>>() {
                     private Vector<E> buffer = Vector.empty();
 
@@ -65,7 +63,7 @@ public abstract class ConsList<E> extends AbstractList<E> implements LinkedList<
 
                     @NotNull
                     @Override
-                    public ConsList<E> build() {
+                    public ConsList<E> doBuild() {
                         ConsList<E> result = ConsList.empty();
                         for (int i = buffer.size() - 1; i >= 0; i--) {
                             result = result.prepend(buffer.get(i));

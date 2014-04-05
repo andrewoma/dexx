@@ -36,7 +36,7 @@ public abstract class AbstractSelfBuilder<E, R> extends AbstractBuilder<E, R> {
 
     @NotNull
     @Override
-    public R build() {
+    public R doBuild() {
         return result;
     }
 }

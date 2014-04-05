@@ -27,12 +27,14 @@ import com.github.andrewoma.dexx.collection.Function;
 import com.github.andrewoma.dexx.collection.Traversable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
+import java.util.Iterator;
 
 /**
  *
  */
 public abstract class AbstractBuilder<E, R> implements Builder<E, R> {
+    private boolean built = false;
+
     @NotNull
     @Override
     public Builder<E, R> addAll(@NotNull Traversable<E> elements) {
@@ -48,9 +50,18 @@ public abstract class AbstractBuilder<E, R> implements Builder<E, R> {
 
     @NotNull
     @Override
-    public Builder<E, R> addAll(@NotNull Collection<E> elements) {
+    public Builder<E, R> addAll(@NotNull Iterable<E> elements) {
         for (E element : elements) {
             add(element);
+        }
+        return this;
+    }
+
+    @NotNull
+    @Override
+    public Builder<E, R> addAll(@NotNull Iterator<E> iterator) {
+        while (iterator.hasNext()) {
+            add(iterator.next());
         }
         return this;
     }
@@ -65,4 +76,15 @@ public abstract class AbstractBuilder<E, R> implements Builder<E, R> {
         }
         return this;
     }
+
+    @NotNull
+    @Override
+    final public R build() {
+        if (built) throw new IllegalStateException("Builders do not support multiple calls to build()");
+        built = true;
+        return doBuild();
+    }
+
+    @NotNull
+    public abstract R doBuild();
 }

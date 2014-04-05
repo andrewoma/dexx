@@ -24,10 +24,13 @@ package com.github.andrewoma.dexx.collection;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * {@code Builders} provide efficient implementations for incrementally building persistent collections.
+ *
+ * <p>It should be assumed that Builders are <b>NOT</b> thread safe. Furthermore, it is invalid to call
+ * {@link #build()} more than once.
  */
 public interface Builder<E, R> {
     @NotNull
@@ -37,7 +40,10 @@ public interface Builder<E, R> {
     Builder<E, R> addAll(@NotNull Traversable<E> elements);
 
     @NotNull
-    Builder<E, R> addAll(@NotNull Collection<E> elements);
+    Builder<E, R> addAll(@NotNull java.lang.Iterable<E> elements);
+
+    @NotNull
+    Builder<E, R> addAll(@NotNull Iterator<E> iterator);
 
     @NotNull
     Builder<E, R> addAll(E e1, E e2, E... es);

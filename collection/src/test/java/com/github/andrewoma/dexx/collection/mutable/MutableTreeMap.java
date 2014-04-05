@@ -140,7 +140,7 @@ public class MutableTreeMap<K, V> extends AbstractSortedMap<K, V> {
 
         @NotNull
         @Override
-        public SortedMap<K, V> build() {
+        public SortedMap<K, V> doBuild() {
             return new MutableTreeMap<K, V>(map);
         }
     }

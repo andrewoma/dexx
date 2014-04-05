@@ -61,7 +61,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
             return this
         }
 
-        override fun build(): Iterable<T> {
+        override fun doBuild(): Iterable<T> {
             val iterable = WrappedMapIterable(builder.build())
             return iterable
         }

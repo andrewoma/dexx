@@ -140,7 +140,7 @@ public class MutableTreeSet<A> extends AbstractSortedSet<A> {
 
         @NotNull
         @Override
-        public SortedSet<A> build() {
+        public SortedSet<A> doBuild() {
             return new MutableTreeSet<A>(result);
         }
     }

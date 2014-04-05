@@ -135,7 +135,7 @@ public class MutableArrayList<E> extends AbstractIndexedList<E> {
 
         @NotNull
         @Override
-        public IndexedList<A> build() {
+        public IndexedList<A> doBuild() {
             return new MutableArrayList<A>(result);
         }
     }

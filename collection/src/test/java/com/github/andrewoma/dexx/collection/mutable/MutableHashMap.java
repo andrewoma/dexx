@@ -103,7 +103,7 @@ public class MutableHashMap<K, V> extends AbstractMap<K, V> {
 
         @NotNull
         @Override
-        public Map<K, V> build() {
+        public Map<K, V> doBuild() {
             return new MutableHashMap<K, V>(map);
         }
     }

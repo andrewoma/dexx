@@ -45,8 +45,20 @@ abstract class AbstractTraversableTest() {
     private fun build<T>(vararg ts: T) = build_(*ts)
 
     test fun builder() {
-        val actual = factory<Int>().newBuilder().add(1).addAll(2, 3, 4).addAll(build(5, 6, 7)).build()
-        assertEquals(build(1, 2, 3, 4, 5, 6, 7), actual)
+        val actual = factory<Int>().newBuilder()
+                .add(1)
+                .addAll(2, 3, 4)
+                .addAll(build(5, 6, 7))
+                .addAll(arrayListOf(8, 9))
+                .addAll(arrayListOf(10, 11).iterator())
+                .build()
+        assertEquals(build(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), actual)
+    }
+
+    test(expected = javaClass<IllegalStateException>()) fun buildingTwiceInvalid() {
+        val builder = factory<Int>().newBuilder().add(1)
+        builder.build()
+        builder.build()
     }
 
     test fun forEach() {

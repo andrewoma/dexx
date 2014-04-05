@@ -95,7 +95,7 @@ public class MutableHashSet<A> extends AbstractSet<A> {
 
         @NotNull
         @Override
-        public Set<A> build() {
+        public Set<A> doBuild() {
             return new MutableHashSet<A>(result);
         }
     }

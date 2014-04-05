@@ -1096,7 +1096,7 @@ class VectorBuilder<E> extends AbstractBuilder<E, Vector<E>> {
 
     @NotNull
     @Override
-    public Vector<E> build() {
+    public Vector<E> doBuild() {
         int size = blockIndex + lo;
         if (size == 0)
             return Vector.empty();

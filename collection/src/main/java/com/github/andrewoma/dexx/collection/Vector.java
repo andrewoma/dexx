@@ -106,12 +106,9 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
 // In principle, escape analysis could even remove the iterator/builder allocations and do it
 // with local variables exclusively. But we're not quite there yet ...
 
-// SeqLike api
-
     @Override
     public E get(int index) {
         int idx = checkRangeConvert(index);
-        //println("get elem: "+index + "/"+idx + "(focus:" +focus+" xor:"+(idx^focus)+" depth:"+depth+")")
         return pointer.getElem(idx, idx ^ focus);
     }
 
@@ -123,7 +120,6 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
             throw new IndexOutOfBoundsException(String.valueOf(index));
     }
 
-    // SeqLike api
     @NotNull
     @Override
     public Vector<E> take(int n) {
@@ -238,10 +234,8 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
                 int shift = freeSpace & ~((1 << 5 * (pointer.depth - 1)) - 1); // number of elements by which we'll shift right (only move at top level)
                 int shiftBlocks = freeSpace >>> 5 * (pointer.depth - 1); // number of top-level blocks
 
-                //println("----- prepend " + value + " at " + (startIndex - 1) + " reached block start")
                 if (shift != 0) {
                     // case A: we can shift right on the top level
-                    //println("shifting right by " + shiftBlocks + " at level " + (depth-1) + " (had "+freeSpace+" free space)")
 
                     if (pointer.depth > 1) {
                         int newBlockIndex = blockIndex + shift;
@@ -252,14 +246,10 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
                         s.shiftTopLevel(0, shiftBlocks); // shift right by n blocks
                         s.gotoFreshPosWritable(newFocus, newBlockIndex, newFocus ^ newBlockIndex); // maybe create pos; prepare for writing
                         s.pointer.display0[lo] = value;
-                        //assert(depth == s.depth)
                         return s;
                     } else {
                         int newBlockIndex = blockIndex + 32;
                         int newFocus = focus;
-
-                        //assert(newBlockIndex == 0)
-                        //assert(newFocus == 0)
 
                         Vector<E> s = new Vector<E>(startIndex - 1 + shift, endIndex + shift, newBlockIndex);
                         s.pointer.initFrom(pointer);
@@ -272,18 +262,15 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
                 } else if (blockIndex < 0) {
                     // case B: we need to move the whole structure
                     int move = (1 << 5 * (pointer.depth + 1)) - (1 << 5 * (pointer.depth));
-                    //println("moving right by " + move + " at level " + (depth-1) + " (had "+freeSpace+" free space)")
 
                     int newBlockIndex = blockIndex + move;
                     int newFocus = focus + move;
-
 
                     Vector<E> s = new Vector<E>(startIndex - 1 + move, endIndex + move, newBlockIndex);
                     s.pointer.initFrom(pointer);
                     s.dirty = dirty;
                     s.gotoFreshPosWritable(newFocus, newBlockIndex, newFocus ^ newBlockIndex); // could optimize: we know it will create a whole branch
                     s.pointer.display0[lo] = value;
-                    //assert(s.depth == depth+1)
                     return s;
                 } else {
                     int newFocus = focus;
@@ -293,7 +280,6 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
                     s.dirty = dirty;
                     s.gotoFreshPosWritable(newFocus, blockIndex, newFocus ^ blockIndex);
                     s.pointer.display0[lo] = value;
-                    //assert(s.depth == depth)
                     return s;
                 }
 
@@ -312,14 +298,11 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
     @NotNull
     @Override
     public Vector<E> append(E value) {
-//    //println("------- append " + value)
-//    debug()()
         if (endIndex != startIndex) {
             int blockIndex = endIndex & ~31;
             int lo = endIndex & 31;
 
             if (endIndex != blockIndex) {
-                //println("will make writable block (from "+focus+") at: " + blockIndex)
                 Vector<E> s = new Vector<E>(startIndex, endIndex + 1, blockIndex);
                 s.pointer.initFrom(pointer);
                 s.dirty = dirty;
@@ -330,10 +313,7 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
                 int shift = startIndex & ~((1 << 5 * (pointer.depth - 1)) - 1);
                 int shiftBlocks = startIndex >>> 5 * (pointer.depth - 1);
 
-                //println("----- appendBack " + value + " at " + endIndex + " reached block end")
-
                 if (shift != 0) {
-                    //println("shifting left by " + shiftBlocks + " at level " + (depth-1) + " (had "+startIndex+" free space)")
                     if (pointer.depth > 1) {
                         int newBlockIndex = blockIndex - shift;
                         int newFocus = focus - shift;
@@ -343,14 +323,10 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
                         s.shiftTopLevel(shiftBlocks, 0); // shift left by n blocks
                         s.gotoFreshPosWritable(newFocus, newBlockIndex, newFocus ^ newBlockIndex);
                         s.pointer.display0[lo] = value;
-                        //assert(depth == s.depth)
                         return s;
                     } else {
                         int newBlockIndex = blockIndex - 32;
                         int newFocus = focus;
-
-                        //assert(newBlockIndex == 0)
-                        //assert(newFocus == 0)
 
                         Vector<E> s = new Vector<E>(startIndex - shift, endIndex + 1 - shift, newBlockIndex);
                         s.pointer.initFrom(pointer);
@@ -381,9 +357,6 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
             return s;
         }
     }
-
-
-// low-level implementation (needs cleanup, maybe move to lang class)
 
     private void shiftTopLevel(int oldLeft, int newLeft) {
         switch (pointer.depth - 1) {
@@ -425,8 +398,6 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
     }
 
     private Object[] copyLeft(Object[] array, int right) {
-//    if (array eq null)
-//      println("OUCH!!! " + right + "/" + depth + "/"+startIndex + "/" + endIndex + "/" + focus)
         Object[] a2 = new Object[array.length];
         System.arraycopy(array, 0, a2, 0, right);
         return a2;
@@ -503,7 +474,6 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
 
     // requires structure is writable and at index cutIndex
     private void cleanRightEdge(int cutIndex) {
-
         // we're actually sitting one block left if cutIndex lies on a block boundary
         // this means that we'll end up erasing the whole block!!
 
@@ -839,18 +809,14 @@ class VectorPointer<E> {
         }
     }
 
-
     // STUFF BELOW USED BY APPEND / UPDATE
-
     public Object[] copyOf(Object[] a) {
-        //println("copy")
         Object[] b = new Object[a.length];
         System.arraycopy(a, 0, b, 0, a.length);
         return b;
     }
 
     public Object[] nullSlotAndCopy(Object[] array, int index) {
-        //println("copy and null")
         Object x = array[index];
         array[index] = null;
         return copyOf((Object[]) x);
@@ -908,7 +874,6 @@ class VectorPointer<E> {
 
 
     /// USED IN UPDATE AND APPEND BACK
-
     // prepare for writing at an existing position
 
     // requires structure is clean and at pos oldIndex = xor ^ newIndex,
@@ -1010,25 +975,20 @@ class VectorPointer<E> {
         }
     }
 
-
     // USED IN DROP
-
     public Object[] copyRange(Object[] array, int oldLeft, int newLeft) {
         Object[] elems = new Object[32];
         System.arraycopy(array, oldLeft, elems, newLeft, 32 - Math.max(newLeft, oldLeft));
         return elems;
     }
 
-
     // USED IN APPEND
     // create a new block at the bottom level (and possibly nodes on its path) and prepares for writing
-
     // requires structure is clean and at pos oldIndex,
-// ensures structure is dirty and at pos newIndex and writable at level 0
+    // ensures structure is dirty and at pos newIndex and writable at level 0
     public void gotoFreshPosWritable0(int oldIndex, int newIndex, int xor) { // goto block start pos
         //noinspection StatementWithEmptyBody
         if (xor < (1 << 5)) { // level = 0
-            //println("XXX clean with low xor")
         } else if (xor < (1 << 10)) { // level = 1
             if (depth == 1) {
                 display1 = new Object[32];

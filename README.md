@@ -161,3 +161,5 @@ for the majority of use cases. While slower, _slow_ is generally referring to mi
 * By default, a quick version of tests are run. Getting better test coverage of `Vectors` requires large
   collections. To run tests with complete coverage use: `mvn -Ddexx.test.mode=COMPLETE -P cobertura clean cobertura:cobertura`
 * To run the benchmarks, use `mvn -Ddexx.test.mode=BENCHMARK test` (results are lines starting with BENCHMARK).
+
+Build status: [![Build Status](https://travis-ci.org/andrewoma/dexx.svg?branch=master)](https://travis-ci.org/andrewoma/dexx)

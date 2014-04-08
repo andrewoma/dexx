@@ -81,6 +81,22 @@ class SortedMapsTest {
         assertEquals(build(1 to "a", 2 to "b"), SortedMaps.copyOfTraversable(Vector.empty<Pair<Int, String>>().append(Pair(1, "a")).append(Pair(2, "b"))))
     }
 
+    test fun copyOfCollectionWithComparator() {
+        assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b"))))
+    }
+
+    test fun copyOfIteratorWithComparator() {
+        assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).iterator()))
+    }
+
+    test fun copyOfArrayWithComparator() {
+        assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).copyToArray()))
+    }
+
+    test fun copyOfTraversableWithComparator() {
+        assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.copyOfTraversable(Vector.empty<Pair<Int, String>>().append(Pair(1, "a")).append(Pair(2, "b"))))
+    }
+
     test fun factory() {
         assertEquals(build(1 to "a", 2 to "b"), SortedMaps.factory<Int, String>().newBuilder().addAll(Pair(1, "a"), Pair(2, "b")).build())
     }

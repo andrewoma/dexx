@@ -137,7 +137,27 @@ public class SortedMaps {
 
     @NotNull
     public static <K extends Comparable<? super K>, V> SortedMap<K, V> copyOf(java.lang.Iterable<Pair<K, V>> iterable) {
-        SortedMap<K, V> result = new TreeMap<K, V>();
+        return copyOf(null, iterable);
+    }
+
+    @NotNull
+    public static <K extends Comparable<? super K>, V> SortedMap<K, V> copyOf(Iterator<Pair<K, V>> iterator) {
+        return copyOf(null, iterator);
+    }
+
+    @NotNull
+    public static <K extends Comparable<? super K>, V> SortedMap<K, V> copyOf(Pair<K, V>[] pairs) {
+        return copyOf(null, pairs);
+    }
+
+    @NotNull
+    public static <K extends Comparable<? super K>, V> SortedMap<K, V> copyOfTraversable(Traversable<Pair<K, V>> traversable) {
+        return copyOfTraversable(null, traversable);
+    }
+
+    @NotNull
+    public static <K, V> SortedMap<K, V> copyOf(Comparator<? super K> comparator, java.lang.Iterable<Pair<K, V>> iterable) {
+        SortedMap<K, V> result = new TreeMap<K, V>(comparator, null);
         for (Pair<K, V> pair : iterable) {
             result = result.put(pair.component1(), pair.component2());
         }
@@ -146,8 +166,8 @@ public class SortedMaps {
     }
 
     @NotNull
-    public static <K extends Comparable<? super K>, V> SortedMap<K, V> copyOf(Iterator<Pair<K, V>> iterator) {
-        SortedMap<K, V> result = new TreeMap<K, V>();
+    public static <K, V> SortedMap<K, V> copyOf(Comparator<? super K> comparator, Iterator<Pair<K, V>> iterator) {
+        SortedMap<K, V> result = new TreeMap<K, V>(comparator, null);
         while (iterator.hasNext()) {
             Pair<K, V> pair = iterator.next();
             result = result.put(pair.component1(), pair.component2());
@@ -157,8 +177,8 @@ public class SortedMaps {
     }
 
     @NotNull
-    public static <K extends Comparable<? super K>, V> SortedMap<K, V> copyOf(Pair<K, V>[] pairs) {
-        SortedMap<K, V> result = new TreeMap<K, V>();
+    public static <K, V> SortedMap<K, V> copyOf(Comparator<? super K> comparator, Pair<K, V>[] pairs) {
+        SortedMap<K, V> result = new TreeMap<K, V>(comparator, null);
         for (Pair<K, V> pair : pairs) {
             result = result.put(pair.component1(), pair.component2());
         }
@@ -166,10 +186,10 @@ public class SortedMaps {
     }
 
     @NotNull
-    public static <K extends Comparable<? super K>, V> SortedMap<K, V> copyOfTraversable(Traversable<Pair<K, V>> traversable) {
+    public static <K, V> SortedMap<K, V> copyOfTraversable(Comparator<? super K> comparator, Traversable<Pair<K, V>> traversable) {
         @SuppressWarnings("unchecked")
         final SortedMap<K, V>[] result = new TreeMap[1];
-        result[0] = new TreeMap<K, V>();
+        result[0] = new TreeMap<K, V>(comparator, null);
         traversable.forEach(new Function<Pair<K, V>, Object>() {
             @Override
             public Object invoke(Pair<K, V> pair) {

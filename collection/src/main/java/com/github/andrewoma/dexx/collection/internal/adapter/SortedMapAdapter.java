@@ -40,6 +40,7 @@ public class SortedMapAdapter<K, V> extends MapAdapter<K, V> implements java.uti
         this.map = map;
     }
 
+    @SuppressWarnings("NullableProblems") // JetBrains annotation doesn't match the spec
     @Override
     public Comparator<? super K> comparator() {
         return map.comparator();
@@ -63,19 +64,17 @@ public class SortedMapAdapter<K, V> extends MapAdapter<K, V> implements java.uti
         return new SortedMapAdapter<K, V>(map.from(fromKey, true));
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public K firstKey() {
-        if (map.isEmpty()) throw new NoSuchElementException("Empty map");
         Pair<K, V> first = map.first();
+        if (first == null) throw new NoSuchElementException("Empty map");
         return first.component1();
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public K lastKey() {
-        if (map.isEmpty()) throw new NoSuchElementException("Empty map");
         Pair<K, V> last = map.last();
+        if (last == null) throw new NoSuchElementException("Empty map");
         return last.component1();
     }
 }

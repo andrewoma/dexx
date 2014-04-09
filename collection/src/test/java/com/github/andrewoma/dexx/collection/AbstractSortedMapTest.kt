@@ -169,6 +169,10 @@ abstract class AbstractSortedMapTest() : AbstractMapTest() {
         assertSequence(sequence(10).drop(100), 0, 0)
     }
 
+    test fun asSortedMap() {
+        assertEquals(sortedMapOf(1 to "A", 2 to "B"), buildMap(2 to "B", 1 to "A").asSortedMap())
+    }
+
     fun sequence(size: Int): SortedMap<Int, Int> {
         val builder = mapFactory<Int, Int>().newBuilder()
         for (i in 0..size - 1) {

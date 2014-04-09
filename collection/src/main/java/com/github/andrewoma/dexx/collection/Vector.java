@@ -49,7 +49,7 @@ import java.util.NoSuchElementException;
  * <p>See Scala's <a href="http://www.scala-lang.org/docu/files/collections-api/collections_15.html">documentation</a>
  * for more information on the implementation.
  */
-public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
+public class Vector<E> extends AbstractIndexedList<E> {
     private static final Vector EMPTY = new Vector(0, 0, 0);
     protected final VectorPointer<E> pointer = new VectorPointer<E>();
 
@@ -378,6 +378,7 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
             case 5:
                 pointer.display5 = pointer.copyRange(pointer.display5, oldLeft, newLeft);
                 break;
+            default:
         }
     }
 
@@ -425,16 +426,20 @@ public class Vector<E> extends AbstractIndexedList<E> implements Iterable<E> {
                 pointer.display3 = null;
                 pointer.display4 = null;
                 pointer.display5 = null;
+                break;
             case 2:
                 pointer.display3 = null;
                 pointer.display4 = null;
                 pointer.display5 = null;
+                break;
             case 3:
                 pointer.display4 = null;
                 pointer.display5 = null;
+                break;
             case 4:
                 pointer.display5 = null;
-            case 5:
+                break;
+            default:
         }
     }
 
@@ -657,6 +662,7 @@ class VectorPointer<E> {
                 display1 = that.display1;
                 display0 = that.display0;
                 break;
+            default:
         }
     }
 
@@ -912,6 +918,8 @@ class VectorPointer<E> {
                 break;
             case 0:
                 display0 = copyOf(display0);
+                break;
+            default:
         }
     }
 

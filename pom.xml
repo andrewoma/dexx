@@ -146,8 +146,14 @@
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.6</version>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <effort>Max</effort>
+                    <threshold>Low</threshold>
+                    <!-- Ignore we have Iterable extending Iterable for now -->
+                    <omitVisitors>Naming</omitVisitors>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>
@@ -182,6 +188,15 @@
         </profile>
         <profile>
             <id>cobertura</id>
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>cobertura-maven-plugin</artifactId>
+                        <version>2.6</version>
+                    </plugin>
+                </plugins>
+            </reporting>
             <dependencies>
                 <dependency>
                     <groupId>net.sourceforge.cobertura</groupId>

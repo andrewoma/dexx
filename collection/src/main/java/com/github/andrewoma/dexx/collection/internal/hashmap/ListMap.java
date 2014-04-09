@@ -125,6 +125,7 @@ public class ListMap<K, V> extends AbstractMap<K, V> {
     }
 
     // Note: this is an inner class that builds a list by using the pointer to the outer class
+    @SuppressWarnings("TypeParameterHidesVisibleType")
     class Node<K, V> extends ListMap<K, V> {
         private final K key;
         private final V value;

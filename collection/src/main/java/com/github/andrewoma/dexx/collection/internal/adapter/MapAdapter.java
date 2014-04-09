@@ -37,7 +37,7 @@ import java.util.Set;
 /**
  *
  */
-public class MapAdapter<K, V> extends java.util.AbstractMap<K, V> implements java.util.Map<K, V> {
+public class MapAdapter<K, V> extends java.util.AbstractMap<K, V> {
     private final Map<K, V> map;
 
     public MapAdapter(Map<K, V> map) {
@@ -300,7 +300,7 @@ public class MapAdapter<K, V> extends java.util.AbstractMap<K, V> implements jav
                             }
 
                             @Override
-                            public V setValue(V value) {
+                            public V setValue(@NotNull V value) {
                                 throw new UnsupportedOperationException();
                             }
 

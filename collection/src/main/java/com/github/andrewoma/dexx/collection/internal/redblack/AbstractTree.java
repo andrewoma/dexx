@@ -24,9 +24,7 @@ package com.github.andrewoma.dexx.collection.internal.redblack;
 
 import com.github.andrewoma.dexx.collection.KeyFunction;
 
-import java.io.Serializable;
-
-public abstract class AbstractTree<K, V> implements Serializable, Tree<K, V> {
+public abstract class AbstractTree<K, V> implements Tree<K, V> {
     private final Tree<K, V> left;
     private final Tree<K, V> right;
     private final V value;
@@ -55,5 +53,3 @@ public abstract class AbstractTree<K, V> implements Serializable, Tree<K, V> {
         return right;
     }
 }
-
-

@@ -23,6 +23,7 @@
 package com.github.andrewoma.dexx.collection.internal.base;
 
 
+import com.github.andrewoma.dexx.collection.Pair;
 import com.github.andrewoma.dexx.collection.SortedMap;
 import com.github.andrewoma.dexx.collection.internal.adapter.SortedMapAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -31,17 +32,17 @@ public abstract class AbstractSortedMap<K, V> extends AbstractMap<K, V> implemen
     @NotNull
     @Override
     public SortedMap<K, V> from(@NotNull K key, boolean inclusive) {
-        if (isEmpty()) return this;
-        //noinspection ConstantConditions
-        return range(key, inclusive, last().component1(), true);
+        Pair<K, V> last = last();
+        if (last == null) return this;
+        return range(key, inclusive, last.component1(), true);
     }
 
     @NotNull
     @Override
     public SortedMap<K, V> to(@NotNull K key, boolean inclusive) {
-        if (isEmpty()) return this;
-        //noinspection ConstantConditions
-        return range(first().component1(), true, key, inclusive);
+        Pair<K, V> first = first();
+        if (first == null) return this;
+        return range(first.component1(), true, key, inclusive);
     }
 
     @NotNull

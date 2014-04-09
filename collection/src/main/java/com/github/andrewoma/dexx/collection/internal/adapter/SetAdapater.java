@@ -31,7 +31,7 @@ import java.util.Iterator;
 /**
  *
  */
-public class SetAdapater<E> extends java.util.AbstractSet<E> implements java.util.Set<E> {
+public class SetAdapater<E> extends java.util.AbstractSet<E> {
     private Set<E> set;
 
     public SetAdapater(Set<E> set) {

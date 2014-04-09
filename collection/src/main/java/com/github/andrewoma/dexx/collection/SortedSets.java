@@ -284,6 +284,7 @@ public class SortedSets {
 
     @NotNull
     public static <E> Builder<E, SortedSet<E>> builder(Comparator<? super E> comparator) {
+        //noinspection RedundantTypeArguments
         return SortedSets.<E>factory(comparator).newBuilder();
     }
 }

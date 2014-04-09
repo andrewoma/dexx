@@ -22,7 +22,7 @@
 
 package com.github.andrewoma.dexx.collection;
 
-import com.github.andrewoma.dexx.collection.internal.base.AbstractList;
+import com.github.andrewoma.dexx.collection.internal.base.AbstractLinkedList;
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,7 +42,7 @@ import java.util.NoSuchElementException;
  * <p>If there is any doubt as to the access patterns for using a {@code List}, use a {@link com.github.andrewoma.dexx.collection.Vector}
  * instead.
  */
-public abstract class ConsList<E> extends AbstractList<E> implements LinkedList<E> {
+public abstract class ConsList<E> extends AbstractLinkedList<E> {
     private static ConsList<Object> EMPTY = new Nil<Object>();
 
     @NotNull

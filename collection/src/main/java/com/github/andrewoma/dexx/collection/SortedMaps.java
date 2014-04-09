@@ -46,6 +46,7 @@ public class SortedMaps {
     @NotNull
     @SuppressWarnings("unchecked")
     public static <K extends Comparable<? super K>, V> SortedMap<K, V> of() {
+        //noinspection RedundantTypeArguments
         return SortedMaps.<K, V>construct();
     }
 
@@ -82,6 +83,7 @@ public class SortedMaps {
     @NotNull
     @SuppressWarnings("unchecked")
     public static <K, V> SortedMap<K, V> of(Comparator<? super K> comparator) {
+        //noinspection RedundantTypeArguments
         return SortedMaps.<K, V>construct(comparator);
     }
 

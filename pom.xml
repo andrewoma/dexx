@@ -9,7 +9,7 @@
 
     <groupId>com.github.andrewoma.dexx</groupId>
     <artifactId>dexx-parent</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2</version>
     <packaging>pom</packaging>
 
     <name>Dexx parent</name>
@@ -29,7 +29,7 @@
         <url>https://github.com/andrewoma/dexx</url>
         <connection>scm:git:git://github.com/andrewoma/dexx.git</connection>
         <developerConnection>scm:git:git@github.com:andrewoma/dexx.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>v0.2</tag>
   </scm>
 
     <developers>

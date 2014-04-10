@@ -34,7 +34,7 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 * All collections have been implemented
 * HashSet, TreeSet, HashMap, TreeMap and Vector are ports from Scala
 * ConsList and ArrayList have been written from scratch.
-* Helper classes for construction and adapters to `java.util` collections are complete
+* Helper classes for construction and adapters to `java.util` collections are available
 * Test coverage is fairly comprehensive: 95% line and 90% branch at present
 
 #### Dependencies
@@ -43,16 +43,17 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 * The tests are written in Kotlin, but again this is not a runtime dependency
 
 #### Roadmap
-* Release 0.2 to Maven Central
+* Explore annotating methods that return a new collection with [@CheckReturnValue](https://code.google.com/p/error-prone/wiki/CheckReturnValue)
+  to allow static verification of collection usage.
 * Active development is essentially complete. Further work is expected to be bug fixes and refinements.
 
 #### Release Notes
-* 0.1:
-  * Includes ports of Scala's `HashSet`, `TreeSet`, `HashMap`, `TreeMap` and `Vector`
-* 0.2-SNAPSHOT:
+* 0.2:
   * Add `LinkedLists` support with `ConsList` as the default implementation
   * Add `ArrayList` as an alternative `IndexedList` implementation
   * Formalise the `Builder` contract and enforce at runtime
+* 0.1:
+  * Includes ports of Scala's `HashSet`, `TreeSet`, `HashMap`, `TreeMap` and `Vector`
 
 #### License
 This project is licensed under a MIT license. Portions ported from Scala are Scala's 3-clause BSD license.
@@ -60,12 +61,12 @@ This project is licensed under a MIT license. Portions ported from Scala are Sca
 #### Usage
 
 ##### Adding to your project
-Version 0.1 has been released and is available in Maven Central. You can use it via the following dependency:
+Version 0.2 has been released and is available in Maven Central. You can use it via the following dependency:
 ```xml
 <dependency>
     <groupId>com.github.andrewoma.dexx</groupId>
     <artifactId>dexx-collections</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
 </dependency>
 ```
 

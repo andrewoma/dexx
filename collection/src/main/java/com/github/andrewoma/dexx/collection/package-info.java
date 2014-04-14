@@ -29,7 +29,7 @@
  * structure unchanged.
  *
  * <p>The following diagram shows the key interfaces (blue) and classes (green) in this package:
- * <p><img src="https://github.com/andrewoma/dexx/raw/master/docs/dexxcollections.png"/>
+ * <p><img src="https://github.com/andrewoma/dexx/raw/master/docs/dexxcollections.png">
  *
  * <p><b>Usage Notes:</b>
  * <ul>

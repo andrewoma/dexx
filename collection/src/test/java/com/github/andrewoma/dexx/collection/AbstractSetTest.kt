@@ -95,7 +95,7 @@ abstract class AbstractSetTest() : AbstractIterableTest() {
 
     test fun immutablity() {
         val set1 = build(1)
-        if (set1.getClass().getSimpleName().contains("Mutable")) return // Shouldn't be immutable
+        if (set1.javaClass.getSimpleName().contains("Mutable")) return // Shouldn't be immutable
 
         val set2 = set1.add(2)
         assertEquals(build(1), set1)

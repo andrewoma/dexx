@@ -34,7 +34,7 @@ abstract class AbstractTraversableTest() {
     protected abstract fun factory<T>() : BuilderFactory<T, out Traversable<T>>
     open val maxSize = 10000
 
-    fun isMutable(travserable: Traversable<*>) = travserable.getClass().getSimpleName().contains("Mutable")
+    fun isMutable(travserable: Traversable<*>) = travserable.javaClass.getSimpleName().contains("Mutable")
 
     protected open fun build_<T>(vararg ts : T) : Traversable<T> {
         val builder = factory<T>().newBuilder()
@@ -121,7 +121,7 @@ abstract class AbstractTraversableTest() {
     }
 
     test fun toSortedSetWithComparator() {
-        object comparator : Comparator<Int> {
+        val comparator  = object : Comparator<Int> {
             [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
             override fun compare(o1: Int, o2: Int): Int {
                 return o1.compareTo(o2) * -1
@@ -138,7 +138,7 @@ abstract class AbstractTraversableTest() {
 
     test fun testToString() {
         val traversable = build(1, 2, 3)
-        assertEquals(traversable.getClass().getSimpleName() + "(" + toList(traversable).makeString(", ") + ")", traversable.toString())
+        assertEquals(traversable.javaClass.getSimpleName() + "(" + toList(traversable).makeString(", ") + ")", traversable.toString())
     }
 
     test fun hashCodes() {

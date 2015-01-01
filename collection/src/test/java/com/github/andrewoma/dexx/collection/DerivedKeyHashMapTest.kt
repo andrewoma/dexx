@@ -36,7 +36,7 @@ import java.util.Comparator
 class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
     fun <K, V> empty() = DerivedKeyHashMap.factory<K, Pair<K, V>> { it.component1()!! }.newBuilder().build()
 
-    inner class WrappedDerivedKeyHashMap<K : Any, V : Any>(val underlying: DerivedKeyHashMap<K, Pair<K, V>> = empty()) : AbstractMap<K, V>() {
+    inner class WrappedDerivedKeyHashMap<K : Any, V : Any>(val underlying: DerivedKeyHashMap<K, Pair<K, V?>> = empty()) : AbstractMap<K, V>() {
 
         [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
         override fun put(key: K, value: V?): Map<K, V> {
@@ -53,12 +53,12 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
             return WrappedDerivedKeyHashMap(underlying.remove(key))
         }
 
-        override fun iterator(): MutableIterator<Pair<K, V>> {
+        override fun iterator(): MutableIterator<Pair<K, V?>> {
             return underlying.iterator().map { it.component2()!! } as MutableIterator
         }
 
         [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
-        override fun <U> forEach(f: Function<Pair<K, V>, U>) {
+        override fun <U> forEach(f: Function<Pair<K, V?>, U>) {
             underlying.forEach { f.invoke(it.component2()) }
         }
 

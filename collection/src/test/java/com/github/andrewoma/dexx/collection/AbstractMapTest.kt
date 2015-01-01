@@ -57,7 +57,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
     class WrappedBuilder<T : Any>(val builder: Builder<Pair<T, T>, out Map<T, T>>, val factory: BuilderFactory<T, Iterable<T>>) : AbstractBuilder<T, Iterable<T>>() {
         [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
         override fun add(p0: T?): Builder<T, Iterable<T>> {
-            builder.add(Pair(p0, p0))
+            builder.add(Pair(p0!!, p0))
             return this
         }
 

@@ -22,6 +22,7 @@
 
 package com.github.andrewoma.dexx.collection
 
+import org.junit.Test as test
 import kotlin.test.assertEquals
 
 class HashSetTest() : AbstractSetTest() {

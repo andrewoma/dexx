@@ -60,13 +60,13 @@ public open class SetAdapterTest {
     }
 
     test fun toArray() {
-        val ints = set(1, 2, 3).copyToArray()
+        val ints = set(1, 2, 3).toTypedArray()
         assertEquals(ints.sortBy { it }, listOf(1, 2, 3))
     }
 
     test fun iterator() {
         val ints = set(1, 2, 3).iterator()
-        assertEquals(ints.sortBy { it }, listOf(1, 2, 3))
+        assertEquals(ints.asSequence().toList().sortBy { it }, listOf(1, 2, 3))
     }
 
     test fun containsAll() {
@@ -78,27 +78,27 @@ public open class SetAdapterTest {
         assertFalse(set(1, 2, 3).containsAll(listOf(1, 2, 3, 4)))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun add() {
+    test(expected = UnsupportedOperationException::class) fun add() {
         set().add(1)
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun remove() {
+    test(expected = UnsupportedOperationException::class) fun remove() {
         set().remove(1)
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun addAll() {
+    test(expected = UnsupportedOperationException::class) fun addAll() {
         set().addAll(listOf(1))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun retainAll() {
+    test(expected = UnsupportedOperationException::class) fun retainAll() {
         set().retainAll(listOf(1))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun removeAll() {
+    test(expected = UnsupportedOperationException::class) fun removeAll() {
         set().removeAll(listOf(1))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun clear() {
+    test(expected = UnsupportedOperationException::class) fun clear() {
         set().clear()
     }
 }

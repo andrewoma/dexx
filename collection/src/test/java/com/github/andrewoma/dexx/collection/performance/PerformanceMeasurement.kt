@@ -30,7 +30,7 @@ import java.security.SecureRandom
 import java.util.LinkedHashSet
 import com.github.andrewoma.dexx.TestMode
 
-public trait PerformanceMeasurement {
+public interface PerformanceMeasurement {
     data public class Result(val nanoDuration: Long, val result: Long)
 
     public fun uniqueRandomInts(size: Int): IntArray {
@@ -63,7 +63,7 @@ public trait PerformanceMeasurement {
         val random = SecureRandom()
         val accesses = IntArray(size)
         for (i in 0..size - 1) {
-            val index = random.nextInt(data.size)
+            val index = random.nextInt(data.size())
             accesses[i] = (if (returnValue)
                 data[index]
             else
@@ -91,7 +91,7 @@ public trait PerformanceMeasurement {
     fun time(iterations: Int, f: () -> Result): Result {
         var last: Result? = null
         val times = arrayListOf<Long>()
-        iterations.times {
+        repeat(iterations) {
             val result = f()
             if (last != null) {
                 assertEquals(last!!.result, result.result)

@@ -115,7 +115,7 @@ abstract class AbstractSetTest() : AbstractIterableTest() {
 
     test fun collisions() {
         val keys = setOf(CollidingKey(1, 1), CollidingKey(1, 2), CollidingKey(2, 3), CollidingKey(2, 4))
-        val set = build(*keys.copyToArray())
+        val set = build(*keys.toTypedArray())
         for (i in set) assertTrue(set.contains(i))
     }
 

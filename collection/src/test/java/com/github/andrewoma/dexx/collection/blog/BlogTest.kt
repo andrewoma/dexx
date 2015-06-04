@@ -32,22 +32,22 @@ import org.junit.Test as test
 import kotlin.test.assertEquals
 
 class BlogTest {
-    fun <T, R> Stream<T>.build(builder: Builder<T, R>): R {
-        this.forEach { builder.add(it) }
+    fun <T, R> Sequence<T>.build(builder: Builder<T, R>): R {
+        for (e in this) { builder.add(e) }
         return builder.build()
     }
 
-    fun <T> Stream<T>.toPersistentSet(): com.github.andrewoma.dexx.collection.Set<T>
+    fun <T> Sequence<T>.toPersistentSet(): com.github.andrewoma.dexx.collection.Set<T>
             = build(Sets.builder<T>())
 
-    fun <T> Stream<T>.toPersistentSortedSet(): SortedSet<T>
+    fun <T> Sequence<T>.toPersistentSortedSet(): SortedSet<T>
             = build(SortedSets.builder<T>())
 
-    fun <K, V> Stream<com.github.andrewoma.dexx.collection.Pair<K, V>>.toPersistentMap(): com.github.andrewoma.dexx.collection.Map<K, V>
+    fun <K, V> Sequence<com.github.andrewoma.dexx.collection.Pair<K, V>>.toPersistentMap(): com.github.andrewoma.dexx.collection.Map<K, V>
             = build(Maps.builder<K, V>())
 
     test fun lazyEvaluation() {
-        val set = SortedSets.of(1, 2, 3, 4, 5, 6).stream()
+        val set = SortedSets.of(1, 2, 3, 4, 5, 6).asSequence()
                 .filter { it % 2 == 0 }
                 .map { "$it is even" }
                 .take(2)

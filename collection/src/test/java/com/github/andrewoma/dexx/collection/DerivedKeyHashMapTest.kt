@@ -38,31 +38,37 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
 
     inner class WrappedDerivedKeyHashMap<K : Any, V : Any>(val underlying: DerivedKeyHashMap<K, Pair<K, V?>> = empty()) : AbstractMap<K, V>() {
 
-        [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+        @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun put(key: K, value: V?): Map<K, V> {
             return WrappedDerivedKeyHashMap(underlying.put(key, Pair(key, value)))
         }
 
-        [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+        @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun get(key: K): V? {
             return underlying.get(key)?.component2()
         }
 
-        [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+        @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun remove(key: K): Map<K, V> {
             return WrappedDerivedKeyHashMap(underlying.remove(key))
         }
 
         override fun iterator(): MutableIterator<Pair<K, V?>> {
-            return underlying.iterator().map { it.component2()!! } as MutableIterator
+            val i = underlying.iterator()
+
+            return object : MutableIterator<Pair<K, V?>> {
+                override fun remove() = i.remove()
+                override fun next() = i.next().component2()
+                override fun hasNext() = i.hasNext()
+            }
         }
 
-        [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+        @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun <U> forEach(f: Function<Pair<K, V?>, U>) {
             underlying.forEach { f.invoke(it.component2()) }
         }
 
-        [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+        @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun containsKey(key: K): Boolean {
             return underlying.containsKey(key)
         }
@@ -72,7 +78,7 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
         return object : BuilderFactory<Pair<K, V>, Map<K, V>> {
             override fun newBuilder(): Builder<Pair<K, V>, Map<K, V>> {
                 return object : AbstractSelfBuilder<Pair<K, V>, Map<K, V>>(WrappedDerivedKeyHashMap<K, V>(empty())) {
-                    [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+                    @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
                     override fun add(element: Pair<K, V>?): Builder<Pair<K, V>, Map<K, V>> {
                         result = result!!.put(element!!.component1()!!, element.component2()!!)
                         return this
@@ -89,7 +95,7 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
 
         val actual = java.util.HashSet<String>()
         val f = object: Function<Pair<String, DerivedKeyHashMapTest.ClassWithKey>, Unit> {
-            [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+            @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
             override fun invoke(parameter: Pair<String, DerivedKeyHashMapTest.ClassWithKey>?) {
                 actual.add(parameter!!.component1()!!)
             }
@@ -130,7 +136,7 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
     data class ClassWithKey(val key : String, val value : String)
 
     val keyFunction = object : KeyFunction<String, ClassWithKey> {
-        [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+        @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun key(value: ClassWithKey): String {
             return value.key
         }

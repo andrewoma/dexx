@@ -28,7 +28,7 @@ import java.util.Comparator
 
 class SortedSetsTest {
     val c = object : Comparator<Int> {
-        [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+        @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun compare(o1: Int, o2: Int): Int {
             return o1.compareTo(o2) * -1
         }
@@ -81,7 +81,7 @@ class SortedSetsTest {
     }
 
     test fun copyOfArray() {
-        assertEquals(build(null, 1, 2, 3), SortedSets.copyOf(java.util.Arrays.asList(1, 2, 3).copyToArray()))
+        assertEquals(build(null, 1, 2, 3), SortedSets.copyOf(java.util.Arrays.asList(1, 2, 3).toTypedArray()))
     }
 
     test fun copyOfTraversable() {
@@ -101,7 +101,7 @@ class SortedSetsTest {
     }
 
     test fun copyOfArrayWithComparator() {
-        assertEquals(build(c, 1, 2, 3), SortedSets.copyOf(c, java.util.Arrays.asList(1, 2, 3).copyToArray()))
+        assertEquals(build(c, 1, 2, 3), SortedSets.copyOf(c, java.util.Arrays.asList(1, 2, 3).toTypedArray()))
     }
 
     test fun copyOfTraversableWithComparator() {

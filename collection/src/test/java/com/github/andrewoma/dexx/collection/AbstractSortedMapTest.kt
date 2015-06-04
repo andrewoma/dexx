@@ -97,7 +97,7 @@ abstract class AbstractSortedMapTest() : AbstractMapTest() {
 
     test fun <K,V>  sortedWithCustomComparator() {
         val c = object: Comparator<Int> {
-            [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+            @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
             override fun compare(o1: Int, o2: Int): Int {
                 return o1.compareTo(o2)  * -1
             }

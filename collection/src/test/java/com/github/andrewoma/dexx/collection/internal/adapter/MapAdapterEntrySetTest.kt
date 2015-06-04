@@ -63,7 +63,7 @@ public open class MapAdapterEntrySetTest {
         assertFalse(map(1 to 1, 2 to 2).isEmpty())
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun setValue() {
+    test(expected = UnsupportedOperationException::class) fun setValue() {
         map(1 to 1).iterator().next().setValue(2)
     }
 
@@ -78,8 +78,8 @@ public open class MapAdapterEntrySetTest {
     }
 
     test fun entriesWithNullsEqual() {
-        val e1 = Maps.of(1, null: Int?).asMap().entrySet()
-        val e2 = Maps.of(1, null: Int?).asMap().entrySet()
+        val e1 = Maps.of(1, null).asMap().entrySet()
+        val e2 = Maps.of(1, null).asMap().entrySet()
         assertEquals(e1.iterator().next(), e2.iterator().next())
         assertEquals(e2.iterator().next(), e1.iterator().next())
         assertFalse(e1.iterator().next().equals(""))
@@ -105,13 +105,13 @@ public open class MapAdapterEntrySetTest {
     }
 
     test fun toArray() {
-        val ints = map(1 to 1, 2 to 2).copyToArray()
+        val ints = map(1 to 1, 2 to 2).toTypedArray()
         assertEquals(ints.map { it.getKey() } sortBy { it }, listOf(1, 2))
     }
 
     test fun iterator() {
         val ints = mapOf(1 to 1, 2 to 2).iterator()
-        assertEquals(ints.map { it.getKey() } sortBy { it }, listOf(1, 2))
+        assertEquals(ints.asSequence().toList().map { it.getKey() } sortBy { it }, listOf(1, 2))
     }
 
     test fun containsAll() {
@@ -127,27 +127,27 @@ public open class MapAdapterEntrySetTest {
         return ImmutableMap.of(pair.first, pair.second)!!.entrySet().iterator().next()
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun add() {
+    test(expected = UnsupportedOperationException::class) fun add() {
         map().add(e(1 to 1))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun remove() {
+    test(expected = UnsupportedOperationException::class) fun remove() {
         map().remove(e(1 to 1))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun addAll() {
+    test(expected = UnsupportedOperationException::class) fun addAll() {
         map().addAll(listOf(e(1 to 1)))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun retainAll() {
+    test(expected = UnsupportedOperationException::class) fun retainAll() {
         map().retainAll(listOf(e(1 to 1)))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun removeAll() {
+    test(expected = UnsupportedOperationException::class) fun removeAll() {
         map().removeAll(listOf(e(1 to 1)))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun clear() {
+    test(expected = UnsupportedOperationException::class) fun clear() {
         map().clear()
     }
 }

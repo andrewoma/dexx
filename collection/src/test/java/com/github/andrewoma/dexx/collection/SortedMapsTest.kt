@@ -34,7 +34,7 @@ class SortedMapsTest {
     }
 
     val c = object : Comparator<Int> {
-        [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+        @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun compare(o1: Int, o2: Int): Int {
             return o1.compareTo(o2) * -1
         }
@@ -74,7 +74,7 @@ class SortedMapsTest {
     }
 
     test fun copyOfArray() {
-        assertEquals(build(1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).copyToArray()))
+        assertEquals(build(1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).toTypedArray()))
     }
 
     test fun copyOfTraversable() {
@@ -90,7 +90,7 @@ class SortedMapsTest {
     }
 
     test fun copyOfArrayWithComparator() {
-        assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).copyToArray()))
+        assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).toTypedArray()))
     }
 
     test fun copyOfTraversableWithComparator() {

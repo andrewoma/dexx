@@ -119,11 +119,11 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         assertFalse(build(1, 1).equals(build(1, 1, 1)))
     }
 
-    test(expected = javaClass<IndexOutOfBoundsException>()) fun getOutOfBounds() {
+    test(expected = IndexOutOfBoundsException::class) fun getOutOfBounds() {
         sequence(10)[11]
     }
 
-    test(expected = javaClass<IndexOutOfBoundsException>()) fun setOutOfBounds() {
+    test(expected = IndexOutOfBoundsException::class) fun setOutOfBounds() {
         sequence(10).set(11, 100)
     }
 
@@ -155,11 +155,11 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         assertEquals(listOf(3, 2, 3), list.klist())
     }
 
-    test(expected = javaClass<IndexOutOfBoundsException>()) fun emptyGet() {
+    test(expected = IndexOutOfBoundsException::class) fun emptyGet() {
         build<Int>()[0]
     }
 
-    test(expected = javaClass<IndexOutOfBoundsException>()) fun emptySet() {
+    test(expected = IndexOutOfBoundsException::class) fun emptySet() {
         build<Int>().set(0, 100)
     }
 

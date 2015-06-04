@@ -49,11 +49,11 @@ public class SortedSetAdapterTest : SetAdapterTest() {
         assertEquals(4, set(3, 1, 4, 3).last())
     }
 
-    test(expected = javaClass<NoSuchElementException>()) fun firstEmpty() {
+    test(expected = NoSuchElementException::class) fun firstEmpty() {
         set().first()
     }
 
-    test(expected = javaClass<NoSuchElementException>()) fun lastEmpty() {
+    test(expected = NoSuchElementException::class) fun lastEmpty() {
         set().last()
     }
 
@@ -112,7 +112,7 @@ public class SortedSetAdapterTest : SetAdapterTest() {
 
     test fun sortedWithCustomComparator() {
         val c = object: Comparator<Int> {
-            [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+            @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
             override fun compare(o1: Int, o2: Int): Int {
                 return o1.compareTo(o2) * -1
             }

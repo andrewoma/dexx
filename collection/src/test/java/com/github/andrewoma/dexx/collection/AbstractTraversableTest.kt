@@ -55,7 +55,7 @@ abstract class AbstractTraversableTest() {
         assertEquals(build(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), actual)
     }
 
-    test(expected = javaClass<IllegalStateException>()) fun buildingTwiceInvalid() {
+    test(expected = IllegalStateException::class) fun buildingTwiceInvalid() {
         val builder = factory<Int>().newBuilder().add(1)
         builder.build()
         builder.build()
@@ -102,12 +102,12 @@ abstract class AbstractTraversableTest() {
 
     test fun makeString() {
         val traversable = build(1, 2, 3)
-        assertEquals(toList(traversable).makeString(","), traversable.makeString(","))
+        assertEquals(toList(traversable).joinToString(","), traversable.makeString(","))
     }
 
     test fun makeStringFull() {
         val traversable = build(1, 2, 3)
-        assertEquals("prefix" + toList(traversable).makeString(",") + "postfix", traversable.makeString(",", "prefix", "postfix", -1, ""))
+        assertEquals("prefix" + toList(traversable).joinToString(",") + "postfix", traversable.makeString(",", "prefix", "postfix", -1, ""))
     }
 
     test fun makeStringTruncated() {
@@ -122,7 +122,7 @@ abstract class AbstractTraversableTest() {
 
     test fun toSortedSetWithComparator() {
         val comparator  = object : Comparator<Int> {
-            [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+            @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
             override fun compare(o1: Int, o2: Int): Int {
                 return o1.compareTo(o2) * -1
             }
@@ -138,7 +138,7 @@ abstract class AbstractTraversableTest() {
 
     test fun testToString() {
         val traversable = build(1, 2, 3)
-        assertEquals(traversable.javaClass.getSimpleName() + "(" + toList(traversable).makeString(", ") + ")", traversable.toString())
+        assertEquals(traversable.javaClass.getSimpleName() + "(" + toList(traversable).joinToString(", ") + ")", traversable.toString())
     }
 
     test fun hashCodes() {

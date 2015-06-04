@@ -55,7 +55,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
     }
 
     class WrappedBuilder<T : Any>(val builder: Builder<Pair<T, T>, out Map<T, T>>, val factory: BuilderFactory<T, Iterable<T>>) : AbstractBuilder<T, Iterable<T>>() {
-        [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+        @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun add(p0: T?): Builder<T, Iterable<T>> {
             builder.add(Pair(p0!!, p0))
             return this
@@ -111,10 +111,10 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
 
     test fun forEachWithPairs() {
         val pairs = setOf(1 to "A", 2 to "B", 3 to "C", 4 to "D")
-        val map = buildMap(*pairs.copyToArray())
+        val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<kotlin.Pair<Int, String>>()
         val f = object : Function<Pair<Int, String>, Unit> {
-            [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+            @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
             override fun invoke(parameter: Pair<Int, String>?) {
                 actual.add(kotlin.Pair(parameter!!.component1()!!, parameter.component2()!!))
             }
@@ -126,15 +126,15 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
 
     test fun iteratorWithPairs() {
         val pairs = setOf(1 to "A", 2 to "B", 3 to "C", 4 to "D")
-        val map = buildMap(*pairs.copyToArray())
+        val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<kotlin.Pair<Int, String>>()
-        map.iterator().forEach { actual.add(kotlin.Pair(it.component1()!!, it.component2()!!)) }
+        map.forEach { actual.add(kotlin.Pair(it.component1()!!, it.component2()!!)) }
         assertEquals(pairs, actual)
     }
 
     test fun keys() {
         val pairs = setOf(1 to "A", 2 to "B", 3 to "C", 4 to "D")
-        val map = buildMap(*pairs.copyToArray())
+        val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<Int>()
         map.keys().forEach { actual.add(it) }
         assertEquals(pairs.map { it.first }.toSet(), actual)
@@ -142,7 +142,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
 
     test fun values() {
         val pairs = setOf(1 to "A", 2 to "B", 3 to "C", 4 to "D")
-        val map = buildMap(*pairs.copyToArray())
+        val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<String>()
         map.values().forEach { actual.add(it) }
         assertEquals(pairs.map { it.second }.toSet(), actual)
@@ -150,7 +150,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
 
     test fun forEachWithCollisions() {
         val pairs = setOf(CollidingKey(1, 1) to "A", CollidingKey(1, 2) to "B", CollidingKey(2, 3) to "C", CollidingKey(2, 4) to "D")
-        val map = buildMap(*pairs.copyToArray())
+        val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<kotlin.Pair<CollidingKey, String>>()
         map.forEach { actual.add(kotlin.Pair(it.component1()!!, it.component2()!!)) }
         assertEquals(pairs, actual)
@@ -158,9 +158,9 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
 
     test fun iteratorWithCollisionsWithPairs() {
         val pairs = setOf(CollidingKey(1, 1) to "A", CollidingKey(1, 2) to "B", CollidingKey(2, 3) to "C", CollidingKey(2, 4) to "D")
-        val map = buildMap(*pairs.copyToArray())
+        val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<kotlin.Pair<CollidingKey, String>>()
-        map.iterator().forEach { actual.add(kotlin.Pair(it.component1()!!, it.component2()!!)) }
+        map.forEach { actual.add(kotlin.Pair(it.component1()!!, it.component2()!!)) }
         assertEquals(pairs, actual)
     }
 
@@ -294,7 +294,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         for (i in numbers) {
             map = map.put(i, i + 1)
         }
-        assertEquals(numbers.size, map.size())
+        assertEquals(numbers.size(), map.size())
 
         for (i in numbers) {
             assertEquals(i + 1, map.get(i))

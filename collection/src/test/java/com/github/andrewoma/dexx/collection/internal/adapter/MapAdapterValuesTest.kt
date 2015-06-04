@@ -60,11 +60,11 @@ public open class MapAdapterValuesTest {
     }
 
     test fun iterator() {
-        assertEquals(values(1, 2, 3).iterator().toSet(), setOf(1, 2, 3))
+        assertEquals(values(1, 2, 3).iterator().asSequence().toSet(), setOf(1, 2, 3))
     }
 
     test fun toArray() {
-        val ints = values(1, 2).copyToArray()
+        val ints = values(1, 2).toTypedArray()
         assertEquals(arrayListOf(*ints), listOf(1, 2))
     }
 
@@ -77,27 +77,27 @@ public open class MapAdapterValuesTest {
         assertFalse(values(1, 2, 3).containsAll(listOf(1, 2, 3, 4)))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun add() {
+    test(expected = UnsupportedOperationException::class) fun add() {
         values().add(1)
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun remove() {
+    test(expected = UnsupportedOperationException::class) fun remove() {
         values().remove(1)
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun addAll() {
+    test(expected = UnsupportedOperationException::class) fun addAll() {
         values().addAll(listOf(1))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun retainAll() {
+    test(expected = UnsupportedOperationException::class) fun retainAll() {
         values().retainAll(listOf(1))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun removeAll() {
+    test(expected = UnsupportedOperationException::class) fun removeAll() {
         values().removeAll(listOf(1))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun clear() {
+    test(expected = UnsupportedOperationException::class) fun clear() {
         values().clear()
     }
 }

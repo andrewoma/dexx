@@ -57,7 +57,7 @@ class LinkedListsTest {
     }
 
     test fun copyOfArray() {
-        assertEquals(build(1, 2, 3), LinkedLists.copyOf(java.util.Arrays.asList(1, 2, 3).copyToArray()))
+        assertEquals(build(1, 2, 3), LinkedLists.copyOf(java.util.Arrays.asList(1, 2, 3).toTypedArray()))
     }
 
     test fun copyOfTraversable() {

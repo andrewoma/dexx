@@ -57,11 +57,11 @@ public open class SortedMapAdapterTest : MapAdapterTest() {
         assertEquals(4, map(3 to 3, 1 to 1, 4 to 4, 3 to 3).lastKey())
     }
 
-    test(expected = javaClass<NoSuchElementException>()) fun firstKeyEmpty() {
+    test(expected = NoSuchElementException::class) fun firstKeyEmpty() {
         map().firstKey()
     }
 
-    test(expected = javaClass<NoSuchElementException>()) fun lastKeyEmpty() {
+    test(expected = NoSuchElementException::class) fun lastKeyEmpty() {
         map().lastKey()
     }
 
@@ -120,7 +120,7 @@ public open class SortedMapAdapterTest : MapAdapterTest() {
 
     test fun <K, V>  sortedWithCustomComparator() {
         val c = object: Comparator<Int> {
-            [suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")]
+            @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
             override fun compare(o1: Int, o2: Int): Int {
                 return o1.compareTo(o2) * -1
             }

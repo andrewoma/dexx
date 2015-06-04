@@ -38,7 +38,7 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
         assertFalse(build<Int>().iterator().hasNext())
     }
 
-    test(expected = javaClass<NoSuchElementException>()) fun iterateEmptyNext() {
+    test(expected = NoSuchElementException::class) fun iterateEmptyNext() {
         build<Int>().iterator().next()
     }
 
@@ -49,7 +49,7 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
         assertFalse(i.hasNext())
     }
 
-    test(expected = javaClass<NoSuchElementException>()) fun iterateSingleNext() {
+    test(expected = NoSuchElementException::class) fun iterateSingleNext() {
         var i = build(1).iterator()
         assertTrue(i.hasNext())
         assertEquals(1, i.next())
@@ -57,7 +57,7 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
         i.next()
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun iteratorRemove() {
+    test(expected = UnsupportedOperationException::class) fun iteratorRemove() {
         val iterable = build(1)
         if (isMutable(iterable)) throw UnsupportedOperationException()
         val i = iterable.iterator()
@@ -65,7 +65,7 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
         i.remove()
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun iteratorRemove2() {
+    test(expected = UnsupportedOperationException::class) fun iteratorRemove2() {
         val iterable = build(1, 2)
         if (isMutable(iterable)) throw UnsupportedOperationException()
         val i = iterable.iterator()
@@ -75,12 +75,12 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
     }
 
     test fun iterator() {
-        assertEquals(setOf(1, 2, 3, 4), build(1, 2, 3, 4).iterator().toSet())
+        assertEquals(setOf(1, 2, 3, 4), build(1, 2, 3, 4).iterator().asSequence().toSet())
     }
 
     test fun iteratorWithCollisions() {
         val keys = setOf(CollidingKey(1, 1), CollidingKey(1, 2), CollidingKey(2, 3), CollidingKey(2, 4))
-        assertEquals(keys, build(*keys.copyToArray()).iterator().toSet())
+        assertEquals(keys, build(*keys.toTypedArray()).iterator().asSequence().toSet())
     }
 
     test fun iterableLarge() {
@@ -91,7 +91,7 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
             expected.add(i)
         }
         val actual = hashSetOf<Int>()
-        builder.build().iterator().forEach { actual.add(it) }
+        builder.build().forEach { actual.add(it) }
         assertEquals(expected, actual)
     }
 }

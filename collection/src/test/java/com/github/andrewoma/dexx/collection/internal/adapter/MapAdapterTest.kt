@@ -85,19 +85,19 @@ public open class MapAdapterTest {
         assertFalse(map.containsValue("foo"))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun put() {
+    test(expected = UnsupportedOperationException::class) fun put() {
         map().put(1, 1)
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun remove() {
+    test(expected = UnsupportedOperationException::class) fun remove() {
         map().remove(1)
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun putAll() {
+    test(expected = UnsupportedOperationException::class) fun putAll() {
         map().putAll(map(1 to 1))
     }
 
-    test(expected = javaClass<UnsupportedOperationException>()) fun clear() {
+    test(expected = UnsupportedOperationException::class) fun clear() {
         map().clear()
     }
 }

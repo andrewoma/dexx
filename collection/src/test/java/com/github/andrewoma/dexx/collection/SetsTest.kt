@@ -53,7 +53,7 @@ class SetsTest {
     }
 
     test fun copyOfArray() {
-        assertEquals(build(1, 2, 3), Sets.copyOf(java.util.Arrays.asList(1, 2, 3).copyToArray()))
+        assertEquals(build(1, 2, 3), Sets.copyOf(java.util.Arrays.asList(1, 2, 3).toTypedArray()))
     }
 
     test fun copyOfTraversable() {

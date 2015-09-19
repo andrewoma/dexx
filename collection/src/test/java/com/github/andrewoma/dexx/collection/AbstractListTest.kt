@@ -22,9 +22,9 @@
 
 package com.github.andrewoma.dexx.collection
 
+import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
-import org.junit.Test as test
 import kotlin.test.assertNull
 
 abstract class AbstractListTest() : AbstractIterableTest() {
@@ -40,40 +40,40 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         return klist
     }
 
-    test fun insertOrderPreserved() {
+    @Test fun insertOrderPreserved() {
         assertEquals(listOf(1, 3, 2), build(1, 3, 2).klist())
     }
 
-    test fun duplicatesPreserved() {
+    @Test fun duplicatesPreserved() {
         assertEquals(listOf(1, 2, 2, 1), build(1, 2, 2, 1).klist())
     }
 
-    test fun indexOf() {
+    @Test fun indexOf() {
         val list = build(1, 2, 2, 1)
         assertEquals(1, list.indexOf(2))
         assertEquals(-1, list.indexOf(3))
     }
 
-    test fun tail() {
+    @Test fun tail() {
         assertEquals(build(2, 3), build(1, 2, 3).tail());
         assertEquals(build(2), build(1, 2).tail());
         assertEquals(build<Int>(), build(1).tail());
         assertEquals(build<Int>(), build<Int>().tail());
     }
 
-    test fun prepend() {
+    @Test fun prepend() {
         assertEquals(build(1), build<Int>().prepend(1));
         assertEquals(build(2, 1), build(1).prepend(2));
         assertEquals(build(3, 2, 1), build(2, 1).prepend(3));
     }
 
-    test fun append() {
+    @Test fun append() {
         assertEquals(build(1), build<Int>().append(1));
         assertEquals(build(1, 2), build(1).append(2));
         assertEquals(build(1, 2, 3), build(1, 2).append(3));
     }
 
-    test open fun range() {
+    @Test open fun range() {
         assertEquals(build(1, 2, 3, 4), build(1, 2, 3, 4).range(0, true, 3, true));
         assertEquals(build(2, 3), build(1, 2, 3, 4).range(0, false, 3, false));
         assertEquals(build(2, 3), build(1, 2, 3, 4).range(1, true, 2, true));
@@ -82,25 +82,25 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         assertEquals(build<Int>(), build(1, 2, 3, 4).range(1, false, 2, false));
     }
 
-    test fun lastIndexOf() {
+    @Test fun lastIndexOf() {
         val list = build(1, 2, 2, 1)
         assertEquals(2, list.lastIndexOf(2))
         assertEquals(-1, list.lastIndexOf(3))
     }
 
-    test fun indexOfWithNulls() {
+    @Test fun indexOfWithNulls() {
         val list = build(1, null, null, 1)
         assertEquals(1, list.indexOf(null))
         assertEquals(-1, list.indexOf(3))
     }
 
-    test fun lastIndexOfWithNulls() {
+    @Test fun lastIndexOfWithNulls() {
         val list = build(1, null, null, 1)
         assertEquals(2, list.lastIndexOf(null))
         assertEquals(-1, list.lastIndexOf(3))
     }
 
-    test fun equalsUsingNulls() {
+    @Test fun equalsUsingNulls() {
         assertEquals(build(1, null, 2, null), build(1, null, 2, null))
         assertEquals(build(1, 2), build(1, 2))
         assertEquals(build(null, 2), build(null, 2))
@@ -110,24 +110,24 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         assertFalse(build(1, 2, 3).equals(build(null, null, null)))
     }
 
-    test fun hashCodeUsingNulls() {
+    @Test fun hashCodeUsingNulls() {
         assertEquals(build(1, null, 2, null).hashCode(), build(1, null, 2, null).hashCode())
     }
 
-    test fun notEqualsWithDifferentLengths() {
+    @Test fun notEqualsWithDifferentLengths() {
         assertFalse(build(1, 1, 1).equals(build(1, 1)))
         assertFalse(build(1, 1).equals(build(1, 1, 1)))
     }
 
-    test(expected = IndexOutOfBoundsException::class) fun getOutOfBounds() {
+    @Test(expected = IndexOutOfBoundsException::class) fun getOutOfBounds() {
         sequence(10)[11]
     }
 
-    test(expected = IndexOutOfBoundsException::class) fun setOutOfBounds() {
+    @Test(expected = IndexOutOfBoundsException::class) fun setOutOfBounds() {
         sequence(10).set(11, 100)
     }
 
-    test fun get() {
+    @Test fun get() {
         val list = sequence(10)
         for (i in 0..list.size() - 1) {
             assertEquals(i, list[i])
@@ -137,7 +137,7 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         }
     }
 
-    test fun set() {
+    @Test fun set() {
         var list = sequence(10)
         for (i in 0..list.size() - 1) {
             list = list.set(i, i + 10);
@@ -148,67 +148,67 @@ abstract class AbstractListTest() : AbstractIterableTest() {
         }
     }
 
-    test fun setSameValueTwice() {
+    @Test fun setSameValueTwice() {
         var list = build(1, 2, 3)
         list = list.set(0, 3)
         list = list.set(0, 3)
         assertEquals(listOf(3, 2, 3), list.klist())
     }
 
-    test(expected = IndexOutOfBoundsException::class) fun emptyGet() {
+    @Test(expected = IndexOutOfBoundsException::class) fun emptyGet() {
         build<Int>()[0]
     }
 
-    test(expected = IndexOutOfBoundsException::class) fun emptySet() {
+    @Test(expected = IndexOutOfBoundsException::class) fun emptySet() {
         build<Int>().set(0, 100)
     }
 
-    test fun emptyTake() {
+    @Test fun emptyTake() {
         assertEquals(build<Int>(), build<Int>().take(1))
     }
 
-    test fun emptyDrop() {
+    @Test fun emptyDrop() {
         assertEquals(build<Int>(), build<Int>().drop(1))
     }
 
-    test fun emptyRange() {
+    @Test fun emptyRange() {
         assertEquals(build<Int>(), build<Int>().range(0, true, 1, true))
     }
 
-    test fun take() {
+    @Test fun take() {
         assertSequence(sequence(10).take(5), 0, 5)
     }
 
-    test fun takeNone() {
+    @Test fun takeNone() {
         val list = sequence(10)
         assertSequence(list.take(0), 0, 0)
         assertSequence(list.take(-1), 0, 0)
     }
 
-    test fun takeAll() {
+    @Test fun takeAll() {
         assertSequence(sequence(10).take(100), 0, 10)
     }
 
-    test fun drop() {
+    @Test fun drop() {
         assertSequence(sequence(10).drop(5), 5, 5)
     }
 
-    test fun dropNone() {
+    @Test fun dropNone() {
         val list = sequence(10)
         assertSequence(list.drop(0), 0, 10)
         assertSequence(list.drop(-1), 0, 10)
     }
 
-    test fun dropAll() {
+    @Test fun dropAll() {
         assertSequence(sequence(10).drop(100), 0, 0)
     }
 
-    test fun first() {
+    @Test fun first() {
         assertEquals(0, sequence(10).first())
         assertNull(sequence(0).first())
     }
 
-    test fun last() {
+    @Test fun last() {
         assertEquals(9, sequence(10).last())
         assertNull(sequence(0).last())
     }

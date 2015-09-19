@@ -22,29 +22,24 @@
 
 package com.github.andrewoma.dexx.collection
 
+import org.junit.Test
+import java.util.*
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.fail
-import kotlin.test.assertTrue
 import kotlin.test.assertNull
-import com.github.andrewoma.dexx.collection.internal.base.AbstractIterable
-import com.github.andrewoma.dexx.collection.AbstractMapTest.WrappedBuilderFactory
-import org.junit.Test as test
-import java.util.Comparator
 
 abstract class AbstractSortedMapTest() : AbstractMapTest() {
-    override abstract fun <K, V> mapFactory(comparator: Comparator<in K>?): BuilderFactory<Pair<K,V>, out SortedMap<K,V>>
+    override abstract fun <K, V> mapFactory(comparator: Comparator<in K>?): BuilderFactory<Pair<K, V>, out SortedMap<K, V>>
 
-    private fun <K, V> buildMap(vararg entries : kotlin.Pair<K, V>) = buildMap_(*entries) as SortedMap<K, V>
+    private fun <K, V> buildMap(vararg entries: kotlin.Pair<K, V>) = buildMap_(*entries) as SortedMap<K, V>
 
-    test fun sortedForEach() {
+    @Test fun sortedForEach() {
         val map = buildMap(1 to "A", 3 to "C", 2 to "B", 5 to "E", 4 to "D")
         val actual = arrayListOf<Int>()
         map.forEach { actual.add(it.component1()!!) }
         assertEquals(listOf(1, 2, 3, 4, 5), actual)
     }
 
-    test fun range() {
+    @Test fun range() {
         val map = buildMap(1 to "A", 2 to "B", 3 to "C")
         assertEquals(buildMap(1 to "A", 2 to "B", 3 to "C"), map.range(0, false, 4, false))
         assertEquals(buildMap(1 to "A", 2 to "B", 3 to "C"), map.range(1, true, 3, true))
@@ -56,18 +51,18 @@ abstract class AbstractSortedMapTest() : AbstractMapTest() {
         assertEquals(buildMap<Int, String>(), map.range(4, true, 1, true))
     }
 
-    test fun from() {
-        val map = buildMap(1 to "A",  2 to "B", 3 to "C")
-        assertEquals(buildMap(1 to "A",  2 to "B", 3 to "C"), map.from(0, false))
-        assertEquals(buildMap(1 to "A",  2 to "B", 3 to "C"), map.from(1, true))
+    @Test fun from() {
+        val map = buildMap(1 to "A", 2 to "B", 3 to "C")
+        assertEquals(buildMap(1 to "A", 2 to "B", 3 to "C"), map.from(0, false))
+        assertEquals(buildMap(1 to "A", 2 to "B", 3 to "C"), map.from(1, true))
         assertEquals(buildMap(2 to "B", 3 to "C"), map.from(1, false))
         assertEquals(buildMap(2 to "B", 3 to "C"), map.from(2, true))
         assertEquals(buildMap(3 to "C"), map.from(3, true))
         assertEquals(buildMap<Int, String>(), map.from(3, false))
     }
 
-    test fun until() {
-        val map = buildMap(1 to "A",  2 to "B", 3 to "C")
+    @Test fun until() {
+        val map = buildMap(1 to "A", 2 to "B", 3 to "C")
         assertEquals(buildMap<Int, String>(), map.to(0, false))
         assertEquals(buildMap(1 to "A"), map.to(1, true))
         assertEquals(buildMap(1 to "A"), map.to(2, false))
@@ -77,29 +72,29 @@ abstract class AbstractSortedMapTest() : AbstractMapTest() {
         assertEquals(buildMap(1 to "A", 2 to "B", 3 to "C"), map.to(4, false))
     }
 
-    test fun firstSortedMap() {
+    @Test fun firstSortedMap() {
         val map = buildMap(1 to "A", 3 to "C", 2 to "B", 5 to "E", 4 to "D")
         assertEquals(Pair(1, "A"), map.first())
     }
 
-    test fun firstSortedMapEmpty() {
+    @Test fun firstSortedMapEmpty() {
         assertNull(buildMap<Int, Int>().first())
     }
 
-    test fun lastSortedMap() {
+    @Test fun lastSortedMap() {
         val map = buildMap(1 to "A", 3 to "C", 2 to "B", 5 to "E", 4 to "D")
         assertEquals(Pair(5, "E"), map.last())
     }
 
-    test fun lastSortedMapEmpty() {
+    @Test fun lastSortedMapEmpty() {
         assertNull(buildMap<Int, Int>().last())
     }
 
-    test fun <K,V>  sortedWithCustomComparator() {
-        val c = object: Comparator<Int> {
-            @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+    @Test fun <K, V>  sortedWithCustomComparator() {
+        val c = object : Comparator<Int> {
+            @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
             override fun compare(o1: Int, o2: Int): Int {
-                return o1.compareTo(o2)  * -1
+                return o1.compareTo(o2) * -1
             }
         }
         val builder = mapFactory<Int, Int>(c).newBuilder()
@@ -120,56 +115,56 @@ abstract class AbstractSortedMapTest() : AbstractMapTest() {
         assertEquals(c, map.comparator())
     }
 
-    test fun compartorIsNullWhenNotSupplied() {
+    @Test fun compartorIsNullWhenNotSupplied() {
         val map = buildMap<Int, Int>()
         assertNull(map.comparator())
     }
 
-    test fun take() {
+    @Test fun take() {
         assertSequence(sequence(10).take(5), 0, 5)
     }
 
-    test fun takeNone() {
+    @Test fun takeNone() {
         val map = sequence(10)
         assertSequence(map.take(0), 0, 0)
         assertSequence(map.take(-1), 0, 0)
     }
 
-    test fun takeLoop() {
+    @Test fun takeLoop() {
         val max = 100
         val map = sequence(max)
-        for (i in 1 .. max) {
+        for (i in 1..max) {
             assertSequence(map.take(i), 0, i)
         }
     }
 
-    test fun dropLoop() {
+    @Test fun dropLoop() {
         val max = 100
         val map = sequence(max)
-        for (i in 1 .. max) {
+        for (i in 1..max) {
             assertSequence(map.drop(i), i, max - i)
         }
     }
 
-    test fun takeAll() {
+    @Test fun takeAll() {
         assertSequence(sequence(10).take(100), 0, 10)
     }
 
-    test fun drop() {
+    @Test fun drop() {
         assertSequence(sequence(10).drop(5), 5, 5)
     }
 
-    test fun dropNone() {
+    @Test fun dropNone() {
         val map = sequence(10)
         assertSequence(map.drop(0), 0, 10)
         assertSequence(map.drop(-1), 0, 10)
     }
 
-    test fun dropAll() {
+    @Test fun dropAll() {
         assertSequence(sequence(10).drop(100), 0, 0)
     }
 
-    test fun asSortedMap() {
+    @Test fun asSortedMap() {
         assertEquals(sortedMapOf(1 to "A", 2 to "B"), buildMap(2 to "B", 1 to "A").asSortedMap())
     }
 
@@ -184,8 +179,7 @@ abstract class AbstractSortedMapTest() : AbstractMapTest() {
     fun assertSequence(map: SortedMap<Int, Int>, from: Int, length: Int) {
         var from_ = from
         assertEquals(length, map.size())
-        for (pair in map)
-        {
+        for (pair in map) {
             assertEquals(from_++, pair.component1())
         }
     }

@@ -22,16 +22,13 @@
 
 package com.github.andrewoma.dexx.collection
 
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-import kotlin.test.assertNull
-import com.github.andrewoma.dexx.collection.AbstractMapTest.WrappedBuilderFactory
-import org.junit.Test as test
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractBuilder
+import org.junit.Test
+import java.util.*
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
-import java.util.Comparator
-import java.util.Random
-import java.util.LinkedHashSet
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : AbstractIterableTest() {
     abstract fun <K, V> mapFactory(comparator: Comparator<in K>? = null): BuilderFactory<Pair<K, V>, out Map<K, V>>
@@ -54,8 +51,8 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         }
     }
 
-    class WrappedBuilder<T : Any>(val builder: Builder<Pair<T, T>, out Map<T, T>>, val factory: BuilderFactory<T, Iterable<T>>) : AbstractBuilder<T, Iterable<T>>() {
-        @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+    class WrappedBuilder<T>(val builder: Builder<Pair<T, T>, out Map<T, T>>, val factory: BuilderFactory<T, Iterable<T>>) : AbstractBuilder<T, Iterable<T>>() {
+        @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE", "BASE_WITH_NULLABLE_UPPER_BOUND")
         override fun add(p0: T?): Builder<T, Iterable<T>> {
             builder.add(Pair(p0!!, p0))
             return this
@@ -67,20 +64,20 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         }
     }
 
-    test fun putGetRemove() {
+    @Test fun putGetRemove() {
         var map = buildMap(1 to "A")
         assertEquals("A", map[1])
 
         map = map.remove(1)
-        assertTrue(map.isEmpty())
+        assertTrue(map.isEmpty)
     }
 
-    test fun removeFromEmpty() {
+    @Test fun removeFromEmpty() {
         val map = buildMap<Int, Int>()
-        assertTrue(map.remove(1).isEmpty())
+        assertTrue(map.remove(1).isEmpty)
     }
 
-    test fun removeNotExists() {
+    @Test fun removeNotExists() {
         var map = buildMap(1 to "A")
         assertEquals("A", map.get(1))
 
@@ -88,33 +85,33 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         assertEquals(buildMap(1 to "A"), map)
     }
 
-    test fun removeNotExists2() {
+    @Test fun removeNotExists2() {
         val map = buildMap(1 to "A", 2 to "B")
         assertEquals(buildMap(1 to "A", 2 to "B"), map.remove(3))
     }
 
-    test fun removeSingle() {
+    @Test fun removeSingle() {
         var map = buildMap(1 to "A")
-        assertTrue(map.remove(1).isEmpty())
+        assertTrue(map.remove(1).isEmpty)
     }
 
-    test fun removeUpdateSingle() {
+    @Test fun removeUpdateSingle() {
         var map = buildMap(1 to "A")
         map = map.put(1, "A")
         assertEquals(buildMap(1 to "A"), map)
     }
 
-    test fun getFromEmpty() {
+    @Test fun getFromEmpty() {
         val map = buildMap<Int, Int>()
         assertNull(map.get(1))
     }
 
-    test fun forEachWithPairs() {
+    @Test fun forEachWithPairs() {
         val pairs = setOf(1 to "A", 2 to "B", 3 to "C", 4 to "D")
         val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<kotlin.Pair<Int, String>>()
         val f = object : Function<Pair<Int, String>, Unit> {
-            @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+            @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
             override fun invoke(parameter: Pair<Int, String>?) {
                 actual.add(kotlin.Pair(parameter!!.component1()!!, parameter.component2()!!))
             }
@@ -124,7 +121,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         assertEquals(pairs, actual)
     }
 
-    test fun iteratorWithPairs() {
+    @Test fun iteratorWithPairs() {
         val pairs = setOf(1 to "A", 2 to "B", 3 to "C", 4 to "D")
         val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<kotlin.Pair<Int, String>>()
@@ -132,7 +129,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         assertEquals(pairs, actual)
     }
 
-    test fun keys() {
+    @Test fun keys() {
         val pairs = setOf(1 to "A", 2 to "B", 3 to "C", 4 to "D")
         val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<Int>()
@@ -140,7 +137,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         assertEquals(pairs.map { it.first }.toSet(), actual)
     }
 
-    test fun values() {
+    @Test fun values() {
         val pairs = setOf(1 to "A", 2 to "B", 3 to "C", 4 to "D")
         val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<String>()
@@ -148,7 +145,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         assertEquals(pairs.map { it.second }.toSet(), actual)
     }
 
-    test fun forEachWithCollisions() {
+    @Test fun forEachWithCollisions() {
         val pairs = setOf(CollidingKey(1, 1) to "A", CollidingKey(1, 2) to "B", CollidingKey(2, 3) to "C", CollidingKey(2, 4) to "D")
         val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<kotlin.Pair<CollidingKey, String>>()
@@ -156,7 +153,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         assertEquals(pairs, actual)
     }
 
-    test fun iteratorWithCollisionsWithPairs() {
+    @Test fun iteratorWithCollisionsWithPairs() {
         val pairs = setOf(CollidingKey(1, 1) to "A", CollidingKey(1, 2) to "B", CollidingKey(2, 3) to "C", CollidingKey(2, 4) to "D")
         val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<kotlin.Pair<CollidingKey, String>>()
@@ -164,19 +161,19 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         assertEquals(pairs, actual)
     }
 
-    test fun putRemoveCollisions() {
+    @Test fun putRemoveCollisions() {
         var map = buildMap(CollidingKey(1, 1) to "A", CollidingKey(1, 2) to "B", CollidingKey(2, 3) to "C", CollidingKey(2, 4) to "D")
         map = map.remove(CollidingKey(1, 1)).remove(CollidingKey(1, 2)).remove(CollidingKey(2, 3)).remove(CollidingKey(2, 4))
-        assertTrue(map.isEmpty())
+        assertTrue(map.isEmpty)
     }
 
-    test fun putGetRemoveMultiple() {
+    @Test fun putGetRemoveMultiple() {
         var map = buildMap(1 to "A", 2 to "B", 3 to "C", 4 to "D")
         map = map.remove(1).remove(2).remove(3).remove(4)
-        assertTrue(map.isEmpty())
+        assertTrue(map.isEmpty)
     }
 
-    test fun immutablity() {
+    @Test fun immutablity() {
         val map1 = buildMap(1 to "A")
 
         val map2 = map1.put(2, "B")
@@ -189,19 +186,19 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         assertEquals(buildMap(2 to "B", 3 to "C"), map4)
     }
 
-    test fun updateSameKey() {
+    @Test fun updateSameKey() {
         var map = buildMap(1 to "A")
         map = map.put(1, "B")
         assertEquals(buildMap(1 to "B"), map)
     }
 
-    test fun updateSameKeyWithCollision() {
+    @Test fun updateSameKeyWithCollision() {
         var map = buildMap(CollidingKey(1, 1) to "A")
         map = map.put(CollidingKey(1, 1), "B")
         assertEquals(buildMap(CollidingKey(1, 1) to "B"), map)
     }
 
-    test fun collisions() {
+    @Test fun collisions() {
         val map = buildMap(CollidingKey(1, 1) to "A", CollidingKey(1, 2) to "B", CollidingKey(1, 3) to "C", CollidingKey(1, 4) to "D")
         assertEquals("A", map[CollidingKey(1, 1)])
         assertEquals("B", map[CollidingKey(1, 2)])
@@ -209,7 +206,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         assertEquals("D", map[CollidingKey(1, 4)])
     }
 
-    test fun collisionsUpdated() {
+    @Test fun collisionsUpdated() {
         var map = buildMap(CollidingKey(1, 1) to "A", CollidingKey(1, 2) to "B")
         map = map.put(CollidingKey(1, 1), "C")
         map = map.put(CollidingKey(1, 2), "D")
@@ -217,29 +214,29 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         assertEquals("D", map[CollidingKey(1, 2)])
     }
 
-    test fun collisionsUpdateWithSame() {
+    @Test fun collisionsUpdateWithSame() {
         var map = buildMap(CollidingKey(1, 1) to "A")
         map = map.put(CollidingKey(1, 1), "A")
         assertEquals("A", map[CollidingKey(1, 1)])
     }
 
-    test fun collisionsRemoved() {
+    @Test fun collisionsRemoved() {
         var map = buildMap(CollidingKey(1, 1) to "A", CollidingKey(1, 2) to "B", CollidingKey(1, 3) to "C", CollidingKey(1, 4) to "D")
         assertEquals(4, map.size())
 
         map = map.remove(CollidingKey(1, 1)).remove(CollidingKey(1, 2)).remove(CollidingKey(1, 3)).remove(CollidingKey(1, 4))
-        assertTrue(map.isEmpty())
+        assertTrue(map.isEmpty)
     }
 
-    test fun equal() {
+    @Test fun equal() {
         assertEquals(buildMap(1 to 2, 3 to 4), buildMap(1 to 2, 3 to 4))
     }
 
-    test fun testHashCode() {
+    @Test fun testHashCode() {
         assertEquals(buildMap(1 to 2, 3 to 4).hashCode(), buildMap(1 to 2, 3 to 4).hashCode())
     }
 
-    test fun containsKey() {
+    @Test fun containsKey() {
         val map = buildMap(1 to 2, 3 to 4)
         assertTrue(map.containsKey(1))
         assertTrue(map.containsKey(3))
@@ -247,36 +244,36 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         assertFalse(map.containsKey(4))
     }
 
-    test fun emptyGet() {
+    @Test fun emptyGet() {
         val map = buildMap<Int, Int>()
         assertNull(map.get(1))
     }
 
-    test fun emptyRemove() {
+    @Test fun emptyRemove() {
         val map = buildMap<Int, Int>()
-        assertTrue(map.remove(1).isEmpty())
+        assertTrue(map.remove(1).isEmpty)
     }
 
-    test fun nullValue() {
+    @Test fun nullValue() {
         val map = buildMap<Int?, Int?>()
         assertNull(map.put(1, null).get(1))
     }
 
-    test fun containsKeyNullValue() {
+    @Test fun containsKeyNullValue() {
         val map = buildMap<Int?, Int?>()
         assertTrue(map.put(1, null).containsKey(1))
     }
 
-    test fun equalsNonMap() {
+    @Test fun equalsNonMap() {
         assertFalse(buildMap(1 to 2).equals(""))
     }
 
-    test fun equalsWithNullValues() {
+    @Test fun equalsWithNullValues() {
         if (!supportsNullValues) return
         assertEquals(buildMap(1 to null), buildMap(1 to null))
     }
 
-    open test fun putGetRemoveRandom() {
+    open @Test fun putGetRemoveRandom() {
         putGetRemoveRandom(10000)
     }
 
@@ -303,13 +300,13 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         for (i in numbers) {
             map = map.remove(i)
         }
-        assertTrue(map.isEmpty())
+        assertTrue(map.isEmpty)
 
         // Do it again
         for (i in numbers) {
             map = map.remove(i)
         }
-        assertTrue(map.isEmpty())
+        assertTrue(map.isEmpty)
     }
 
     fun randomNumbers(size: Int): LinkedHashSet<Int> {

@@ -22,13 +22,7 @@
 
 package com.github.andrewoma.dexx.collection
 
-import com.github.andrewoma.dexx.collection.internal.base.Break
-import com.github.andrewoma.dexx.collection.internal.base.AbstractIterable
-import org.junit.Test
-import kotlin.test.assertEquals
-import java.util.Comparator
-
-import org.junit.Test as test
+import java.util.*
 
 /**
  *
@@ -36,6 +30,6 @@ import org.junit.Test as test
 class HashMapTest : AbstractMapTest() {
 
     override fun <K, V> mapFactory(comparator: Comparator<in K>?): BuilderFactory<Pair<K, V>, out Map<K, V>> {
-        return HashMap.factory<K,V>()
+        return HashMap.factory<K, V>()
     }
 }

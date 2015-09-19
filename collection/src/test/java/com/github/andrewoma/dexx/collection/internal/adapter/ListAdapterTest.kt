@@ -22,61 +22,59 @@
 
 package com.github.andrewoma.dexx.collection.internal.adapter
 
-import org.junit.Test as test
-import com.github.andrewoma.dexx.collection.TreeSet
-import com.github.andrewoma.dexx.collection.Sets
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-import kotlin.test.assertFalse
 import com.github.andrewoma.dexx.collection.IndexedLists
+import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 
 public open class ListAdapterTest {
     open fun list(vararg values: Int) = IndexedLists.copyOf(values.toList()).asList()
 
-    test fun equals() {
+    @Test fun equals() {
         assertEquals(list(1, 2, 3), listOf(1, 2, 3))
         assertEquals(listOf(1, 2, 3), list(1, 2, 3))
     }
 
-    test fun testHashCode() {
+    @Test fun testHashCode() {
         assertEquals(list(1, 2, 3), list(1, 2, 3))
     }
 
-    test fun size() {
+    @Test fun size() {
         assertEquals(0, list().size())
         assertEquals(3, list(1, 2, 3).size())
     }
 
-    test fun empty() {
+    @Test fun empty() {
         assertTrue(list().isEmpty())
         assertFalse(list(1, 2, 3).isEmpty())
     }
 
-    test fun contains() {
+    @Test fun contains() {
         val list = list(1, 2, 3)
         assertTrue(list.contains(1))
         assertFalse(list.contains(4))
         assertFalse(list.contains("foo"))
     }
 
-    test fun get() {
+    @Test fun get() {
         val list = list(1, 2)
         assertEquals(1, list[0])
         assertEquals(2, list[1])
     }
 
-    test fun toArray() {
+    @Test fun toArray() {
         val ints = list(1, 2, 3).toTypedArray()
-        assertEquals(ints.sortBy { it }, listOf(1, 2, 3))
+        assertEquals(ints.sortedBy { it }, listOf(1, 2, 3))
     }
 
-    test fun iterator() {
+    @Test fun iterator() {
         val ints = list(1, 2, 3).iterator()
-        assertEquals(ints.asSequence().toList().sortBy { it }, listOf(1, 2, 3))
+        assertEquals(ints.asSequence().toList().sortedBy { it }, listOf(1, 2, 3))
     }
 
-    test fun containsAll() {
+    @Test fun containsAll() {
         assertTrue(list(1, 2, 3).containsAll(listOf(1, 2, 3)))
         assertTrue(list(1, 2, 3).containsAll(listOf(1, 2)))
         assertTrue(list(1, 2, 3).containsAll(listOf(1)))
@@ -85,31 +83,31 @@ public open class ListAdapterTest {
         assertFalse(list(1, 2, 3).containsAll(listOf(1, 2, 3, 4)))
     }
 
-    test(expected = UnsupportedOperationException::class) fun add() {
+    @Test(expected = UnsupportedOperationException::class) fun add() {
         list().add(1)
     }
 
-    test(expected = UnsupportedOperationException::class) fun remove() {
+    @Test(expected = UnsupportedOperationException::class) fun remove() {
         list().remove(1)
     }
 
-    test(expected = UnsupportedOperationException::class) fun removeObject() {
+    @Test(expected = UnsupportedOperationException::class) fun removeObject() {
         list().remove("")
     }
 
-    test(expected = UnsupportedOperationException::class) fun addAll() {
+    @Test(expected = UnsupportedOperationException::class) fun addAll() {
         list().addAll(listOf(1))
     }
 
-    test(expected = UnsupportedOperationException::class) fun retainAll() {
+    @Test(expected = UnsupportedOperationException::class) fun retainAll() {
         list().retainAll(listOf(1))
     }
 
-    test(expected = UnsupportedOperationException::class) fun removeAll() {
+    @Test(expected = UnsupportedOperationException::class) fun removeAll() {
         list().removeAll(listOf(1))
     }
 
-    test(expected = UnsupportedOperationException::class) fun clear() {
+    @Test(expected = UnsupportedOperationException::class) fun clear() {
         list().clear()
     }
 }

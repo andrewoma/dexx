@@ -22,8 +22,6 @@
 
 package com.github.andrewoma.dexx.collection
 
-import org.junit.Test as test
-
 class ArrayListTest() : AbstractListTest() {
 
     override fun <T> factory(): BuilderFactory<T, out List<T>> {

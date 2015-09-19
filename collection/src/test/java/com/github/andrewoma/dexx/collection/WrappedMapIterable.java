@@ -27,7 +27,7 @@ import com.github.andrewoma.dexx.collection.internal.base.MappedIterable;
 /**
  *
  */
-public class WrappedMapIterable<T> extends MappedIterable<T, Pair<T,T>> {
+public class WrappedMapIterable<T> extends MappedIterable<T, Pair<T, T>> {
     private Iterable<Pair<T, T>> from;
 
     public WrappedMapIterable(Iterable<Pair<T, T>> from) {

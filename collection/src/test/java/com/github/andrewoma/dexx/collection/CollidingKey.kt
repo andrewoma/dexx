@@ -22,11 +22,11 @@
 
 package com.github.andrewoma.dexx.collection
 
-class CollidingKey(val hashCode : Int, val key : Int) : Comparable<CollidingKey> {
+class CollidingKey(val hashCode: Int, val key: Int) : Comparable<CollidingKey> {
 
     override fun hashCode() = hashCode
 
-    override fun equals(other : Any?) = this.identityEquals(other) || ((other is CollidingKey) && key == other.key)
+    override fun equals(other: Any?) = this.identityEquals(other) || ((other is CollidingKey) && key == other.key)
 
     override fun compareTo(other: CollidingKey) = key.compareTo(other.key)
 

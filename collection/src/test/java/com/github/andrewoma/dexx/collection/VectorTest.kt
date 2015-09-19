@@ -22,13 +22,12 @@
 
 package com.github.andrewoma.dexx.collection
 
-import org.junit.Test as test
+import com.github.andrewoma.dexx.TestMode
+import org.junit.Test
 import java.math.BigDecimal
-import com.github.andrewoma.dexx.*
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 import kotlin.test.assertFalse
-import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 class VectorTest() : AbstractListTest() {
 
@@ -45,13 +44,13 @@ class VectorTest() : AbstractListTest() {
         return sizes
     }
 
-    test fun isEmpty() {
+    @Test fun isEmpty() {
         val vector = Vector.empty<String>()
-        assertTrue(vector.isEmpty())
-        assertFalse(vector.append("A").isEmpty())
+        assertTrue(vector.isEmpty)
+        assertFalse(vector.append("A").isEmpty)
     }
 
-    test fun addGet() {
+    @Test fun addGet() {
         for (size in sizes()) {
             var vector = Vector.empty<Int>()
             for (i in 0..size - 1) {
@@ -60,14 +59,13 @@ class VectorTest() : AbstractListTest() {
             assertEquals(size, vector.size())
 
             var i: Int = 0
-            for (integer in vector)
-            {
+            for (integer in vector) {
                 assertEquals(i++, integer)
             }
         }
     }
 
-    test fun addPrependGet() {
+    @Test fun addPrependGet() {
         for (size in sizes()) {
             var vector = Vector.empty<Int>()
             val half: Int = size / 2
@@ -82,14 +80,13 @@ class VectorTest() : AbstractListTest() {
             }
 
             var i: Int = 0
-            for (integer in vector)
-            {
+            for (integer in vector) {
                 assertEquals(i++, integer)
             }
         }
     }
 
-    test fun split() {
+    @Test fun split() {
         for (size in sizes()) {
             var vector = sequence(size) as Vector<Int>
             val half = size / 2
@@ -100,19 +97,17 @@ class VectorTest() : AbstractListTest() {
             assertEquals(half, bottom?.size())
 
             var i: Int = 0
-            for (integer in top!!)
-            {
+            for (integer in top!!) {
                 assertEquals(i++, integer)
             }
 
-            for (integer in bottom!!)
-            {
+            for (integer in bottom!!) {
                 assertEquals(i++, integer)
             }
         }
     }
 
-    test fun prependGet() {
+    @Test fun prependGet() {
         for (size in sizes()) {
             var vector = Vector.empty<Int>()
             var i = size - 1
@@ -123,25 +118,23 @@ class VectorTest() : AbstractListTest() {
             assertEquals(size, vector.size())
 
             i = 0
-            for (integer in vector)
-            {
+            for (integer in vector) {
                 assertEquals(i++, integer)
             }
         }
     }
 
-    test fun buildIterate() {
+    @Test fun buildIterate() {
         for (size in sizes()) {
             var vector = sequence(size)
             var i: Int = 0
-            for (integer in vector)
-            {
+            for (integer in vector) {
                 assertEquals(i++, integer)
             }
         }
     }
 
-    test fun update() {
+    @Test fun update() {
         for (size in sizes()) {
             var vector = sequence(size)
             for (i in 0..size - 1) {

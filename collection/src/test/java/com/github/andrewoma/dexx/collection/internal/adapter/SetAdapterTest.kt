@@ -22,54 +22,53 @@
 
 package com.github.andrewoma.dexx.collection.internal.adapter
 
-import org.junit.Test as test
-import com.github.andrewoma.dexx.collection.TreeSet
 import com.github.andrewoma.dexx.collection.Sets
+import org.junit.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 
 public open class SetAdapterTest {
     open fun set(vararg values: Int) = Sets.copyOf(values.toList()).asSet()
 
-    test fun equals() {
+    @Test fun equals() {
         assertEquals(set(1, 2, 3), setOf(1, 2, 3))
         assertEquals(setOf(1, 2, 3), set(1, 2, 3))
     }
 
-    test fun testHashCode() {
+    @Test fun testHashCode() {
         assertEquals(set(1, 2, 3), set(1, 2, 3))
     }
 
-    test fun size() {
+    @Test fun size() {
         assertEquals(0, set().size())
         assertEquals(3, set(1, 2, 3).size())
     }
 
-    test fun empty() {
+    @Test fun empty() {
         assertTrue(set().isEmpty())
         assertFalse(set(1, 2, 3).isEmpty())
     }
 
-    test fun contains() {
+    @Test fun contains() {
         val set = set(1, 2, 3)
         assertTrue(set.contains(1))
         assertFalse(set.contains(4))
         assertFalse(set.contains("foo"))
     }
 
-    test fun toArray() {
+    @Test fun toArray() {
         val ints = set(1, 2, 3).toTypedArray()
-        assertEquals(ints.sortBy { it }, listOf(1, 2, 3))
+        assertEquals(ints.sortedBy { it }, listOf(1, 2, 3))
     }
 
-    test fun iterator() {
+    @Test fun iterator() {
         val ints = set(1, 2, 3).iterator()
-        assertEquals(ints.asSequence().toList().sortBy { it }, listOf(1, 2, 3))
+        assertEquals(ints.asSequence().toList().sortedBy { it }, listOf(1, 2, 3))
     }
 
-    test fun containsAll() {
+    @Test fun containsAll() {
         assertTrue(set(1, 2, 3).containsAll(listOf(1, 2, 3)))
         assertTrue(set(1, 2, 3).containsAll(listOf(1, 2)))
         assertTrue(set(1, 2, 3).containsAll(listOf(1)))
@@ -78,27 +77,27 @@ public open class SetAdapterTest {
         assertFalse(set(1, 2, 3).containsAll(listOf(1, 2, 3, 4)))
     }
 
-    test(expected = UnsupportedOperationException::class) fun add() {
+    @Test(expected = UnsupportedOperationException::class) fun add() {
         set().add(1)
     }
 
-    test(expected = UnsupportedOperationException::class) fun remove() {
+    @Test(expected = UnsupportedOperationException::class) fun remove() {
         set().remove(1)
     }
 
-    test(expected = UnsupportedOperationException::class) fun addAll() {
+    @Test(expected = UnsupportedOperationException::class) fun addAll() {
         set().addAll(listOf(1))
     }
 
-    test(expected = UnsupportedOperationException::class) fun retainAll() {
+    @Test(expected = UnsupportedOperationException::class) fun retainAll() {
         set().retainAll(listOf(1))
     }
 
-    test(expected = UnsupportedOperationException::class) fun removeAll() {
+    @Test(expected = UnsupportedOperationException::class) fun removeAll() {
         set().removeAll(listOf(1))
     }
 
-    test(expected = UnsupportedOperationException::class) fun clear() {
+    @Test(expected = UnsupportedOperationException::class) fun clear() {
         set().clear()
     }
 }

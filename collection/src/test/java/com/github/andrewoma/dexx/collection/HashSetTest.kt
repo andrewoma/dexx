@@ -22,7 +22,7 @@
 
 package com.github.andrewoma.dexx.collection
 
-import org.junit.Test as test
+import org.junit.Test
 import kotlin.test.assertEquals
 
 class HashSetTest() : AbstractSetTest() {
@@ -33,7 +33,7 @@ class HashSetTest() : AbstractSetTest() {
         return HashSet.factory<T>()
     }
 
-    test fun setOfSets() {
+    @Test fun setOfSets() {
         val sets = build(build(1, 2, 3), build(1, 2, 3), build(2, 3), build(4, 5, 6))
         assertEquals(3, sets.size())
     }

@@ -22,13 +22,12 @@
 
 package com.github.andrewoma.dexx.collection.performance
 
-import org.junit.Test as test
-import kotlin.Set as JSet
-import com.github.andrewoma.dexx.collection.Set as DSet
-import kotlin.test.assertEquals
-import java.security.SecureRandom
-import java.util.LinkedHashSet
 import com.github.andrewoma.dexx.TestMode
+import java.security.SecureRandom
+import java.util.*
+import kotlin.test.assertEquals
+import com.github.andrewoma.dexx.collection.Set as DSet
+import kotlin.Set as JSet
 
 public interface PerformanceMeasurement {
     data public class Result(val nanoDuration: Long, val result: Long)

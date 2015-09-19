@@ -22,12 +22,8 @@
 
 package com.github.andrewoma.dexx.collection
 
-import com.github.andrewoma.dexx.collection.internal.base.Break
-import com.github.andrewoma.dexx.collection.internal.base.AbstractIterable
-import org.junit.Test
-import kotlin.test.assertEquals
 import com.github.andrewoma.dexx.collection.internal.hashmap.ListMap
-import java.util.Comparator
+import java.util.*
 
 /**
  *

@@ -22,45 +22,45 @@
 
 package com.github.andrewoma.dexx.collection.performance
 
-import org.junit.Test as test
-import kotlin.Set as JSet
-import com.github.andrewoma.dexx.collection.List as DList
 import com.github.andrewoma.dexx.collection.Builder
-import kotlin.util.measureTimeNano
-import com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result
-import com.github.andrewoma.dexx.collection.mutable.MutableArrayList
 import com.github.andrewoma.dexx.collection.Vector
+import com.github.andrewoma.dexx.collection.mutable.MutableArrayList
+import com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result
+import org.junit.Test
+import kotlin.util.measureTimeNano
+import com.github.andrewoma.dexx.collection.List as DList
+import kotlin.Set as JSet
 
 public open class IndexedListPerformanceTest : PerformanceMeasurement {
 
-    test fun append() {
+    @Test fun append() {
         append(size = 100, operations = 10000, iterations = 1000)
         append(size = 10000, operations = 10000, iterations = 1000)
         append(size = 100000, operations = 10000, iterations = 100)
         append(size = 1000000, operations = 10000, iterations = 10)
     }
 
-    test fun prepend() {
+    @Test fun prepend() {
         prepend(size = 100, operations = 10000, iterations = 1000)
         prepend(size = 10000, operations = 10000, iterations = 1000)
         prepend(size = 100000, operations = 10000, iterations = 100)
     }
 
-    test fun randomGet() {
+    @Test fun randomGet() {
         randomGet(size = 100, operations = 10000, iterations = 1000)
         randomGet(size = 10000, operations = 10000, iterations = 1000)
         randomGet(size = 100000, operations = 10000, iterations = 100)
         randomGet(size = 1000000, operations = 10000, iterations = 10)
     }
 
-    test fun randomSet() {
+    @Test fun randomSet() {
         randomSet(size = 100, operations = 10000, iterations = 1000)
         randomSet(size = 10000, operations = 10000, iterations = 1000)
         randomSet(size = 100000, operations = 10000, iterations = 100)
         randomSet(size = 1000000, operations = 10000, iterations = 10)
     }
 
-    test fun iterate() {
+    @Test fun iterate() {
         iterate(size = 100000, operations = 100000, iterations = 1000)
         iterate(size = 1000000, operations = 1000000, iterations = 1000)
     }

@@ -22,20 +22,18 @@
 
 package com.github.andrewoma.dexx.collection.internal.adapter
 
-import com.github.andrewoma.dexx.collection.Sets
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-import kotlin.test.assertFalse
 import com.github.andrewoma.dexx.collection.HashMap
+import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 import com.github.andrewoma.dexx.collection.Pair as DPair
-import org.junit.Test as test
-import com.google.common.collect.ImmutableMap
 
 /**
  * TODO ... should values implement equals() and hashCode()? Java's doesn't ...
  */
 public open class MapAdapterValuesTest {
-    open fun values(vararg values: Int) : MutableCollection<Int> {
+    open fun values(vararg values: Int): MutableCollection<Int> {
         val builder = HashMap.factory<Int, Int>().newBuilder()
         for (value in values) {
             builder.add(DPair(value, value))
@@ -43,32 +41,32 @@ public open class MapAdapterValuesTest {
         return builder.build().asMap().values()
     }
 
-    test fun size() {
+    @Test fun size() {
         assertEquals(0, values().size())
         assertEquals(2, values(1, 2).size())
     }
 
-    test fun empty() {
+    @Test fun empty() {
         assertTrue(values().isEmpty())
         assertFalse(values(1, 2).isEmpty())
     }
 
-    test fun contains() {
+    @Test fun contains() {
         val set = values(1, 2, 3)
         assertTrue(set.contains(1))
         assertFalse(set.contains(4))
     }
 
-    test fun iterator() {
+    @Test fun iterator() {
         assertEquals(values(1, 2, 3).iterator().asSequence().toSet(), setOf(1, 2, 3))
     }
 
-    test fun toArray() {
+    @Test fun toArray() {
         val ints = values(1, 2).toTypedArray()
         assertEquals(arrayListOf(*ints), listOf(1, 2))
     }
 
-    test fun containsAll() {
+    @Test fun containsAll() {
         assertTrue(values(1, 2, 3).containsAll(listOf(1, 2, 3)))
         assertTrue(values(1, 2, 3).containsAll(listOf(1, 2)))
         assertTrue(values(1, 2, 3).containsAll(listOf(1)))
@@ -77,27 +75,27 @@ public open class MapAdapterValuesTest {
         assertFalse(values(1, 2, 3).containsAll(listOf(1, 2, 3, 4)))
     }
 
-    test(expected = UnsupportedOperationException::class) fun add() {
+    @Test(expected = UnsupportedOperationException::class) fun add() {
         values().add(1)
     }
 
-    test(expected = UnsupportedOperationException::class) fun remove() {
+    @Test(expected = UnsupportedOperationException::class) fun remove() {
         values().remove(1)
     }
 
-    test(expected = UnsupportedOperationException::class) fun addAll() {
+    @Test(expected = UnsupportedOperationException::class) fun addAll() {
         values().addAll(listOf(1))
     }
 
-    test(expected = UnsupportedOperationException::class) fun retainAll() {
+    @Test(expected = UnsupportedOperationException::class) fun retainAll() {
         values().retainAll(listOf(1))
     }
 
-    test(expected = UnsupportedOperationException::class) fun removeAll() {
+    @Test(expected = UnsupportedOperationException::class) fun removeAll() {
         values().removeAll(listOf(1))
     }
 
-    test(expected = UnsupportedOperationException::class) fun clear() {
+    @Test(expected = UnsupportedOperationException::class) fun clear() {
         values().clear()
     }
 }

@@ -22,7 +22,7 @@
 
 package com.github.andrewoma.dexx.collection
 
-import org.junit.Test as test
+import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 
@@ -30,7 +30,7 @@ import kotlin.test.assertFalse
  *
  */
 class PairTest {
-    test fun equals() {
+    @Test fun equals() {
         assertEquals(Pair("1", "A"), Pair("1", "A"))
         assertFalse(Pair("1", "A").equals(Pair("1", "B")))
         assertFalse(Pair("1", "A").equals(Pair("2", "A")))
@@ -43,7 +43,7 @@ class PairTest {
         assertFalse(Pair(null, 1).equals(null))
     }
 
-    test fun testHashCode() {
+    @Test fun testHashCode() {
         assertEquals(Pair("1", "A").hashCode(), Pair("1", "A").hashCode())
         assertEquals(Pair(null, null).hashCode(), Pair(null, null).hashCode())
         assertEquals(Pair(1, null).hashCode(), Pair(1, null).hashCode())
@@ -52,7 +52,7 @@ class PairTest {
         assertFalse(Pair("1", "A").hashCode().equals(Pair("2", "A").hashCode()))
     }
 
-    test fun testToString() {
+    @Test fun testToString() {
         assertEquals("(1, A)", Pair("1", "A").toString())
     }
 }

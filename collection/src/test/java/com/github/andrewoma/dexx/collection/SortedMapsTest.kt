@@ -22,31 +22,35 @@
 
 package com.github.andrewoma.dexx.collection
 
-import org.junit.Test as test
+import org.junit.Test
+import java.util.*
 import kotlin.test.assertEquals
-import java.util.Comparator
 
 class SortedMapsTest {
-    private fun build<K, V>(vararg ts: kotlin.Pair<K, V>) : Map<K, V> {
+    private fun build<K, V>(vararg ts: kotlin.Pair<K, V>): Map<K, V> {
         val builder = TreeMap.factory<K, V>(null, null).newBuilder()
-        for (t in ts) { builder.add(Pair(t.first, t.second)) }
+        for (t in ts) {
+            builder.add(Pair(t.first, t.second))
+        }
         return builder.build()
     }
 
     val c = object : Comparator<Int> {
-        @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+        @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun compare(o1: Int, o2: Int): Int {
             return o1.compareTo(o2) * -1
         }
     }
 
-    private fun build<K, V>(comparator: Comparator<in K>?, vararg ts: kotlin.Pair<K, V>) : SortedMap<K, V> {
+    private fun build<K, V>(comparator: Comparator<in K>?, vararg ts: kotlin.Pair<K, V>): SortedMap<K, V> {
         val builder = TreeMap.factory<K, V>(comparator, null).newBuilder()
-        for (t in ts) { builder.add(Pair(t.first, t.second)) }
+        for (t in ts) {
+            builder.add(Pair(t.first, t.second))
+        }
         return builder.build()
     }
 
-    test fun of() {
+    @Test fun of() {
         assertEquals(build<Int, Int>(), SortedMaps.of<Int, Int>())
         assertEquals(build(1 to "a"), SortedMaps.of(1, "a"))
         assertEquals(build(1 to "a", 2 to "b"), SortedMaps.of(1, "a", 2, "b"))
@@ -55,7 +59,7 @@ class SortedMapsTest {
         assertEquals(build(1 to "a", 2 to "b", 3 to "c", 4 to "d", 5 to "e"), SortedMaps.of(1, "a", 2, "b", 3, "c", 4, "d", 5, "e"))
     }
 
-    test fun ofWithComparator() {
+    @Test fun ofWithComparator() {
         assertEquals(build<Int, Int>(c), SortedMaps.of<Int, Int>(c))
         assertEquals(build(c, 1 to "a"), SortedMaps.of(c, 1, "a"))
         assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.of(c, 1, "a", 2, "b"))
@@ -65,51 +69,51 @@ class SortedMapsTest {
         assertEquals(5, SortedMaps.of(c, 1, "a", 2, "b", 3, "c", 4, "d", 5, "e").first()?.component1())
     }
 
-    test fun copyOfCollection() {
+    @Test fun copyOfCollection() {
         assertEquals(build(1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b"))))
     }
 
-    test fun copyOfIterator() {
+    @Test fun copyOfIterator() {
         assertEquals(build(1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).iterator()))
     }
 
-    test fun copyOfArray() {
+    @Test fun copyOfArray() {
         assertEquals(build(1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).toTypedArray()))
     }
 
-    test fun copyOfTraversable() {
+    @Test fun copyOfTraversable() {
         assertEquals(build(1 to "a", 2 to "b"), SortedMaps.copyOfTraversable(Vector.empty<Pair<Int, String>>().append(Pair(1, "a")).append(Pair(2, "b"))))
     }
 
-    test fun copyOfCollectionWithComparator() {
+    @Test fun copyOfCollectionWithComparator() {
         assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b"))))
     }
 
-    test fun copyOfIteratorWithComparator() {
+    @Test fun copyOfIteratorWithComparator() {
         assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).iterator()))
     }
 
-    test fun copyOfArrayWithComparator() {
+    @Test fun copyOfArrayWithComparator() {
         assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).toTypedArray()))
     }
 
-    test fun copyOfTraversableWithComparator() {
+    @Test fun copyOfTraversableWithComparator() {
         assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.copyOfTraversable(Vector.empty<Pair<Int, String>>().append(Pair(1, "a")).append(Pair(2, "b"))))
     }
 
-    test fun factory() {
+    @Test fun factory() {
         assertEquals(build(1 to "a", 2 to "b"), SortedMaps.factory<Int, String>().newBuilder().addAll(Pair(1, "a"), Pair(2, "b")).build())
     }
 
-    test fun factoryWithComparator() {
+    @Test fun factoryWithComparator() {
         assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.factory<Int, String>(c).newBuilder().addAll(Pair(1, "a"), Pair(2, "b")).build())
     }
 
-    test fun builder() {
+    @Test fun builder() {
         assertEquals(build(1 to "a", 2 to "b"), SortedMaps.builder<Int, String>().addAll(Pair(1, "a"), Pair(2, "b")).build())
     }
 
-    test fun builderWithComparator() {
+    @Test fun builderWithComparator() {
         assertEquals(build(c, 1 to "a", 2 to "b"), SortedMaps.builder<Int, String>(c).addAll(Pair(1, "a"), Pair(2, "b")).build())
     }
 }

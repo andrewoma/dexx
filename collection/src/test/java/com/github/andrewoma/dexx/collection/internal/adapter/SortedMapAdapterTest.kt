@@ -22,14 +22,11 @@
 
 package com.github.andrewoma.dexx.collection.internal.adapter
 
-import org.junit.Test as test
+import com.github.andrewoma.dexx.collection.TreeMap
+import org.junit.Test
+import java.util.*
 import kotlin.test.assertEquals
 import com.github.andrewoma.dexx.collection.Pair as DPair
-import kotlin.test.assertNull
-import com.github.andrewoma.dexx.collection.TreeMap
-import java.util.SortedMap
-import java.util.NoSuchElementException
-import java.util.Comparator
 
 
 public open class SortedMapAdapterTest : MapAdapterTest() {
@@ -49,23 +46,23 @@ public open class SortedMapAdapterTest : MapAdapterTest() {
         return map
     }
 
-    test fun firstKey() {
+    @Test fun firstKey() {
         assertEquals(1, map(3 to 3, 1 to 1, 4 to 4, 3 to 3).firstKey())
     }
 
-    test fun lastKey() {
+    @Test fun lastKey() {
         assertEquals(4, map(3 to 3, 1 to 1, 4 to 4, 3 to 3).lastKey())
     }
 
-    test(expected = NoSuchElementException::class) fun firstKeyEmpty() {
+    @Test(expected = NoSuchElementException::class) fun firstKeyEmpty() {
         map().firstKey()
     }
 
-    test(expected = NoSuchElementException::class) fun lastKeyEmpty() {
+    @Test(expected = NoSuchElementException::class) fun lastKeyEmpty() {
         map().lastKey()
     }
 
-    test fun headMap() {
+    @Test fun headMap() {
         assertEquals(map(1 to 1, 2 to 2, 3 to 3), map(1 to 1, 2 to 2, 3 to 3).headMap(4))
         assertEquals(map(1 to 1, 2 to 2), map(1 to 1, 2 to 2, 3 to 3).headMap(3))
         assertEquals(map(1 to 1), map(1 to 1, 2 to 2, 3 to 3).headMap(2))
@@ -80,7 +77,7 @@ public open class SortedMapAdapterTest : MapAdapterTest() {
         assertEquals(map(), jmap().headMap(1))
     }
 
-    test fun tailMap() {
+    @Test fun tailMap() {
         assertEquals(map(1 to 1, 2 to 2, 3 to 3), map(1 to 1, 2 to 2, 3 to 3).tailMap(0))
         assertEquals(map(1 to 1, 2 to 2, 3 to 3), map(1 to 1, 2 to 2, 3 to 3).tailMap(1))
         assertEquals(map(2 to 2, 3 to 3), map(1 to 1, 2 to 2, 3 to 3).tailMap(2))
@@ -97,7 +94,7 @@ public open class SortedMapAdapterTest : MapAdapterTest() {
         assertEquals(map(), jmap().tailMap(1))
     }
 
-    test fun subMap() {
+    @Test fun subMap() {
         assertEquals(map(1 to 1, 2 to 2, 3 to 3), map(1 to 1, 2 to 2, 3 to 3).subMap(0, 4))
         assertEquals(map(1 to 1, 2 to 2), map(1 to 1, 2 to 2, 3 to 3).subMap(1, 3))
         assertEquals(map(), map(1 to 1, 2 to 2, 3 to 3).subMap(2, 2))
@@ -113,14 +110,14 @@ public open class SortedMapAdapterTest : MapAdapterTest() {
         assertEquals(map(), jmap().subMap(1, 1))
     }
 
-    test fun comparator() {
+    @Test fun comparator() {
         // TODO ... Bug in JetBrains' annotations - it thinks SortedMap.comparator() can't return a null
         // assertNull(map().comparator())
     }
 
-    test fun <K, V>  sortedWithCustomComparator() {
-        val c = object: Comparator<Int> {
-            @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+    @Test fun <K, V>  sortedWithCustomComparator() {
+        val c = object : Comparator<Int> {
+            @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
             override fun compare(o1: Int, o2: Int): Int {
                 return o1.compareTo(o2) * -1
             }

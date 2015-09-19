@@ -22,25 +22,27 @@
 
 package com.github.andrewoma.dexx.collection
 
-import org.junit.Test as test
+import org.junit.Test
+import java.util.*
 import kotlin.test.assertEquals
-import java.util.Comparator
 
 class SortedSetsTest {
     val c = object : Comparator<Int> {
-        @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+        @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
         override fun compare(o1: Int, o2: Int): Int {
             return o1.compareTo(o2) * -1
         }
     }
 
-    private fun build<T>(comparator: Comparator<in T>?, vararg ts: T) : SortedSet<T> {
+    private fun build<T>(comparator: Comparator<in T>?, vararg ts: T): SortedSet<T> {
         val builder = TreeSet.factory<T>(comparator).newBuilder()
-        for (t in ts) { builder.add(t) }
+        for (t in ts) {
+            builder.add(t)
+        }
         return builder.build()
     }
 
-    test fun of() {
+    @Test fun of() {
         assertEquals(build<Int>(null), SortedSets.of<Int>())
         assertEquals(build(null, 1), SortedSets.of(1))
         assertEquals(build(null, 1, 2), SortedSets.of(1, 2))
@@ -56,7 +58,7 @@ class SortedSetsTest {
         assertEquals(build(null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), SortedSets.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
     }
 
-    test fun ofWithComparator() {
+    @Test fun ofWithComparator() {
         assertEquals(build<Int>(c), SortedSets.of<Int>(c))
         assertEquals(build(c, 1), SortedSets.of(c, 1))
         assertEquals(build(c, 1, 2), SortedSets.of(c, 1, 2))
@@ -72,51 +74,51 @@ class SortedSetsTest {
         assertEquals(build(c, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), SortedSets.of(c, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
     }
 
-    test fun copyOfIterable() {
+    @Test fun copyOfIterable() {
         assertEquals(build(null, 1, 2, 3), SortedSets.copyOf(java.util.Arrays.asList(1, 2, 3)))
     }
 
-    test fun copyOfIterator() {
+    @Test fun copyOfIterator() {
         assertEquals(build(null, 1, 2, 3), SortedSets.copyOf(Vector.empty<Int>().append(1).append(2).append(3).iterator()))
     }
 
-    test fun copyOfArray() {
+    @Test fun copyOfArray() {
         assertEquals(build(null, 1, 2, 3), SortedSets.copyOf(java.util.Arrays.asList(1, 2, 3).toTypedArray()))
     }
 
-    test fun copyOfTraversable() {
+    @Test fun copyOfTraversable() {
         assertEquals(build(null, 1, 2, 3), SortedSets.copyOfTraversable(Vector.empty<Int>().append(1).append(2).append(3)))
     }
 
-    test fun factory() {
+    @Test fun factory() {
         assertEquals(build(null, 1, 2, 3), SortedSets.factory<Int>().newBuilder().addAll(1, 2, 3).build())
     }
 
-    test fun copyOfIterableWithComparator() {
+    @Test fun copyOfIterableWithComparator() {
         assertEquals(build(c, 1, 2, 3), SortedSets.copyOf(c, java.util.Arrays.asList(1, 2, 3)))
     }
 
-    test fun copyOfIteratorWithComparator() {
+    @Test fun copyOfIteratorWithComparator() {
         assertEquals(build(c, 1, 2, 3), SortedSets.copyOf(c, Vector.empty<Int>().append(1).append(2).append(3).iterator()))
     }
 
-    test fun copyOfArrayWithComparator() {
+    @Test fun copyOfArrayWithComparator() {
         assertEquals(build(c, 1, 2, 3), SortedSets.copyOf(c, java.util.Arrays.asList(1, 2, 3).toTypedArray()))
     }
 
-    test fun copyOfTraversableWithComparator() {
+    @Test fun copyOfTraversableWithComparator() {
         assertEquals(build(c, 1, 2, 3), SortedSets.copyOfTraversable(c, Vector.empty<Int>().append(1).append(2).append(3)))
     }
 
-    test fun factoryWithComparator() {
+    @Test fun factoryWithComparator() {
         assertEquals(build(c, 1, 2, 3), SortedSets.factory<Int>(c).newBuilder().addAll(1, 2, 3).build())
     }
 
-    test fun builder() {
+    @Test fun builder() {
         assertEquals(build(null, 1, 2, 3), SortedSets.builder<Int>().addAll(1, 2, 3).build())
     }
 
-    test fun builderWithComparator() {
+    @Test fun builderWithComparator() {
         assertEquals(build(c, 1, 2, 3), SortedSets.builder(c).addAll(1, 2, 3).build())
     }
 }

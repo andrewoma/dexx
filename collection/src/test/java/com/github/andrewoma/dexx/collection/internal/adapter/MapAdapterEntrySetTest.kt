@@ -22,21 +22,20 @@
 
 package com.github.andrewoma.dexx.collection.internal.adapter
 
-import com.github.andrewoma.dexx.collection.Sets
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-import kotlin.test.assertFalse
 import com.github.andrewoma.dexx.collection.HashMap
-import com.github.andrewoma.dexx.collection.Pair as DPair
-import org.junit.Test as test
-import com.google.common.collect.ImmutableMap
 import com.github.andrewoma.dexx.collection.Maps
+import com.google.common.collect.ImmutableMap
+import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
+import com.github.andrewoma.dexx.collection.Pair as DPair
 
 /**
  *
  */
 public open class MapAdapterEntrySetTest {
-    open fun map(vararg values: Pair<Int, Int>) : MutableSet<MutableMap.MutableEntry<Int, Int>> {
+    open fun map(vararg values: Pair<Int, Int>): MutableSet<MutableMap.MutableEntry<Int, Int>> {
         val builder = HashMap.factory<Int, Int>().newBuilder()
         for (pair in values) {
             builder.add(DPair(pair.first, pair.second))
@@ -44,30 +43,30 @@ public open class MapAdapterEntrySetTest {
         return builder.build().asMap().entrySet()
     }
 
-    test fun equals() {
+    @Test fun equals() {
         assertEquals(map(1 to 1, 2 to 2), mapOf(1 to 1, 2 to 2).entrySet())
         assertEquals(mapOf(1 to 1, 2 to 2).entrySet(), map(1 to 1, 2 to 2))
     }
 
-    test fun testHashCode() {
+    @Test fun testHashCode() {
         assertEquals(map(1 to 1, 2 to 2), map(1 to 1, 2 to 2))
     }
 
-    test fun size() {
+    @Test fun size() {
         assertEquals(0, map().size())
         assertEquals(2, map(1 to 1, 2 to 2).size())
     }
 
-    test fun empty() {
+    @Test fun empty() {
         assertTrue(map().isEmpty())
         assertFalse(map(1 to 1, 2 to 2).isEmpty())
     }
 
-    test(expected = UnsupportedOperationException::class) fun setValue() {
+    @Test(expected = UnsupportedOperationException::class) fun setValue() {
         map(1 to 1).iterator().next().setValue(2)
     }
 
-    test fun entriesEqual() {
+    @Test fun entriesEqual() {
         val e1 = map(1 to 1)
         val e2 = map(1 to 1)
         val e3 = map(1 to 2)
@@ -77,7 +76,7 @@ public open class MapAdapterEntrySetTest {
         assertFalse(e1.iterator().next().equals(""))
     }
 
-    test fun entriesWithNullsEqual() {
+    @Test fun entriesWithNullsEqual() {
         val e1 = Maps.of(1, null).asMap().entrySet()
         val e2 = Maps.of(1, null).asMap().entrySet()
         assertEquals(e1.iterator().next(), e2.iterator().next())
@@ -85,11 +84,11 @@ public open class MapAdapterEntrySetTest {
         assertFalse(e1.iterator().next().equals(""))
     }
 
-    test fun entryToString() {
+    @Test fun entryToString() {
         assertEquals("1=2", map(1 to 2).iterator().next().toString())
     }
 
-    test fun entriesHashcodesEqual() {
+    @Test fun entriesHashcodesEqual() {
         val e1 = map(1 to 1)
         val e2 = map(1 to 1)
         val e3 = map(1 to 2)
@@ -97,24 +96,24 @@ public open class MapAdapterEntrySetTest {
         assertFalse(e1.iterator().next().hashCode() == e3.iterator().next().hashCode())
     }
 
-    test fun contains() {
+    @Test fun contains() {
         val set = map(1 to 1, 2 to 2, 3 to 3)
         assertTrue(set.contains(e(1 to 1)))
         assertFalse(set.contains(e(4  to 4)))
         assertFalse(set.contains(""))
     }
 
-    test fun toArray() {
+    @Test fun toArray() {
         val ints = map(1 to 1, 2 to 2).toTypedArray()
-        assertEquals(ints.map { it.getKey() } sortBy { it }, listOf(1, 2))
+        assertEquals(ints.map { it.getKey() } sortedBy { it }, listOf(1, 2))
     }
 
-    test fun iterator() {
+    @Test fun iterator() {
         val ints = mapOf(1 to 1, 2 to 2).iterator()
-        assertEquals(ints.asSequence().toList().map { it.getKey() } sortBy { it }, listOf(1, 2))
+        assertEquals(ints.asSequence().toList().map { it.getKey() } sortedBy { it }, listOf(1, 2))
     }
 
-    test fun containsAll() {
+    @Test fun containsAll() {
         assertTrue(map(1 to 1, 2 to 2, 3 to 3).containsAll(listOf(e(1 to 1), e(2 to 2), e(3 to 3))))
         assertTrue(map(1 to 1, 2 to 2, 3 to 3).containsAll(listOf(e(1 to 1), e(2 to 2))))
         assertTrue(map(1 to 1, 2 to 2, 3 to 3).containsAll(listOf(e(1 to 1))))
@@ -127,27 +126,27 @@ public open class MapAdapterEntrySetTest {
         return ImmutableMap.of(pair.first, pair.second)!!.entrySet().iterator().next()
     }
 
-    test(expected = UnsupportedOperationException::class) fun add() {
+    @Test(expected = UnsupportedOperationException::class) fun add() {
         map().add(e(1 to 1))
     }
 
-    test(expected = UnsupportedOperationException::class) fun remove() {
+    @Test(expected = UnsupportedOperationException::class) fun remove() {
         map().remove(e(1 to 1))
     }
 
-    test(expected = UnsupportedOperationException::class) fun addAll() {
+    @Test(expected = UnsupportedOperationException::class) fun addAll() {
         map().addAll(listOf(e(1 to 1)))
     }
 
-    test(expected = UnsupportedOperationException::class) fun retainAll() {
+    @Test(expected = UnsupportedOperationException::class) fun retainAll() {
         map().retainAll(listOf(e(1 to 1)))
     }
 
-    test(expected = UnsupportedOperationException::class) fun removeAll() {
+    @Test(expected = UnsupportedOperationException::class) fun removeAll() {
         map().removeAll(listOf(e(1 to 1)))
     }
 
-    test(expected = UnsupportedOperationException::class) fun clear() {
+    @Test(expected = UnsupportedOperationException::class) fun clear() {
         map().clear()
     }
 }

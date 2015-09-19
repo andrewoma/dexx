@@ -22,18 +22,15 @@
 
 package com.github.andrewoma.dexx.collection
 
+import org.junit.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-import kotlin.test.assertFalse
-import org.junit.Test as test
-import java.util.NoSuchElementException
 import kotlin.test.assertNull
 
 abstract class AbstractSortedSetTest() : AbstractSetTest() {
 
     private fun build<T>(vararg ts: T) = build_(*ts) as SortedSet<T>
 
-    test fun range() {
+    @Test fun range() {
         val set = build(1, 2, 3)
         assertEquals(build(1, 2, 3), set.range(0, false, 4, false))
         assertEquals(build(1, 2, 3), set.range(1, true, 3, true))
@@ -45,18 +42,18 @@ abstract class AbstractSortedSetTest() : AbstractSetTest() {
         assertEquals(build<Int>(), set.range(4, true, 1, true))
     }
 
-    test fun from() {
-        val set = build(1,  2, 3)
-        assertEquals(build(1,  2, 3), set.from(0, false))
-        assertEquals(build(1,  2, 3), set.from(1, true))
+    @Test fun from() {
+        val set = build(1, 2, 3)
+        assertEquals(build(1, 2, 3), set.from(0, false))
+        assertEquals(build(1, 2, 3), set.from(1, true))
         assertEquals(build(2, 3), set.from(1, false))
         assertEquals(build(2, 3), set.from(2, true))
         assertEquals(build(3), set.from(3, true))
         assertEquals(build<Int>(), set.from(3, false))
     }
 
-    test fun until() {
-        val set = build(1,  2, 3)
+    @Test fun until() {
+        val set = build(1, 2, 3)
         assertEquals(build<Int>(), set.to(0, false))
         assertEquals(build(1), set.to(1, true))
         assertEquals(build(1), set.to(2, false))
@@ -66,69 +63,69 @@ abstract class AbstractSortedSetTest() : AbstractSetTest() {
         assertEquals(build(1, 2, 3), set.to(4, false))
     }
 
-    test fun firstSortedSet() {
+    @Test fun firstSortedSet() {
         val set = build(1, 3, 2, 5, 4)
         assertEquals(1, set.first())
     }
 
-    test fun lastSortedSet() {
+    @Test fun lastSortedSet() {
         val set = build(1, 3, 2, 5, 4)
         assertEquals(5, set.last())
     }
 
-    test fun firstEmpty() {
+    @Test fun firstEmpty() {
         assertNull(build<Int>().first())
     }
 
-    test fun lastEmpty() {
+    @Test fun lastEmpty() {
         assertNull(build<Int>().last())
     }
 
-    test fun asSortedSet() {
+    @Test fun asSortedSet() {
         assertEquals(setOf(1, 2, 3), build(1, 2, 3).asSortedSet())
     }
 
-    test fun take() {
+    @Test fun take() {
         assertSequence(sequence(10).take(5), 0, 5)
     }
 
-    test fun takeNone() {
+    @Test fun takeNone() {
         val set = sequence(10)
         assertSequence(set.take(0), 0, 0)
         assertSequence(set.take(-1), 0, 0)
     }
 
-    test fun takeLoop() {
+    @Test fun takeLoop() {
         val max = 100
         val set = sequence(max)
-        for (i in 1 .. max) {
+        for (i in 1..max) {
             assertSequence(set.take(i), 0, i)
         }
     }
 
-    test fun dropLoop() {
+    @Test fun dropLoop() {
         val max = 100
         val set = sequence(max)
-        for (i in 1 .. max) {
+        for (i in 1..max) {
             assertSequence(set.drop(i), i, max - i)
         }
     }
 
-    test fun takeAll() {
+    @Test fun takeAll() {
         assertSequence(sequence(10).take(100), 0, 10)
     }
 
-    test fun drop() {
+    @Test fun drop() {
         assertSequence(sequence(10).drop(5), 5, 5)
     }
 
-    test fun dropNone() {
+    @Test fun dropNone() {
         val set = sequence(10)
         assertSequence(set.drop(0), 0, 10)
         assertSequence(set.drop(-1), 0, 10)
     }
 
-    test fun dropAll() {
+    @Test fun dropAll() {
         assertSequence(sequence(10).drop(100), 0, 0)
     }
 
@@ -143,8 +140,7 @@ abstract class AbstractSortedSetTest() : AbstractSetTest() {
     fun assertSequence(set: SortedSet<Int>, from: Int, length: Int) {
         var from_ = from
         assertEquals(length, set.size())
-        for (integer in set)
-        {
+        for (integer in set) {
             assertEquals(from_++, integer)
         }
     }

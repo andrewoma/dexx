@@ -22,9 +22,9 @@
 
 package com.github.andrewoma.dexx.collection
 
+import org.junit.Test
+import java.util.*
 import kotlin.test.assertEquals
-import org.junit.Test as test
-import java.util.Comparator
 
 /**
  *
@@ -35,34 +35,34 @@ class TreeMapTest : AbstractSortedMapTest() {
         return TreeMap.factory<K, V>(comparator, null)
     }
 
-    test fun construct() {
+    @Test fun construct() {
         assertEquals(mapFactory<Int, Int>().newBuilder().add(Pair(1, 2)).build(), TreeMap<Int, Int>().put(1, 2))
     }
 
-    test fun sliceFromStart() {
+    @Test fun sliceFromStart() {
         val max = 100
         val map = sequence(max) as TreeMap
-        for (i in 0..max-1) {
+        for (i in 0..max - 1) {
             val from = i
             val to = map.size()
             assertEquals(map.drop(from).take(to - from), map.slice(from, to))
         }
     }
 
-    test fun sliceFromEnd() {
+    @Test fun sliceFromEnd() {
         val max = 100
         val map = sequence(max) as TreeMap
-        for (i in 0..max-1) {
+        for (i in 0..max - 1) {
             val from = 0
             val to = map.size() - i
             assertEquals(map.drop(from).take(to - from), map.slice(from, to))
         }
     }
 
-    test fun sliceFromStartAndEnd() {
+    @Test fun sliceFromStartAndEnd() {
         val max = 100
         val map = sequence(max) as TreeMap
-        for (i in 0..max/2) {
+        for (i in 0..max / 2) {
             val from = i
             val to = map.size() - i
             assertEquals(map.drop(from).take(to - from), map.slice(from, to))

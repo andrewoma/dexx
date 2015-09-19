@@ -22,32 +22,32 @@
 
 package com.github.andrewoma.dexx.collection.performance
 
-import org.junit.Test as test
-import com.github.andrewoma.dexx.collection.Map as DMap
 import com.github.andrewoma.dexx.collection.Builder
-import kotlin.util.measureTimeNano
-import com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result
-import com.github.andrewoma.dexx.collection.mutable.MutableHashMap
-import com.github.andrewoma.dexx.collection.Pair
 import com.github.andrewoma.dexx.collection.HashMap
+import com.github.andrewoma.dexx.collection.Pair
+import com.github.andrewoma.dexx.collection.mutable.MutableHashMap
+import com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result
+import org.junit.Test
+import kotlin.util.measureTimeNano
+import com.github.andrewoma.dexx.collection.Map as DMap
 
 public open class MapPerformanceTest : PerformanceMeasurement {
 
-    test fun put() {
+    @Test fun put() {
         put(size = 100, operations = 10000, iterations = 1000)
         put(size = 10000, operations = 10000, iterations = 1000)
         put(size = 100000, operations = 10000, iterations = 100)
         put(size = 1000000, operations = 10000, iterations = 10)
     }
 
-    test fun containsKey() {
+    @Test fun containsKey() {
         containsKey(size = 100, operations = 100, iterations = 1000)
         containsKey(size = 10000, operations = 10000, iterations = 1000)
         containsKey(size = 100000, operations = 100000, iterations = 100)
         containsKey(size = 1000000, operations = 1000000, iterations = 10)
     }
 
-    test fun remove() {
+    @Test fun remove() {
         remove(size = 100, operations = 100, iterations = 1000)
         remove(size = 10000, operations = 10000, iterations = 1000)
         remove(size = 100000, operations = 100000, iterations = 100)

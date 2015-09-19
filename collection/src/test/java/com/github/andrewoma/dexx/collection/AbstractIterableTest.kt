@@ -22,11 +22,11 @@
 
 package com.github.andrewoma.dexx.collection
 
+import org.junit.Test
+import java.util.*
 import kotlin.test.assertEquals
-import org.junit.Test as test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
-import java.util.NoSuchElementException
 
 abstract class AbstractIterableTest() : AbstractTraversableTest() {
 
@@ -34,22 +34,22 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
 
     private fun build<T>(vararg ts: T) = build_(*ts) as Iterable<T>
 
-    test fun iterateEmpty() {
+    @Test fun iterateEmpty() {
         assertFalse(build<Int>().iterator().hasNext())
     }
 
-    test(expected = NoSuchElementException::class) fun iterateEmptyNext() {
+    @Test(expected = NoSuchElementException::class) fun iterateEmptyNext() {
         build<Int>().iterator().next()
     }
 
-    test fun iterateSingle() {
+    @Test fun iterateSingle() {
         var i = build(1).iterator()
         assertTrue(i.hasNext())
         assertEquals(1, i.next())
         assertFalse(i.hasNext())
     }
 
-    test(expected = NoSuchElementException::class) fun iterateSingleNext() {
+    @Test(expected = NoSuchElementException::class) fun iterateSingleNext() {
         var i = build(1).iterator()
         assertTrue(i.hasNext())
         assertEquals(1, i.next())
@@ -57,7 +57,7 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
         i.next()
     }
 
-    test(expected = UnsupportedOperationException::class) fun iteratorRemove() {
+    @Test(expected = UnsupportedOperationException::class) fun iteratorRemove() {
         val iterable = build(1)
         if (isMutable(iterable)) throw UnsupportedOperationException()
         val i = iterable.iterator()
@@ -65,7 +65,7 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
         i.remove()
     }
 
-    test(expected = UnsupportedOperationException::class) fun iteratorRemove2() {
+    @Test(expected = UnsupportedOperationException::class) fun iteratorRemove2() {
         val iterable = build(1, 2)
         if (isMutable(iterable)) throw UnsupportedOperationException()
         val i = iterable.iterator()
@@ -74,16 +74,16 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
         i.remove()
     }
 
-    test fun iterator() {
+    @Test fun iterator() {
         assertEquals(setOf(1, 2, 3, 4), build(1, 2, 3, 4).iterator().asSequence().toSet())
     }
 
-    test fun iteratorWithCollisions() {
+    @Test fun iteratorWithCollisions() {
         val keys = setOf(CollidingKey(1, 1), CollidingKey(1, 2), CollidingKey(2, 3), CollidingKey(2, 4))
         assertEquals(keys, build(*keys.toTypedArray()).iterator().asSequence().toSet())
     }
 
-    test fun iterableLarge() {
+    @Test fun iterableLarge() {
         var builder = factory<Int>().newBuilder()
         val expected = hashSetOf<Int>()
         for (i in 1..maxSize) {

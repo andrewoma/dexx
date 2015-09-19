@@ -22,18 +22,15 @@
 
 package com.github.andrewoma.dexx.collection.blog
 
-import com.github.andrewoma.dexx.collection.Builder
-import com.github.andrewoma.dexx.collection.Sets
-import com.github.andrewoma.dexx.collection.SortedSet
-import com.github.andrewoma.dexx.collection.SortedSets
-import com.github.andrewoma.dexx.collection.Maps
-
-import org.junit.Test as test
+import com.github.andrewoma.dexx.collection.*
+import org.junit.Test
 import kotlin.test.assertEquals
 
 class BlogTest {
     fun <T, R> Sequence<T>.build(builder: Builder<T, R>): R {
-        for (e in this) { builder.add(e) }
+        for (e in this) {
+            builder.add(e)
+        }
         return builder.build()
     }
 
@@ -46,7 +43,7 @@ class BlogTest {
     fun <K, V> Sequence<com.github.andrewoma.dexx.collection.Pair<K, V>>.toPersistentMap(): com.github.andrewoma.dexx.collection.Map<K, V>
             = build(Maps.builder<K, V>())
 
-    test fun lazyEvaluation() {
+    @Test fun lazyEvaluation() {
         val set = SortedSets.of(1, 2, 3, 4, 5, 6).asSequence()
                 .filter { it % 2 == 0 }
                 .map { "$it is even" }
@@ -56,7 +53,7 @@ class BlogTest {
         assertEquals(SortedSets.of("2 is even", "4 is even"), set)
     }
 
-    test fun setExample() {
+    @Test fun setExample() {
         val set1 = Sets.of(1, 2, 3)
         val set2 = set1.add(4)
         val set3 = set1.remove(1)
@@ -65,18 +62,18 @@ class BlogTest {
         println(set3) // Prints Set(2, 3)
     }
 
-    test fun usageFragment1() {
+    @Test fun usageFragment1() {
         val set = Sets.of(1, 2, 3)
         println(set)
     }
 
-    test fun usageFragment2() {
+    @Test fun usageFragment2() {
         val javaSet: kotlin.Set<Int> = setOf<Int>()
         val set = Sets.copyOf(javaSet)
         println(set)
     }
 
-    test fun usageFragment3() {
+    @Test fun usageFragment3() {
         val builder = Sets.builder<Int>()
         for (i in 1..100) {
             builder.add(i)

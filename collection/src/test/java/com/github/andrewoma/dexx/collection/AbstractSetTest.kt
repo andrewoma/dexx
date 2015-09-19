@@ -22,87 +22,86 @@
 
 package com.github.andrewoma.dexx.collection
 
+import org.junit.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 import kotlin.test.assertFalse
-import org.junit.Test as test
-import java.util.NoSuchElementException
+import kotlin.test.assertTrue
 
 abstract class AbstractSetTest() : AbstractIterableTest() {
 
     private fun build<T>(vararg ts: T) = build_(*ts) as Set<T>
 
-    test fun add() {
+    @Test fun add() {
         var set = build<Int>()
-        assertTrue(set.isEmpty())
+        assertTrue(set.isEmpty)
         assertEquals(0, set.size())
-        
+
         set = set.add(1)
         assertTrue(set.contains(1))
-        assertFalse(set.isEmpty())
+        assertFalse(set.isEmpty)
         assertEquals(1, set.size())
     }
-    
-    test fun remove() {
+
+    @Test fun remove() {
         var set = build(1)
-        assertFalse(set.isEmpty())
+        assertFalse(set.isEmpty)
         assertEquals(1, set.size())
-        
+
         set = set.remove(1)
-        assertTrue(set.isEmpty())
+        assertTrue(set.isEmpty)
         assertEquals(0, set.size())
     }
 
-    test fun removeNotExists() {
+    @Test fun removeNotExists() {
         var set = build(1)
         assertTrue(set.contains(1))
 
         var set2 = set.remove(2)
         assertEquals(set, set2)
     }
-    
-    test fun trieRemoveNotExists() {
+
+    @Test fun trieRemoveNotExists() {
         var set = build(1, 2)
         set = set.remove(3)
         assertEquals(build(1, 2), set)
     }
 
-    test fun removeFromEmpty() {
-        assertTrue(build<Int>().remove(1).isEmpty())
+    @Test fun removeFromEmpty() {
+        assertTrue(build<Int>().remove(1).isEmpty)
     }
 
-    test fun removeFromSize1() {
-        assertTrue(build(1).remove(1).isEmpty())
+    @Test fun removeFromSize1() {
+        assertTrue(build(1).remove(1).isEmpty)
     }
 
-    test fun updateSize1() {
+    @Test fun updateSize1() {
         assertEquals(build(1), build(1).add(1))
     }
 
-    test fun containsFromEmpty() {
+    @Test fun containsFromEmpty() {
         assertFalse(build<Int>().contains(1))
     }
 
-    test fun putGetRemoveMultiple() {
+    @Test fun putGetRemoveMultiple() {
         var set = build(1, 2, 3, 4)
         assertTrue(set.contains(1))
         assertTrue(set.contains(2))
         assertTrue(set.contains(3))
         assertTrue(set.contains(4))
         set = set.remove(1).remove(2).remove(3).remove(4)
-        assertTrue(set.isEmpty())
+        assertTrue(set.isEmpty)
     }
 
-    test fun immutablity() {
+    @Test fun immutablity() {
         val set1 = build(1)
-        if (set1.javaClass.getSimpleName().contains("Mutable")) return // Shouldn't be immutable
+        if (set1.javaClass.simpleName.contains("Mutable")) return // Shouldn't be immutable
 
         val set2 = set1.add(2)
         assertEquals(build(1), set1)
         assertEquals(build(1, 2), set2)
     }
 
-    test fun largeDataSet() {
+    @Test fun largeDataSet() {
         var ints = build<Int>()
 
         val range = 1..maxSize
@@ -110,16 +109,16 @@ abstract class AbstractSetTest() : AbstractIterableTest() {
         for (i in range) assertTrue(ints.contains(i))
         for (i in range) ints = ints.remove(i)
 
-        assertTrue(ints.isEmpty())
+        assertTrue(ints.isEmpty)
     }
 
-    test fun collisions() {
+    @Test fun collisions() {
         val keys = setOf(CollidingKey(1, 1), CollidingKey(1, 2), CollidingKey(2, 3), CollidingKey(2, 4))
         val set = build(*keys.toTypedArray())
         for (i in set) assertTrue(set.contains(i))
     }
 
-    test fun collisionsRemoved() {
+    @Test fun collisionsRemoved() {
         var set = build(CollidingKey(1, 1), CollidingKey(1, 2), CollidingKey(1, 3), CollidingKey(2, 4))
         assertEquals(4, set.size())
 
@@ -135,25 +134,25 @@ abstract class AbstractSetTest() : AbstractIterableTest() {
         assertEquals(build(CollidingKey(2, 4)), set)
     }
 
-    test fun outOfOrderInsertion() {
+    @Test fun outOfOrderInsertion() {
         assertEquals(build(3, 4, 2, 1), build(1, 2, 3, 4))
     }
 
-    test fun duplicatesIgnored() {
+    @Test fun duplicatesIgnored() {
         assertEquals(build(1, 2, 2, 3, 3, 3, 4, 4, 4, 4), build(1, 2, 3, 4))
     }
 
-    test fun asSet() {
+    @Test fun asSet() {
         assertEquals(setOf(1, 2, 3), build(1, 2, 3).asSet())
     }
 
     // TODO ... can/should Sets support containing nulls
-//    test fun hashCodesWithNullValues() {
-//        assertEquals(build(1, 2, null).hashCode(), build(1, 2, null).hashCode())
-//    }
-//
-//    test fun equalsWithNullValues() {
-//        assertEquals(build(1, 2, null), build(1, 2, null))
-//        assertFalse(build(null).equals(build("1", "2", "3")))
-//    }
+    //    test fun hashCodesWithNullValues() {
+    //        assertEquals(build(1, 2, null).hashCode(), build(1, 2, null).hashCode())
+    //    }
+    //
+    //    test fun equalsWithNullValues() {
+    //        assertEquals(build(1, 2, null), build(1, 2, null))
+    //        assertFalse(build(null).equals(build("1", "2", "3")))
+    //    }
 }

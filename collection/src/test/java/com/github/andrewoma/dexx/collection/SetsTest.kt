@@ -22,17 +22,19 @@
 
 package com.github.andrewoma.dexx.collection
 
-import org.junit.Test as test
+import org.junit.Test
 import kotlin.test.assertEquals
 
 class SetsTest {
-    private fun build<T>(vararg ts: T) : Set<T> {
+    private fun build<T>(vararg ts: T): Set<T> {
         val builder = HashSet.factory<T>().newBuilder()
-        for (t in ts) { builder.add(t) }
+        for (t in ts) {
+            builder.add(t)
+        }
         return builder.build()
     }
 
-    test fun of() {
+    @Test fun of() {
         assertEquals(build<Int>(), Sets.of<Int>())
         assertEquals(build(1), Sets.of(1))
         assertEquals(build(1, 2), Sets.of(1, 2))
@@ -48,27 +50,27 @@ class SetsTest {
         assertEquals(build(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), Sets.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
     }
 
-    test fun copyOfCollection() {
+    @Test fun copyOfCollection() {
         assertEquals(build(1, 2, 3), Sets.copyOf(java.util.Arrays.asList(1, 2, 3)))
     }
 
-    test fun copyOfArray() {
+    @Test fun copyOfArray() {
         assertEquals(build(1, 2, 3), Sets.copyOf(java.util.Arrays.asList(1, 2, 3).toTypedArray()))
     }
 
-    test fun copyOfTraversable() {
+    @Test fun copyOfTraversable() {
         assertEquals(build(1, 2, 3), Sets.copyOfTraversable(Vector.empty<Int>().append(1).append(2).append(3)))
     }
 
-    test fun copyOfIterator() {
+    @Test fun copyOfIterator() {
         assertEquals(build(1, 2, 3), Sets.copyOf(Vector.empty<Int>().append(1).append(2).append(3).iterator()))
     }
 
-    test fun factory() {
+    @Test fun factory() {
         assertEquals(build(1, 2, 3), Sets.factory<Int>().newBuilder().addAll(1, 2, 3).build())
     }
 
-    test fun builder() {
+    @Test fun builder() {
         assertEquals(build(1, 2, 3), Sets.builder<Int>().addAll(1, 2, 3).build())
     }
 }

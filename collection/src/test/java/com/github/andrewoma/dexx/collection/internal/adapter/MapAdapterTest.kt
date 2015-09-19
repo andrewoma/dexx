@@ -22,19 +22,17 @@
 
 package com.github.andrewoma.dexx.collection.internal.adapter
 
-import org.junit.Test as test
-import com.github.andrewoma.dexx.collection.TreeSet
-import com.github.andrewoma.dexx.collection.Sets
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-import kotlin.test.assertFalse
 import com.github.andrewoma.dexx.collection.HashMap
-import com.github.andrewoma.dexx.collection.Pair as DPair
+import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
+import com.github.andrewoma.dexx.collection.Pair as DPair
 
 
 public open class MapAdapterTest {
-    open fun map(vararg values: Pair<Int, Int>) : MutableMap<Int, Int> {
+    open fun map(vararg values: Pair<Int, Int>): MutableMap<Int, Int> {
         val builder = HashMap.factory<Int, Int>().newBuilder()
         for (pair in values) {
             builder.add(DPair(pair.first, pair.second))
@@ -42,26 +40,26 @@ public open class MapAdapterTest {
         return builder.build().asMap()
     }
 
-    test fun equals() {
+    @Test fun equals() {
         assertEquals(map(1 to 1, 2 to 2), mapOf(1 to 1, 2 to 2))
     }
 
-    test fun testHashCode() {
+    @Test fun testHashCode() {
         assertEquals(map(1 to 1, 2 to 2).hashCode(), map(1 to 1, 2 to 2).hashCode())
         assertEquals(map(1 to 1, 2 to 2).hashCode(), mapOf(1 to 1, 2 to 2).hashCode()) // Same hashCode algorithm as java.util
     }
 
-    test fun size() {
+    @Test fun size() {
         assertEquals(0, map().size())
         assertEquals(2, map(1 to 1, 2 to 2).size())
     }
 
-    test fun empty() {
+    @Test fun empty() {
         assertTrue(map().isEmpty())
         assertFalse(map(1 to 1).isEmpty())
     }
 
-    test fun containsKey() {
+    @Test fun containsKey() {
         val map = map(1 to 10, 2 to 20, 3 to 30)
         assertTrue(map.containsKey(1))
         assertFalse(map.containsKey(4))
@@ -69,7 +67,7 @@ public open class MapAdapterTest {
         assertFalse(map.containsKey("foo"))
     }
 
-    test fun get() {
+    @Test fun get() {
         val map = map(1 to 10, 2 to 20, 3 to 30)
         assertEquals(10, map.get(1))
         assertNull(map.get(4))
@@ -77,7 +75,7 @@ public open class MapAdapterTest {
         assertNull(map.get("foo"))
     }
 
-    test fun containsValue() {
+    @Test fun containsValue() {
         val map = map(1 to 10, 2 to 20, 3 to 30)
         assertTrue(map.containsValue(10))
         assertFalse(map.containsValue(40))
@@ -85,19 +83,19 @@ public open class MapAdapterTest {
         assertFalse(map.containsValue("foo"))
     }
 
-    test(expected = UnsupportedOperationException::class) fun put() {
+    @Test(expected = UnsupportedOperationException::class) fun put() {
         map().put(1, 1)
     }
 
-    test(expected = UnsupportedOperationException::class) fun remove() {
+    @Test(expected = UnsupportedOperationException::class) fun remove() {
         map().remove(1)
     }
 
-    test(expected = UnsupportedOperationException::class) fun putAll() {
+    @Test(expected = UnsupportedOperationException::class) fun putAll() {
         map().putAll(map(1 to 1))
     }
 
-    test(expected = UnsupportedOperationException::class) fun clear() {
+    @Test(expected = UnsupportedOperationException::class) fun clear() {
         map().clear()
     }
 }

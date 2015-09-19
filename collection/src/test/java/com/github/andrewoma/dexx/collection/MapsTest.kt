@@ -22,17 +22,19 @@
 
 package com.github.andrewoma.dexx.collection
 
-import org.junit.Test as test
+import org.junit.Test
 import kotlin.test.assertEquals
 
 class MapsTest {
-    private fun build<K, V>(vararg ts: kotlin.Pair<K, V>) : Map<K, V> {
+    private fun build<K, V>(vararg ts: kotlin.Pair<K, V>): Map<K, V> {
         val builder = HashMap.factory<K, V>().newBuilder()
-        for (t in ts) { builder.add(Pair(t.first, t.second)) }
+        for (t in ts) {
+            builder.add(Pair(t.first, t.second))
+        }
         return builder.build()
     }
 
-    test fun of() {
+    @Test fun of() {
         assertEquals(build<Int, Int>(), Maps.of<Int, Int>())
         assertEquals(build(1 to "a"), Maps.of(1, "a"))
         assertEquals(build(1 to "a", 2 to "b"), Maps.of(1, "a", 2, "b"))
@@ -41,27 +43,27 @@ class MapsTest {
         assertEquals(build(1 to "a", 2 to "b", 3 to "c", 4 to "d", 5 to "e"), Maps.of(1, "a", 2, "b", 3, "c", 4, "d", 5, "e"))
     }
 
-    test fun copyOfCollection() {
+    @Test fun copyOfCollection() {
         assertEquals(build(1 to "a", 2 to "b"), Maps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b"))))
     }
 
-    test fun copyOfIterator() {
+    @Test fun copyOfIterator() {
         assertEquals(build(1 to "a", 2 to "b"), Maps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).iterator()))
     }
 
-    test fun copyOfArray() {
+    @Test fun copyOfArray() {
         assertEquals(build(1 to "a", 2 to "b"), Maps.copyOf(arrayListOf(Pair(1, "a"), Pair(2, "b")).toTypedArray()))
     }
 
-    test fun copyOfTraversable() {
+    @Test fun copyOfTraversable() {
         assertEquals(build(1 to "a", 2 to "b"), Maps.copyOfTraversable(Vector.empty<Pair<Int, String>>().append(Pair(1, "a")).append(Pair(2, "b"))))
     }
 
-    test fun factory() {
+    @Test fun factory() {
         assertEquals(build(1 to "a", 2 to "b"), Maps.factory<Int, String>().newBuilder().addAll(Pair(1, "a"), Pair(2, "b")).build())
     }
 
-    test fun builder() {
+    @Test fun builder() {
         assertEquals(build(1 to "a", 2 to "b"), Maps.builder<Int, String>().addAll(Pair(1, "a"), Pair(2, "b")).build())
     }
 }

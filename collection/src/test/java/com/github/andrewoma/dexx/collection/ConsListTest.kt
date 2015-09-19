@@ -22,14 +22,6 @@
 
 package com.github.andrewoma.dexx.collection
 
-import org.junit.Test as test
-import java.math.BigDecimal
-import com.github.andrewoma.dexx.*
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
-import kotlin.test.assertFalse
-import kotlin.test.assertNull
-
 class ConsListTest() : AbstractListTest() {
 
     override fun <T> factory(): BuilderFactory<T, out List<T>> {

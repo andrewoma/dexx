@@ -22,29 +22,28 @@
 
 package com.github.andrewoma.dexx.collection
 
+import org.junit.Test
+import java.util.*
 import kotlin.test.assertEquals
-import org.junit.Test as test
-import kotlin.test.fail
-import org.junit.Assume
-import kotlin.test.assertTrue
 import kotlin.test.assertFalse
-import java.util.Comparator
+import kotlin.test.assertTrue
+import kotlin.test.fail
 
 abstract class AbstractTraversableTest() {
-    protected abstract fun factory<T>() : BuilderFactory<T, out Traversable<T>>
+    protected abstract fun factory<T>(): BuilderFactory<T, out Traversable<T>>
     open val maxSize = 10000
 
-    fun isMutable(travserable: Traversable<*>) = travserable.javaClass.getSimpleName().contains("Mutable")
+    fun isMutable(travserable: Traversable<*>) = travserable.javaClass.simpleName.contains("Mutable")
 
-    protected open fun build_<T>(vararg ts : T) : Traversable<T> {
+    protected open fun build_<T>(vararg ts: T): Traversable<T> {
         val builder = factory<T>().newBuilder()
-        for (t : T in ts) builder.add(t)
+        for (t: T in ts) builder.add(t)
         return builder.build()
     }
 
     private fun build<T>(vararg ts: T) = build_(*ts)
 
-    test fun builder() {
+    @Test fun builder() {
         val actual = factory<Int>().newBuilder()
                 .add(1)
                 .addAll(2, 3, 4)
@@ -55,29 +54,29 @@ abstract class AbstractTraversableTest() {
         assertEquals(build(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), actual)
     }
 
-    test(expected = IllegalStateException::class) fun buildingTwiceInvalid() {
+    @Test(expected = IllegalStateException::class) fun buildingTwiceInvalid() {
         val builder = factory<Int>().newBuilder().add(1)
         builder.build()
         builder.build()
     }
 
-    test fun forEach() {
+    @Test fun forEach() {
         val actual = hashSetOf<Int>()
         build(1, 2, 3).forEach { actual.add(it!!) }
         assertEquals(setOf(1, 2, 3), actual)
     }
 
-    test fun emptyForEach() {
+    @Test fun emptyForEach() {
         build<Int>().forEach { fail("Shouldn't be called") }
     }
 
-    test fun singleForEach() {
+    @Test fun singleForEach() {
         val actual = hashSetOf<Int>()
         build<Int>(1).forEach { actual.add(it!!) }
         assertEquals(setOf(1), actual)
     }
 
-    test fun forEachLarge() {
+    @Test fun forEachLarge() {
         var builder = factory<Int>().newBuilder()
         val expected = hashSetOf<Int>()
         for (i in 1..maxSize) {
@@ -89,40 +88,40 @@ abstract class AbstractTraversableTest() {
         assertEquals(expected, actual)
     }
 
-    test fun toSet() {
+    @Test fun toSet() {
         assertEquals(build(1, 1, 2, 2).toSet(), HashSet.factory<Int>().newBuilder().addAll(1, 2).build())
     }
 
     // Converts to a list so the order of traversal is known (may not be the order of insertion for Sets et al)
-    fun <T> toList(traversable: Traversable<T>) : Collection<T> {
+    fun <T> toList(traversable: Traversable<T>): Collection<T> {
         val ordered = arrayListOf<T>()
         traversable.forEach { ordered.add(it!!) }
         return ordered
     }
 
-    test fun makeString() {
+    @Test fun makeString() {
         val traversable = build(1, 2, 3)
         assertEquals(toList(traversable).joinToString(","), traversable.makeString(","))
     }
 
-    test fun makeStringFull() {
+    @Test fun makeStringFull() {
         val traversable = build(1, 2, 3)
         assertEquals("prefix" + toList(traversable).joinToString(",") + "postfix", traversable.makeString(",", "prefix", "postfix", -1, ""))
     }
 
-    test fun makeStringTruncated() {
+    @Test fun makeStringTruncated() {
         val traversable = build(1, 2, 3)
         val list = toList(traversable).iterator()
         assertEquals("prefix" + list.next() + "," + list.next() + ",...postfix", traversable.makeString(",", "prefix", "postfix", 2, "..."))
     }
 
-    test fun toSortedSet() {
+    @Test fun toSortedSet() {
         assertEquals(TreeSet.factory<Int>(null).newBuilder().addAll(1, 2, 3).build(), build(3, 1, 2).toSortedSet(null))
     }
 
-    test fun toSortedSetWithComparator() {
-        val comparator  = object : Comparator<Int> {
-            @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+    @Test fun toSortedSetWithComparator() {
+        val comparator = object : Comparator<Int> {
+            @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
             override fun compare(o1: Int, o2: Int): Int {
                 return o1.compareTo(o2) * -1
             }
@@ -131,27 +130,27 @@ abstract class AbstractTraversableTest() {
         assertEquals(TreeSet.factory<Int>(comparator).newBuilder().addAll(1, 2, 3).build(), build(3, 1, 2).toSortedSet(comparator))
     }
 
-    test fun toIndexedList() {
+    @Test fun toIndexedList() {
         val traversable = build(1, 2, 3)
         assertEquals(Vector.factory<Int>().newBuilder().addAll(toList(traversable)).build(), traversable.toIndexedList());
     }
 
-    test fun testToString() {
+    @Test fun testToString() {
         val traversable = build(1, 2, 3)
-        assertEquals(traversable.javaClass.getSimpleName() + "(" + toList(traversable).joinToString(", ") + ")", traversable.toString())
+        assertEquals(traversable.javaClass.simpleName + "(" + toList(traversable).joinToString(", ") + ")", traversable.toString())
     }
 
-    test fun hashCodes() {
+    @Test fun hashCodes() {
         assertEquals(build(1, 2, 3).hashCode(), build(1, 2, 3).hashCode())
         assertFalse(build(1, 2, 3).hashCode() == build(2, 3, 4).hashCode())
     }
 
-    test fun emptyCollection() {
-        assertTrue(build<Int>().isEmpty())
-        assertFalse(build(1).isEmpty())
+    @Test fun emptyCollection() {
+        assertTrue(build<Int>().isEmpty)
+        assertFalse(build(1).isEmpty)
     }
 
-    test fun equals() {
+    @Test fun equals() {
         assertEquals(build(1, 2, 3), build(1, 2, 3))
         assertFalse(build(1, 2, 3).equals(build(2, 3, 4)))
         assertFalse(build(1, 2, 3).equals(build(1, 2)))

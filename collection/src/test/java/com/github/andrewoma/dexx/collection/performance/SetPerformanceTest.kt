@@ -22,32 +22,32 @@
 
 package com.github.andrewoma.dexx.collection.performance
 
-import org.junit.Test as test
-import kotlin.Set as JSet
-import com.github.andrewoma.dexx.collection.Set as DSet
-import com.github.andrewoma.dexx.collection.mutable.MutableHashSet
 import com.github.andrewoma.dexx.collection.Builder
 import com.github.andrewoma.dexx.collection.HashSet
-import kotlin.util.measureTimeNano
+import com.github.andrewoma.dexx.collection.mutable.MutableHashSet
 import com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result
+import org.junit.Test
+import kotlin.util.measureTimeNano
+import com.github.andrewoma.dexx.collection.Set as DSet
+import kotlin.Set as JSet
 
 public open class SetPerformanceTest : PerformanceMeasurement {
 
-    test fun add() {
+    @Test fun add() {
         add(size = 100, operations = 10000, iterations = 1000)
         add(size = 10000, operations = 10000, iterations = 1000)
         add(size = 100000, operations = 10000, iterations = 100)
         add(size = 1000000, operations = 10000, iterations = 10)
     }
 
-    test fun contains() {
+    @Test fun contains() {
         contains(size = 100, operations = 100, iterations = 1000)
         contains(size = 10000, operations = 10000, iterations = 1000)
         contains(size = 100000, operations = 100000, iterations = 100)
         contains(size = 1000000, operations = 1000000, iterations = 10)
     }
 
-    test fun remove() {
+    @Test fun remove() {
         remove(size = 100, operations = 100, iterations = 1000)
         remove(size = 10000, operations = 10000, iterations = 1000)
         remove(size = 100000, operations = 100000, iterations = 100)

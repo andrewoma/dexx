@@ -22,12 +22,11 @@
 
 package com.github.andrewoma.dexx.collection.performance
 
-import org.junit.Test as test
-import com.github.andrewoma.dexx.collection.Map as DMap
 import com.github.andrewoma.dexx.collection.Builder
 import com.github.andrewoma.dexx.collection.Pair
-import com.github.andrewoma.dexx.collection.mutable.MutableTreeMap
 import com.github.andrewoma.dexx.collection.TreeMap
+import com.github.andrewoma.dexx.collection.mutable.MutableTreeMap
+import com.github.andrewoma.dexx.collection.Map as DMap
 
 public open class SortedMapPerformanceTest : MapPerformanceTest() {
 

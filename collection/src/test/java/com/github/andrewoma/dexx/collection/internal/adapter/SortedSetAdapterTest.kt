@@ -22,18 +22,11 @@
 
 package com.github.andrewoma.dexx.collection.internal.adapter
 
-import org.junit.Test as test
-
-import com.github.andrewoma.dexx.collection.HashMap
-import com.github.andrewoma.dexx.collection.SortedSet
 import com.github.andrewoma.dexx.collection.SortedSets
-import java.util.SortedMap
-import kotlin.test.assertEquals
-import java.util.NoSuchElementException
-import java.util.Comparator
-import com.github.andrewoma.dexx.collection.TreeMap
-import kotlin.test.assertNull
 import com.github.andrewoma.dexx.collection.TreeSet
+import org.junit.Test
+import java.util.*
+import kotlin.test.assertEquals
 
 public class SortedSetAdapterTest : SetAdapterTest() {
 
@@ -41,23 +34,23 @@ public class SortedSetAdapterTest : SetAdapterTest() {
 
     fun jset(vararg values: Int) = values.toSortedSet()
 
-    test fun first() {
+    @Test fun first() {
         assertEquals(1, set(3, 1, 4, 3).first())
     }
 
-    test fun last() {
+    @Test fun last() {
         assertEquals(4, set(3, 1, 4, 3).last())
     }
 
-    test(expected = NoSuchElementException::class) fun firstEmpty() {
+    @Test(expected = NoSuchElementException::class) fun firstEmpty() {
         set().first()
     }
 
-    test(expected = NoSuchElementException::class) fun lastEmpty() {
+    @Test(expected = NoSuchElementException::class) fun lastEmpty() {
         set().last()
     }
 
-    test fun headSet() {
+    @Test fun headSet() {
         assertEquals(set(1, 2, 3), set(1, 2, 3).headSet(4))
         assertEquals(set(1, 2), set(1, 2, 3).headSet(3))
         assertEquals(set(1), set(1, 2, 3).headSet(2))
@@ -72,7 +65,7 @@ public class SortedSetAdapterTest : SetAdapterTest() {
         assertEquals(set(), jset().headSet(1))
     }
 
-    test fun tailSet() {
+    @Test fun tailSet() {
         assertEquals(set(1, 2, 3), set(1, 2, 3).tailSet(0))
         assertEquals(set(1, 2, 3), set(1, 2, 3).tailSet(1))
         assertEquals(set(2, 3), set(1, 2, 3).tailSet(2))
@@ -89,7 +82,7 @@ public class SortedSetAdapterTest : SetAdapterTest() {
         assertEquals(set(), jset().tailSet(1))
     }
 
-    test fun subSet() {
+    @Test fun subSet() {
         assertEquals(set(1, 2, 3), set(1, 2, 3).subSet(0, 4))
         assertEquals(set(1, 2), set(1, 2, 3).subSet(1, 3))
         assertEquals(set(), set(1, 2, 3).subSet(2, 2))
@@ -105,14 +98,14 @@ public class SortedSetAdapterTest : SetAdapterTest() {
         assertEquals(set(), jset().subSet(1, 1))
     }
 
-    test fun comparator() {
+    @Test fun comparator() {
         // TODO ... Bug in JetBrains' annotations - it thinks SortedMap.comparator() can't return a null
         // assertNull(set().comparator())
     }
 
-    test fun sortedWithCustomComparator() {
-        val c = object: Comparator<Int> {
-            @suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+    @Test fun sortedWithCustomComparator() {
+        val c = object : Comparator<Int> {
+            @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
             override fun compare(o1: Int, o2: Int): Int {
                 return o1.compareTo(o2) * -1
             }

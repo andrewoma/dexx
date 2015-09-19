@@ -22,14 +22,14 @@
 
 package com.github.andrewoma.dexx.collection.performance
 
-import org.junit.Test as test
-import kotlin.Set as JSet
-import com.github.andrewoma.dexx.collection.Set as DSet
 import com.github.andrewoma.dexx.collection.Builder
-import com.github.andrewoma.dexx.collection.mutable.MutableTreeSet
 import com.github.andrewoma.dexx.collection.TreeSet
+import com.github.andrewoma.dexx.collection.mutable.MutableTreeSet
 import com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result
+import org.junit.Test
 import kotlin.util.measureTimeNano
+import com.github.andrewoma.dexx.collection.Set as DSet
+import kotlin.Set as JSet
 
 public class SortedSetPerformanceTest : SetPerformanceTest() {
 
@@ -40,14 +40,14 @@ public class SortedSetPerformanceTest : SetPerformanceTest() {
         compare("SortedSet: $description", operations, java, dexx)
     }
 
-    test fun addSorted() {
+    @Test fun addSorted() {
         addSorted(size = 100, iterations = 1000)
         addSorted(size = 10000, iterations = 1000)
         addSorted(size = 100000, iterations = 100)
         addSorted(size = 1000000, iterations = 10)
     }
 
-    test fun addReverseSorted() {
+    @Test fun addReverseSorted() {
         addReverseSorted(size = 100, iterations = 1000)
         addReverseSorted(size = 10000, iterations = 1000)
         addReverseSorted(size = 100000, iterations = 100)

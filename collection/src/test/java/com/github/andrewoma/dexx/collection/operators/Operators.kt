@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Andrew O'Malley
+ * Copyright (c) 2015 Andrew O'Malley
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,15 +20,16 @@
  * THE SOFTWARE.
  */
 
-package com.github.andrewoma.dexx.collection
+package com.github.andrewoma.dexx.collection.operators
 
-class CollidingKey(val hashCode: Int, val key: Int) : Comparable<CollidingKey> {
+import com.github.andrewoma.dexx.collection.List
+import com.github.andrewoma.dexx.collection.Map
+import com.github.andrewoma.dexx.collection.Pair
 
-    override fun hashCode() = hashCode
+operator fun <T> List<T>.get(i: Int): T = this.get(i)
+operator fun <T> List<T>.set(i: Int, elem: T) = this.set(i, elem)
 
-    override fun equals(other: Any?) = this === other || ((other is CollidingKey) && key == other.key)
+operator fun <K : Any, V> Map<K, V>.get(key: K) = this.get(key)
 
-    override fun compareTo(other: CollidingKey) = key.compareTo(other.key)
-
-    override fun toString() = "CollidingKey(" + "hashCode=" + hashCode + ", key=" + key + ')'
-}
+operator fun <C1, C2> Pair<C1, C2>.component1(): C1 = this.component1()
+operator fun <C1, C2> Pair<C1, C2>.component2(): C2 = this.component2()

@@ -24,6 +24,7 @@ package com.github.andrewoma.dexx.collection
 
 import com.github.andrewoma.dexx.collection.internal.base.AbstractMap
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractSelfBuilder
+import com.github.andrewoma.dexx.collection.operators.get
 import org.junit.Test
 import java.util.*
 import kotlin.test.assertEquals

@@ -23,6 +23,7 @@
 package com.github.andrewoma.dexx.collection
 
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractBuilder
+import com.github.andrewoma.dexx.collection.operators.get
 import org.junit.Test
 import java.util.*
 import kotlin.test.assertEquals
@@ -112,8 +113,9 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         val actual = hashSetOf<kotlin.Pair<Int, String>>()
         val f = object : Function<Pair<Int, String>, Unit> {
             @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-            override fun invoke(parameter: Pair<Int, String>?) {
+            override operator fun invoke(parameter: Pair<Int, String>?) {
                 actual.add(kotlin.Pair(parameter!!.component1()!!, parameter.component2()!!))
+                actual.add(kotlin.Pair(parameter.component1()!!, parameter.component2()!!))
             }
         }
 

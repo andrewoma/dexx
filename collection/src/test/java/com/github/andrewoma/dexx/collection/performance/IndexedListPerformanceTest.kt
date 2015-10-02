@@ -25,6 +25,8 @@ package com.github.andrewoma.dexx.collection.performance
 import com.github.andrewoma.dexx.collection.Builder
 import com.github.andrewoma.dexx.collection.Vector
 import com.github.andrewoma.dexx.collection.mutable.MutableArrayList
+import com.github.andrewoma.dexx.collection.operators.get
+import com.github.andrewoma.dexx.collection.operators.set
 import com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result
 import org.junit.Test
 import kotlin.util.measureTimeNano
@@ -156,7 +158,7 @@ public open class IndexedListPerformanceTest : PerformanceMeasurement {
         var result = 0L
         val duration = measureTimeNano {
             for (i in operationInts) {
-                result += list[i]!!.toLong()
+                result += list[i].toLong()
             }
         }
 

@@ -23,6 +23,9 @@
 package com.github.andrewoma.dexx.collection
 
 import com.github.andrewoma.dexx.TestMode
+import com.github.andrewoma.dexx.collection.operators.component1
+import com.github.andrewoma.dexx.collection.operators.component2
+import com.github.andrewoma.dexx.collection.operators.get
 import org.junit.Test
 import java.math.BigDecimal
 import kotlin.test.assertEquals

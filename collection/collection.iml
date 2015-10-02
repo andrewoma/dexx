@@ -11,8 +11,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: com.intellij:annotations:12.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:0.13.1513" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.jetbrains.kotlin:kotlin-runtime:0.13.1513" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:0.14.449" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.jetbrains.kotlin:kotlin-runtime:0.14.449" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.google.guava:guava:14.0.1" level="project" />

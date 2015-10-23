@@ -31,7 +31,7 @@ import kotlin.test.assertNull
 abstract class AbstractListTest() : AbstractIterableTest() {
     override abstract fun <T> factory(): BuilderFactory<T, out List<T>>
 
-    private fun build<T>(vararg ts: T) = build_(*ts) as List<T>
+    private fun <T> build(vararg ts: T) = build_(*ts) as List<T>
 
     fun <T> List<T>.klist(): java.util.ArrayList<T> {
         val klist = arrayListOf<T>()

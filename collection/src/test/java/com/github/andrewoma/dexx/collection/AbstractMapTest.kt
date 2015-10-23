@@ -293,7 +293,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         for (i in numbers) {
             map = map.put(i, i + 1)
         }
-        assertEquals(numbers.size(), map.size())
+        assertEquals(numbers.size, map.size())
 
         for (i in numbers) {
             assertEquals(i + 1, map.get(i))
@@ -314,7 +314,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
     fun randomNumbers(size: Int): LinkedHashSet<Int> {
         val random = Random()
         val generated = LinkedHashSet<Int>()
-        while (generated.size() < size) {
+        while (generated.size < size) {
             generated.add(random.nextInt())
         }
         return generated

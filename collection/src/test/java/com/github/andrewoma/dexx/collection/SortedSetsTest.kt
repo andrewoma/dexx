@@ -34,7 +34,7 @@ class SortedSetsTest {
         }
     }
 
-    private fun build<T>(comparator: Comparator<in T>?, vararg ts: T): SortedSet<T> {
+    private fun <T> build(comparator: Comparator<in T>?, vararg ts: T): SortedSet<T> {
         val builder = TreeSet.factory<T>(comparator).newBuilder()
         for (t in ts) {
             builder.add(t)

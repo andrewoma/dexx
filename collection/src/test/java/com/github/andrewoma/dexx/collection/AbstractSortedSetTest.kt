@@ -28,7 +28,7 @@ import kotlin.test.assertNull
 
 abstract class AbstractSortedSetTest() : AbstractSetTest() {
 
-    private fun build<T>(vararg ts: T) = build_(*ts) as SortedSet<T>
+    private fun <T> build(vararg ts: T) = build_(*ts) as SortedSet<T>
 
     @Test fun range() {
         val set = build(1, 2, 3)

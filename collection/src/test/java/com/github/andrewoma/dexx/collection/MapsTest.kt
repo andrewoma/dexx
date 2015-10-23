@@ -26,7 +26,7 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 class MapsTest {
-    private fun build<K, V>(vararg ts: kotlin.Pair<K, V>): Map<K, V> {
+    private fun <K, V> build(vararg ts: kotlin.Pair<K, V>): Map<K, V> {
         val builder = HashMap.factory<K, V>().newBuilder()
         for (t in ts) {
             builder.add(Pair(t.first, t.second))

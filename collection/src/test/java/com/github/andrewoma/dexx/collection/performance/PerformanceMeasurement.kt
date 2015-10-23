@@ -35,11 +35,11 @@ public interface PerformanceMeasurement {
     public fun uniqueRandomInts(size: Int): IntArray {
         val random = SecureRandom()
         val generated = LinkedHashSet<Int>()
-        while (generated.size() < size) {
+        while (generated.size < size) {
             generated.add(random.nextInt())
         }
 
-        val ints = IntArray(generated.size())
+        val ints = IntArray(generated.size)
         var i = 0
         for (value in generated) {
             ints[i++] = value
@@ -62,7 +62,7 @@ public interface PerformanceMeasurement {
         val random = SecureRandom()
         val accesses = IntArray(size)
         for (i in 0..size - 1) {
-            val index = random.nextInt(data.size())
+            val index = random.nextInt(data.size)
             accesses[i] = (if (returnValue)
                 data[index]
             else

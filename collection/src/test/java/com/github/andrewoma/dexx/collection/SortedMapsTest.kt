@@ -27,7 +27,7 @@ import java.util.*
 import kotlin.test.assertEquals
 
 class SortedMapsTest {
-    private fun build<K, V>(vararg ts: kotlin.Pair<K, V>): Map<K, V> {
+    private fun <K, V> build(vararg ts: kotlin.Pair<K, V>): Map<K, V> {
         val builder = TreeMap.factory<K, V>(null, null).newBuilder()
         for (t in ts) {
             builder.add(Pair(t.first, t.second))
@@ -42,7 +42,7 @@ class SortedMapsTest {
         }
     }
 
-    private fun build<K, V>(comparator: Comparator<in K>?, vararg ts: kotlin.Pair<K, V>): SortedMap<K, V> {
+    private fun <K, V> build(comparator: Comparator<in K>?, vararg ts: kotlin.Pair<K, V>): SortedMap<K, V> {
         val builder = TreeMap.factory<K, V>(comparator, null).newBuilder()
         for (t in ts) {
             builder.add(Pair(t.first, t.second))

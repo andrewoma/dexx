@@ -26,7 +26,7 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 class SetsTest {
-    private fun build<T>(vararg ts: T): Set<T> {
+    private fun <T> build(vararg ts: T): Set<T> {
         val builder = HashSet.factory<T>().newBuilder()
         for (t in ts) {
             builder.add(t)

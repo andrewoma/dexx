@@ -38,12 +38,12 @@ public open class MapAdapterValuesTest {
         for (value in values) {
             builder.add(DPair(value, value))
         }
-        return builder.build().asMap().values()
+        return builder.build().asMap().values
     }
 
     @Test fun size() {
-        assertEquals(0, values().size())
-        assertEquals(2, values(1, 2).size())
+        assertEquals(0, values().size)
+        assertEquals(2, values(1, 2).size)
     }
 
     @Test fun empty() {

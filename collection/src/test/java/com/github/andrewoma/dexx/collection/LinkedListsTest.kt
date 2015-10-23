@@ -26,7 +26,7 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 class LinkedListsTest {
-    private fun build<T>(vararg ts: T): LinkedList<T> {
+    private fun <T> build(vararg ts: T): LinkedList<T> {
         val builder = ConsList.factory<T>().newBuilder()
         for (t in ts) {
             builder.add(t)

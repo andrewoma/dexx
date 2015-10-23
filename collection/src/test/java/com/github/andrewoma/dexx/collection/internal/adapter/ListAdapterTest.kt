@@ -42,8 +42,8 @@ public open class ListAdapterTest {
     }
 
     @Test fun size() {
-        assertEquals(0, list().size())
-        assertEquals(3, list(1, 2, 3).size())
+        assertEquals(0, list().size)
+        assertEquals(3, list(1, 2, 3).size)
     }
 
     @Test fun empty() {
@@ -55,7 +55,7 @@ public open class ListAdapterTest {
         val list = list(1, 2, 3)
         assertTrue(list.contains(1))
         assertFalse(list.contains(4))
-        assertFalse(list.contains("foo"))
+        assertFalse(list.containsRaw("foo"))
     }
 
     @Test fun get() {
@@ -92,7 +92,7 @@ public open class ListAdapterTest {
     }
 
     @Test(expected = UnsupportedOperationException::class) fun removeObject() {
-        list().remove("")
+        list().removeRaw("")
     }
 
     @Test(expected = UnsupportedOperationException::class) fun addAll() {

@@ -32,6 +32,6 @@ public class MapKeySetAdapterTest : SetAdapterTest() {
             map.add(com.github.andrewoma.dexx.collection.Pair(i, i))
         }
 
-        return map.build().asMap().keySet()
+        return map.build().asMap().keys
     }
 }

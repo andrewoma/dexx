@@ -42,8 +42,8 @@ public open class SetAdapterTest {
     }
 
     @Test fun size() {
-        assertEquals(0, set().size())
-        assertEquals(3, set(1, 2, 3).size())
+        assertEquals(0, set().size)
+        assertEquals(3, set(1, 2, 3).size)
     }
 
     @Test fun empty() {
@@ -55,7 +55,7 @@ public open class SetAdapterTest {
         val set = set(1, 2, 3)
         assertTrue(set.contains(1))
         assertFalse(set.contains(4))
-        assertFalse(set.contains("foo"))
+        assertFalse(set.containsRaw("foo"))
     }
 
     @Test fun toArray() {

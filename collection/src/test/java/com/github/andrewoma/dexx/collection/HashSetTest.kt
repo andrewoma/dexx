@@ -27,7 +27,7 @@ import kotlin.test.assertEquals
 
 class HashSetTest() : AbstractSetTest() {
 
-    private fun build<T>(vararg ts: T) = build_(*ts) as Set<T>
+    private fun <T> build(vararg ts: T) = build_(*ts) as Set<T>
 
     override fun <T> factory(): BuilderFactory<T, out Iterable<T>> {
         return HashSet.factory<T>()

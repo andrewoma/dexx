@@ -32,7 +32,7 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
 
     override abstract fun <T> factory(): BuilderFactory<T, out Iterable<T>>
 
-    private fun build<T>(vararg ts: T) = build_(*ts) as Iterable<T>
+    private fun <T> build(vararg ts: T) = build_(*ts) as Iterable<T>
 
     @Test fun iterateEmpty() {
         assertFalse(build<Int>().iterator().hasNext())

@@ -29,7 +29,7 @@ import kotlin.test.assertTrue
 
 abstract class AbstractSetTest() : AbstractIterableTest() {
 
-    private fun build<T>(vararg ts: T) = build_(*ts) as Set<T>
+    private fun <T> build(vararg ts: T) = build_(*ts) as Set<T>
 
     @Test fun add() {
         var set = build<Int>()

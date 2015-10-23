@@ -50,8 +50,8 @@ public open class MapAdapterTest {
     }
 
     @Test fun size() {
-        assertEquals(0, map().size())
-        assertEquals(2, map(1 to 1, 2 to 2).size())
+        assertEquals(0, map().size)
+        assertEquals(2, map(1 to 1, 2 to 2).size)
     }
 
     @Test fun empty() {
@@ -64,7 +64,7 @@ public open class MapAdapterTest {
         assertTrue(map.containsKey(1))
         assertFalse(map.containsKey(4))
         assertFalse(map.containsKey(10))
-        assertFalse(map.containsKey("foo"))
+        assertFalse(map.containsKeyRaw("foo"))
     }
 
     @Test fun get() {
@@ -72,7 +72,7 @@ public open class MapAdapterTest {
         assertEquals(10, map.get(1))
         assertNull(map.get(4))
         assertNull(map.get(10))
-        assertNull(map.get("foo"))
+        assertNull(map.getRaw("foo"))
     }
 
     @Test fun containsValue() {
@@ -80,7 +80,7 @@ public open class MapAdapterTest {
         assertTrue(map.containsValue(10))
         assertFalse(map.containsValue(40))
         assertFalse(map.containsValue(1))
-        assertFalse(map.containsValue("foo"))
+        assertFalse(map.containsValueRaw("foo"))
     }
 
     @Test(expected = UnsupportedOperationException::class) fun put() {

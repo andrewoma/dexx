@@ -30,18 +30,18 @@ import kotlin.test.assertTrue
 import kotlin.test.fail
 
 abstract class AbstractTraversableTest() {
-    protected abstract fun factory<T>(): BuilderFactory<T, out Traversable<T>>
+    protected abstract fun <T> factory(): BuilderFactory<T, out Traversable<T>>
     open val maxSize = 10000
 
     fun isMutable(travserable: Traversable<*>) = travserable.javaClass.simpleName.contains("Mutable")
 
-    protected open fun build_<T>(vararg ts: T): Traversable<T> {
+    protected open fun <T> build_(vararg ts: T): Traversable<T> {
         val builder = factory<T>().newBuilder()
         for (t: T in ts) builder.add(t)
         return builder.build()
     }
 
-    private fun build<T>(vararg ts: T) = build_(*ts)
+    private fun <T> build(vararg ts: T) = build_(*ts)
 
     @Test fun builder() {
         val actual = factory<Int>().newBuilder()

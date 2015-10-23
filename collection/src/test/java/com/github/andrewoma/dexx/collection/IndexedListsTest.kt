@@ -26,7 +26,7 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 class IndexedListsTest {
-    private fun build<T>(vararg ts: T): IndexedList<T> {
+    private fun <T> build(vararg ts: T): IndexedList<T> {
         val builder = Vector.factory<T>().newBuilder()
         for (t in ts) {
             builder.add(t)

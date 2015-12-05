@@ -43,7 +43,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
     private fun <K, V> buildMap(vararg entries: kotlin.Pair<K, V>): Map<K, V> = buildMap_(*entries)
 
     override fun <T> factory(): BuilderFactory<T, out Iterable<T>> {
-        return WrappedBuilderFactory(mapFactory())
+        return WrappedBuilderFactory<T>(mapFactory())
     }
 
     class WrappedBuilderFactory<T>(val f: BuilderFactory<Pair<T, T>, out Map<T, T>>) : BuilderFactory<T, Iterable<T>> {

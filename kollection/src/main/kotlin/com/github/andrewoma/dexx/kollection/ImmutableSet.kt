@@ -25,6 +25,7 @@ package com.github.andrewoma.dexx.kollection
 import com.github.andrewoma.dexx.collection.HashSet
 import com.github.andrewoma.dexx.collection.TreeSet
 import java.util.*
+import com.github.andrewoma.dexx.collection.SortedSet as DSortedSet
 import com.github.andrewoma.dexx.collection.Set as DSet
 
 interface ImmutableSet<E : Any> : Set<E> {
@@ -59,8 +60,9 @@ internal class ImmutableSetAdapter<E : Any>(val underlying: DSet<E>) : Immutable
 
     override fun minus(values: Iterable<E>): ImmutableSet<E> = ImmutableSetAdapter(values.fold(underlying) { r, e -> r.remove(e) })
 
-    override fun toString() = this.joinToString(", ", "ImmutableSet(", ")")
+    override fun toString() = this.joinToString(", ", "${if (underlying is DSortedSet<*>) "ImmutableSortedSet" else "ImmutableSet"}(", ")")
 
+    // TODO ... should ordering matter for equality of sets?
     override fun equals(other: Any?) = this === other || (other is Set<*> && this.size == other.size && this.containsAll(other))
 
     override fun hashCode(): Int = underlying.hashCode()

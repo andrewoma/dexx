@@ -22,6 +22,13 @@
 
 package com.github.andrewoma.dexx.kollection
 
+import org.assertj.core.api.Assertions
+import org.junit.Test
+
 class ImmutableSetTest : AbstractImmutableSetTest() {
     override fun <E : Comparable<E>> iSetOf(vararg elements: E) = immutableSetOf(*elements)
+
+    @Test fun `should be produce a readable toString`() {
+        Assertions.assertThat(iSetOf(1, 2, 3).toString()).isEqualTo("ImmutableSet(1, 2, 3)")
+    }
 }

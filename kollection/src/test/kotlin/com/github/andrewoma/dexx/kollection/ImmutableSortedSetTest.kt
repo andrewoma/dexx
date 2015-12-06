@@ -22,6 +22,7 @@
 
 package com.github.andrewoma.dexx.kollection
 
+import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -40,6 +41,10 @@ class ImmutableSortedSetTest : AbstractImmutableSetTest() {
                 .isEqualTo(listOf(1, 2, 3, 4, 5, 6))
         assertThat(listOf(3, 1, 4, 5, 6, 2).toImmutableSortedSet({ e -> e * -1 }).toList())
                 .isEqualTo(listOf(6, 5, 4, 3, 2, 1))
+    }
+
+    @Test fun `should be produce a readable toString`() {
+        Assertions.assertThat(iSetOf(1, 2, 3).toString()).isEqualTo("ImmutableSortedSet(1, 2, 3)")
     }
 }
 

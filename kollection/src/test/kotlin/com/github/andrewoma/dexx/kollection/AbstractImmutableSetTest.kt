@@ -54,10 +54,6 @@ abstract class AbstractImmutableSetTest {
         assertThat(hashSetOf(1, 2, 3)).isEqualTo(iSetOf(1, 2, 3))
     }
 
-    @Test fun `should be produce a readable toString`() {
-        assertThat(iSetOf(1, 2, 3).toString()).isEqualTo("ImmutableSet(1, 2, 3)")
-    }
-
     @Test fun `should convert to and from kotlin collections`() {
         assertThat(arrayListOf(1, 2, 3).toImmutableSet()).isEqualTo(iSetOf(1, 2, 3))
         assertThat(iSetOf(1, 2, 3).toSet()).isEqualTo(setOf(1, 2, 3))

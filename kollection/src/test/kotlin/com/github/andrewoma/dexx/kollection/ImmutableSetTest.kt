@@ -22,13 +22,17 @@
 
 package com.github.andrewoma.dexx.kollection
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class ImmutableSetTest : AbstractImmutableSetTest() {
     override fun <E : Comparable<E>> iSetOf(vararg elements: E) = immutableSetOf(*elements)
 
     @Test fun `should be produce a readable toString`() {
-        Assertions.assertThat(iSetOf(1, 2, 3).toString()).isEqualTo("ImmutableSet(1, 2, 3)")
+        assertThat(iSetOf(1, 2, 3).toString()).isEqualTo("ImmutableSet(1, 2, 3)")
+    }
+
+    @Test fun `should allow construction from sequences`() {
+        assertThat(listOf(1, 2, 3).asSequence().toImmutableSet()).isEqualTo(immutableSetOf(1, 2, 3))
     }
 }

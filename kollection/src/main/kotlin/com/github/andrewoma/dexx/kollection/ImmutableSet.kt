@@ -69,11 +69,11 @@ internal class ImmutableSetAdapter<E : Any>(val underlying: DSet<E>) : Immutable
 }
 
 // Construction
-fun <E : Any> immutableSetOf(vararg elements: E): ImmutableSet<E> =
-        ImmutableSetAdapter(elements.fold(HashSet.empty<E>()) { r, e -> r.add(e) })
+fun <E : Any> immutableSetOf(vararg elements: E): ImmutableSet<E>
+        = ImmutableSetAdapter(elements.fold(HashSet.empty<E>()) { r, e -> r.add(e) })
 
-fun <E : Comparable<E>> immutableSortedSetOf(vararg elements: E): ImmutableSet<E> =
-        ImmutableSetAdapter(elements.fold(TreeSet.empty<E>()) { r, e -> r.add(e) })
+fun <E : Comparable<E>> immutableSortedSetOf(vararg elements: E): ImmutableSet<E>
+        = ImmutableSetAdapter(elements.fold(TreeSet.empty<E>()) { r, e -> r.add(e) })
 
 fun <E : Any> immutableCustomSortedSetOf(selector: (E) -> Comparable<*>?, vararg elements: E): ImmutableSet<E> {
     val ordering = Comparator<E> { e1, e2 -> compareValuesBy(e1, e2, selector) }
@@ -81,16 +81,22 @@ fun <E : Any> immutableCustomSortedSetOf(selector: (E) -> Comparable<*>?, vararg
 }
 
 // Conversion from Iterables
-fun <E : Any> Iterable<E>.toImmutableSet() = immutableSetOf<E>() + this
+fun <E : Any> Iterable<E>.toImmutableSet(): ImmutableSet<E>
+        = immutableSetOf<E>() + this
 
-fun <E : Comparable<E>> Iterable<E>.toImmutableSortedSet() = immutableSortedSetOf<E>() + this
+fun <E : Comparable<E>> Iterable<E>.toImmutableSortedSet(): ImmutableSet<E>
+        = immutableSortedSetOf<E>() + this
 
-fun <E : Any> Iterable<E>.toImmutableSortedSet(selector: (E) -> Comparable<*>?) = immutableCustomSortedSetOf<E>(selector) + this
+fun <E : Any> Iterable<E>.toImmutableSortedSet(selector: (E) -> Comparable<*>?): ImmutableSet<E>
+        = immutableCustomSortedSetOf<E>(selector) + this
 
 // Conversion from Sequences
-fun <E : Any> Sequence<E>.toImmutableSet() = immutableSetOf<E>() + this.asIterable()
+fun <E : Any> Sequence<E>.toImmutableSet(): ImmutableSet<E>
+        = immutableSetOf<E>() + this.asIterable()
 
-fun <E : Comparable<E>> Sequence<E>.toImmutableSortedSet() = immutableSortedSetOf<E>() + this.asIterable()
+fun <E : Comparable<E>> Sequence<E>.toImmutableSortedSet(): ImmutableSet<E>
+        = immutableSortedSetOf<E>() + this.asIterable()
 
-fun <E : Any> Sequence<E>.toImmutableSortedSet(selector: (E) -> Comparable<*>?) = immutableCustomSortedSetOf<E>(selector) + this.asIterable()
+fun <E : Any> Sequence<E>.toImmutableSortedSet(selector: (E) -> Comparable<*>?): ImmutableSet<E>
+        = immutableCustomSortedSetOf<E>(selector) + this.asIterable()
 

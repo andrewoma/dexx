@@ -22,6 +22,24 @@
 
 package com.github.andrewoma.dexx.kollection
 
-class ImmutableSetTest : AbstractImmutableSetTest() {
-    override fun <E : Comparable<E>> iSetOf(vararg elements: E) = immutableSetOf(*elements)
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.Test
+
+class ImmutableSortedSetTest : AbstractImmutableSetTest() {
+    override fun <E : Comparable<E>> iSetOf(vararg elements: E) = immutableSortedSetOf(*elements)
+
+    @Test fun `should order elements`() {
+        assertThat(immutableSortedSetOf(3, 1, 4, 5, 6, 2).toList())
+                .isEqualTo(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(immutableCustomSortedSetOf({ e -> e * -1 }, 3, 1, 4, 5, 6, 2).toList())
+                .isEqualTo(listOf(6, 5, 4, 3, 2, 1))
+    }
+
+    @Test fun `should convert from Kotlin collections`() {
+        assertThat(listOf(3, 1, 4, 5, 6, 2).toImmutableSortedSet().toList())
+                .isEqualTo(listOf(1, 2, 3, 4, 5, 6))
+        assertThat(listOf(3, 1, 4, 5, 6, 2).toImmutableSortedSet({ e -> e * -1 }).toList())
+                .isEqualTo(listOf(6, 5, 4, 3, 2, 1))
+    }
 }
+

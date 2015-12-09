@@ -60,9 +60,11 @@ internal class ImmutableSetAdapter<E : Any>(val underlying: DSet<E>) : Immutable
 
     override fun minus(values: Iterable<E>): ImmutableSet<E> = ImmutableSetAdapter(values.fold(underlying) { r, e -> r.remove(e) })
 
-    override fun toString() = this.joinToString(", ", "${if (underlying is DSortedSet<*>) "ImmutableSortedSet" else "ImmutableSet"}(", ")")
+    override fun toString(): String {
+        val prefix = "${if (underlying is DSortedSet<*>) "ImmutableSortedSet" else "ImmutableSet"}("
+        return this.joinToString(", ", prefix, ")")
+    }
 
-    // TODO ... should ordering matter for equality of sets?
     override fun equals(other: Any?) = this === other || (other is Set<*> && this.size == other.size && this.containsAll(other))
 
     override fun hashCode(): Int = underlying.hashCode()

@@ -43,10 +43,12 @@ abstract class AbstractImmutableSetTest {
         assertThat(iSetOf<Int>()).isEqualTo(iSetOf<Int>())
         assertThat(iSetOf(1)).isEqualTo(iSetOf(1))
         assertThat(iSetOf(1, 2, 3)).isEqualTo(iSetOf(1, 2, 3))
+        assertThat(iSetOf(1, 2, 3)).isNotEqualTo(iSetOf(2, 3, 4))
 
         assertThat(iSetOf<Int>().hashCode()).isEqualTo(iSetOf<Int>().hashCode())
         assertThat(iSetOf(1).hashCode()).isEqualTo(iSetOf(1).hashCode())
         assertThat(iSetOf(1, 2, 3).hashCode()).isEqualTo(iSetOf(1, 2, 3).hashCode())
+        assertThat(iSetOf(1, 2, 3).hashCode()).isNotEqualTo(iSetOf(2, 3, 4).hashCode())
     }
 
     @Test fun `should equal kotlin sets`() {

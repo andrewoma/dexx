@@ -22,37 +22,38 @@
 
 package com.github.andrewoma.dexx.kollection
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class ImmutableSortedSetTest : AbstractImmutableSetTest() {
+class ImmutableSortedMapTest : AbstractImmutableMapTest() {
 
     val reverse: (Int) -> Int = { e -> e * -1 }
 
-    override fun <E : Comparable<E>> iSetOf(vararg elements: E) = immutableSortedSetOf(*elements)
+    override fun <K : Comparable<K>, V> iMapOf(elements: List<Pair<K, V>>) = elements.toImmutableSortedMap()
 
     @Test fun `should order elements`() {
-        assertThat(immutableSortedSetOf(3, 1, 4, 5, 6, 2).toList())
-                .isEqualTo(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(immutableCustomSortedSetOf(reverse, 3, 1, 4, 5, 6, 2).toList())
-                .isEqualTo(listOf(6, 5, 4, 3, 2, 1))
+        assertThat(immutableSortedMapOf(*pairs(3, 1, 4, 5, 6, 2).toTypedArray()).toList())
+                .isEqualTo(pairs(1, 2, 3, 4, 5, 6))
+        assertThat(immutableCustomSortedMapOf(reverse, *pairs(3, 1, 4, 5, 6, 2).toTypedArray()).toList())
+                .isEqualTo(pairs(6, 5, 4, 3, 2, 1))
     }
 
     @Test fun `should convert from Kotlin collections`() {
-        assertThat(listOf(3, 1, 4, 5, 6, 2).toImmutableSortedSet().toList())
-                .isEqualTo(listOf(1, 2, 3, 4, 5, 6))
-        assertThat(listOf(3, 1, 4, 5, 6, 2).toImmutableSortedSet(reverse).toList())
-                .isEqualTo(listOf(6, 5, 4, 3, 2, 1))
+        assertThat(pairs(3, 1, 4, 5, 6, 2).toImmutableSortedMap().toList())
+                .isEqualTo(pairs(1, 2, 3, 4, 5, 6))
+        assertThat(pairs(3, 1, 4, 5, 6, 2).toImmutableSortedMap(reverse).toList())
+                .isEqualTo(pairs(6, 5, 4, 3, 2, 1))
     }
 
     @Test fun `should be produce a readable toString`() {
-        Assertions.assertThat(iSetOf(1, 2, 3).toString()).isEqualTo("ImmutableSortedSet(1, 2, 3)")
+        assertThat(iMapOf(pairs(1, 2, 3)).toString()).isEqualTo("ImmutableSortedMap(1=a, 2=b, 3=c)")
     }
 
     @Test fun `should allow construction from sequences`() {
-        assertThat(listOf(1, 2, 3).asSequence().toImmutableSortedSet()).isEqualTo(immutableSortedSetOf(1, 2, 3))
-        assertThat(listOf(1, 2, 3).asSequence().toImmutableSortedSet(reverse)).isEqualTo(immutableCustomSortedSetOf(reverse, 1, 2, 3))
+        assertThat(pairs(1, 2, 3).asSequence().toImmutableSortedMap())
+                .isEqualTo(iMapOf(pairs(1, 2, 3)))
+
+        assertThat(pairs(1, 2, 3).asSequence().toImmutableSortedMap(reverse))
+                .isEqualTo(pairs(1, 2, 3).toImmutableSortedMap())
     }
 }
-

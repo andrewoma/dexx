@@ -1,10 +1,10 @@
 #### Dexx Collections for Kotlin
 
-The Kotlin module provides decorators for the Dexx's Java collections to improve the Kotlin API.
+The Kotlin module provides decorators for the Dexx's Java collections to improve Kotlin interoperability.
 
 ### Features
 - Defines `ImmutableSet`, `ImmutableList` & `ImmutableMap` that extend Kotlin's `Set`, `List` & `Map` respectively.
-- Defines functions for construction, such as `immutableSetOf`, `immutableListOf` & `immutableMapOf` (as well as sorted variants).
+- Defines functions for construction, such as `immutableSetOf`, `immutableListOf` & `immutableMapOf` (including sorted variants).
 - Defines extension functions to convert from Kotlin's `Iterable` and `Sequence`.
 
 Example:
@@ -50,11 +50,11 @@ val byName = immutableCustomSortedSetOf({ it.first },
 
 #### More information
 
-See the [API source](src/main/kotlin/com/github/andrewoma/dexx/kollection) for the full API.
+See the [API source](src/main/kotlin/com/github/andrewoma/dexx/kollection).
 
 See the [tests](src/test/kotlin/com/github/andrewoma/dexx/kollection) for more examples of usage.
 
 #### Roadmap
 
 * Expose sorted interfaces for `Sets` and `Maps` to allow efficient creation of subsets without copying
-* Explore adding methods such as `add` and `remove` in addition the current operators
+* Explore adding methods such as `add` and `remove` in addition the existing operators

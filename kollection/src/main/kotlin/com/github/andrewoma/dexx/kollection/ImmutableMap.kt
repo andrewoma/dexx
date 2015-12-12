@@ -41,7 +41,7 @@ interface ImmutableMap<K : Any, V> : Map<K, V> {
     operator fun minus(keys: Iterable<K>): ImmutableMap<K, V>
 }
 
-internal class ImmutableMapAdapter<K : Any, V>(val underlying: DMap<K, V>) : ImmutableMap<K, V> {
+internal class MapAdapter<K : Any, V>(val underlying: DMap<K, V>) : ImmutableMap<K, V> {
     override val size: Int
         get() = underlying.size()
 
@@ -53,7 +53,7 @@ internal class ImmutableMapAdapter<K : Any, V>(val underlying: DMap<K, V>) : Imm
 
     override fun get(key: K) = underlying[key]
 
-    override fun put(key: K, value: V) = ImmutableMapAdapter(underlying.put(key, value))
+    override fun put(key: K, value: V) = MapAdapter(underlying.put(key, value))
 
     override val keys: Set<K>
         get() = underlying.asMap().keys
@@ -64,24 +64,24 @@ internal class ImmutableMapAdapter<K : Any, V>(val underlying: DMap<K, V>) : Imm
     override val entries: Set<Map.Entry<K, V>>
         get() = underlying.asMap().entries
 
-    override fun plus(entry: Pair<K, V>): ImmutableMap<K, V> = ImmutableMapAdapter(underlying.put(entry.first, entry.second))
+    override fun plus(entry: Pair<K, V>): ImmutableMap<K, V> = MapAdapter(underlying.put(entry.first, entry.second))
 
-    override fun minus(key: K) = ImmutableMapAdapter(underlying.remove(key))
+    override fun minus(key: K) = MapAdapter(underlying.remove(key))
 
     override fun plus(entries: Iterable<Pair<K, V>>)
-            = ImmutableMapAdapter(entries.fold(underlying) { r, e -> r.put(e.first, e.second) })
+            = MapAdapter(entries.fold(underlying) { r, e -> r.put(e.first, e.second) })
 
     override fun minus(keys: Iterable<K>)
-            = ImmutableMapAdapter(keys.fold(underlying) { r, k -> r.remove(k) })
+            = MapAdapter(keys.fold(underlying) { r, k -> r.remove(k) })
 
     override fun toString(): String {
         val prefix = "${if (underlying is DSortedMap<*, *>) "ImmutableSortedMap" else "ImmutableMap"}("
         return this.entries.joinToString(", ", prefix, ")")
     }
 
-    override fun equals(other: Any?) = this === other || (other is Map<*, *> && this.size == other.size && contentsEqual(other))
+    override fun equals(other: Any?) = this === other || (other is Map<*, *> && this.size == other.size && contentsEquals(other))
 
-    private fun contentsEqual(m: Map<*, *>): Boolean {
+    private fun contentsEquals(m: Map<*, *>): Boolean {
         for ((key, value) in this) {
             if (value == null) {
                 if (m[key] != null || !m.containsKey(key)) return false
@@ -97,14 +97,14 @@ internal class ImmutableMapAdapter<K : Any, V>(val underlying: DMap<K, V>) : Imm
 
 // Construction
 fun <K : Any, V> immutableMapOf(vararg elements: Pair<K, V>): ImmutableMap<K, V>
-        = ImmutableMapAdapter(elements.fold(HashMap.empty<K, V>()) { r, e -> r.put(e.first, e.second) })
+        = MapAdapter(elements.fold(HashMap.empty<K, V>()) { r, e -> r.put(e.first, e.second) })
 
 fun <K : Comparable<K>, V> immutableSortedMapOf(vararg elements: Pair<K, V>): ImmutableMap<K, V>
-        = ImmutableMapAdapter(elements.fold(TreeMap<K, V>()) { r, e -> r.put(e.first, e.second) })
+        = MapAdapter(elements.fold(TreeMap<K, V>()) { r, e -> r.put(e.first, e.second) })
 
 fun <K : Any, V> immutableCustomSortedMapOf(selector: (K) -> Comparable<*>?, vararg elements: Pair<K, V>): ImmutableMap<K, V> {
     val ordering = Comparator<K> { e1, e2 -> compareValuesBy(e1, e2, selector) }
-    return ImmutableMapAdapter(elements.fold(TreeMap(ordering, null)) { r, e -> r.put(e.first, e.second) })
+    return MapAdapter(elements.fold(TreeMap(ordering, null)) { r, e -> r.put(e.first, e.second) })
 }
 
 // Conversion from Iterables

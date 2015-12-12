@@ -26,10 +26,10 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class ImmutableSetTest : AbstractImmutableSetTest() {
-    override fun <E : Comparable<E>> iSetOf(vararg elements: E) = immutableSetOf(*elements)
+    override fun <E : Comparable<E>> set(vararg elements: E) = immutableSetOf(*elements)
 
     @Test fun `should be produce a readable toString`() {
-        assertThat(iSetOf(1, 2, 3).toString()).isEqualTo("ImmutableSet(1, 2, 3)")
+        assertThat(set(1, 2, 3).toString()).isEqualTo("ImmutableSet(1, 2, 3)")
     }
 
     @Test fun `should allow construction from sequences`() {

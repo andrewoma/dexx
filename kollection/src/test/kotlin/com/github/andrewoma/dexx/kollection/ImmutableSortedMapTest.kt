@@ -29,7 +29,7 @@ class ImmutableSortedMapTest : AbstractImmutableMapTest() {
 
     val reverse: (Int) -> Int = { e -> e * -1 }
 
-    override fun <K : Comparable<K>, V> iMapOf(elements: List<Pair<K, V>>) = elements.toImmutableSortedMap()
+    override fun <K : Comparable<K>, V> map(elements: List<Pair<K, V>>) = elements.toImmutableSortedMap()
 
     @Test fun `should order elements`() {
         assertThat(immutableSortedMapOf(*pairs(3, 1, 4, 5, 6, 2).toTypedArray()).toList())
@@ -46,12 +46,12 @@ class ImmutableSortedMapTest : AbstractImmutableMapTest() {
     }
 
     @Test fun `should be produce a readable toString`() {
-        assertThat(iMapOf(pairs(1, 2, 3)).toString()).isEqualTo("ImmutableSortedMap(1=a, 2=b, 3=c)")
+        assertThat(map(pairs(1, 2, 3)).toString()).isEqualTo("ImmutableSortedMap(1=a, 2=b, 3=c)")
     }
 
     @Test fun `should allow construction from sequences`() {
         assertThat(pairs(1, 2, 3).asSequence().toImmutableSortedMap())
-                .isEqualTo(iMapOf(pairs(1, 2, 3)))
+                .isEqualTo(map(pairs(1, 2, 3)))
 
         assertThat(pairs(1, 2, 3).asSequence().toImmutableSortedMap(reverse))
                 .isEqualTo(pairs(1, 2, 3).toImmutableSortedMap())

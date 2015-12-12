@@ -30,7 +30,7 @@ class ImmutableSortedSetTest : AbstractImmutableSetTest() {
 
     val reverse: (Int) -> Int = { e -> e * -1 }
 
-    override fun <E : Comparable<E>> iSetOf(vararg elements: E) = immutableSortedSetOf(*elements)
+    override fun <E : Comparable<E>> set(vararg elements: E) = immutableSortedSetOf(*elements)
 
     @Test fun `should order elements`() {
         assertThat(immutableSortedSetOf(3, 1, 4, 5, 6, 2).toList())
@@ -47,7 +47,7 @@ class ImmutableSortedSetTest : AbstractImmutableSetTest() {
     }
 
     @Test fun `should be produce a readable toString`() {
-        Assertions.assertThat(iSetOf(1, 2, 3).toString()).isEqualTo("ImmutableSortedSet(1, 2, 3)")
+        Assertions.assertThat(set(1, 2, 3).toString()).isEqualTo("ImmutableSortedSet(1, 2, 3)")
     }
 
     @Test fun `should allow construction from sequences`() {

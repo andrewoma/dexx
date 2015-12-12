@@ -27,78 +27,80 @@ import org.junit.Test
 
 abstract class AbstractImmutableMapTest {
 
-    abstract fun <K : Comparable<K>, V> iMapOf(elements: List<Pair<K, V>>): ImmutableMap<K, V>
+    abstract fun <K : Comparable<K>, V> map(elements: List<Pair<K, V>>): ImmutableMap<K, V>
 
-    fun pairs(vararg keys: Int) = keys.map { it to ('a' + it - 1).toString()  }
+    fun pairs(vararg keys: Int) = keys.map { it to ('a' + it - 1).toString() }
+
+    fun map(vararg keys: Int): ImmutableMap<Int, String> = map(pairs(*keys))
 
     @Test fun `should support immutable semantics`() {
-        val map1 = iMapOf(pairs(1, 2, 3))
+        val map1 = map(1, 2, 3)
         val map2 = map1 + (4 to "d")
         val map3 = map1 - 1
         val map4 = map1.put(4, "d")
 
-        assertThat(map1).isEqualTo(iMapOf(pairs(1, 2, 3)))
-        assertThat(map2).isEqualTo(iMapOf(pairs(1, 2, 3, 4)))
-        assertThat(map3).isEqualTo(iMapOf(pairs(2, 3)))
-        assertThat(map4).isEqualTo(iMapOf(pairs(1, 2, 3, 4)))
+        assertThat(map1).isEqualTo(map(1, 2, 3))
+        assertThat(map2).isEqualTo(map(1, 2, 3, 4))
+        assertThat(map3).isEqualTo(map(2, 3))
+        assertThat(map4).isEqualTo(map(1, 2, 3, 4))
     }
 
     @Test fun `should support equals and hashCode`() {
-        assertThat(iMapOf<Int, String>(listOf())).isEqualTo(iMapOf<Int, String>(listOf()))
-        assertThat(iMapOf(pairs(1))).isEqualTo(iMapOf(pairs(1)))
-        assertThat(iMapOf(pairs(1, 2, 3))).isEqualTo(iMapOf(pairs(1, 2, 3)))
-        assertThat(iMapOf(pairs(1, 2, 3))).isNotEqualTo(iMapOf(pairs(2, 3, 4)))
-        assertThat(iMapOf(listOf(1 to null))).isNotEqualTo(iMapOf(listOf(1 to "a")))
+        assertThat(map<Int, String>(listOf())).isEqualTo(map<Int, String>(listOf()))
+        assertThat(map(1)).isEqualTo(map(1))
+        assertThat(map(1, 2, 3)).isEqualTo(map(1, 2, 3))
+        assertThat(map(1, 2, 3)).isNotEqualTo(map(2, 3, 4))
+        assertThat(map(listOf(1 to null))).isNotEqualTo(map(listOf(1 to "a")))
 
-        assertThat(iMapOf<Int, String>(listOf()).hashCode()).isEqualTo(iMapOf<Int, String>(listOf()).hashCode())
-        assertThat(iMapOf(pairs(1)).hashCode()).isEqualTo(iMapOf(pairs(1)).hashCode())
-        assertThat(iMapOf(pairs(1, 2, 3)).hashCode()).isEqualTo(iMapOf(pairs(1, 2, 3)).hashCode())
-        assertThat(iMapOf(pairs(1, 2, 3)).hashCode()).isNotEqualTo(iMapOf(pairs(2, 3, 4)).hashCode())
+        assertThat(map<Int, String>(listOf()).hashCode()).isEqualTo(map<Int, String>(listOf()).hashCode())
+        assertThat(map(1).hashCode()).isEqualTo(map(1).hashCode())
+        assertThat(map(1, 2, 3).hashCode()).isEqualTo(map(1, 2, 3).hashCode())
+        assertThat(map(1, 2, 3).hashCode()).isNotEqualTo(map(2, 3, 4).hashCode())
     }
 
     @Test fun `should equal kotlin maps`() {
-        assertThat(iMapOf(pairs(1, 2, 3))).isEqualTo(pairs(1, 2, 3).toMap())
-        assertThat(pairs(1, 2, 3).toMap()).isEqualTo(iMapOf(pairs(1, 2, 3)))
+        assertThat(map(1, 2, 3)).isEqualTo(pairs(1, 2, 3).toMap())
+        assertThat(pairs(1, 2, 3).toMap()).isEqualTo(map(1, 2, 3))
     }
 
     @Test fun `should convert to and from kotlin collections`() {
-        assertThat(pairs(1, 2, 3).toImmutableMap()).isEqualTo(iMapOf(pairs(1, 2, 3)))
-        assertThat(iMapOf(pairs(1, 2, 3)).toLinkedMap()).isEqualTo(pairs(1, 2, 3).toMap())
+        assertThat(pairs(1, 2, 3).toImmutableMap()).isEqualTo(map(1, 2, 3))
+        assertThat(map(1, 2, 3).toLinkedMap()).isEqualTo(pairs(1, 2, 3).toMap())
     }
 
     @Test fun `should support bulk operations`() {
-        assertThat(iMapOf(pairs(1, 2, 3)) + iMapOf(pairs(4, 5))).isEqualTo(iMapOf(pairs(1, 2, 3, 4, 5)))
-        assertThat(iMapOf(pairs(1, 2, 3)) - setOf(1, 2)).isEqualTo(iMapOf(pairs(3)))
+        assertThat(map(1, 2, 3) + map(4, 5)).isEqualTo(map(1, 2, 3, 4, 5))
+        assertThat(map(1, 2, 3) - setOf(1, 2)).isEqualTo(map(3))
     }
 
     @Test fun `should support contains`() {
-        assertThat(iMapOf(pairs(1, 2, 3)).containsKey(1)).isTrue()
-        assertThat(iMapOf(pairs(1, 2, 3)).containsKey(4)).isFalse()
+        assertThat(map(1, 2, 3).containsKey(1)).isTrue()
+        assertThat(map(1, 2, 3).containsKey(4)).isFalse()
 
-        assertThat(iMapOf(pairs(1, 2, 3)).containsValue("c")).isTrue()
-        assertThat(iMapOf(pairs(1, 2, 3)).containsValue("d")).isFalse()
+        assertThat(map(1, 2, 3).containsValue("c")).isTrue()
+        assertThat(map(1, 2, 3).containsValue("d")).isFalse()
     }
 
     @Test fun `should support size`() {
-        assertThat(iMapOf<Int, String>(listOf()).size).isEqualTo(0)
-        assertThat(iMapOf<Int, String>(listOf()).isEmpty()).isTrue()
+        assertThat(map<Int, String>(listOf()).size).isEqualTo(0)
+        assertThat(map<Int, String>(listOf()).isEmpty()).isTrue()
 
-        assertThat(iMapOf(pairs(1)).size).isEqualTo(1)
-        assertThat(iMapOf(pairs(1)).isEmpty()).isFalse()
+        assertThat(map(1).size).isEqualTo(1)
+        assertThat(map(1).isEmpty()).isFalse()
 
-        assertThat(iMapOf(pairs(1, 2, 3)).size).isEqualTo(3)
-        assertThat(iMapOf(pairs(1, 2, 3)).isEmpty()).isFalse()
+        assertThat(map(1, 2, 3).size).isEqualTo(3)
+        assertThat(map(1, 2, 3).isEmpty()).isFalse()
     }
 
     @Test fun `should iterate values`() {
-        assertThat(iMapOf(pairs(1, 2, 3)).values.toSet()).isEqualTo(setOf("a", "b", "c"))
+        assertThat(map(1, 2, 3).values.toSet()).isEqualTo(setOf("a", "b", "c"))
     }
 
     @Test fun `should iterate keys`() {
-        assertThat(iMapOf(pairs(1, 2, 3)).keys).isEqualTo(setOf(1, 2, 3))
+        assertThat(map(1, 2, 3).keys).isEqualTo(setOf(1, 2, 3))
     }
 
     @Test fun `should iterate entries`() {
-        assertThat(iMapOf(pairs(1, 2, 3)).entries.map { it.key to it.value }.toSet()).isEqualTo(pairs(1, 2, 3).toSet())
+        assertThat(map(1, 2, 3).entries.map { it.key to it.value }.toSet()).isEqualTo(pairs(1, 2, 3).toSet())
     }
 }

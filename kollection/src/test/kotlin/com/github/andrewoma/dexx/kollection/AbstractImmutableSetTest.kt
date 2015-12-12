@@ -27,67 +27,66 @@ import org.junit.Test
 
 abstract class AbstractImmutableSetTest {
 
-    abstract fun <E : Comparable<E>> iSetOf(vararg elements: E): ImmutableSet<E>
+    abstract fun <E : Comparable<E>> set(vararg elements: E): ImmutableSet<E>
 
     @Test fun `should support immutable semantics`() {
-        val set1 = iSetOf(1, 2, 3)
+        val set1 = set(1, 2, 3)
         val set2 = set1 + 4
         val set3 = set1 - 1
 
-        assertThat(set1).isEqualTo(iSetOf(1, 2, 3))
-        assertThat(set2).isEqualTo(iSetOf(1, 2, 3, 4))
-        assertThat(set3).isEqualTo(iSetOf(2, 3))
+        assertThat(set1).isEqualTo(set(1, 2, 3))
+        assertThat(set2).isEqualTo(set(1, 2, 3, 4))
+        assertThat(set3).isEqualTo(set(2, 3))
     }
 
     @Test fun `should support equals and hashCode`() {
-        assertThat(iSetOf<Int>()).isEqualTo(iSetOf<Int>())
-        assertThat(iSetOf(1)).isEqualTo(iSetOf(1))
-        assertThat(iSetOf(1, 2, 3)).isEqualTo(iSetOf(1, 2, 3))
-        assertThat(iSetOf(1, 2, 3)).isNotEqualTo(iSetOf(2, 3, 4))
+        assertThat(set<Int>()).isEqualTo(set<Int>())
+        assertThat(set(1)).isEqualTo(set(1))
+        assertThat(set(1, 2, 3)).isEqualTo(set(1, 2, 3))
+        assertThat(set(1, 2, 3)).isNotEqualTo(set(2, 3, 4))
 
-        assertThat(iSetOf<Int>().hashCode()).isEqualTo(iSetOf<Int>().hashCode())
-        assertThat(iSetOf(1).hashCode()).isEqualTo(iSetOf(1).hashCode())
-        assertThat(iSetOf(1, 2, 3).hashCode()).isEqualTo(iSetOf(1, 2, 3).hashCode())
-        assertThat(iSetOf(1, 2, 3).hashCode()).isNotEqualTo(iSetOf(2, 3, 4).hashCode())
+        assertThat(set<Int>().hashCode()).isEqualTo(set<Int>().hashCode())
+        assertThat(set(1).hashCode()).isEqualTo(set(1).hashCode())
+        assertThat(set(1, 2, 3).hashCode()).isEqualTo(set(1, 2, 3).hashCode())
+        assertThat(set(1, 2, 3).hashCode()).isNotEqualTo(set(2, 3, 4).hashCode())
     }
 
     @Test fun `should equal kotlin sets`() {
-        assertThat(iSetOf(1, 2, 3)).isEqualTo(hashSetOf(1, 2, 3))
-        assertThat(hashSetOf(1, 2, 3)).isEqualTo(iSetOf(1, 2, 3))
+        assertThat(set(1, 2, 3)).isEqualTo(hashSetOf(1, 2, 3))
+        assertThat(hashSetOf(1, 2, 3)).isEqualTo(set(1, 2, 3))
     }
 
     @Test fun `should convert to and from kotlin collections`() {
-        assertThat(arrayListOf(1, 2, 3).toImmutableSet()).isEqualTo(iSetOf(1, 2, 3))
-        assertThat(iSetOf(1, 2, 3).toSet()).isEqualTo(setOf(1, 2, 3))
+        assertThat(arrayListOf(1, 2, 3).toImmutableSet()).isEqualTo(set(1, 2, 3))
+        assertThat(set(1, 2, 3).toSet()).isEqualTo(setOf(1, 2, 3))
     }
 
     @Test fun `should support bulk operations`() {
-        assertThat(iSetOf(1, 2, 3) + iSetOf(4, 5)).isEqualTo(iSetOf(1, 2, 3, 4, 5))
-        assertThat(iSetOf(1, 2, 3) - iSetOf(1, 2)).isEqualTo(iSetOf(3))
+        assertThat(set(1, 2, 3) + set(4, 5)).isEqualTo(set(1, 2, 3, 4, 5))
+        assertThat(set(1, 2, 3) - set(1, 2)).isEqualTo(set(3))
     }
 
     @Test fun `should support contains`() {
-        assertThat(iSetOf(1, 2, 3).contains(1)).isTrue()
-        assertThat(iSetOf(1, 2, 3).contains(4)).isFalse()
+        assertThat(set(1, 2, 3).contains(1)).isTrue()
+        assertThat(set(1, 2, 3).contains(4)).isFalse()
 
-        assertThat(iSetOf(1, 2, 3).containsAll(setOf(1, 2, 3))).isTrue()
-        assertThat(iSetOf(1, 2, 3).containsAll(setOf(1, 2))).isTrue()
-        assertThat(iSetOf(1, 2, 3).containsAll(setOf(1, 2, 3, 4))).isFalse()
+        assertThat(set(1, 2, 3).containsAll(setOf(1, 2, 3))).isTrue()
+        assertThat(set(1, 2, 3).containsAll(setOf(1, 2))).isTrue()
+        assertThat(set(1, 2, 3).containsAll(setOf(1, 2, 3, 4))).isFalse()
     }
 
     @Test fun `should support size`() {
-        assertThat(iSetOf<Int>().size).isEqualTo(0)
-        assertThat(iSetOf<Int>().isEmpty()).isTrue()
+        assertThat(set<Int>().size).isEqualTo(0)
+        assertThat(set<Int>().isEmpty()).isTrue()
 
-        assertThat(iSetOf(1).size).isEqualTo(1)
-        assertThat(iSetOf(1).isEmpty()).isFalse()
+        assertThat(set(1).size).isEqualTo(1)
+        assertThat(set(1).isEmpty()).isFalse()
 
-        assertThat(iSetOf(1, 2, 3).size).isEqualTo(3)
-        assertThat(iSetOf(1, 2, 3).isEmpty()).isFalse()
+        assertThat(set(1, 2, 3).size).isEqualTo(3)
+        assertThat(set(1, 2, 3).isEmpty()).isFalse()
     }
 
     @Test fun `should iterate elements`() {
-        assertThat(iSetOf(1, 2, 3).iterator().asSequence().toSet())
-                .isEqualTo(setOf(1, 2, 3))
+        assertThat(set(1, 2, 3).iterator().asSequence().toSet()).isEqualTo(setOf(1, 2, 3))
     }
 }

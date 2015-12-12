@@ -27,14 +27,14 @@ import org.junit.Test
 
 class ImmutableMapTest : AbstractImmutableMapTest() {
 
-    override fun <K : Comparable<K>, V> iMapOf(elements: List<Pair<K, V>>) = elements.toImmutableMap()
+    override fun <K : Comparable<K>, V> map(elements: List<Pair<K, V>>) = elements.toImmutableMap()
 
     @Test fun `should be produce a readable toString`() {
-        assertThat(iMapOf(pairs(1, 2, 3)).toString()).isEqualTo("ImmutableMap(1=a, 2=b, 3=c)")
+        assertThat(map(pairs(1, 2, 3)).toString()).isEqualTo("ImmutableMap(1=a, 2=b, 3=c)")
     }
 
     @Test fun `should allow construction from sequences`() {
         assertThat(pairs(1, 2, 3).asSequence().toImmutableMap())
-                .isEqualTo(iMapOf(pairs(1, 2, 3)))
+                .isEqualTo(map(pairs(1, 2, 3)))
     }
 }

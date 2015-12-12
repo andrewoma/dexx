@@ -25,8 +25,8 @@ package com.github.andrewoma.dexx.kollection
 import com.github.andrewoma.dexx.collection.HashSet
 import com.github.andrewoma.dexx.collection.TreeSet
 import java.util.*
-import com.github.andrewoma.dexx.collection.SortedSet as DSortedSet
 import com.github.andrewoma.dexx.collection.Set as DSet
+import com.github.andrewoma.dexx.collection.SortedSet as DSortedSet
 
 interface ImmutableSet<E : Any> : Set<E> {
 
@@ -39,7 +39,7 @@ interface ImmutableSet<E : Any> : Set<E> {
     operator fun minus(values: Iterable<E>): ImmutableSet<E>
 }
 
-internal class ImmutableSetAdapter<E : Any>(val underlying: DSet<E>) : ImmutableSet<E> {
+internal class SetAdapter<E : Any>(val underlying: DSet<E>) : ImmutableSet<E> {
 
     override val size: Int
         get() = underlying.size()
@@ -52,13 +52,13 @@ internal class ImmutableSetAdapter<E : Any>(val underlying: DSet<E>) : Immutable
 
     override fun containsAll(elements: Collection<E>) = underlying.asSet().containsAll(elements)
 
-    override fun plus(value: E) = ImmutableSetAdapter(underlying.add(value))
+    override fun plus(value: E) = SetAdapter(underlying.add(value))
 
-    override fun plus(values: Iterable<E>) = ImmutableSetAdapter(values.fold(underlying) { r, e -> r.add(e) })
+    override fun plus(values: Iterable<E>) = SetAdapter(values.fold(underlying) { r, e -> r.add(e) })
 
-    override fun minus(value: E) = ImmutableSetAdapter(underlying.remove(value))
+    override fun minus(value: E) = SetAdapter(underlying.remove(value))
 
-    override fun minus(values: Iterable<E>): ImmutableSet<E> = ImmutableSetAdapter(values.fold(underlying) { r, e -> r.remove(e) })
+    override fun minus(values: Iterable<E>): ImmutableSet<E> = SetAdapter(values.fold(underlying) { r, e -> r.remove(e) })
 
     override fun toString(): String {
         val prefix = "${if (underlying is DSortedSet<*>) "ImmutableSortedSet" else "ImmutableSet"}("
@@ -72,14 +72,14 @@ internal class ImmutableSetAdapter<E : Any>(val underlying: DSet<E>) : Immutable
 
 // Construction
 fun <E : Any> immutableSetOf(vararg elements: E): ImmutableSet<E>
-        = ImmutableSetAdapter(elements.fold(HashSet.empty<E>()) { r, e -> r.add(e) })
+        = SetAdapter(elements.fold(HashSet.empty<E>()) { r, e -> r.add(e) })
 
 fun <E : Comparable<E>> immutableSortedSetOf(vararg elements: E): ImmutableSet<E>
-        = ImmutableSetAdapter(elements.fold(TreeSet.empty<E>()) { r, e -> r.add(e) })
+        = SetAdapter(elements.fold(TreeSet.empty<E>()) { r, e -> r.add(e) })
 
 fun <E : Any> immutableCustomSortedSetOf(selector: (E) -> Comparable<*>?, vararg elements: E): ImmutableSet<E> {
     val ordering = Comparator<E> { e1, e2 -> compareValuesBy(e1, e2, selector) }
-    return ImmutableSetAdapter(elements.fold(TreeSet(ordering)) { r, e -> r.add(e) })
+    return SetAdapter(elements.fold(TreeSet(ordering)) { r, e -> r.add(e) })
 }
 
 // Conversion from Iterables

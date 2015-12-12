@@ -28,13 +28,13 @@ import java.util.*
 import com.github.andrewoma.dexx.collection.Map as DMap
 import com.github.andrewoma.dexx.collection.SortedMap as DSortedMap
 
-interface ImmutableMap<K : Any, V> : Map<K, V> {
+interface ImmutableMap<K : Any, out V> : Map<K, V> {
 
-    fun put(key: K, value: V): ImmutableMap<K, V>
+    fun put(key: K, value: @UnsafeVariance V): ImmutableMap<K, V>
 
-    operator fun plus(entry: Pair<K, V>): ImmutableMap<K, V>
+    operator fun plus(entry: Pair<K, @UnsafeVariance V>): ImmutableMap<K, V>
 
-    operator fun plus(entries: Iterable<Pair<K, V>>): ImmutableMap<K, V>
+    operator fun plus(entries: Iterable<Pair<K, @UnsafeVariance V>>): ImmutableMap<K, V>
 
     operator fun minus(key: K): ImmutableMap<K, V>
 

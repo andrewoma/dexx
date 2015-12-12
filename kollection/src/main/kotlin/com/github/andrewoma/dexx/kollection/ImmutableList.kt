@@ -24,11 +24,11 @@ package com.github.andrewoma.dexx.kollection
 
 import com.github.andrewoma.dexx.collection.Vector
 
-interface ImmutableList<E> : List<E> {
+interface ImmutableList<out E> : List<E> {
 
-    operator fun plus(value: E): ImmutableList<E>
+    operator fun plus(value: @UnsafeVariance E): ImmutableList<E>
 
-    operator fun plus(values: Iterable<E>): ImmutableList<E>
+    operator fun plus(values: Iterable<@UnsafeVariance E>): ImmutableList<E>
 
     fun drop(n: Int): ImmutableList<E>
 

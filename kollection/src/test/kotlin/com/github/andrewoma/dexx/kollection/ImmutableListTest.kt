@@ -170,4 +170,10 @@ class ImmutableListTest {
         assertThat(listOf(1, 2, 3).listIterator().asSequence().toList()).isEqualTo(listOf(1, 2, 3))
         assertThat(listOf(1, 2, 3).listIterator(2).asSequence().toList()).isEqualTo(listOf(3))
     }
+
+    @Test fun `should support variance`() {
+        val list: ImmutableList<Int> = list(1, 2, 3)
+        val listAny: ImmutableList<Any> = list
+        assertThat(listAny).isEqualTo(list)
+    }
 }

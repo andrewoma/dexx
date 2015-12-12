@@ -28,15 +28,15 @@ import java.util.*
 import com.github.andrewoma.dexx.collection.Set as DSet
 import com.github.andrewoma.dexx.collection.SortedSet as DSortedSet
 
-interface ImmutableSet<E : Any> : Set<E> {
+interface ImmutableSet<out E : Any> : Set<E> {
 
-    operator fun plus(value: E): ImmutableSet<E>
+    operator fun plus(value: @UnsafeVariance E): ImmutableSet<E>
 
-    operator fun plus(values: Iterable<E>): ImmutableSet<E>
+    operator fun plus(values: Iterable<@UnsafeVariance E>): ImmutableSet<E>
 
-    operator fun minus(value: E): ImmutableSet<E>
+    operator fun minus(value: @UnsafeVariance E): ImmutableSet<E>
 
-    operator fun minus(values: Iterable<E>): ImmutableSet<E>
+    operator fun minus(values: Iterable<@UnsafeVariance E>): ImmutableSet<E>
 }
 
 internal class SetAdapter<E : Any>(val underlying: DSet<E>) : ImmutableSet<E> {

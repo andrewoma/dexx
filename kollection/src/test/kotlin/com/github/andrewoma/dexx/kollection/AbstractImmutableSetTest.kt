@@ -89,4 +89,10 @@ abstract class AbstractImmutableSetTest {
     @Test fun `should iterate elements`() {
         assertThat(set(1, 2, 3).iterator().asSequence().toSet()).isEqualTo(setOf(1, 2, 3))
     }
+
+    @Test fun `should support variance`() {
+        val set: ImmutableSet<Int> = set(1, 2, 3)
+        val setAny: ImmutableSet<Any> = set
+        assertThat(setAny).isEqualTo(set)
+    }
 }

@@ -103,4 +103,10 @@ abstract class AbstractImmutableMapTest {
     @Test fun `should iterate entries`() {
         assertThat(map(1, 2, 3).entries.map { it.key to it.value }.toSet()).isEqualTo(pairs(1, 2, 3).toSet())
     }
+
+    @Test fun `should support variance in value`() {
+        val map: ImmutableMap<Int, String> = map(1, 2, 3)
+        val mapAny: ImmutableMap<Int, Any> = map
+        assertThat(mapAny).isEqualTo(map)
+    }
 }

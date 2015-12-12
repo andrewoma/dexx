@@ -4,7 +4,7 @@ Dexx Collections are a port of Scala's immutable, persistent collection classes 
 
 _Persistent_ in the context of functional data structures means the data structure preserves the previous version of itself when modified. This means any reference to a collection is effectively immutable. However, modifications can be made by returning a new version of the data structure, leaving the original structure unchanged.
 
-Here's an example using Dexx's Sets (examples are in [Kotlin](http://kotlin.jetbrains.org/) for conciseness, but the collections are pure Java):
+Here's an example using Dexx's Sets (examples are in [Kotlin](https://kotlinlang.org/) for conciseness, but the collections are pure Java):
 ```kotlin
 val set1 = Sets.of(1, 2, 3)
 val set2 = set1.add(4)
@@ -15,6 +15,8 @@ println(set3) // Prints Set(2, 3)
 ```
 
 From the above example we can see that although we've made modifications to `set1` to create `set2` and `set3`, the contents of `set1` remain unchanged.
+
+Note: There's now first class support for Kotlin - see the [kollection module README](kollection) for more information.
 
 #### Why port?
 
@@ -117,25 +119,25 @@ Such transformations are deliberately <b>not</b> supported:
 Here's an example of using lazy evaluation in a functional style with Kotlin:
 
 ```kotlin
-val set = SortedSets.of(1, 2, 3, 4, 5, 6).stream()
+val set = SortedSets.of(1, 2, 3, 4, 5, 6).asSequence()
         .filter { it % 2 == 0 }
         .map { "$it is even" }
         .take(2)
-        .toPersistentSortedSet()
+        .toImmutableSet()
 
 assertEquals(SortedSets.of("2 is even", "4 is even"), set)
 ```
-The example above uses Kotlins in-built extension function that converts any `Iterable` into a `Stream`.
-It also uses the following extension functions to add `Stream<T>.toPersistentSortedSet()` to cleanly convert the stream
+The example above uses Kotlins in-built extension function that converts any `Iterable` into a `Sequence`.
+It also uses the following extension functions to add `Sequence<T>.toImmutableSet()` to cleanly convert the sequence
 back into a Dexx Collection.
 
 ```kotlin
-fun <T, R> Stream<T>.build(builder: Builder<T, R>): R {
+fun <T, R> Sequence<T>.build(builder: Builder<T, R>): R {
     this.forEach { builder.add(it) }
     return builder.build()
 }
 
-fun <T> Stream<T>.toPersistentSortedSet(): SortedSet<T> = build(SortedSets.builder<T>())
+fun <T> Sequence<T>.toImmutableSet(): SortedSet<T> = build(SortedSets.builder<T>())
 ```
 
 #### Performance

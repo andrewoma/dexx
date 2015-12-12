@@ -32,7 +32,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>Dexx collections for Kotlin</name>
-    <artifactId>dexx-kollections</artifactId>
+    <artifactId>kollection</artifactId>
     <packaging>jar</packaging>
 
     <description>Persistent (immutable) collection library for Kotlin</description>

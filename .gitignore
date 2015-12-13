@@ -20,3 +20,4 @@ target
 !.idea/vcs.xml
 collection/build
 kollection/build
+build/

@@ -1,0 +1,84 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.0.0-beta-3595'
+        junitVersion = '4.12'
+        guavaVersion = '14.0.1'
+        assertJVersion = '1.7.0'
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath(
+                "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
+                'com.bmuschko:gradle-nexus-plugin:2.3.1',
+                'net.researchgate:gradle-release:2.1.2',
+                'com.github.ben-manes:gradle-versions-plugin:0.11.3',
+                'com.netflix.nebula:gradle-extra-configurations-plugin:3.0.3'
+        )
+    }
+}
+
+apply plugin: 'net.researchgate.release'
+
+createReleaseTag.dependsOn ':collection:uploadArchives', ':kollection:uploadArchives'
+
+allprojects {
+    group = 'com.github.andrewoma.dexx'
+    apply plugin: 'com.github.ben-manes.versions'
+}
+
+subprojects {
+    apply plugin: 'maven'
+    apply plugin: 'java'
+    apply plugin: 'kotlin'
+    apply from: '../publish.gradle'
+
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
+
+    repositories {
+        mavenCentral()
+    }
+
+    compileKotlin {
+        kotlinOptions.moduleName = "${project.group}.${project.name}"
+    }
+
+    test {
+        exclude '**/Abstract*'
+    }
+}
+
+
+project(':collection') {
+
+    apply plugin: 'nebula.optional-base'
+
+    dependencies {
+        compile "com.intellij:annotations:12.0", optional
+        testCompile(
+                "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+                "junit:junit:$junitVersion",
+                "com.google.guava:guava:$guavaVersion",
+        )
+    }
+}
+
+project(':kollection') {
+
+    dependencies {
+        compile(
+                project(':collection'),
+                "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+                "org.assertj:assertj-core:$assertJVersion",
+        )
+        testCompile(
+                "junit:junit:$junitVersion",
+        )
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}

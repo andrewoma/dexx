@@ -1,0 +1,4 @@
+include 'collection'
+include 'kollection'
+
+rootProject.name = 'dexx'

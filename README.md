@@ -16,7 +16,7 @@ println(set3) // Prints Set(2, 3)
 
 From the above example we can see that although we've made modifications to `set1` to create `set2` and `set3`, the contents of `set1` remain unchanged.
 
-Note: There's now first class support for Kotlin - see the [kollection module README](kollection) for more information.
+Note: There's now first class support for Kotlin - see the [kollection module README](kollection/README.md) for more information.
 
 #### Why port?
 

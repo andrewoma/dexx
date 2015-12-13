@@ -50,6 +50,10 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 * Active development is essentially complete. Further work is expected to be bug fixes and refinements.
 
 #### Release Notes
+* 0.3.1:
+  * Added a native Kotlin api in the kollection module
+  * Converted the build to gradle from maven
+  * Renamed `dexx-collections`` artefact to `collection``
 * 0.2:
   * Add `LinkedLists` support with `ConsList` as the default implementation
   * Add `ArrayList` as an alternative `IndexedList` implementation
@@ -63,13 +67,11 @@ This project is licensed under a MIT license. Portions ported from Scala are Sca
 #### Usage
 
 ##### Adding to your project
-Version 0.2 has been released and is available in Maven Central. You can use it via the following dependency:
-```xml
-<dependency>
-    <groupId>com.github.andrewoma.dexx</groupId>
-    <artifactId>dexx-collections</artifactId>
-    <version>0.2</version>
-</dependency>
+Version 0.3.1 has been released and is available in Maven Central [here](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.github.andrewoma.dexx%22). You can use it via the following gradle dependency:
+
+```groovy
+'com.github.andrewoma.dexx:collection:0.3.1' // For Java
+'com.github.andrewoma.dexx:kollection:0.3.1' // For Kotlin
 ```
 
 ##### Constructing collections

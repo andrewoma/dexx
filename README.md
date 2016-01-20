@@ -145,21 +145,13 @@ fun <T> Sequence<T>.toImmutableSet(): SortedSet<T> = build(SortedSets.builder<T>
 #### Performance
 
 Benchmarking is still a work in progress (all the warnings about JVM benchmarks apply). The results so far
-running on OS X 10.6.8 with JDK 1.6.0_65 are:
-* HashSet is around 3-4 times slower than `java.util.HashSet` for add, remove and contains.
-* TreeSet is around 3-4 times slower than `java.util.TreeSet` for add and remove, but on a par for contains.
-* HashMap and TreeMap have similar performance characteristics HashSet and TreeSet respectively as they share
-  the same underlying implementation.
-* Vector performance relative to `java.util.ArrayList`:
-  * Appending and iteration is slower for small lists, but becomes faster for larger lists
-  * Random access seems to be a constant 2x slower
-  * Prepending is a constant time operation for Vectors (fast), but is linear in ArrayLists
-
-See the section below for how to run the benchmarks for yourself. The output from my development machine
-is [here](/docs/benchmarks.txt).
+running on Mac OS X 10.11.1 x86_64 with JDK 1.8.0_65 (Oracle Corporation 25.65-b01) are [here](/docs/benchmarks.txt).
 
 My conclusions so far are that the collections perform adequately to be used as a drop-in replacement
 for the majority of use cases. While slower, _slow_ is generally referring to millions of operations per second.
+
+In general, mutating methods incur a overhead of 2-5 times that of `java.util` equivalents and
+reading operations are 1-1.5 time slower.
 
 #### Development
 * Dexx is built with gradle. Use `./gradlew install` to build and install into your local repository.

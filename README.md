@@ -162,9 +162,14 @@ My conclusions so far are that the collections perform adequately to be used as 
 for the majority of use cases. While slower, _slow_ is generally referring to millions of operations per second.
 
 #### Development
-* Dexx is currently built with maven. Use `mvn install` to build and install into your local repository.
+* Dexx is built with gradle. Use `./gradlew install` to build and install into your local repository.
+* To run the benchmarks, use `./gradlew check -PdexxTestMode=BENCHMARK --info | grep '^    BENCHMARK:'`.
+* To generate coverage reports, use:
+```
+./gradlew :collection:clean :collection:check :collection:jacocoTestReport
+ open collection/build/jacocoHtml/index.html
+```
 * By default, a quick version of tests are run. Getting better test coverage of `Vectors` requires large
-  collections. To run tests with complete coverage use: `mvn -Ddexx.test.mode=COMPLETE -P cobertura clean cobertura:cobertura`
-* To run the benchmarks, use `mvn -Ddexx.test.mode=BENCHMARK test` (results are lines starting with BENCHMARK).
+  collections. To run tests with complete coverage use: `./gradlew -PdexxTestMode=COMPLETE :collection:clean :collection:check :collection:jacocoTestReport`
 
 [![Build Status](https://travis-ci.org/andrewoma/dexx.svg?branch=master)](https://travis-ci.org/andrewoma/dexx)

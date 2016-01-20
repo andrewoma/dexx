@@ -54,6 +54,7 @@ subprojects {
 project(':collection') {
 
     apply plugin: 'nebula.optional-base'
+    apply plugin: "jacoco"
 
     dependencies {
         compile "com.intellij:annotations:12.0", optional
@@ -62,6 +63,28 @@ project(':collection') {
                 "junit:junit:$junitVersion",
                 "com.google.guava:guava:$guavaVersion",
         )
+    }
+
+    jacoco {
+        toolVersion = "0.7.5.201505241946"
+        reportsDir = file("$buildDir/customJacocoReportDir")
+    }
+
+    jacocoTestReport {
+        reports {
+            xml.enabled false
+            csv.enabled false
+            html.destination "${buildDir}/jacocoHtml"
+        }
+    }
+
+    test {
+        if (project.hasProperty('dexxTestMode')) {
+            maxHeapSize = '2048m'
+            jvmArgs '-server'
+        }
+
+        systemProperty "dexx.test.mode", project.properties['dexxTestMode'] ?: "QUICK"
     }
 }
 

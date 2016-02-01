@@ -94,10 +94,10 @@ project(':kollection') {
         compile(
                 project(':collection'),
                 "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
-                "org.assertj:assertj-core:$assertJVersion",
         )
         testCompile(
                 "junit:junit:$junitVersion",
+                "org.assertj:assertj-core:$assertJVersion",
         )
     }
 }

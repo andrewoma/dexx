@@ -29,14 +29,14 @@ import java.util.Iterator;
 
 /**
  * {@code SortedMaps} is the preferred method of constructing instances of {@code SortedMap}.
- *
+ * <p/>
  * <p>{@link com.github.andrewoma.dexx.collection.TreeMap} is currently constructed in
  * all cases, however this may change in the future.
- *
+ * <p/>
  * <p>{@code SortedMaps} is preferred for construction as:
  * <ul>
- *     <li>It works better in languages that support type inference
- *     <li>It allows future optimisations (e.g. small maps may be dedicated classes which are then upgraded to {@code TreeMaps})
+ * <li>It works better in languages that support type inference
+ * <li>It allows future optimisations (e.g. small maps may be dedicated classes which are then upgraded to {@code TreeMaps})
  * </ul>
  */
 public class SortedMaps {

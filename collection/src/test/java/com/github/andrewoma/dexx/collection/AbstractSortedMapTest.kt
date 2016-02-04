@@ -90,13 +90,8 @@ abstract class AbstractSortedMapTest() : AbstractMapTest() {
         assertNull(buildMap<Int, Int>().last())
     }
 
-    @Test fun <K, V>  sortedWithCustomComparator() {
-        val c = object : Comparator<Int> {
-            @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-            override fun compare(o1: Int, o2: Int): Int {
-                return o1.compareTo(o2) * -1
-            }
-        }
+    @Test fun sortedWithCustomComparator() {
+        val c = Comparator<Int> { o1, o2 -> o1.compareTo(o2) * -1 }
         val builder = mapFactory<Int, Int>(c).newBuilder()
         builder.add(Pair(2, 20))
         builder.add(Pair(1, 10))

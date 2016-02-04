@@ -53,7 +53,7 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 * 0.3.1:
   * Added a native Kotlin api in the kollection module
   * Converted the build to gradle from maven
-  * Renamed `dexx-collections` artefact to `collection``
+  * Renamed `dexx-collections` artefact to `collection`
 * 0.2:
   * Add `LinkedLists` support with `ConsList` as the default implementation
   * Add `ArrayList` as an alternative `IndexedList` implementation

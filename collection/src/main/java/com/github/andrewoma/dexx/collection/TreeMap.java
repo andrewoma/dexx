@@ -40,7 +40,7 @@ import java.util.NoSuchElementException;
 /**
  * {@code TreeMap} is an implementation of {@code SortedMap} based on a
  * <a href="http://en.wikipedia.org/wiki/Red%E2%80%93black_tree">red-black tree</a>.
- *
+ * <p/>
  * <p>{@code TreeMaps} can be constructed with a {@link com.github.andrewoma.dexx.collection.KeyFunction}
  * to provide modest memory saving per node. See {@link com.github.andrewoma.dexx.collection.DerivedKeyHashMap}
  * for an example of using a key function.

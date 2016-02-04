@@ -40,12 +40,12 @@ import java.util.NoSuchElementException;
 
 /**
  * Vector is a general-purpose, immutable data structure.
- *
+ * <p/>
  * <p>It provides random access and updates in effectively constant time, as well as very fast append and prepend.
- *
+ * <p/>
  * <p>It is backed by a little endian bit-mapped vector trie with a branching factor of 32.  Locality is very good, but not
  * contiguous, which is good for very large sequences.
- *
+ * <p/>
  * <p>See Scala's <a href="http://www.scala-lang.org/docu/files/collections-api/collections_15.html">documentation</a>
  * for more information on the implementation.
  */

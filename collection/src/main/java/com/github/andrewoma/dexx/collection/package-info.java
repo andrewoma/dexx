@@ -22,36 +22,36 @@
 
 /**
  * Dexx collections are a port of Scala's immutable, persistent collection classes to pure Java.
- *
+ * <p/>
  * <p>Persistent in the context of functional data structures means the data structure preserves
  * the previous version of itself when modified. This means any reference to a collection is effectively immutable.
  * However, modifications can be made by returning a new version of the data structure, leaving the original
  * structure unchanged.
- *
+ * <p/>
  * <p>The following diagram shows the key interfaces (blue) and classes (green) in this package:
  * <p><img alt="Dexx collections overview" src="https://github.com/andrewoma/dexx/raw/master/docs/dexxcollections.png">
- *
+ * <p/>
  * <p><b>Usage Notes:</b>
  * <ul>
- *     <li>Each of the collection types has an associated companion class (plural form) that is the
- *     preferred method of construction. e.g. To create a {@link com.github.andrewoma.dexx.collection.Set},
- *     use the {@link com.github.andrewoma.dexx.collection.Sets} class.
- *
- *     <li>Many of the collections have the same name as their mutable {@code java.util} counterparts, however
- *     they are not directly related. This is due to the interfaces being fundamentally incompatible as
- *     operations the "modify" collections must return a new instance for persistent collections.
- *
- *     <li>Collections can be viewed as their {@code java.util} counterpart by using {@code as...()} methods.
- *     e.g. {@link com.github.andrewoma.dexx.collection.Set#asSet()}. Such views are immutable.
- *
- *     <li>Collections can be constructed from {@code java.util} collections by using the {@code copyOf(...)}
- *     methods in the companion classes. e.g. {@link com.github.andrewoma.dexx.collection.Sets#copyOf(java.lang.Iterable)}.
- *
- *     <li>While operations on collections often return a new instance that reflects the modifications,
- *     this is not a guarantee. e.g. Attempting to remove an element from a {@code Set} that does not exist
- *     may return the same collection as no modifications were required.
+ * <li>Each of the collection types has an associated companion class (plural form) that is the
+ * preferred method of construction. e.g. To create a {@link com.github.andrewoma.dexx.collection.Set},
+ * use the {@link com.github.andrewoma.dexx.collection.Sets} class.
+ * <p/>
+ * <li>Many of the collections have the same name as their mutable {@code java.util} counterparts, however
+ * they are not directly related. This is due to the interfaces being fundamentally incompatible as
+ * operations the "modify" collections must return a new instance for persistent collections.
+ * <p/>
+ * <li>Collections can be viewed as their {@code java.util} counterpart by using {@code as...()} methods.
+ * e.g. {@link com.github.andrewoma.dexx.collection.Set#asSet()}. Such views are immutable.
+ * <p/>
+ * <li>Collections can be constructed from {@code java.util} collections by using the {@code copyOf(...)}
+ * methods in the companion classes. e.g. {@link com.github.andrewoma.dexx.collection.Sets#copyOf(java.lang.Iterable)}.
+ * <p/>
+ * <li>While operations on collections often return a new instance that reflects the modifications,
+ * this is not a guarantee. e.g. Attempting to remove an element from a {@code Set} that does not exist
+ * may return the same collection as no modifications were required.
  * </ul>
- *
+ * <p/>
  * <p>See the <a href="https://github.com/andrewoma/dexx">project site</a> for further examples and information.
  */
 package com.github.andrewoma.dexx.collection;

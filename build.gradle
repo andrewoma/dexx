@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = '1.0.0-beta-3595'
+        kotlinVersion = '1.0.0-rc-1036'
         junitVersion = '4.12'
         guavaVersion = '14.0.1'
         assertJVersion = '1.7.0'
@@ -60,6 +60,7 @@ project(':collection') {
         compile "com.intellij:annotations:12.0", optional
         testCompile(
                 "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+                "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion",
                 "junit:junit:$junitVersion",
                 "com.google.guava:guava:$guavaVersion",
         )
@@ -98,6 +99,7 @@ project(':kollection') {
         testCompile(
                 "junit:junit:$junitVersion",
                 "org.assertj:assertj-core:$assertJVersion",
+                "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion",
         )
     }
 }

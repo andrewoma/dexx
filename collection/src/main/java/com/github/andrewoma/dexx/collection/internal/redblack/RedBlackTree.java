@@ -250,11 +250,9 @@ public class RedBlackTree<K, V> {
             int rank = count(tree.getLeft()) + 1;
             if (idx < rank) {
                 return balanceLeft(isBlackTree(tree), tree.getKey(kf), tree.getValue(), updNth(tree.getLeft(), idx, k, v, overwrite), tree.getRight());
-            }
-            else if (idx > rank) {
+            } else if (idx > rank) {
                 return balanceRight(isBlackTree(tree), tree.getKey(kf), tree.getValue(), tree.getLeft(), updNth(tree.getRight(), idx - rank, k, v, overwrite));
-            }
-            else if (overwrite) {
+            } else if (overwrite) {
                 return mkTree(isBlackTree(tree), k, v, tree.getLeft(), tree.getRight());
             }
             return tree;
@@ -426,7 +424,8 @@ public class RedBlackTree<K, V> {
         if (n > count) return doDrop(tree.getRight(), n - count - 1);
         Tree<K, V> newLeft = doDrop(tree.getLeft(), n);
         if (newLeft == tree.getLeft()) return tree;
-        else if (newLeft == null) return updNth(tree.getRight(), n - count - 1, tree.getKey(kf), tree.getValue(), false);
+        else if (newLeft == null)
+            return updNth(tree.getRight(), n - count - 1, tree.getKey(kf), tree.getValue(), false);
         else return rebalance(tree, newLeft, tree.getRight());
     }
 

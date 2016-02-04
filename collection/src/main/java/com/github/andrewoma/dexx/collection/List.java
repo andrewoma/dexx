@@ -27,13 +27,13 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * {@code List} defines an sequence of elements where the order is preserved.
- *
+ * <p/>
  * <p>There are two sub-interfaces of {@code List} that define very different performance characteristics:
  * <ul>
  * <li>{@link IndexedList}: Guarantees fast random access to elements in the {@code List} via indexes.
  * <li>{@link LinkedList}: Guarantees fast {@link #prepend(Object)} and {@link #tail()} operations.
  * </ul>
- *
+ * <p/>
  * <p>The performance of other operations is unspecified - care must be taken to use specific implementations
  * using the appropriate access patterns.
  */

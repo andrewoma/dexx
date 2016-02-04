@@ -25,15 +25,12 @@ package com.github.andrewoma.dexx.collection.performance
 import com.github.andrewoma.dexx.collection.Builder
 import com.github.andrewoma.dexx.collection.Vector
 import com.github.andrewoma.dexx.collection.mutable.MutableArrayList
-import com.github.andrewoma.dexx.collection.operators.get
-import com.github.andrewoma.dexx.collection.operators.set
 import com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result
 import org.junit.Test
-import kotlin.util.measureTimeNano
+import kotlin.system.measureNanoTime
 import com.github.andrewoma.dexx.collection.List as DList
-import kotlin.Set as JSet
 
-public open class IndexedListPerformanceTest : PerformanceMeasurement {
+open class IndexedListPerformanceTest : PerformanceMeasurement {
 
     @Test fun append() {
         append(size = 100, operations = 10000, iterations = 1000)
@@ -118,7 +115,7 @@ public open class IndexedListPerformanceTest : PerformanceMeasurement {
         var list = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in 1..operations) {
                 list = list.append(i)
                 result += i
@@ -137,7 +134,7 @@ public open class IndexedListPerformanceTest : PerformanceMeasurement {
         var list = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in 1..operations) {
                 list = list.prepend(i)
                 result += i
@@ -156,7 +153,7 @@ public open class IndexedListPerformanceTest : PerformanceMeasurement {
         var list = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in operationInts) {
                 result += list[i].toLong()
             }
@@ -174,7 +171,7 @@ public open class IndexedListPerformanceTest : PerformanceMeasurement {
         var list = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in operationInts) {
                 list[i] = i
                 result += i
@@ -193,7 +190,7 @@ public open class IndexedListPerformanceTest : PerformanceMeasurement {
         var list = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in list) {
                 result += i
             }

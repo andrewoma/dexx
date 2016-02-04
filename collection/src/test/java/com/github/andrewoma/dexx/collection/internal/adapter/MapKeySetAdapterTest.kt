@@ -24,7 +24,7 @@ package com.github.andrewoma.dexx.collection.internal.adapter
 
 import com.github.andrewoma.dexx.collection.HashMap
 
-public class MapKeySetAdapterTest : SetAdapterTest() {
+class MapKeySetAdapterTest : SetAdapterTest() {
 
     override fun set(vararg values: Int): MutableSet<Int> {
         val map = HashMap.factory<Int, Int>().newBuilder()

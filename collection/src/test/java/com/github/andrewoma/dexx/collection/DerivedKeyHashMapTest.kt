@@ -24,7 +24,6 @@ package com.github.andrewoma.dexx.collection
 
 import com.github.andrewoma.dexx.collection.internal.base.AbstractMap
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractSelfBuilder
-import com.github.andrewoma.dexx.collection.operators.get
 import org.junit.Test
 import java.util.*
 import kotlin.test.assertEquals
@@ -70,14 +69,12 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
     }
 
     override fun <K, V> mapFactory(comparator: Comparator<in K>?): BuilderFactory<Pair<K, V>, out Map<K, V>> {
-        return object : BuilderFactory<Pair<K, V>, Map<K, V>> {
-            override fun newBuilder(): Builder<Pair<K, V>, Map<K, V>> {
-                return object : AbstractSelfBuilder<Pair<K, V>, Map<K, V>>(WrappedDerivedKeyHashMap<K, V>(empty())) {
-                    @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-                    override fun add(element: Pair<K, V>?): Builder<Pair<K, V>, Map<K, V>> {
-                        result = result!!.put(element!!.component1()!!, element.component2()!!)
-                        return this
-                    }
+        return BuilderFactory<Pair<K, V>, Map<K, V>> {
+            object : AbstractSelfBuilder<Pair<K, V>, Map<K, V>>(WrappedDerivedKeyHashMap<K, V>(empty())) {
+                @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+                override fun add(element: Pair<K, V>?): Builder<Pair<K, V>, Map<K, V>> {
+                    result = result!!.put(element!!.component1()!!, element.component2()!!)
+                    return this
                 }
             }
         }
@@ -89,12 +86,7 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
         map = map.put("2", ClassWithKey("2", "B"))
 
         val actual = java.util.HashSet<String>()
-        val f = object : Function<Pair<String, DerivedKeyHashMapTest.ClassWithKey>, Unit> {
-            @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-            override fun invoke(parameter: Pair<String, DerivedKeyHashMapTest.ClassWithKey>?) {
-                actual.add(parameter!!.component1()!!)
-            }
-        }
+        val f = Function<Pair<String, DerivedKeyHashMapTest.ClassWithKey>, Unit> { parameter -> actual.add(parameter!!.component1()!!) }
         map.forEach(f)
         assertEquals(setOf("1", "2"), actual)
     }
@@ -120,9 +112,9 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
 
     @Test fun withIdentityKeyFunction() {
         var map = DerivedKeyHashMap.factory<ClassForIdentityKey, ClassForIdentityKey>(IdentityKeyFunction()).newBuilder().build()
-        val o1 = ClassForIdentityKey("1", "2")
+        val o1 = ClassForIdentityKey("1")
         map = map.put(o1, o1)
-        val o2 = ClassForIdentityKey("1", "3")
+        val o2 = ClassForIdentityKey("1")
         map = map.put(o2, o2)
         assertEquals(1, map.size())
         assertEquals(Pair(o2, o2), map.iterator().next())
@@ -130,14 +122,9 @@ class DerivedKeyHashMapTest : AbstractMapTest(supportsNullValues = false) {
 
     data class ClassWithKey(val key: String, val value: String)
 
-    val keyFunction = object : KeyFunction<String, ClassWithKey> {
-        @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-        override fun key(value: ClassWithKey): String {
-            return value.key
-        }
-    }
+    val keyFunction = KeyFunction<String, DerivedKeyHashMapTest.ClassWithKey> { value -> value.key }
 
-    class ClassForIdentityKey(val key: String, val value: String) {
+    class ClassForIdentityKey(val key: String) {
         override fun equals(other: Any?): Boolean = other is ClassForIdentityKey && other.key == key
         override fun hashCode(): Int = key.hashCode()
     }

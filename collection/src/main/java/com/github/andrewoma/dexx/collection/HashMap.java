@@ -32,7 +32,7 @@ import java.util.Iterator;
 
 /**
  * {@code HashMap} is an implementation of {@code Map} based on a hash trie.
- *
+ * <p/>
  * <p>The underlying implementation is a port of Scala's HashMap which is an implementation of a
  * <a href="http://en.wikipedia.org/wiki/Hash_array_mapped_trie">hash array mapped trie.</a>
  */

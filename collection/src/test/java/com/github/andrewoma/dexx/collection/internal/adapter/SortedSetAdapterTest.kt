@@ -28,7 +28,7 @@ import org.junit.Test
 import java.util.*
 import kotlin.test.assertEquals
 
-public class SortedSetAdapterTest : SetAdapterTest() {
+class SortedSetAdapterTest : SetAdapterTest() {
 
     override fun set(vararg values: Int) = SortedSets.copyOf(values.toList()).asSortedSet()
 
@@ -104,12 +104,7 @@ public class SortedSetAdapterTest : SetAdapterTest() {
     }
 
     @Test fun sortedWithCustomComparator() {
-        val c = object : Comparator<Int> {
-            @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-            override fun compare(o1: Int, o2: Int): Int {
-                return o1.compareTo(o2) * -1
-            }
-        }
+        val c = Comparator<Int> { o1, o2 -> o1.compareTo(o2) * -1 }
         val set = TreeSet<Int>(c).add(2).add(1).add(3).add(7).add(4).asSortedSet()
 
         assertEquals(listOf(7, 4, 3, 2, 1), set.toList())

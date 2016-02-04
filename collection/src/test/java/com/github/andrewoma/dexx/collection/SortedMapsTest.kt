@@ -35,12 +35,7 @@ class SortedMapsTest {
         return builder.build()
     }
 
-    val c = object : Comparator<Int> {
-        @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-        override fun compare(o1: Int, o2: Int): Int {
-            return o1.compareTo(o2) * -1
-        }
-    }
+    val c = Comparator<Int> { o1, o2 -> o1.compareTo(o2) * -1 }
 
     private fun <K, V> build(comparator: Comparator<in K>?, vararg ts: kotlin.Pair<K, V>): SortedMap<K, V> {
         val builder = TreeMap.factory<K, V>(comparator, null).newBuilder()

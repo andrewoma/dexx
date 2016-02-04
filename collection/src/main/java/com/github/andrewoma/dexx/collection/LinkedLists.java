@@ -28,10 +28,10 @@ import java.util.Iterator;
 
 /**
  * {@code LinkedLists} is the preferred method of constructing instances of {@code LinkedList}.
- *
+ * <p/>
  * <p>{@link com.github.andrewoma.dexx.collection.ConsList} is currently constructed in
  * all cases, however this may change in the future.
- *
+ * <p/>
  * <p>{@code LinkedLists} is preferred for construction as:
  * <ul>
  * <li>It works better in languages that support type inference

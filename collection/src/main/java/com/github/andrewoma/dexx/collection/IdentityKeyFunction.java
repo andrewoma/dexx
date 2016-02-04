@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * {@code IdentityKeyFunction} is a {@code KeyFunction} where the value can be used as a key.
- *
+ * <p/>
  * <p>This is useful in {@code DerivedKeyHashMap} instances where the value defines {@code equals()}
  * and {@code hashCode()} methods that only use the key.
  */

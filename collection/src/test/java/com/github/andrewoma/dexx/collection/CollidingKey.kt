@@ -30,5 +30,5 @@ class CollidingKey(val hashCode: Int, val key: Int) : Comparable<CollidingKey> {
 
     override fun compareTo(other: CollidingKey) = key.compareTo(other.key)
 
-    override fun toString() = "CollidingKey(" + "hashCode=" + hashCode + ", key=" + key + ')'
+    override fun toString() = "CollidingKey(hashCode=$hashCode, key=$key)"
 }

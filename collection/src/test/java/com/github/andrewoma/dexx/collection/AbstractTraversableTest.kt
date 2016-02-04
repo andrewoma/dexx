@@ -72,7 +72,7 @@ abstract class AbstractTraversableTest() {
 
     @Test fun singleForEach() {
         val actual = hashSetOf<Int>()
-        build<Int>(1).forEach { actual.add(it!!) }
+        build(1).forEach { actual.add(it!!) }
         assertEquals(setOf(1), actual)
     }
 
@@ -120,12 +120,7 @@ abstract class AbstractTraversableTest() {
     }
 
     @Test fun toSortedSetWithComparator() {
-        val comparator = object : Comparator<Int> {
-            @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-            override fun compare(o1: Int, o2: Int): Int {
-                return o1.compareTo(o2) * -1
-            }
-        }
+        val comparator = Comparator<Int> { o1, o2 -> o1.compareTo(o2) * -1 }
 
         assertEquals(TreeSet.factory<Int>(comparator).newBuilder().addAll(1, 2, 3).build(), build(3, 1, 2).toSortedSet(comparator))
     }

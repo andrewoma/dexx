@@ -22,7 +22,11 @@
 
 package com.github.andrewoma.dexx.collection.mutable;
 
-import com.github.andrewoma.dexx.collection.*;
+import com.github.andrewoma.dexx.collection.Builder;
+import com.github.andrewoma.dexx.collection.BuilderFactory;
+import com.github.andrewoma.dexx.collection.Map;
+import com.github.andrewoma.dexx.collection.Pair;
+import com.github.andrewoma.dexx.collection.SortedMap;
 import com.github.andrewoma.dexx.collection.internal.base.AbstractSortedMap;
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractBuilder;
 import org.jetbrains.annotations.NotNull;

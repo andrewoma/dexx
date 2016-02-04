@@ -29,7 +29,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 
-public open class SetAdapterTest {
+open class SetAdapterTest {
     open fun set(vararg values: Int) = Sets.copyOf(values.toList()).asSet()
 
     @Test fun equals() {
@@ -55,7 +55,6 @@ public open class SetAdapterTest {
         val set = set(1, 2, 3)
         assertTrue(set.contains(1))
         assertFalse(set.contains(4))
-        assertFalse(set.containsRaw("foo"))
     }
 
     @Test fun toArray() {

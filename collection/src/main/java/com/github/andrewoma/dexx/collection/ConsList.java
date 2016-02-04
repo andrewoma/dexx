@@ -34,11 +34,11 @@ import java.util.NoSuchElementException;
 /**
  * {@code ConsList} is a functional {@link com.github.andrewoma.dexx.collection.LinkedList} implementation
  * that constructs a list by prepending an element to another list.
- *
+ * <p/>
  * <p><b>WARNING:</b> Appending to a {@code ConsList} results in copying the entire list - always
  * use a {@link com.github.andrewoma.dexx.collection.Builder} when appending. Likewise,
  * operations like {@link #set(int, Object)} will result in copying portions of the list.
- *
+ * <p/>
  * <p>If there is any doubt as to the access patterns for using a {@code List}, use a {@link com.github.andrewoma.dexx.collection.Vector}
  * instead.
  */

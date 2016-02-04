@@ -34,7 +34,7 @@ import com.github.andrewoma.dexx.collection.Pair as DPair
 /**
  *
  */
-public open class MapAdapterEntrySetTest {
+open class MapAdapterEntrySetTest {
     open fun map(vararg values: Pair<Int, Int>): MutableSet<MutableMap.MutableEntry<Int, Int>> {
         val builder = HashMap.factory<Int, Int>().newBuilder()
         for (pair in values) {
@@ -100,7 +100,6 @@ public open class MapAdapterEntrySetTest {
         val set = map(1 to 1, 2 to 2, 3 to 3)
         assertTrue(set.contains(e(1 to 1)))
         assertFalse(set.contains(e(4  to 4)))
-        assertFalse(set.containsRaw(""))
     }
 
     @Test fun toArray() {

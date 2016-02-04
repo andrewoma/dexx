@@ -27,12 +27,7 @@ import java.util.*
 import kotlin.test.assertEquals
 
 class SortedSetsTest {
-    val c = object : Comparator<Int> {
-        @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-        override fun compare(o1: Int, o2: Int): Int {
-            return o1.compareTo(o2) * -1
-        }
-    }
+    val c = Comparator<Int> { o1, o2 -> o1.compareTo(o2) * -1 }
 
     private fun <T> build(comparator: Comparator<in T>?, vararg ts: T): SortedSet<T> {
         val builder = TreeSet.factory<T>(comparator).newBuilder()
@@ -59,7 +54,7 @@ class SortedSetsTest {
     }
 
     @Test fun ofWithComparator() {
-        assertEquals(build<Int>(c), SortedSets.of<Int>(c))
+        assertEquals(build(c), SortedSets.of(c))
         assertEquals(build(c, 1), SortedSets.of(c, 1))
         assertEquals(build(c, 1, 2), SortedSets.of(c, 1, 2))
         assertEquals(build(c, 1, 2, 3), SortedSets.of(c, 1, 2, 3))

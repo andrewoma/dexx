@@ -27,11 +27,10 @@ import com.github.andrewoma.dexx.collection.HashSet
 import com.github.andrewoma.dexx.collection.mutable.MutableHashSet
 import com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result
 import org.junit.Test
-import kotlin.util.measureTimeNano
+import kotlin.system.measureNanoTime
 import com.github.andrewoma.dexx.collection.Set as DSet
-import kotlin.Set as JSet
 
-public open class SetPerformanceTest : PerformanceMeasurement {
+open class SetPerformanceTest : PerformanceMeasurement {
 
     @Test fun add() {
         add(size = 100, operations = 10000, iterations = 1000)
@@ -94,7 +93,7 @@ public open class SetPerformanceTest : PerformanceMeasurement {
         var set = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in operationInts) {
                 set = set.add(i)
                 result += i
@@ -113,7 +112,7 @@ public open class SetPerformanceTest : PerformanceMeasurement {
         var set = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in operationInts) {
                 val found = set.contains(i)
                 result += if (found) 1 else 0
@@ -132,7 +131,7 @@ public open class SetPerformanceTest : PerformanceMeasurement {
         var set = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in operationInts) {
                 set = set.remove(i)
                 result += i

@@ -66,7 +66,7 @@ public class Adapters {
         // Estimate size of array; be prepared to see more or fewer elements
         int size = traversable.size();
         final T[] result = a.length >= size ? a : (T[]) java.lang.reflect.Array.newInstance(a.getClass().getComponentType(), size);
-        final int[] count = new int[] {0};
+        final int[] count = new int[]{0};
 
         traversable.forEach(new Function<E, Object>() {
             @Override

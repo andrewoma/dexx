@@ -25,6 +25,7 @@ package com.github.andrewoma.dexx.kollection
 import com.github.andrewoma.dexx.collection.HashMap
 import com.github.andrewoma.dexx.collection.TreeMap
 import java.util.*
+import kotlin.comparisons.compareValuesBy
 import com.github.andrewoma.dexx.collection.Map as DMap
 import com.github.andrewoma.dexx.collection.SortedMap as DSortedMap
 

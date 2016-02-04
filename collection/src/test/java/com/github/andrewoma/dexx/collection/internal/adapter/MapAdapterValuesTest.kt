@@ -32,7 +32,7 @@ import com.github.andrewoma.dexx.collection.Pair as DPair
 /**
  * TODO ... should values implement equals() and hashCode()? Java's doesn't ...
  */
-public open class MapAdapterValuesTest {
+open class MapAdapterValuesTest {
     open fun values(vararg values: Int): MutableCollection<Int> {
         val builder = HashMap.factory<Int, Int>().newBuilder()
         for (value in values) {

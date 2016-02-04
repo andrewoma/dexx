@@ -135,7 +135,7 @@ public abstract class AbstractTraversable<E> implements Traversable<E> {
     @Override
     public Object[] toArray() {
         final Object[] result = new Object[size()];
-        final int[] count = new int[] {0};
+        final int[] count = new int[]{0};
         forEach(new Function<E, Object>() {
             @Override
             public Object invoke(E parameter) {
@@ -156,7 +156,7 @@ public abstract class AbstractTraversable<E> implements Traversable<E> {
         @SuppressWarnings("unchecked")
         final E[] result = array.length >= size ? array : (E[]) java.lang.reflect.Array.newInstance(array.getClass().getComponentType(), size);
 
-        final int[] count = new int[] {0};
+        final int[] count = new int[]{0};
         forEach(new Function<E, Object>() {
             @Override
             public Object invoke(E parameter) {

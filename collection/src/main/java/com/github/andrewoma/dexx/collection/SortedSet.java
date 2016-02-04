@@ -70,6 +70,7 @@ public interface SortedSet<E> extends Set<E> {
 
     /**
      * Returns the bottom of the set starting from the key specified.
+     *
      * @param inclusive if true, the key will be included in the result, otherwise it will be excluded
      */
     @NotNull
@@ -77,6 +78,7 @@ public interface SortedSet<E> extends Set<E> {
 
     /**
      * Returns the top of the set up until the key specified.
+     *
      * @param inclusive if true, the key will be included in the result, otherwise it will be excluded
      */
     @NotNull
@@ -84,8 +86,9 @@ public interface SortedSet<E> extends Set<E> {
 
     /**
      * Returns a subset of the set between the {@code from} and {@code to} keys specified.
+     *
      * @param fromInclusive if true, the key will be included in the result, otherwise it will be excluded
-     * @param toInclusive if true, the key will be included in the result, otherwise it will be excluded
+     * @param toInclusive   if true, the key will be included in the result, otherwise it will be excluded
      */
     @NotNull
     SortedSet<E> range(@NotNull E from, boolean fromInclusive, @NotNull E to, boolean toInclusive);

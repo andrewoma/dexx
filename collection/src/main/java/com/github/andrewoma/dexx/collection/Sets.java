@@ -28,14 +28,14 @@ import java.util.Iterator;
 
 /**
  * {@code Sets} is the preferred method of constructing instances of {@code Set}.
- *
+ * <p/>
  * <p>{@link com.github.andrewoma.dexx.collection.HashSet} is currently constructed in
  * all cases, however this may change in the future.
- *
+ * <p/>
  * <p>{@code Sets} is preferred for construction as:
  * <ul>
- *     <li>It works better in languages that support type inference
- *     <li>It allows future optimisations (e.g. small sets be dedicated classes which are then upgraded to {@code HashSets})
+ * <li>It works better in languages that support type inference
+ * <li>It allows future optimisations (e.g. small sets be dedicated classes which are then upgraded to {@code HashSets})
  * </ul>
  */
 public class Sets {

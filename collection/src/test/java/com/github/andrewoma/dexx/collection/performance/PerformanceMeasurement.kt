@@ -27,12 +27,11 @@ import java.security.SecureRandom
 import java.util.*
 import kotlin.test.assertEquals
 import com.github.andrewoma.dexx.collection.Set as DSet
-import kotlin.Set as JSet
 
-public interface PerformanceMeasurement {
-    data public class Result(val nanoDuration: Long, val result: Long)
+interface PerformanceMeasurement {
+    data class Result(val nanoDuration: Long, val result: Long)
 
-    public fun uniqueRandomInts(size: Int): IntArray {
+    fun uniqueRandomInts(size: Int): IntArray {
         val random = SecureRandom()
         val generated = LinkedHashSet<Int>()
         while (generated.size < size) {
@@ -48,7 +47,7 @@ public interface PerformanceMeasurement {
         return ints
     }
 
-    public fun randomInts(size: Int): IntArray {
+    fun randomInts(size: Int): IntArray {
         val random = SecureRandom()
         val ints = IntArray(size)
         for (i in 0..size - 1) {
@@ -58,7 +57,7 @@ public interface PerformanceMeasurement {
         return ints
     }
 
-    public fun randomAccesses(size: Int, data: IntArray, returnValue: Boolean): IntArray {
+    fun randomAccesses(size: Int, data: IntArray, returnValue: Boolean): IntArray {
         val random = SecureRandom()
         val accesses = IntArray(size)
         for (i in 0..size - 1) {

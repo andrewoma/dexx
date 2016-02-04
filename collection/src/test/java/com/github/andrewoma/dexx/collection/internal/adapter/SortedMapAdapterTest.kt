@@ -29,7 +29,7 @@ import kotlin.test.assertEquals
 import com.github.andrewoma.dexx.collection.Pair as DPair
 
 
-public open class SortedMapAdapterTest : MapAdapterTest() {
+open class SortedMapAdapterTest : MapAdapterTest() {
     override fun map(vararg values: Pair<Int, Int>): SortedMap<Int, Int> {
         val builder = TreeMap.factory<Int, Int>(null, null).newBuilder()
         for (pair in values) {
@@ -115,13 +115,8 @@ public open class SortedMapAdapterTest : MapAdapterTest() {
         // assertNull(map().comparator())
     }
 
-    @Test fun <K, V>  sortedWithCustomComparator() {
-        val c = object : Comparator<Int> {
-            @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-            override fun compare(o1: Int, o2: Int): Int {
-                return o1.compareTo(o2) * -1
-            }
-        }
+    @Test fun sortedWithCustomComparator() {
+        val c = Comparator<Int> { o1, o2 -> o1.compareTo(o2) * -1 }
         val map = TreeMap<Int, Int>(c, null).put(2, 20).put(1, 10).put(3, 30).put(7, 70).put(4, 40).asSortedMap()
         val actual = map.map { it.component1() }
 

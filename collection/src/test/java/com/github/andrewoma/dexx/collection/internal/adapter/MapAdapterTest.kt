@@ -31,7 +31,7 @@ import kotlin.test.assertTrue
 import com.github.andrewoma.dexx.collection.Pair as DPair
 
 
-public open class MapAdapterTest {
+open class MapAdapterTest {
     open fun map(vararg values: Pair<Int, Int>): MutableMap<Int, Int> {
         val builder = HashMap.factory<Int, Int>().newBuilder()
         for (pair in values) {
@@ -64,15 +64,13 @@ public open class MapAdapterTest {
         assertTrue(map.containsKey(1))
         assertFalse(map.containsKey(4))
         assertFalse(map.containsKey(10))
-        assertFalse(map.containsKeyRaw("foo"))
     }
 
     @Test fun get() {
         val map = map(1 to 10, 2 to 20, 3 to 30)
-        assertEquals(10, map.get(1))
-        assertNull(map.get(4))
-        assertNull(map.get(10))
-        assertNull(map.getRaw("foo"))
+        assertEquals(10, map[1])
+        assertNull(map[4])
+        assertNull(map[10])
     }
 
     @Test fun containsValue() {
@@ -80,7 +78,6 @@ public open class MapAdapterTest {
         assertTrue(map.containsValue(10))
         assertFalse(map.containsValue(40))
         assertFalse(map.containsValue(1))
-        assertFalse(map.containsValueRaw("foo"))
     }
 
     @Test(expected = UnsupportedOperationException::class) fun put() {

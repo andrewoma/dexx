@@ -22,7 +22,6 @@
 
 package com.github.andrewoma.dexx.collection
 
-import com.github.andrewoma.dexx.collection.operators.get
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

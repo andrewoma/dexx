@@ -25,6 +25,7 @@ package com.github.andrewoma.dexx.kollection
 import com.github.andrewoma.dexx.collection.HashSet
 import com.github.andrewoma.dexx.collection.TreeSet
 import java.util.*
+import kotlin.comparisons.compareValuesBy
 import com.github.andrewoma.dexx.collection.Set as DSet
 import com.github.andrewoma.dexx.collection.SortedSet as DSortedSet
 
@@ -90,7 +91,7 @@ fun <E : Comparable<E>> Iterable<E>.toImmutableSortedSet(): ImmutableSet<E>
         = immutableSortedSetOf<E>() + this
 
 fun <E : Any> Iterable<E>.toImmutableSortedSet(selector: (E) -> Comparable<*>?): ImmutableSet<E>
-        = immutableCustomSortedSetOf<E>(selector) + this
+        = immutableCustomSortedSetOf(selector) + this
 
 // Conversion from Sequences
 fun <E : Any> Sequence<E>.toImmutableSet(): ImmutableSet<E>
@@ -100,5 +101,5 @@ fun <E : Comparable<E>> Sequence<E>.toImmutableSortedSet(): ImmutableSet<E>
         = immutableSortedSetOf<E>() + this.asIterable()
 
 fun <E : Any> Sequence<E>.toImmutableSortedSet(selector: (E) -> Comparable<*>?): ImmutableSet<E>
-        = immutableCustomSortedSetOf<E>(selector) + this.asIterable()
+        = immutableCustomSortedSetOf(selector) + this.asIterable()
 

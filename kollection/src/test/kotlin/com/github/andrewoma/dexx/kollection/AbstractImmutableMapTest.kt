@@ -24,6 +24,7 @@ package com.github.andrewoma.dexx.kollection
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import java.util.*
 
 abstract class AbstractImmutableMapTest {
 
@@ -65,7 +66,7 @@ abstract class AbstractImmutableMapTest {
 
     @Test fun `should convert to and from kotlin collections`() {
         assertThat(pairs(1, 2, 3).toImmutableMap()).isEqualTo(map(1, 2, 3))
-        assertThat(map(1, 2, 3).toLinkedMap()).isEqualTo(pairs(1, 2, 3).toMap())
+        assertThat(LinkedHashMap(map(1, 2, 3))).isEqualTo(pairs(1, 2, 3).toMap())
     }
 
     @Test fun `should support bulk operations`() {

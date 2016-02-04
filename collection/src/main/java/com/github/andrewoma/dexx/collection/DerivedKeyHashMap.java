@@ -32,10 +32,10 @@ import java.util.Iterator;
 
 /**
  * {@code DerivedKeyHashMap} is a {@code HashMap} variant where the key for the {@code Map} is derived from the value stored.
- *
+ * <p/>
  * <p>By deriving the key it is possible to reduce the memory overhead per node in the map (assuming the key is a
  * primitive field in the value object). e.g.
- *
+ * <p/>
  * <pre> {@code
  * static class Value {
  *     int key;
@@ -54,13 +54,13 @@ import java.util.Iterator;
  * value.value = 100;
  * map = map.put(value.key, value);
  * }</pre>
- *
+ * <p/>
  * The underlying implementation is a port of Scala's HashMap which is an implementation of a
  * <a href="http://en.wikipedia.org/wiki/Hash_array_mapped_trie">hash array mapped trie.</a>
- *
+ * <p/>
  * <p>It uses significantly less memory than Scala's implementation as the leaf nodes are the values
  * themselves (not objects containing keys, values and hashes).
- *
+ * <p/>
  * <p>As the key is derived from the value, {@code DerivedKeyHashMap} does not support {@code null} values.
  */
 public class DerivedKeyHashMap<K, V> extends AbstractMap<K, V> {

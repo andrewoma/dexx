@@ -33,7 +33,7 @@ import java.util.NoSuchElementException;
 
 /**
  * {@code ArrayList} is an {@code IndexedList} implementation backed by an array.
- *
+ * <p/>
  * <p><b>WARNING:</b> All modifications copy the entire backing array. {@code ArrayLists} should only be
  * used where modifications are infrequent and access times are critical. ArrayList is also compact
  * in memory usage, so may be appropriate for small lists. If there is any doubt regarding access patterns

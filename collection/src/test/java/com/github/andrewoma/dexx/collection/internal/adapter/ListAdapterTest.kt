@@ -29,7 +29,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 
-public open class ListAdapterTest {
+open class ListAdapterTest {
     open fun list(vararg values: Int) = IndexedLists.copyOf(values.toList()).asList()
 
     @Test fun equals() {
@@ -55,7 +55,6 @@ public open class ListAdapterTest {
         val list = list(1, 2, 3)
         assertTrue(list.contains(1))
         assertFalse(list.contains(4))
-        assertFalse(list.containsRaw("foo"))
     }
 
     @Test fun get() {
@@ -89,10 +88,6 @@ public open class ListAdapterTest {
 
     @Test(expected = UnsupportedOperationException::class) fun remove() {
         list().remove(1)
-    }
-
-    @Test(expected = UnsupportedOperationException::class) fun removeObject() {
-        list().removeRaw("")
     }
 
     @Test(expected = UnsupportedOperationException::class) fun addAll() {

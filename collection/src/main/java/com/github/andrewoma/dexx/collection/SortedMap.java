@@ -39,6 +39,7 @@ public interface SortedMap<K, V> extends Map<K, V> {
 
     /**
      * Returns the bottom of the map starting from the key specified.
+     *
      * @param inclusive if true, the key will be included in the result, otherwise it will be excluded
      */
     @NotNull
@@ -46,6 +47,7 @@ public interface SortedMap<K, V> extends Map<K, V> {
 
     /**
      * Returns the top of the map up until the key specified.
+     *
      * @param inclusive if true, the key will be included in the result, otherwise it will be excluded
      */
     @NotNull
@@ -53,8 +55,9 @@ public interface SortedMap<K, V> extends Map<K, V> {
 
     /**
      * Returns a subset of the map between the {@code from} and {@code to} keys specified.
+     *
      * @param fromInclusive if true, the key will be included in the result, otherwise it will be excluded
-     * @param toInclusive if true, the key will be included in the result, otherwise it will be excluded
+     * @param toInclusive   if true, the key will be included in the result, otherwise it will be excluded
      */
     @NotNull
     SortedMap<K, V> range(@NotNull K from, boolean fromInclusive, @NotNull K to, boolean toInclusive);

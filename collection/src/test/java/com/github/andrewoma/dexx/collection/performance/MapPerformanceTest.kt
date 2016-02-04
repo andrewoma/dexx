@@ -28,10 +28,10 @@ import com.github.andrewoma.dexx.collection.Pair
 import com.github.andrewoma.dexx.collection.mutable.MutableHashMap
 import com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result
 import org.junit.Test
-import kotlin.util.measureTimeNano
+import kotlin.system.measureNanoTime
 import com.github.andrewoma.dexx.collection.Map as DMap
 
-public open class MapPerformanceTest : PerformanceMeasurement {
+open class MapPerformanceTest : PerformanceMeasurement {
 
     @Test fun put() {
         put(size = 100, operations = 10000, iterations = 1000)
@@ -94,7 +94,7 @@ public open class MapPerformanceTest : PerformanceMeasurement {
         var map = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in operationInts) {
                 map = map.put(i, i)
                 result += i
@@ -113,7 +113,7 @@ public open class MapPerformanceTest : PerformanceMeasurement {
         var map = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in operationInts) {
                 val found = map.containsKey(i)
                 result += if (found) 1 else 0
@@ -132,7 +132,7 @@ public open class MapPerformanceTest : PerformanceMeasurement {
         var map = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in operationInts) {
                 map = map.remove(i)
                 result += i

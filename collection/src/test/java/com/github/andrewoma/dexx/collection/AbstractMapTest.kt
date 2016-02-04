@@ -23,7 +23,6 @@
 package com.github.andrewoma.dexx.collection
 
 import com.github.andrewoma.dexx.collection.internal.builder.AbstractBuilder
-import com.github.andrewoma.dexx.collection.operators.get
 import org.junit.Test
 import java.util.*
 import kotlin.test.assertEquals
@@ -111,12 +110,9 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
         val pairs = setOf(1 to "A", 2 to "B", 3 to "C", 4 to "D")
         val map = buildMap(*pairs.toTypedArray())
         val actual = hashSetOf<kotlin.Pair<Int, String>>()
-        val f = object : Function<Pair<Int, String>, Unit> {
-            @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-            override operator fun invoke(parameter: Pair<Int, String>?) {
-                actual.add(kotlin.Pair(parameter!!.component1()!!, parameter.component2()!!))
-                actual.add(kotlin.Pair(parameter.component1()!!, parameter.component2()!!))
-            }
+        val f = Function<Pair<Int, String>, Unit> { parameter ->
+            actual.add(kotlin.Pair(parameter!!.component1()!!, parameter.component2()!!))
+            actual.add(kotlin.Pair(parameter.component1()!!, parameter.component2()!!))
         }
 
         map.forEach(f)

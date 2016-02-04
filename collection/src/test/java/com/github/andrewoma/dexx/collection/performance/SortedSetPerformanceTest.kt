@@ -27,11 +27,10 @@ import com.github.andrewoma.dexx.collection.TreeSet
 import com.github.andrewoma.dexx.collection.mutable.MutableTreeSet
 import com.github.andrewoma.dexx.collection.performance.PerformanceMeasurement.Result
 import org.junit.Test
-import kotlin.util.measureTimeNano
+import kotlin.system.measureNanoTime
 import com.github.andrewoma.dexx.collection.Set as DSet
-import kotlin.Set as JSet
 
-public class SortedSetPerformanceTest : SetPerformanceTest() {
+class SortedSetPerformanceTest : SetPerformanceTest() {
 
     override fun compare(description: String, operations: Int, iterations: Int, f: (builder: Builder<Int, out DSet<Int>>)
     -> PerformanceMeasurement.Result) {
@@ -66,7 +65,7 @@ public class SortedSetPerformanceTest : SetPerformanceTest() {
         var set = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in 1..size) {
                 set = set.add(i)
                 result += i
@@ -90,7 +89,7 @@ public class SortedSetPerformanceTest : SetPerformanceTest() {
         var set = builder.build()
 
         var result = 0L
-        val duration = measureTimeNano {
+        val duration = measureNanoTime {
             for (i in size.downTo(1)) {
                 set = set.add(i)
                 result += i

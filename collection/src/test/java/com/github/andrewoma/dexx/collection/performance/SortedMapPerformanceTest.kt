@@ -28,7 +28,7 @@ import com.github.andrewoma.dexx.collection.TreeMap
 import com.github.andrewoma.dexx.collection.mutable.MutableTreeMap
 import com.github.andrewoma.dexx.collection.Map as DMap
 
-public open class SortedMapPerformanceTest : MapPerformanceTest() {
+open class SortedMapPerformanceTest : MapPerformanceTest() {
 
     override fun compare(description: String, operations: Int, iterations: Int, f: (builder: Builder<Pair<Int, Int>, out DMap<Int, Int>>) -> PerformanceMeasurement.Result) {
         val java = time(iterations) { f(MutableTreeMap.factory<Int, Int>().newBuilder()) }

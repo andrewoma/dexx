@@ -28,7 +28,7 @@ import java.util.Comparator;
 
 /**
  * {@code Traversable} is the root of the collection hierarchy.
- *
+ * <p/>
  * <p>{@code Traversable} allows collections to be defined by a {@link #forEach(Function)} method and without an
  * iterator. {@link #forEach(Function)} can be a lot simpler to implement for tree-like structure and also offers
  * a more direct method of traversal for such structures.
@@ -42,7 +42,7 @@ public interface Traversable<E> {
 
     /**
      * Returns the size of the collection.
-     *
+     * <p/>
      * <p>Warning: infinite collections are possible, as are collections that require traversal to calculate the
      * size.
      */

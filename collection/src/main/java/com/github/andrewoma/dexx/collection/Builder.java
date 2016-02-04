@@ -28,7 +28,7 @@ import java.util.Iterator;
 
 /**
  * {@code Builders} provide efficient implementations for incrementally building persistent collections.
- *
+ * <p/>
  * <p>It should be assumed that Builders are <b>NOT</b> thread safe. Furthermore, it is invalid to call
  * {@link #build()} more than once.
  */

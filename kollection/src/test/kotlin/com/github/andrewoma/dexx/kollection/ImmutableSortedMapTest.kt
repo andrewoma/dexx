@@ -56,4 +56,12 @@ class ImmutableSortedMapTest : AbstractImmutableMapTest() {
         assertThat(pairs(1, 2, 3).asSequence().toImmutableSortedMap(reverse))
                 .isEqualTo(pairs(1, 2, 3).toImmutableSortedMap())
     }
+
+    @Test fun `should allow construction from maps`() {
+        assertThat(pairs(1, 2, 3).toMap().toImmutableSortedMap())
+                .isEqualTo(map(pairs(1, 2, 3)))
+
+        assertThat(pairs(1, 2, 3).toMap().toImmutableSortedMap(reverse))
+                .isEqualTo(pairs(1, 2, 3).toImmutableSortedMap())
+    }
 }

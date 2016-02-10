@@ -128,3 +128,15 @@ fun <K : Comparable<K>, V> Sequence<Pair<K, V>>.toImmutableSortedMap(): Immutabl
 fun <K : Any, V> Sequence<Pair<K, V>>.toImmutableSortedMap(selector: (K) -> Comparable<*>?): ImmutableMap<K, V>
         = immutableCustomSortedMapOf<K, V>(selector) + this.asIterable()
 
+// Conversion from other Maps
+fun <K : Any, V> Map<K, V>.toImmutableMap(): ImmutableMap<K, V>
+        = convert(this, immutableMapOf<K, V>())
+
+fun <K : Comparable<K>, V> Map<K, V>.toImmutableSortedMap(): ImmutableMap<K, V>
+        = convert(this, immutableSortedMapOf<K, V>())
+
+fun <K : Any, V> Map<K, V>.toImmutableSortedMap(selector: (K) -> Comparable<*>?): ImmutableMap<K, V>
+        = convert(this, immutableCustomSortedMapOf<K, V>(selector))
+
+private fun <K : Any, V> convert(from: Map<K, V>, to: ImmutableMap<K, V>)
+        = from.entries.fold(to) { m, e -> m.put(e.key, e.value) }

@@ -30,11 +30,17 @@ class ImmutableMapTest : AbstractImmutableMapTest() {
     override fun <K : Comparable<K>, V> map(elements: List<Pair<K, V>>) = elements.toImmutableMap()
 
     @Test fun `should be produce a readable toString`() {
-        assertThat(map(pairs(1, 2, 3)).toString()).isEqualTo("ImmutableMap(1=a, 2=b, 3=c)")
+        assertThat(map(pairs(1, 2, 3)).toString())
+                .isEqualTo("ImmutableMap(1=a, 2=b, 3=c)")
     }
 
     @Test fun `should allow construction from sequences`() {
         assertThat(pairs(1, 2, 3).asSequence().toImmutableMap())
+                .isEqualTo(map(pairs(1, 2, 3)))
+    }
+
+    @Test fun `should allow construction from maps`() {
+        assertThat(pairs(1, 2, 3).toMap().toImmutableMap())
                 .isEqualTo(map(pairs(1, 2, 3)))
     }
 }

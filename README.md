@@ -51,7 +51,7 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 
 #### Release Notes
 * 0.5:
-  * Updated to 1.0.0-rc-1036
+  * Updated to 1.0.0
   * Added `toImmutableMap()` conversions from existing `Maps`
 * 0.4:
   * Updated to 1.0.0-rc-1036

@@ -73,11 +73,11 @@ This project is licensed under a MIT license. Portions ported from Scala are Sca
 #### Usage
 
 ##### Adding to your project
-Version 0.3.1 has been released and is available in Maven Central [here](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.github.andrewoma.dexx%22). You can use it via the following gradle dependency:
+Version 0.5 has been released and is available in Maven Central [here](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.github.andrewoma.dexx%22). You can use it via the following gradle dependency:
 
 ```groovy
-'com.github.andrewoma.dexx:collection:0.3.1' // For Java
-'com.github.andrewoma.dexx:kollection:0.3.1' // For Kotlin
+'com.github.andrewoma.dexx:collection:0.5' // For Java
+'com.github.andrewoma.dexx:kollection:0.5' // For Kotlin
 ```
 
 ##### Constructing collections

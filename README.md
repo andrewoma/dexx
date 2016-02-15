@@ -50,6 +50,9 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 * Active development is essentially complete. Further work is expected to be bug fixes and refinements.
 
 #### Release Notes
+* 0.5:
+  * Updated to 1.0.0-rc-1036
+  * Added `toImmutableMap()` conversions from existing `Maps`
 * 0.4:
   * Updated to 1.0.0-rc-1036
   * Removed accidental assertJ compile dependency in kollection (thanks @brianegan)

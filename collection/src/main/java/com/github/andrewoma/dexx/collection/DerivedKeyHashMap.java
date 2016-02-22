@@ -65,7 +65,7 @@ import java.util.Iterator;
  */
 public class DerivedKeyHashMap<K, V> extends AbstractMap<K, V> {
     private final KeyFunction<K, V> keyFunction;
-    private CompactHashMap<K, V> compactHashMap = CompactHashMap.empty();
+    private final CompactHashMap<K, V> compactHashMap;
 
     @NotNull
     public static <K, V> BuilderFactory<Pair<K, V>, DerivedKeyHashMap<K, V>> factory(final KeyFunction<K, V> keyFunction) {
@@ -87,6 +87,7 @@ public class DerivedKeyHashMap<K, V> extends AbstractMap<K, V> {
 
     public DerivedKeyHashMap(@NotNull KeyFunction<K, V> keyFunction) {
         this.keyFunction = keyFunction;
+        this.compactHashMap = CompactHashMap.empty();
     }
 
     private DerivedKeyHashMap(KeyFunction<K, V> keyFunction, CompactHashMap<K, V> compactHashMap) {

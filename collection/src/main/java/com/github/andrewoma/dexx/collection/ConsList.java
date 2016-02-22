@@ -43,7 +43,7 @@ import java.util.NoSuchElementException;
  * instead.
  */
 public abstract class ConsList<E> extends AbstractLinkedList<E> {
-    private static ConsList<Object> EMPTY = new Nil<Object>();
+    private static final ConsList<Object> EMPTY = new Nil<Object>();
 
     @NotNull
     public static <E> BuilderFactory<E, ConsList<E>> factory() {

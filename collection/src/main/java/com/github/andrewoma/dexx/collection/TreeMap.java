@@ -46,10 +46,11 @@ import java.util.NoSuchElementException;
  * for an example of using a key function.
  */
 public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
-    private Tree<K, V> tree;
+    private final Tree<K, V> tree;
     private final RedBlackTree<K, V> redBlackTree;
 
     public TreeMap() {
+        tree = null;
         redBlackTree = new RedBlackTree<K, V>();
     }
 
@@ -78,6 +79,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
 
     public TreeMap(Comparator<? super K> ordering, KeyFunction<K, V> keyFunction) {
         TreeFactory factory = keyFunction == null ? new DefaultTreeFactory() : new DerivedKeyFactory();
+        tree = null;
         redBlackTree = new RedBlackTree<K, V>(factory, ordering, keyFunction);
     }
 

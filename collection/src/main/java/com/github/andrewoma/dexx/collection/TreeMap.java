@@ -35,7 +35,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * {@code TreeMap} is an implementation of {@code SortedMap} based on a
@@ -133,11 +132,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     @Nullable
     @Override
     public Pair<K, V> first() {
-        try {
-            return toPair(redBlackTree.smallest(tree));
-        } catch (NoSuchElementException e) {
-            return null;
-        }
+        return tree != null ? toPair(redBlackTree.smallest(tree)) : null;
     }
 
     private Pair<K, V> toPair(Tree<K, V> tree) {
@@ -147,11 +142,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     @Nullable
     @Override
     public Pair<K, V> last() {
-        try {
-            return toPair(redBlackTree.greatest(tree));
-        } catch (NoSuchElementException e) {
-            return null;
-        }
+        return tree != null ? toPair(redBlackTree.greatest(tree)) : null;
     }
 
     @NotNull

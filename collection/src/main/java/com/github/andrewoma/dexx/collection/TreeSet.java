@@ -32,7 +32,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * {@code TreeSet} is an implementation of {@code SortedSet} backed by a {@code TreeMap}.
@@ -111,21 +110,13 @@ public class TreeSet<E> extends AbstractSortedSet<E> {
     @Nullable
     @Override
     public E first() {
-        try {
-            return redBlackTree.smallest(tree).getValue();
-        } catch (NoSuchElementException e) {
-            return null;
-        }
+        return tree != null ? redBlackTree.smallest(tree).getValue() : null;
     }
 
     @Nullable
     @Override
     public E last() {
-        try {
-            return redBlackTree.greatest(tree).getValue();
-        } catch (NoSuchElementException e) {
-            return null;
-        }
+        return tree != null ? redBlackTree.greatest(tree).getValue() : null;
     }
 
     @NotNull

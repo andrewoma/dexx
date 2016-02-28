@@ -40,9 +40,9 @@ import java.util.NoSuchElementException;
  * for a {@code List} then use a {@link com.github.andrewoma.dexx.collection.Vector} instead.
  */
 public class ArrayList<E> extends AbstractIndexedList<E> {
-    private static ArrayList<Object> EMPTY = new ArrayList<Object>();
+    private static final ArrayList<Object> EMPTY = new ArrayList<Object>();
 
-    private Object[] elements;
+    private final Object[] elements;
 
     @SuppressWarnings("unchecked")
     public static <E> ArrayList<E> empty() {

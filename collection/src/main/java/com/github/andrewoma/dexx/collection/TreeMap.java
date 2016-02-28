@@ -35,7 +35,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * {@code TreeMap} is an implementation of {@code SortedMap} based on a
@@ -46,10 +45,11 @@ import java.util.NoSuchElementException;
  * for an example of using a key function.
  */
 public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
-    private Tree<K, V> tree;
+    private final Tree<K, V> tree;
     private final RedBlackTree<K, V> redBlackTree;
 
     public TreeMap() {
+        tree = null;
         redBlackTree = new RedBlackTree<K, V>();
     }
 
@@ -78,6 +78,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
 
     public TreeMap(Comparator<? super K> ordering, KeyFunction<K, V> keyFunction) {
         TreeFactory factory = keyFunction == null ? new DefaultTreeFactory() : new DerivedKeyFactory();
+        tree = null;
         redBlackTree = new RedBlackTree<K, V>(factory, ordering, keyFunction);
     }
 
@@ -131,11 +132,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     @Nullable
     @Override
     public Pair<K, V> first() {
-        try {
-            return toPair(redBlackTree.smallest(tree));
-        } catch (NoSuchElementException e) {
-            return null;
-        }
+        return tree != null ? toPair(redBlackTree.smallest(tree)) : null;
     }
 
     private Pair<K, V> toPair(Tree<K, V> tree) {
@@ -145,11 +142,7 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
     @Nullable
     @Override
     public Pair<K, V> last() {
-        try {
-            return toPair(redBlackTree.greatest(tree));
-        } catch (NoSuchElementException e) {
-            return null;
-        }
+        return tree != null ? toPair(redBlackTree.greatest(tree)) : null;
     }
 
     @NotNull

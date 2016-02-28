@@ -18,6 +18,8 @@ target
 !.idea/copyright
 !.idea/copyright/*
 !.idea/vcs.xml
+collection/bin
 collection/build
+kollection/bin
 kollection/build
 build/

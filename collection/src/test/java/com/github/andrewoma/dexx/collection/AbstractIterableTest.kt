@@ -43,14 +43,14 @@ abstract class AbstractIterableTest() : AbstractTraversableTest() {
     }
 
     @Test fun iterateSingle() {
-        var i = build(1).iterator()
+        val i = build(1).iterator()
         assertTrue(i.hasNext())
         assertEquals(1, i.next())
         assertFalse(i.hasNext())
     }
 
     @Test(expected = NoSuchElementException::class) fun iterateSingleNext() {
-        var i = build(1).iterator()
+        val i = build(1).iterator()
         assertTrue(i.hasNext())
         assertEquals(1, i.next())
         assertFalse(i.hasNext())

@@ -150,7 +150,7 @@ open class IndexedListPerformanceTest : PerformanceMeasurement {
         for (i in 1..size) {
             builder.add(i)
         }
-        var list = builder.build()
+        val list = builder.build()
 
         var result = 0L
         val duration = measureNanoTime {
@@ -168,7 +168,7 @@ open class IndexedListPerformanceTest : PerformanceMeasurement {
         for (i in 1..size) {
             builder.add(i)
         }
-        var list = builder.build()
+        val list = builder.build()
 
         var result = 0L
         val duration = measureNanoTime {
@@ -187,7 +187,7 @@ open class IndexedListPerformanceTest : PerformanceMeasurement {
         for (i in 1..size) {
             builder.add(i)
         }
-        var list = builder.build()
+        val list = builder.build()
 
         var result = 0L
         val duration = measureNanoTime {

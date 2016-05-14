@@ -109,7 +109,7 @@ open class SetPerformanceTest : PerformanceMeasurement {
         for (i in randomInts) {
             builder.add(i)
         }
-        var set = builder.build()
+        val set = builder.build()
 
         var result = 0L
         val duration = measureNanoTime {

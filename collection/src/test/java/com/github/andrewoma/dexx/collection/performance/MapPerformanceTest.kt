@@ -110,7 +110,7 @@ open class MapPerformanceTest : PerformanceMeasurement {
         for (i in randomInts) {
             builder.add(Pair(i, i))
         }
-        var map = builder.build()
+        val map = builder.build()
 
         var result = 0L
         val duration = measureNanoTime {

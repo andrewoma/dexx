@@ -88,7 +88,7 @@ class VectorTest() : AbstractListTest() {
 
     @Test fun split() {
         for (size in sizes()) {
-            var vector = sequence(size) as Vector<Int>
+            val vector = sequence(size) as Vector<Int>
             val half = size / 2
 
             val (top, bottom) = vector.splitAt(half)
@@ -126,7 +126,7 @@ class VectorTest() : AbstractListTest() {
 
     @Test fun buildIterate() {
         for (size in sizes()) {
-            var vector = sequence(size)
+            val vector = sequence(size)
             var i: Int = 0
             for (integer in vector) {
                 assertEquals(i++, integer)

@@ -91,7 +91,7 @@ abstract class AbstractMapTest(val supportsNullValues: Boolean = true) : Abstrac
     }
 
     @Test fun removeSingle() {
-        var map = buildMap(1 to "A")
+        val map = buildMap(1 to "A")
         assertTrue(map.remove(1).isEmpty)
     }
 

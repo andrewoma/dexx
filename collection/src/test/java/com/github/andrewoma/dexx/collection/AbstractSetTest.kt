@@ -53,10 +53,10 @@ abstract class AbstractSetTest() : AbstractIterableTest() {
     }
 
     @Test fun removeNotExists() {
-        var set = build(1)
+        val set = build(1)
         assertTrue(set.contains(1))
 
-        var set2 = set.remove(2)
+        val set2 = set.remove(2)
         assertEquals(set, set2)
     }
 

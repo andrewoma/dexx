@@ -79,7 +79,7 @@ public class ArrayList<E> extends AbstractIndexedList<E> {
         this(new Object[0]);
     }
 
-    private ArrayList(Object[] elements) {
+    ArrayList(Object[] elements) {
         this.elements = elements;
     }
 

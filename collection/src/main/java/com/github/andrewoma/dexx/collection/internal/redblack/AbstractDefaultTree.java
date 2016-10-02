@@ -43,6 +43,16 @@ final class DefaultRedTree<K, V> extends AbstractDefaultTree<K, V> implements Re
         super(key, value, left, right);
     }
 
+    @Override
+    public boolean isBlack() {
+        return false;
+    }
+
+    @Override
+    public boolean isRed() {
+        return true;
+    }
+
     public Tree<K, V> black() {
         return new DefaultBlackTree<K, V>(getKey(null), getValue(), getLeft(), getRight());
     }
@@ -60,6 +70,16 @@ final class DefaultRedTree<K, V> extends AbstractDefaultTree<K, V> implements Re
 final class DefaultBlackTree<K, V> extends AbstractDefaultTree<K, V> implements BlackTree<K, V> {
     public DefaultBlackTree(K key, V value, Tree<K, V> left, Tree<K, V> right) {
         super(key, value, left, right);
+    }
+
+    @Override
+    public boolean isBlack() {
+        return true;
+    }
+
+    @Override
+    public boolean isRed() {
+        return false;
     }
 
     public Tree<K, V> black() {

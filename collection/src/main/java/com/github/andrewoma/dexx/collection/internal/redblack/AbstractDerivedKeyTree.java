@@ -45,6 +45,16 @@ class DerivedKeyRedTree<K, V> extends AbstractDerivedKeyTree<K, V> implements Re
         super(left, right, value);
     }
 
+    @Override
+    public boolean isBlack() {
+        return false;
+    }
+
+    @Override
+    public boolean isRed() {
+        return true;
+    }
+
     public Tree<K, V> black() {
         return new DerivedKeyBlackTree<K, V>(getLeft(), getRight(), getValue());
     }
@@ -58,6 +68,16 @@ class DerivedKeyBlackTree<K, V> extends AbstractDerivedKeyTree<K, V> implements 
 
     DerivedKeyBlackTree(Tree<K, V> left, Tree<K, V> right, V value) {
         super(left, right, value);
+    }
+
+    @Override
+    public boolean isBlack() {
+        return true;
+    }
+
+    @Override
+    public boolean isRed() {
+        return false;
     }
 
     public Tree<K, V> black() {

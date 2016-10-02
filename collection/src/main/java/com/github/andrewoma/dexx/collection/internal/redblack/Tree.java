@@ -30,6 +30,10 @@ import com.github.andrewoma.dexx.collection.KeyFunction;
 public interface Tree<K, V> {
     int count();
 
+    boolean isBlack();
+
+    boolean isRed();
+
     Tree<K, V> black();
 
     Tree<K, V> red();

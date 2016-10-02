@@ -192,11 +192,11 @@ public class RedBlackTree<K, V> {
     }
 
     private boolean isRedTree(Tree<?, ?> tree) {
-        return tree instanceof RedTree;
+        return tree != null && tree.isRed();
     }
 
     private boolean isBlackTree(Tree<?, ?> tree) {
-        return tree instanceof BlackTree;
+        return tree != null && tree.isBlack();
     }
 
     private Tree<K, V> blacken(Tree<K, V> t) {
@@ -296,7 +296,7 @@ public class RedBlackTree<K, V> {
     }
 
     private Tree<K, V> subl(Tree<K, V> t) {
-        if (t instanceof BlackTree)
+        if (isBlackTree(t))
             return t.red();
 
         throw new RuntimeException("Defect: invariance violation; expected black, got " + t);

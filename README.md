@@ -174,4 +174,10 @@ reading operations are 1-1.5 time slower.
 * By default, a quick version of tests are run. Getting better test coverage of `Vectors` requires large
   collections. To run tests with complete coverage use: `./gradlew -PdexxTestMode=COMPLETE :collection:clean :collection:check :collection:jacocoTestReport`
 
+#### Method counts
+
+For android developers, here are method counts:
+* 'com.github.andrewoma.dexx:collection:0.6' = 1036 methods
+* 'com.github.andrewoma.dexx:kollection:0.6' = 1213 methods
+
 [![Build Status](https://travis-ci.org/andrewoma/dexx.svg?branch=master)](https://travis-ci.org/andrewoma/dexx)

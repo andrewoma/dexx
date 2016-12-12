@@ -24,14 +24,45 @@ package com.github.andrewoma.dexx.collection.defect
 
 import com.github.andrewoma.dexx.collection.TreeMap
 import org.junit.Test
+import java.util.*
 import kotlin.test.assertEquals
 
 class Issue11RangeError {
 
-    @Test fun shouldReturnValidRange() {
-        var map: TreeMap<Int, String> = TreeMap()
+    val random = Random()
+
+    @Test fun shouldReturnValidRangeTo() {
+        var map = TreeMap<Int, String>()
         map = map.put(0, "0")
         map = map.put(50, "50")
         assertEquals(map.to(101, false).values().toSortedSet(), sortedSetOf("0", "50"))
+    }
+
+    @Test fun shouldReturnValidRangeToForSequence() {
+        var map = TreeMap<Int, Int>()
+
+        for (i in 0..1000) {
+            map = map.put(i, i)
+            assertEquals(map.to(i + 1, false).values().toList(), (0..i).toList())
+            assertEquals(map.to(i, true).values().toList(), (0..i).toList())
+            assertEquals(map.to(i - 1, true).values().toList(), (0..i - 1).toList())
+        }
+    }
+
+    @Test fun shouldReturnValidRangeToForRandom() {
+        var map = TreeMap<Int, Int>()
+        val values = sortedSetOf<Int>()
+
+        repeat(1000) {
+            val value = random.nextInt()
+            map = map.put(value, value)
+            values.add(value)
+
+            val last = values.last()
+
+            assertEquals(map.to(last + 1, false).values().toList(), values.toList())
+            assertEquals(map.to(last, true).values().toList(), values.toList())
+            assertEquals(map.to(last, false).values().toList(), values.subSet(values.first(), values.last()).toList())
+        }
     }
 }

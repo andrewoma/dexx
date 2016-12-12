@@ -514,7 +514,7 @@ public class RedBlackTree<K, V> {
             throw new RuntimeException("Defect: unexpected empty zipper while computing range");
 
         if (isBlackTree(zipper.get(0))) {
-            return depth == 1 ? zipper : findDepth(zipper.subList(1, zipper.size()), depth - 1);
+            return depth <= 1 ? zipper : findDepth(zipper.subList(1, zipper.size()), depth - 1);
         } else {
             return findDepth(zipper.subList(1, zipper.size()), depth);
         }

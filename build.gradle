@@ -45,7 +45,7 @@ subprojects {
     targetCompatibility = 1.6
 
     repositories {
-        mavenCentral()
+        jcenter()
     }
 
     compileKotlin {

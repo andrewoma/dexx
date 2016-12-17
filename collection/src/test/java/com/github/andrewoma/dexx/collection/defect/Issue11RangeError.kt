@@ -50,19 +50,22 @@ class Issue11RangeError {
     }
 
     @Test fun shouldReturnValidRangeToForRandom() {
-        var map = TreeMap<Int, Int>()
-        val values = sortedSetOf<Int>()
 
-        repeat(1000) {
-            val value = random.nextInt()
-            map = map.put(value, value)
-            values.add(value)
+        repeat(100) {
+            var map = TreeMap<Int, Int>()
+            val values = sortedSetOf<Int>()
 
-            val last = values.last()
+            repeat(100) {
+                val value = random.nextInt()
+                map = map.put(value, value)
+                values.add(value)
 
-            assertEquals(map.to(last + 1, false).values().toList(), values.toList())
-            assertEquals(map.to(last, true).values().toList(), values.toList())
-            assertEquals(map.to(last, false).values().toList(), values.subSet(values.first(), values.last()).toList())
+                val last = values.last()
+
+                assertEquals(map.to(last + 1, false).values().toList(), values.toList())
+                assertEquals(map.to(last, true).values().toList(), values.toList())
+                assertEquals(map.to(last, false).values().toList(), values.subSet(values.first(), values.last()).toList())
+            }
         }
     }
 }

@@ -50,6 +50,8 @@ Note that the interfaces such as `Map`, `Set` and `List` are *not* related to th
 * Active development is essentially complete. Further work is expected to be bug fixes and refinements.
 
 #### Release Notes
+* 0.7:
+  * Fixes #11 - a balancing error in red black trees
 * 0.6:
   * Added OSGI metadata (thanks ajs6f)
   * Make internal fields `final` (thanks mkull)
@@ -77,11 +79,11 @@ This project is licensed under a MIT license. Portions ported from Scala are Sca
 #### Usage
 
 ##### Adding to your project
-Version 0.6 has been released and is available in Maven Central [here](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.github.andrewoma.dexx%22). You can use it via the following gradle dependency:
+Version 0.7 has been released and is available in Maven Central [here](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.github.andrewoma.dexx%22). You can use it via the following gradle dependency:
 
 ```groovy
-'com.github.andrewoma.dexx:collection:0.6' // For Java
-'com.github.andrewoma.dexx:kollection:0.6' // For Kotlin
+'com.github.andrewoma.dexx:collection:0.7' // For Java
+'com.github.andrewoma.dexx:kollection:0.7' // For Kotlin
 ```
 
 ##### Constructing collections

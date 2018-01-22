@@ -165,6 +165,8 @@ for the majority of use cases. While slower, _slow_ is generally referring to mi
 In general, mutating methods incur a overhead of 2-5 times that of `java.util` equivalents and
 reading operations are 1-1.5 time slower.
 
+@ptitjes Has done some more rigorous benchmarks here: https://github.com/ptitjes/benchmark-immutables/blob/master/results/2016-10-02-23:56:36.pdf
+
 #### Development
 * Dexx is built with gradle. Use `./gradlew install` to build and install into your local repository.
 * To run the benchmarks, use `./gradlew check -PdexxTestMode=BENCHMARK --info | grep '^    BENCHMARK:'`.

@@ -179,4 +179,52 @@ public class Sets {
     public static <E> Builder<E, Set<E>> builder() {
         return Sets.<E>factory().newBuilder();
     }
+
+    public static Collector< A, Builder< A, Set< A > >, Set< A > > collector()
+    {
+       return new SetCollector<>();
+    }
+
+    private static class SetCollector< A > implements Collector< A, Builder< A, Set< A > >, Set< A > >
+
+
+       @Override
+       public Supplier< Builder< A, Set< A > > > supplier()
+       {
+          return Sets::builder;
+       }
+
+       @Override
+       public BiConsumer< Builder< A, Set< A > >, A > accumulator()
+       {
+          return Builder::add;
+       }
+
+       @Override
+       public BinaryOperator< Builder< A, Set< A > > > combiner()
+       {
+          return SetCollector::combinerImpl;
+       }
+
+       private static < A > Builder< A, Set< A > > combinerImpl( Builder< A, Set< A > > left, Builder< A, Set< A > > right )
+       {
+          return left.addAll( right.build().asSet() );
+       }
+
+       @Override
+       public Function< Builder< A, Set< A > >, Set< A > > finisher()
+       {
+          return Builder::build;
+       }
+
+       @Override
+       public java.util.Set< Characteristics > characteristics()
+       {
+          return characteristics.asSet();
+       }
+
+       private Set< Characteristics > characteristics = Sets.of();
+
+     }
+
 }
